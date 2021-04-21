@@ -146,7 +146,13 @@ Grant Management specification allows a client to query the status and contents 
 
 ## Consent resource shared with other parties 
 There is a use case where end user might want to share their consents with third parties (e.g. centralised consent management dashboards).
-Grant management specification only allows access to grants administrative entities that own the grant. A new Consent Resource API could be created for this purpose but it is out of scope for this specification.  
+A new Consent Resource API could be created for this purpose.
+This is out of scope for this specification.  
+
+There is also another use case where AS could support sharing of grants among clients belonging to a single administrative entity, for instance where an organisation delivers its service across different platforms (e.g. iOS, Android and a Web App each having separate clients). Sector identifier URIs as defined in [@OpenID.Registration] is one option to achieve this objective.
+This is out of scope for this specification.  
+
+
 
 # OAuth Protocol Extensions
 
@@ -174,8 +180,6 @@ GET /authorize?response_type=code&
      &code_challenge=K2-ltc83acc4h... HTTP/1.1
 Host: as.example.com 
 ```
-
-It is RECOMMENDED that the AS supports sharing of grants among clients belonging to a single administrative entity, for instance where an organisation delivers its service across different platforms (e.g. iOS, Android and a Web App each having a client registration). Sector identifier URIs as defined in [@OpenID.Registration] is one option to achieve this objective.
 
 ## Authorization Response
 
