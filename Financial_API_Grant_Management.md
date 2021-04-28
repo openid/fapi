@@ -150,6 +150,12 @@ Grant management specification only allows access to grants for clients that own
 
 # OAuth Protocol Extensions
 
+## Requirements for Authorization Servers
+
+Authorization servers
+
+ 1. shall support confidential clients as defined in [@!RFC6749].
+
 ## Authorization Request
 
 This specification introduces the authorization request parameters `grant_id` and `grant_management_action`. These parameters can be used with any request serving as authorization request, e.g. it may be used with CIBA requests. 
