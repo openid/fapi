@@ -171,13 +171,11 @@ attacker model:
     data integrity and confidentiality are ensured. The correct public
     keys are used to establish connections and private keys are not
     known to attackers (except for explicitly compromised parties).
-    Exceptions are A6 and A9, where an attacker compromises a TLS
-    terminating endpoint.
   * **JWKS:** Where applicable, key distribution mechanisms work as
     intended, i.e., encryption and signature verification keys of
     uncompromised parties are retrieved from the correct endpoints.
-  * **Browsers and Endpoints:** Except for A4a and A4b, devices and
-    browsers used by resource owners are not compromised. Other
+  * **Browsers and Endpoints:** Devices and
+    browsers used by resource owners are considered not compromised. Other
     endpoints not controlled by an attacker behave according to the
     protocol.
 
@@ -212,10 +210,10 @@ can send users to endpoints of honest ASs.
 
 ### A2 - Network attacker
 
-Controls the whole network (like a rogue WiFi access point or a nation-state
-sponsored hacker). Can intercept, block, and tamper with messages intended for
-other people, but cannot break cryptography unless the attacker has learned the
-respective decryption keys. 
+Controls the whole network (like a rogue WiFi access point or any other
+compromised network node). Can intercept, block, and tamper with messages
+intended for other people, but cannot break cryptography unless the attacker has
+learned the respective decryption keys. 
 
 Note: Most attacks that are exclusive to this kind of attacker can be defended
 against by using transport layer protection like TLS.
@@ -245,11 +243,15 @@ browser logs, web browser history, or on mobile operating systems.
 
 ### Attackers at the Token Endpoint
 
-#### A5 - Read Token Requests and Responses
+#### A5 - Read and Tamper with Token Requests and Responses
 
 This attacker makes the client use a token endpoint that is not the one of the
 honest AS. This attacker can read and tamper with messages sent to and from this
 token endpoint that the client thinks as of an honest AS.
+
+Note: When the token endpoint address is obtained from an authoritative source and via a protected channel, e.g., through OAuth Metadata obtained from the honest AS, this attacker is not relevant.
+
+### Attackers at the Resource Server
 
 #### A7 - Read Resource Requests and Responses
 

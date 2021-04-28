@@ -123,11 +123,11 @@ In the following, a profile of the following technologies is defined:
   * OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access
     Tokens (MTLS) [@!RFC8705]
   * OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
-    [@I-D.draft-ietf-oauth-dpop]
+    [@!I-D.ietf-oauth-dpop]
   * OAuth 2.0 Pushed Authorization Requests (PAR) [@!I-D.ietf-oauth-par]
   * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
-  * OAuth 2.0 Authorization Server Issuer Identifier in Authorization Response [@!I-D.ietf-oauth-iss-auth-res]
+  * OAuth 2.0 Authorization Server Issuer Identifier in Authorization Response [@!I-D.ietf-oauth-iss-auth-resp]
   * OpenID Connect Core 1.0 incorporating errata set 1 [@!OpenID]
   
 ### Requirements for Authorization Servers
@@ -140,18 +140,18 @@ Authorization servers
  3. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749]
  4. shall support client-authenticated pushed authorization requests
-    according to [@I-D.ietf-oauth-par]
+    according to [@!I-D.ietf-oauth-par]
  5. shall reject authorization requests sent without
-    [@I-D.ietf-oauth-par]
+    [@!I-D.ietf-oauth-par]
  6. shall reject pushed authorization requests without client authentication
  7. shall support the `authorization_details` parameter according to
-    [@I-D.ietf-oauth-rar] to convey the authorization clients want to obtain if
+    [@!I-D.ietf-oauth-rar] to convey the authorization clients want to obtain if
     the `scope` parameter is not expressive enough for that purpose
  8. shall support confidential clients as defined in [@!RFC6749]
  9. shall only issue sender-constrained access tokens using one of the following
     methods:
     -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@I-D.draft-ietf-oauth-dpop]
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
  10. shall authenticate clients using one of the following methods:
      - MTLS as specified in section 2 of [@!RFC8705]
      - `private_key_jwt` as specified in section 9 of [@!OpenID]
@@ -160,8 +160,11 @@ Authorization servers
      sender-constrained 
  12. shall require the `redirect_uri` parameter in pushed authorization requests
  14. shall return an `iss` parameter in the authorization response according to
-     [@!I-D.ietf-oauth-iss-auth-res]
- 15. shall require that redirect URIs use the `https` scheme
+     [@!I-D.ietf-oauth-iss-auth-resp]
+ 15. shall not transmit authorization responses over unencrypted network
+     connections, and, to this end, shall not allow redirect URIs that use the
+     "http" scheme except for native clients that use Loopback Interface
+     Redirection as described in [@!RFC8252], Section 7.3,
  16. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
      been previously used
  17. shall provide a means for resource servers to verify the validity,
@@ -191,10 +194,10 @@ the token response, the authorization server shall support OpenID Connect
 Clients
 
  1. shall use the authorization code grant described in [@!RFC6749]
- 2. shall use pushed authorization requests according to [@I-D.ietf-oauth-par]
+ 2. shall use pushed authorization requests according to [@!I-D.ietf-oauth-par]
  3. shall support sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@I-D.draft-ietf-oauth-dpop]
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
  4. shall support client authentication using one of the following methods:
     - MTLS as specified in section 2 of [@!RFC8705]
     - `private_key_jwt` as specified in section 9 of [@!OpenID]
@@ -202,7 +205,7 @@ Clients
  6. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750]
  7. shall check the `iss` parameter in the authorization response according to
-    [@!I-D.ietf-oauth-iss-auth-res] to prevent Mix-Up attacks
+    [@!I-D.ietf-oauth-iss-auth-resp] to prevent Mix-Up attacks
  8. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
 
@@ -224,7 +227,7 @@ Resource servers with the FAPI endpoints
    token authorizes the access to the resource it is representing
 1. shall support and verify sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@I-D.draft-ietf-oauth-dpop]
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
 2. shall identify the associated entity to the access token
 3. shall only return the resource identified by the combination of the entity
    implicit in the access and the granted scope and otherwise return errors as
