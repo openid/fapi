@@ -161,7 +161,10 @@ Authorization servers
  12. shall require the `redirect_uri` parameter in pushed authorization requests
  14. shall return an `iss` parameter in the authorization response according to
      [@!I-D.ietf-oauth-iss-auth-resp]
- 15. shall require that redirect URIs use the `https` scheme
+ 15. shall not transmit authorization responses over unencrypted network
+     connections, and, to this end, shall not allow redirect URIs that use the
+     "http" scheme except for native clients that use Loopback Interface
+     Redirection as described in [@!RFC8252], Section 7.3,
  16. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
      been previously used
  17. shall provide a means for resource servers to verify the validity,
