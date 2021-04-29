@@ -324,3 +324,12 @@ payload and meaningful metadata of a request or response.
   </front>
   <seriesInfo name="arXiv" value="1901.11520"/>
 </reference>
+
+<reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
+<front>
+<title>ISO/IEC Directives Part 2 - </title>
+    <author fullname="International Organization for Standardization">
+      <organization></organization>
+    </author>
+</front>
+</reference>
