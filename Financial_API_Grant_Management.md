@@ -110,7 +110,6 @@ Examples:
 
 * In the UK and Australia, "replace" is supported when grant identifier is specified in the authorization request. 
 
-
 ## Update the details of a grant
 A client wants to update details of the existing grant. Additional details are merged into the grant.
 
@@ -171,7 +170,8 @@ This specification introduces the authorization request parameters `grant_id` an
 `grant_management_action`: string value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: the AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: this mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will assign all permissions as consented by the user in the actual request to the respective grant.
+* `update`: this mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant.
+* `replace`: this mode requires the client to specify a grant id using the `grant_id` paramter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request. 
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
 
@@ -201,7 +201,7 @@ This specification introduces the token response parameter `grant_id`:
 
 `grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value MUST be unique in the context of a certain authorization server and SHOULD have enough entropy to make it impractical to guess it. 
 
-The AS will return a `grant_id` if it supports any of the grant management actions `query`, `revoke`, or `update`.
+The AS will return a `grant_id` if it supports any of the grant management actions `query`, `revoke`, `update`, `replace`.
 
 Here is an example response:
 
@@ -392,7 +392,13 @@ It must not be possible to identify the user or derive any personally identifiab
 
 # Security Considerations {#Security}
 
-A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client. 
+A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
+
+In case of a transaction utilising grant mode `replace` where: 
+- there is a requirement for immediate propagation of changes to grant's permission set and;
+- the new permission set is not a superset of previous permission set 
+- the AS utilises self contained access tokens which do not expire within an acceptable window then;
+- the AS MUST revoke all tokens and effect this change by out of band means immediately
 
 {backmatter}
 
