@@ -219,6 +219,17 @@ Cache-Control: no-cache, no-store
 }
 ```
 ## Lifecycle of the grant
+
+### Creation
+
+Grant, as a set of authorized permissions, is created by the AS on authorization request completion.
+
+For the initial authorization flow, a grant should be considered active when associated tokens have been successfully claimed by the client.
+
+### Deletion
+
+If the tokens haven't been claimed the grant should be deleted by the AS. Timeline of the deltion is left up to AS implementation.
+
 Authorization server may remove an obsolete grant at its discretion, but it should consider status and expiry of authorization elements included in the grant. The exact mechanism could differ between different deployments, for example, some deployments could purge a grant when all individual authorization_details attached to the grant have expired or revoked. 
 
 # Grant Management API
