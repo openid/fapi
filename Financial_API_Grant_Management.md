@@ -136,6 +136,13 @@ Examples:
 
 * In UK, concurrent grants are also supported.
 
+## Creation of another resource
+In some use cases, grant is a permission to create another resource. This created resource will have a separate lifecycle and can be managed outside of the Authorization Server.
+
+Examples:
+
+* For payment initiation, a new grant with a permission to create a payment is created first. A client can use obtained access tokens to initiate the actual payment and, as a result, a new payment / transaction resource is created. 
+
 ## Obtaining new tokens for existing grants
 Clients can also obtain fresh access and, optionally refresh tokens based on existing grants if they re-issue authorization request, reference existing grant and follow the rest of the authorization code flow.
 
