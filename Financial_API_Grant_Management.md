@@ -241,7 +241,7 @@ Some elements of grant can be updated by the AS to reflect the status of some re
 
 ### Deletion
 
-If the tokens haven't been claimed the grant should be deleted by the AS after a reasonable timeout. Timeline of the deltion is left up to AS implementation.
+If the tokens haven't been claimed the grant should be deleted by the AS after a reasonable timeout. Timeline of the deletion is left up to AS implementation.
 
 Authorization server may remove an obsolete grant at its discretion, but it should consider status and expiry of authorization elements included in the grant. The exact mechanism could differ between different deployments, for example, some deployments could purge a grant when all individual authorization_details attached to the grant have expired or revoked. 
 
