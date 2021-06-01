@@ -233,6 +233,8 @@ Grant, as a set of authorized permissions, is created by the AS on authorization
 
 For the initial authorization flow, a grant should be considered active when associated tokens have been successfully claimed by the client.
 
+If the tokens haven't been claimed the grant should be deleted by the AS after a reasonable timeout. Timeline of the deletion is left up to AS implementation.
+
 ### Modification
 
 Grant can be modified by a client via update or replace actions. 
@@ -240,8 +242,6 @@ Grant can be modified by a client via update or replace actions.
 Some elements of grant can be updated by the AS to reflect the status of some resources included in the grant. For example, if a user chosen to share an account with a client and this account required additional authorisations before being considered as fully authorized.
 
 ### Deletion
-
-If the tokens haven't been claimed the grant should be deleted by the AS after a reasonable timeout. Timeline of the deletion is left up to AS implementation.
 
 Authorization server may remove an obsolete grant at its discretion, but it should consider status and expiry of authorization elements included in the grant. The exact mechanism could differ between different deployments, for example, some deployments could purge a grant when all individual authorization_details attached to the grant have expired or revoked. 
 
