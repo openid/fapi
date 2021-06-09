@@ -375,7 +375,7 @@ If the resource URL is unknown, the authorization server responds with HTTP stat
 
 If the client is not authorized to perform a call, the authorization server responds with HTTP status code 403.
 
-If the request lacks a valid access token, the authorization server responds with HTTP status code 401.
+If the request lacks a valid access token, the authorization server responds with HTTP status code 401 and invalid_token error code.
 
 # Metadata
 
