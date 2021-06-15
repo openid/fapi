@@ -371,11 +371,11 @@ Note: Token revocation as defined in [@RFC7009] differentiates from grant revoca
 
 ## Error Responses
 
-If the resource URL is unknown, the authorization server responds with HTTP status code 400.
+If the resource URL is unknown, the authorization server responds with HTTP status code 404.
 
 If the client is not authorized to perform a call, the authorization server responds with HTTP status code 403.
 
-If the request lacks a valid access token, the authorization server responds with HTTP status code 401.
+If the request lacks a valid access token, the authorization server responds with HTTP status code 401 and invalid_token error code.
 
 # Metadata
 
