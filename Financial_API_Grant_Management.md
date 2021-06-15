@@ -345,7 +345,9 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains the `scope` parameter value and (optionally) any `resource` parameter value as defined in [@!RFC8707] passed in the same authorization request. The AS MUST maintain the scope and resource values passed in different authorization requests in separate objects of the JSON structure in order to preserve their relationship.
+* `scopes`: JSON array where every entry contains a `scope` field  and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) they where requested and approved with. The concrete mapping is at the discretaion of the AS. The AS could, 
+for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
+the resource parameter values as requested and approved in a certain authorization request. 
 * `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID]) as requested and consented in one or more authorization requests associated with the respective grant. 
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
