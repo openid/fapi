@@ -167,7 +167,9 @@ This is out of scope for this specification.
 
 Authorization servers
 
- 1. shall support confidential clients as defined in [@!RFC6749].
+ 1. shall support confidential clients as defined in [@!RFC6749]. 
+    
+*Draft Note:* While this specification has been borne out of environments where only confidential clients exist the authors acknowledge that there is potential to use it within public client contexts. The authors will continue to assess this use case over the development of the specification.
 
 ## Authorization Request
 
