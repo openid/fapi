@@ -418,7 +418,7 @@ It must not be possible to identify the user or derive any personally identifiab
 
 A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
 
-During the execution of a transaction utilising grant mode `replace` it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens the the AS should immediately revoke all relevant tokens by an out-of-band means.
+During the execution of a transaction utilising grant mode `replace` it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
 
 
 
