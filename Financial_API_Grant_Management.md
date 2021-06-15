@@ -302,7 +302,7 @@ Host: as.example.com
 Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA
 ```
 
-The authorization server will respond with a JSON-formated response as shown in the folling example:
+The authorization server will respond with a JSON-formatted response as shown in the following example:
 
 ```http
 HTTP/1.1 200 OK
@@ -418,11 +418,9 @@ It must not be possible to identify the user or derive any personally identifiab
 
 A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
 
-In case of a transaction utilising grant mode `replace` where: 
-- there is a requirement for immediate propagation of changes to grant's permission set and;
-- the new permission set is not a superset of previous permission set 
-- the AS utilises self contained access tokens which do not expire within an acceptable window then;
-- the AS MUST revoke all tokens and effect this change by out of band means immediately
+During the execution of a transaction utilising grant mode `replace` it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens the the AS should immediately revoke all relevant tokens by an out-of-band means.
+
+
 
 {backmatter}
 
