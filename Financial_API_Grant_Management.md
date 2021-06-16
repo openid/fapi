@@ -136,8 +136,15 @@ Examples:
 
 * In UK, concurrent grants are also supported.
 
+## Creation of another resource
+In some use cases, grant is a permission to create another resource. This created resource will have a separate lifecycle and can be managed outside of the Authorization Server.
+
+Examples:
+
+* For payment initiation, a new grant with a permission to create a payment request might be created first. A client can then use obtained access tokens to initiate the payment and, as a result, a new payment / transaction resource might be created. 
+
 ## Obtaining new tokens for existing grants
-Clients can also obtain fresh access and, optionally refresh tokens based on existing grants if they re-issue authorization request, reference existing grant and follow the rest of the authorization code flow.
+Clients can also obtain fresh access and, optionally refresh tokens based on existing grants if they re-issue authorization request, reference an existing grant and follow the rest of the authorization code flow.
 
 # Use cases not supported
 
@@ -219,6 +226,23 @@ Cache-Control: no-cache, no-store
 }
 ```
 ## Lifecycle of the grant
+
+### Creation
+
+Grant, as a set of authorized permissions, is created by the AS on authorization request completion.
+
+For the initial authorization flow, a grant should be considered active when associated tokens have been successfully claimed by the client.
+
+If the tokens haven't been claimed the grant should be deleted by the AS after a reasonable timeout. Timeline of the deletion is left up to AS implementation.
+
+### Modification
+
+Grant can be modified by a client via update or replace actions. 
+
+Some elements of grant can be updated by the AS to reflect the status of some resources included in the grant. For example, if a user chosen to share an account with a client and this account required additional authorisations before being considered as fully authorized.
+
+### Deletion
+
 Authorization server may remove an obsolete grant at its discretion, but it should consider status and expiry of authorization elements included in the grant. The exact mechanism could differ between different deployments, for example, some deployments could purge a grant when all individual authorization_details attached to the grant have expired or revoked. 
 
 # Grant Management API
@@ -321,7 +345,9 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains the `scope` parameter value and (optionally) any `resource` parameter value as defined in [@!RFC8707] passed in the same authorization request. The AS MUST maintain the scope and resource values passed in different authorization requests in separate objects of the JSON structure in order to preserve their relationship.
+* `scopes`: JSON array where every entry contains a `scope` field  and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) they where requested and approved with. The concrete mapping is at the discretaion of the AS. The AS could, 
+for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
+the resource parameter values as requested and approved in a certain authorization request. 
 * `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID]) as requested and consented in one or more authorization requests associated with the respective grant. 
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
@@ -347,11 +373,11 @@ Note: Token revocation as defined in [@RFC7009] differentiates from grant revoca
 
 ## Error Responses
 
-If the resource URL is unknown, the authorization server responds with HTTP status code 400.
+If the resource URL is unknown, the authorization server responds with HTTP status code 404.
 
 If the client is not authorized to perform a call, the authorization server responds with HTTP status code 403.
 
-If the request lacks a valid access token, the authorization server responds with HTTP status code 401.
+If the request lacks a valid access token, the authorization server responds with HTTP status code 401 and invalid_token error code.
 
 # Metadata
 
