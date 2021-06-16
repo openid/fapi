@@ -194,13 +194,11 @@ GET /authorize?response_type=code&
 Host: as.example.com 
 ```
 
-## Authorization Response
+## Authorization Error Response
 
-### Error Response
+In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
 
-In case the `grant_id` is unknown or invalid, the authorization server will respond with an error code `invalid_grant_id`.
-
-in case the AS does not support a grant management action requested by the client, it will respond with the error code `invalid_request`.
+In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, SHALL respond with the error code `invalid_request`.
 
 ## Token Response
 
@@ -391,10 +389,13 @@ OPTIONAL. JSON array containing the actions supported by the AS. Allowed values 
 * `update`: the AS allows clients to update existing grants. 
 * `create`: the AS allows clients to request the creation of a new grant. 
 
-If omitted, the AS does not support any grant managenent actions. 
+If omitted, the AS does not support any grant management actions. 
 
 `grant_management_endpoint`
 OPTIONAL. URL of the authorization server's Grant Management Administration Endpoint.
+
+`grant_management_action_required`
+OPTIONAL. Boolean where, if `true` all authorization requests MUST specify a `grant_management_action`. If omitted defaults to `false`.
 
 # Implementation Considerations {#Implementation}
 
@@ -464,11 +465,11 @@ A grant id is considered a public identifier, it is not a secret. Implementation
 
 `grant_id`
 
-`grant_management_mode`
-
-`grant_management_modes_supported`
+`grant_management_action`
 
 `grant_management_actions_supported`
+
+`grant_management_action_required`
 
 `grant_management_endpoint`
 
