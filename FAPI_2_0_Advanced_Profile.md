@@ -1,15 +1,15 @@
 %%%
 title = "FAPI 2.0 Advanced Profile"
 abbrev = "fapi-2-advanced"
-ipr = "trust200902"
-workgroup = "connect"
+ipr = "none"
+workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
 value = "fapi-2_0-advanced-00"
 status = "standard"
-
+ 
 [[author]]
 initials="D."
 surname="Fett"
@@ -105,7 +105,7 @@ following standards are used in the Advanced Profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@I-D.ietf-oauth-jwsreq]
   * JWT Secured Authorization Response Mode for OAuth 2.0 [JARM]
-  * OAuth 2.0 Token Introspection [@!RFC7662] with signed introspection responses [@I-D.draft-ietf-oauth-jwt-introspection-response]
+  * OAuth 2.0 Token Introspection [@!RFC7662] with signed introspection responses [@I-D.ietf-oauth-jwt-introspection-response]
 
 ### Requirements for Authorization Servers
 
@@ -116,7 +116,7 @@ Authorization servers
     [@I-D.ietf-oauth-par]
  2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [JARM]
  3. may support OpenID Connect [@!OpenID] ID Tokens as detached signatures for backward compatibility with existing implementations
- 4. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.draft-ietf-oauth-jwt-introspection-response]
+ 4. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
  5. OPEN QUESTION: how to sign resource requests and responses?
 
 ### Requirements for Clients
@@ -126,7 +126,7 @@ Clients
  1. shall sign request objects according to JAR [@I-D.ietf-oauth-jwsreq] at the PAR endpoint [@I-D.ietf-oauth-par]
  1. shall ensure that authorization responses are signed using either [JARM] or via an ID Token as a detached signature [@!OpenID]
  2. shall verify the respective signatures
- 3. when using token introspection [@!RFC7662], shall request signed token introspection responses according to [@I-D.draft-ietf-oauth-jwt-introspection-response]
+ 3. when using token introspection [@!RFC7662], shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response]
  
 ### Requirements for Resource Servers
 
@@ -163,6 +163,15 @@ Resource servers with the FAPI endpoints
     </author>
    <date day="8" month="Nov" year="2014"/>
   </front>
+</reference>
+
+<reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
+<front>
+<title>ISO/IEC Directives Part 2 - </title>
+    <author fullname="International Organization for Standardization">
+      <organization></organization>
+    </author>
+</front>
 </reference>
 
 <reference anchor="preload" target="https://hstspreload.org/">
