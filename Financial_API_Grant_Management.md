@@ -97,7 +97,7 @@ Examples:
 
 * In banking, the client could query the details of a grant to determine what accounts have been added to the grant by a user or other fine grain details of the authorisation (when the user has a choice). 
 
-* When another user's authorisation is required and this occurs after the original authorisation was granted by the user, the client can query the status of consent at any point after the authorization to determine if full user consent has been obtained.
+* When another user's authorisation is required and this occurs after the original authorisation was granted by the user, the client can query the status of consent at any point after the authorization to determine if full user consent has been obtained (polling).
 
 * Some jurisdictions require client's and authorisation server's applications to provide a dashboard to a user to view and revoke authorisations given to the authorisation server. Querying the details of the grant allows clients to have access to the up-to-date status and contents of the consent.
 
