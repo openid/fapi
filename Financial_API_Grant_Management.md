@@ -110,7 +110,6 @@ Examples:
 
 * In the UK and Australia, "replace" is supported when grant identifier is specified in the authorization request. 
 
-
 ## Update the details of a grant
 A client wants to update details of the existing grant. Additional details are merged into the grant.
 
@@ -178,7 +177,8 @@ This specification introduces the authorization request parameters `grant_id` an
 `grant_management_action`: string value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: the AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: this mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will assign all permissions as consented by the user in the actual request to the respective grant.
+* `update`: this mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant.
+* `replace`: this mode requires the client to specify a grant id using the `grant_id` paramter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request. 
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
 
@@ -194,13 +194,11 @@ GET /authorize?response_type=code&
 Host: as.example.com 
 ```
 
-## Authorization Response
+## Authorization Error Response
 
-### Error Response
+In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
 
-In case the `grant_id` is unknown or invalid, the authorization server will respond with an error code `invalid_grant_id`.
-
-in case the AS does not support a grant management action requested by the client, it will respond with the error code `invalid_request`.
+In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, SHALL respond with the error code `invalid_request`.
 
 ## Token Response
 
@@ -208,7 +206,7 @@ This specification introduces the token response parameter `grant_id`:
 
 `grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value MUST be unique in the context of a certain authorization server and SHOULD have enough entropy to make it impractical to guess it. 
 
-The AS will return a `grant_id` if it supports any of the grant management actions `query`, `revoke`, or `update`.
+The AS will return a `grant_id` if it supports any of the grant management actions `query`, `revoke`, `update`, `replace`.
 
 Here is an example response:
 
@@ -302,7 +300,7 @@ Host: as.example.com
 Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA
 ```
 
-The authorization server will respond with a JSON-formated response as shown in the folling example:
+The authorization server will respond with a JSON-formatted response as shown in the following example:
 
 ```http
 HTTP/1.1 200 OK
@@ -393,10 +391,13 @@ OPTIONAL. JSON array containing the actions supported by the AS. Allowed values 
 * `update`: the AS allows clients to update existing grants. 
 * `create`: the AS allows clients to request the creation of a new grant. 
 
-If omitted, the AS does not support any grant managenent actions. 
+If omitted, the AS does not support any grant management actions. 
 
 `grant_management_endpoint`
 OPTIONAL. URL of the authorization server's Grant Management Administration Endpoint.
+
+`grant_management_action_required`
+OPTIONAL. Boolean where, if `true` all authorization requests MUST specify a `grant_management_action`. If omitted defaults to `false`.
 
 # Implementation Considerations {#Implementation}
 
@@ -420,7 +421,11 @@ It must not be possible to identify the user or derive any personally identifiab
 
 # Security Considerations {#Security}
 
-A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client. 
+A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
+
+During the execution of a transaction utilising grant mode `replace` it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
+
+
 
 {backmatter}
 
@@ -466,11 +471,11 @@ A grant id is considered a public identifier, it is not a secret. Implementation
 
 `grant_id`
 
-`grant_management_mode`
-
-`grant_management_modes_supported`
+`grant_management_action`
 
 `grant_management_actions_supported`
+
+`grant_management_action_required`
 
 `grant_management_endpoint`
 
