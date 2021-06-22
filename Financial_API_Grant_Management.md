@@ -164,7 +164,7 @@ This is out of scope for this specification.
 
 ## Requirements for Authorization Servers
 
-*Draft Note:* This specification has been borne out of environments which expect confidential clients however the authors acknowledge that there is potential to use it within public client contexts. The authors will continue to assess public client use cases over the development of the specification.
+*Draft Note:* This specification has been borne out of environments which expect confidential clients for security reasons. The authors acknowledge that there is potential to use it within public client contexts. The authors will continue to assess public client use cases over the development of the specification.
 
 ## Authorization Request
 
