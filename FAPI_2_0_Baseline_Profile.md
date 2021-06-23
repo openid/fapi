@@ -172,10 +172,11 @@ Authorization servers
      expiration and revocation status of an access token, either by providing an
      introspection endpoint [@!RFC7662], by exposing signature verification
      keys, or by deployment-specific means.
- 17. shall not use the HTTP 307 status code when redirecting a request that
-     contains user credentials to avoid forwarding the credentials to a third
-     party accidentally (see section 4.11 of [@I-D.ietf-oauth-security-topics])
- 18. shall not expose open redirectors (see section 4.10 of
+ 17. shall not use the HTTP 307 status code when redirecting a request that contains 
+     user credentials to avoid forwarding the credentials to a third party accidentally 
+     (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
+ 18. should use the HTTP 303 status code when redirecting the user agent using status codes;
+ 19. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
 
 **NOTE**: If replay identification of the authorization code is not possible, it
