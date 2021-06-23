@@ -351,7 +351,7 @@ the resource parameter values as requested and approved in a certain authorizati
 
 The response structure MAY also include further elements defined by extensions. 
 
-Where an OP is currently experiencing high load it may return an HTTP 503 with a Retry-After response header as described in Section 7.1.3 of [@!RFC7231]. Clients should respect such headers and only retry the token request after the time indicated in the header.
+Where an OP is currently experiencing high load it may return an HTTP 503 with a Retry-After response header as described in Section 7.1.3 of [@!RFC7231]. Clients should respect such headers and only retry after the time indicated in the header.
 
 ## Revoke Grant 
 
