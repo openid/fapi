@@ -97,7 +97,7 @@ Examples:
 
 * In banking, the client could query the details of a grant to determine what accounts have been added to the grant by a user or other fine grain details of the authorisation (when the user has a choice). 
 
-* When another user's authorisation is required and this occurs after the original authorisation was granted by the user, the client can query the status of consent at any point after the authorization to determine if full user consent has been obtained.
+* In some scenarios, resource owner can be multiple natural persons, so additional authorisations might be required and this might occur after the original authorisation was granted by the intiating resource owner. The client can query the status of consent at any point after the authorization to determine if complete authorization has occured (by adhoc query or regular polling). Another scenario that fits in this category is multi-party approval process for business entities. 
 
 * Some jurisdictions require client's and authorisation server's applications to provide a dashboard to a user to view and revoke authorisations given to the authorisation server. Querying the details of the grant allows clients to have access to the up-to-date status and contents of the consent.
 
@@ -126,7 +126,7 @@ Examples that can be implemented using "update":
 * Other use cases that are covered OAuth Incremental Authorization (https://tools.ietf.org/html/draft-ietf-oauth-incremental-authz-04).
 
 ## Support for concurrent grants
-Some ecosystems allow multiple active authorisations between the same client, the same authorization server and the same user at the same time (concurrent grants).
+Some ecosystems allow multiple active authorisations between the same client, the same authorization server and the same resource owner at the same time (concurrent grants).
 In order to support concurrent grants, at a minimum, a client needs an ability to reference and revoke a particular grant, as well as, ability to create a new grant where there is an existing grant between the same parties.
 
 Examples: 
@@ -148,7 +148,7 @@ Clients can also obtain fresh access and, optionally refresh tokens based on exi
 # Use cases not supported
 
 ## Historical grant, authorisation or consent records 
-Grant Management specification allows a client to query the status and contents of a grant (user consent). This is designed for clients to understand what is included in current active grant. This is NOT designed to provide for legal, reporting or archiving purposes, for example, keeping 7 years of expired or revoked consents.
+Grant Management specification allows a client to query the status and contents of a grant (resource owner's consent). This is designed for clients to understand what is included in current active grant. This is NOT designed to provide for legal, reporting or archiving purposes, for example, keeping 7 years of expired or revoked consents.
 
 ## Consent resource shared with other parties 
 There is a use case where end user might want to share their consents with third parties (e.g. centralised consent management dashboards).
@@ -348,6 +348,8 @@ the resource parameter values as requested and approved in a certain authorizati
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions. 
+
+Where an OP is currently experiencing high load it may return an HTTP 503 with a Retry-After response header as described in Section 7.1.3 of [@!RFC7231]. Clients should respect such headers and only retry after the time indicated in the header.
 
 ## Revoke Grant 
 
