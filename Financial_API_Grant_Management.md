@@ -164,9 +164,7 @@ This is out of scope for this specification.
 
 ## Requirements for Authorization Servers
 
-Authorization servers
-
- 1. shall support confidential clients as defined in [@!RFC6749].
+Grant management is restricted to confidential only clients due to security reasons.
 
 ## Authorization Request
 
