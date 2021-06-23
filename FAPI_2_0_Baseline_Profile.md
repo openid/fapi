@@ -156,18 +156,17 @@ Authorization servers
      - MTLS as specified in section 2 of [@!RFC8705]
      - `private_key_jwt` as specified in section 9 of [@!OpenID]
  11. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
- 12. shall only issue authorization codes and refresh tokens that are
-     sender-constrained 
+
  12. shall require the `redirect_uri` parameter in pushed authorization requests
- 14. shall return an `iss` parameter in the authorization response according to
+ 13. shall return an `iss` parameter in the authorization response according to
      [@!I-D.ietf-oauth-iss-auth-resp]
- 15. shall not transmit authorization responses over unencrypted network
+ 14. shall not transmit authorization responses over unencrypted network
      connections, and, to this end, shall not allow redirect URIs that use the
      "http" scheme except for native clients that use Loopback Interface
      Redirection as described in [@!RFC8252], Section 7.3,
- 16. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
+ 15. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
      been previously used
- 17. shall provide a means for resource servers to verify the validity,
+ 16. shall provide a means for resource servers to verify the validity,
      integrity, sender-constraining, scope (incl. `authorization_details`),
      expiration and revocation status of an access token, either by providing an
      introspection endpoint [@!RFC7662], by exposing signature verification
