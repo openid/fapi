@@ -386,7 +386,8 @@ OPTIONAL. JSON array containing the actions supported by the AS. Allowed values 
 
 * `query`: the AS allows clients to query the permissions associated with a certain grant.
 * `revoke`: the AS allows clients to revoke grants. 
-* `update`: the AS allows clients to update existing grants. 
+* `update`: the AS allows clients to update existing grants.
+* `replace`: the AS allows clients to replace existing grants.
 * `create`: the AS allows clients to request the creation of a new grant. 
 
 If omitted, the AS does not support any grant management actions. 
