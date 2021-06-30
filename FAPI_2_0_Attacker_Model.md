@@ -287,6 +287,9 @@ payload and meaningful metadata of a request or response.
   * NR8: Resource Requests
   * NR9: Resource Responses
 
+# Acknowledgements
+
+We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell and Torsten Lodderstedt for their valuable feedback and contributions that helped to evolve this document.
 
 {backmatter}
 
