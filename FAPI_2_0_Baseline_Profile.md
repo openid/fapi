@@ -183,6 +183,8 @@ is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used.
 
+**NOTE**: To enable an interoperable solution to consent management it is anticipated that 
+future versions of this specification will reference the FAPI WG's Grant Management API. 
 #### Returning Authenticated User's Identifier
 
 If it is desired to provide the authenticated user's identifier to the client in
