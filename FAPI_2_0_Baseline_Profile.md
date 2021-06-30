@@ -177,6 +177,12 @@ Authorization servers
  18. should use the HTTP 303 status code when redirecting the user agent using status codes;
  19. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
+ 19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
+     received in client authentication assertions.
+ 
+**NOTE**: In order to facilitate interoperability the authorization server should also 
+accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
+received in the `aud` claim received in client authentication assertions.
 
 **NOTE**: If replay identification of the authorization code is not possible, it
 is desirable to set the validity period of the authorization code to one minute
@@ -210,6 +216,8 @@ Clients
     [@!I-D.ietf-oauth-iss-auth-resp] to prevent Mix-Up attacks
  8. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
+ 9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
+    value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions.
 
 ### Requirements for Resource Servers
 
