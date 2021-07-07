@@ -128,14 +128,14 @@ In the following, a profile of the following technologies is defined:
   * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
   * OAuth 2.0 Authorization Server Issuer Identifier in Authorization Response [@!I-D.ietf-oauth-iss-auth-resp]
-  * OpenID Connect Core 1.0 incorporating errata set 1 [@!OpenID]
+  * OpenID Connect Core 1.0 incorporating errata set 1 [@!OIDC]
   
 ### Requirements for Authorization Servers
 
 Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
-    the metadata document as specified in [OIDD] and [RFC8414]
+    the metadata document as specified in [@!OIDD] and [@!RFC8414]
  2. shall support the authorization code grant described in [@!RFC6749]
  3. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749]
@@ -154,7 +154,7 @@ Authorization servers
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
  10. shall authenticate clients using one of the following methods:
      - MTLS as specified in section 2 of [@!RFC8705]
-     - `private_key_jwt` as specified in section 9 of [@!OpenID]
+     - `private_key_jwt` as specified in section 9 of [@!OIDC]
  11. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
 
  12. shall require the `redirect_uri` parameter in pushed authorization requests
@@ -195,7 +195,7 @@ future versions of this specification will reference the FAPI WG's Grant Managem
 
 If it is desired to provide the authenticated user's identifier to the client in
 the token response, the authorization server shall support OpenID Connect
-[@!OpenID].
+[@!OIDC].
 
 ### Requirements for Clients
 
@@ -208,7 +208,7 @@ Clients
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
  4. shall support client authentication using one of the following methods:
     - MTLS as specified in section 2 of [@!RFC8705]
-    - `private_key_jwt` as specified in section 9 of [@!OpenID]
+    - `private_key_jwt` as specified in section 9 of [@!OIDC]
  5. shall use PKCE [@!RFC7636] with `S256` as the code challenge method
  6. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750]
@@ -280,7 +280,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
 
 {backmatter}
 
-<reference anchor="OpenID" target="http://openid.net/specs/openid-connect-core-1_0.html">
+<reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
     <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
     <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
@@ -301,6 +301,26 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
    <date day="8" month="Nov" year="2014"/>
   </front>
 </reference>
+
+<reference anchor="OIDD" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+  <front>
+    <title>OpenID Connect Discovery 1.0 incorporating errata set 1</title>
+    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
+      <organization>NRI</organization>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization>Ping Identity</organization>
+    </author>
+    <author initials="M." surname="Jones" fullname="Mike Jones">
+      <organization>Microsoft</organization>
+    </author>
+    <author initials="E." surname="Jay" fullname="Edmund Jay">
+      <organization>Illumila</organization>
+    </author>
+    <date day="8" month="Nov" year="2014"/>
+  </front>
+</reference>
+
 
 <reference anchor="preload" target="https://hstspreload.org/">
 <front>

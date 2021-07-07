@@ -104,7 +104,7 @@ In addition to the technologies used in the [Baseline Profile], the
 following standards are used in the Advanced Profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@I-D.ietf-oauth-jwsreq]
-  * JWT Secured Authorization Response Mode for OAuth 2.0 [JARM]
+  * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
   * OAuth 2.0 Token Introspection [@!RFC7662] with signed introspection responses [@I-D.ietf-oauth-jwt-introspection-response]
 
 ### Requirements for Authorization Servers
@@ -114,8 +114,8 @@ Authorization servers
  1. shall support signed request objects according to JAR
     [@I-D.ietf-oauth-jwsreq] at the PAR endpoint
     [@I-D.ietf-oauth-par]
- 2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [JARM]
- 3. may support OpenID Connect [@!OpenID] ID Tokens as detached signatures for backward compatibility with existing implementations
+ 2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
+ 3. may support OpenID Connect [@!OIDC] ID Tokens as detached signatures for backward compatibility with existing implementations
  4. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
  5. OPEN QUESTION: how to sign resource requests and responses?
 
@@ -124,7 +124,7 @@ Authorization servers
 Clients
 
  1. shall sign request objects according to JAR [@I-D.ietf-oauth-jwsreq] at the PAR endpoint [@I-D.ietf-oauth-par]
- 1. shall ensure that authorization responses are signed using either [JARM] or via an ID Token as a detached signature [@!OpenID]
+ 1. shall ensure that authorization responses are signed using either [@!JARM] or via an ID Token as a detached signature [@!OIDC]
  2. shall verify the respective signatures
  3. when using token introspection [@!RFC7662], shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response]
  
@@ -143,7 +143,7 @@ Resource servers with the FAPI endpoints
 
 {backmatter}
 
-<reference anchor="OpenID" target="http://openid.net/specs/openid-connect-core-1_0.html">
+<reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
     <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
     <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
@@ -164,6 +164,39 @@ Resource servers with the FAPI endpoints
    <date day="8" month="Nov" year="2014"/>
   </front>
 </reference>
+
+<reference anchor="OIDD" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+  <front>
+    <title>OpenID Connect Discovery 1.0 incorporating errata set 1</title>
+    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
+      <organization>NRI</organization>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization>Ping Identity</organization>
+    </author>
+    <author initials="M." surname="Jones" fullname="Mike Jones">
+      <organization>Microsoft</organization>
+    </author>
+    <author initials="E." surname="Jay" fullname="Edmund Jay">
+      <organization>Illumila</organization>
+    </author>
+    <date day="8" month="Nov" year="2014"/>
+  </front>
+</reference>
+
+<reference anchor="JARM" target="https://openid.net/specs/openid-financial-api-jarm.html">
+  <front>
+    <title>Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
+    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+      <organization>Yes</organization>
+    </author>
+    <author initials="B." surname="Campbell" fullname="Brian Campbell">
+      <organization>Ping</organization>
+    </author>
+   <date day="17" month="Oct" year="2018"/>
+  </front>
+</reference>
+
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>
