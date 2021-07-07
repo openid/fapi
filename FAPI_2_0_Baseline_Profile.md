@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-baseline-00"
+value = "fapi-2_0-baseline-01"
 status = "standard"
 
 [[author]]
