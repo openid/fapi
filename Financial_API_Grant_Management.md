@@ -7,7 +7,7 @@ keyword = ["security", "oauth", "grant management", "consent management"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-grant-management-01"
+value = "fapi-grant-management-02"
 status = "standard"
 
 [[author]]
@@ -166,7 +166,7 @@ This is out of scope for this specification.
 
 Grant management is restricted to confidential only clients due to security reasons.
 
-## Authorization Request
+## Authorization Request {#authz_request}
 
 This specification introduces the authorization request parameters `grant_id` and `grant_management_action`. These parameters can be used with any request serving as authorization request, e.g. it may be used with CIBA requests. 
 
@@ -424,9 +424,17 @@ A grant id is considered a public identifier, it is not a secret. Implementation
 
 During the execution of a transaction utilising grant mode `replace` it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
 
-
-
 {backmatter}
+
+<reference anchor="IANA.OAuth.Parameters" target="http://www.iana.org/assignments/oauth-parameters">
+ <front>
+  <title>OAuth Parameters</title>
+  <author>
+    <organization>IANA</organization>
+  </author>
+  <date/>
+ </front>
+</reference>
 
 <reference anchor="OpenID" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
@@ -468,17 +476,92 @@ During the execution of a transaction utilising grant mode `replace` it is possi
 
 # IANA Considerations
 
-`grant_id`
+## OAuth Parameter registry
 
-`grant_management_action`
+This specification requests registration of the following value in the IANA "OAuth Parameters Registry" registry of [@IANA.OAuth.Parameters] established by [@RFC6749].
 
-`grant_management_actions_supported`
+{spacing="compact"}
+Parameter name:
+: `grant_id`
 
-`grant_management_action_required`
+Parameter location:
+: authorization request, token response
 
-`grant_management_endpoint`
+Change Controller:
+: IESG
 
-`invalid_grant_id`
+Specification Document(s):
+: (#authz_request) of [[ this document ]]
+
+Parameter name:
+: `grant_management_action`
+
+Parameter location:
+: authorization request 
+
+Change Controller:
+: IESG
+
+Specification Document(s):
+: (#authz_request) of [[ this document ]]
+
+## OAuth Authorization Server Metadata
+
+This specification requests registration of the following values in the IANA "OAuth Authorization Server Metadata" registry of [@IANA.OAuth.Parameters] established by [@!RFC8414]. 
+
+{spacing="compact"}
+Metadata Name:
+: `grant_management_actions_supported`
+
+Metadata Description:
+: JSON array containing the authorization details types the AS supports
+ 
+Change Controller:
+: IESG
+
+Specification Document(s):
+: (#server_metadata) of [[ this document ]]
+
+Metadata Name:
+: `grant_management_endpoint`
+
+Metadata Description:
+: URL of the authorization server's Grant Management Administration Endpoint.
+
+Change Controller:
+: IESG
+
+Specification Document(s):
+: (#server_metadata) of [[ this document ]]
+
+Metadata Name:
+: `grant_management_action_required`
+
+Metadata Description:
+: Boolean where, if `true` all authorization requests MUST specify a `grant_management_action`. 
+
+Change Controller:
+: IESG
+
+Specification Document(s):
+: (#server_metadata) of [[ this document ]]
+
+## OAuth Extensions Error registry
+
+This specification requests registration of the following value in the IANA "OAuth Extensions Error registry" registry of [@IANA.OAuth.Parameters] established by [@RFC6749].
+
+{spacing="compact"}
+Metadata Name:
+: `invalid_grant_id`
+
+Metadata Description:
+: indicates invalid `grant_id` to the client.
+
+Change Controller:
+: IESG
+
+Specification Document(s):
+: (#authz_request) of [[ this document ]]
 
 # Acknowledgements {#Acknowledgements}
 
@@ -486,7 +569,7 @@ We would like to thank Vladimir Dzhuvinov, Takahiko Kawasaki, Roland Hedberg, Fi
 
 # Notices
 
-Copyright (c) 2020 The OpenID Foundation.
+Copyright (c) 2021 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
@@ -495,6 +578,11 @@ The technology described in this specification was made available from contribut
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -02
+
+   * added `replace` grant management action to server metadata
+   * added IANA section content
       
    -01 
    
