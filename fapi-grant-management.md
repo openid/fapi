@@ -385,7 +385,7 @@ If the resource URL is unknown, the authorization server responds with an HTTP s
 
 If the client is not authorized to perform a call, the authorization server responds with an HTTP status code 403.
 
-If the request lacks a valid access token, the authorization server responds with Han TTP status code 401 and an `invalid_token` error code.
+If the request lacks a valid access token, the authorization server responds with an HTTP status code 401 and an `invalid_token` error code.
 
 # Metadata
 
