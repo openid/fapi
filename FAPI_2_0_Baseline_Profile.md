@@ -90,7 +90,7 @@ interpreted with their natural language meanings.
 
 OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
-laid out in the [Attacker Model].
+laid out in the Attacker Model [@!attackermodel].
 
 ## Network Layer Protections
 
@@ -279,6 +279,16 @@ Resource servers with the FAPI endpoints
 We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
 
 {backmatter}
+
+<reference anchor="attackermodel" target="https://bitbucket.org/openid/fapi/src/master/FAPI_2_0_Attacker_Model.md">
+  <front>
+    <title>FAPI 2.0 Attacker Model</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>yes.com</organization>
+    </author>
+   <date day="28" month="Jul" year="2021"/>
+  </front>
+</reference>
 
 <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
