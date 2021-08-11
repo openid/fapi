@@ -11,6 +11,14 @@ value = "fapi-2_0-advanced-authorization-01"
 status = "standard"
 
 [[author]]
+initials="R."
+surname="Bragg"
+fullname="Ralph Bragg"
+organization="Raidiam"
+    [author.address]
+    email = "ralph.bragg@raidiam.com"
+
+[[author]]
 initials="T."
 surname="Lodderstedt"
 fullname="Torsten Lodderstedt"
@@ -32,6 +40,8 @@ surname="Postnikov"
 fullname="Dima Postnikov"
     [author.address]
     email = "dima@postnikov.net"
+    
+
 
 %%%
 
