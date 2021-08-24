@@ -110,24 +110,33 @@ OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
 laid out in the Attacker Model [@!attackermodel].
 
+Fine grain authorization
+
+Clients managing grants 
+
+## Use cases 
+
 ## Profile
 
 In the following, a profile of the following technologies is defined:
 
-  * OAuth 2.0 Authorization Framework [@!RFC6749]
-  ...
+  * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
+  * Grant Management for OAuth 2.0 []
+
   
 ### Requirements for Authorization Servers
 
 Authorization servers
-
- 1. shall ...
+ 
+ 1. shall support the authorization_details parameter according to [@!I-D.ietf-oauth-rar]. 
+ 2. shall support Grant Management APIs according to [] 
 
 ### Requirements for Clients
 
 Clients
 
- 1. shall ...
+ 1. shall use the authorization_details parameter according to [@!I-D.ietf-oauth-rar] to convey the authorization clients want to obtain if the scope parameter is not expressive enough for that purpose.
+ 2. shall use Grant Management when client is required to support concurrent grants. 
 
 ### Requirements for Resource Servers
 
@@ -137,7 +146,14 @@ access token.
 
 Resource servers with the FAPI endpoints
 
-1. shall ...
+1. shall enforce API authorization based on authorization_details. NOTE: To be discussed if this is required.
+
+### Requirements for Conformance Test
+
+Conformance test:
+
+1.
+
                                            |                                                                                                       |
 ## Acknowledgements
 
