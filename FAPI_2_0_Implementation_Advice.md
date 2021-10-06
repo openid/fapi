@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Implemenation Advice"
+title = "FAPI 2.0 Implementation Advice"
 abbrev = "fapi-2-implementation-advice"
 ipr = "none"
 workgroup = "connect"
@@ -24,14 +24,14 @@ organization="Moneyhub"
 .# Abstract 
 
 Financial-grade API (FAPI) 2.0 Implementation Advice is a document to provide practical
-guidance on the implementaiton and usage of the FAPI 2.0 family of standards.
+guidance on the implementation and usage of the FAPI 2.0 family of standards.
 
 {mainmatter}
 
 # Introduction
 
 The Financial-grade API (FAPI) 2.0 family of standards provides security profiles and specifications
-to enable implementers to deploy highly secure, interopable APIs. While we have attempted 
+to enable implementers to deploy highly secure, interoperable APIs. While we have attempted 
 to minimize the optionality in FAPI 2.0, there are still many decisions that need to be made by
 implementers. This document aims to provide advice for implementers based on the experience
 of members of the OpenID Foundation's FAPI Working Group.
