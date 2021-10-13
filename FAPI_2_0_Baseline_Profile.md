@@ -217,7 +217,8 @@ Clients
  8. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
  9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
-    value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions.
+    value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
+    The issuer identifier value shall be sent as a string not as an item in an array.
 
 ### Requirements for Resource Servers
 
