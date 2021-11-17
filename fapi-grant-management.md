@@ -276,6 +276,8 @@ The token is required to be associated with the following scope value:
 
 The Grant Management API is a new endpoint provided by the authorization server. The client MAY utilize the server metadata parameter `grant_management_endpoint` (see (#server_metadata)) to obtain the endpoint URL.
 
+Communication with the Grant Management API MUST utilize TLS. See Section 16.17 [OpenID.Core] for more information on using TLS.
+
 ## Grant Resource URL
 
 The resource URL for a certain grant is built by concatenating the grant management endpoint URL, a slash, and the the `grant_id`. For example, if the grant management endpoint is defined as
@@ -352,7 +354,7 @@ The privileges associated with the grant will be provided as a JSON array contai
 * `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could,
 for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
 the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OIDC]) as requested and consented in one or more authorization requests associated with the respective grant.
+* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested and consented in one or more authorization requests associated with the respective grant.
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
@@ -447,7 +449,7 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
  </front>
 </reference>
 
-<reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
+<reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
     <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
     <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
