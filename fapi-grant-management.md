@@ -213,7 +213,7 @@ In case the AS does not support a grant management action requested by the clien
 
 This specification introduces the token response parameter `grant_id`:
 
-`grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value MUST be unique in the context of a certain authorization server and SHOULD have enough entropy to make it impractical to guess it.
+`grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` SHOULD NOT be issued if the `grant_management_action` request parameter is not provided. The `grant_id` value MUST be unique in the context of a certain authorization server and SHOULD have enough entropy to make it impractical to guess it.
 
 The AS will return a `grant_id` if it supports any of the grant management actions `query`, `revoke`, `update` and `replace`.
 
