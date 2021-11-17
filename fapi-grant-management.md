@@ -39,6 +39,10 @@ fullname="Dima Postnikov"
 
 This specification defines an extension of OAuth 2.0 [@!RFC6749] to allow clients to explicitly manage their grants with the authorization server.
 
+.# Notational Conventions
+
+The key words "shall", "shall not", "should", "should not", "may", and "can" in this document are to be interpreted as described in [ISO Directive Part 2][ISODIR2]. These key words are not used as dictionary terms such that any occurrence of them shall be interpreted as key words and are not to be interpreted with their natural language meanings.
+
 {mainmatter}
 
 # Introduction {#Introduction}
@@ -483,7 +487,17 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
           </author>
           <date day="8" month="Nov" year="2014"/>
         </front>
- </reference>
+</reference>
+
+<reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
+<front>
+<title>ISO/IEC Directives Part 2 - </title>
+    <author fullname="International Organization for Standardization">
+      <organization></organization>
+    </author>
+</front>
+</reference>
+
 
 # IANA Considerations
 
