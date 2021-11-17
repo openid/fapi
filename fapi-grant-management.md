@@ -352,6 +352,28 @@ Content-Type: application/json
    ]
 }
 ```
+The following example demonstrates a simpler scenario when the `authorization_details` or the `resource` indicators are not used or not supported by the AS:
+
+```http
+HTTP/1.1 200 OK
+Cache-Control: no-cache, no-store
+Content-Type: application/json
+
+{
+   "scopes":[
+      {
+         "scope":"openid email address phone"
+      }
+   ],
+   "claims":[
+      "email",
+      "email_verified",
+      "phone_number",
+      "phone_number_verified",
+      "address"
+   ]
+}
+```
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
