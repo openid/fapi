@@ -490,12 +490,12 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
 </reference>
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
-<front>
-<title>ISO/IEC Directives Part 2 - </title>
-    <author fullname="International Organization for Standardization">
-      <organization></organization>
-    </author>
-</front>
+    <front>
+        <title>ISO/IEC Directives Part 2 - </title>
+        <author fullname="International Organization for Standardization">
+          <organization></organization>
+        </author>
+    </front>
 </reference>
 
 
