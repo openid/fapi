@@ -276,7 +276,7 @@ The token is required to be associated with the following scope value:
 
 The Grant Management API is a new endpoint provided by the authorization server. The client MAY utilize the server metadata parameter `grant_management_endpoint` (see (#server_metadata)) to obtain the endpoint URL.
 
-Communication with the Grant Management API MUST utilize TLS. See Section 16.17 [OpenID.Core] for more information on using TLS.
+Communication with the Grant Management API MUST use the "https" scheme.
 
 ## Grant Resource URL
 
