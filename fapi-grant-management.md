@@ -203,9 +203,9 @@ Host: as.example.com
 
 In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
 
-In case the `grant_id` is provided for `create` action, the authorization server SHALL respond with an error code `invalid_request`.
+In case the `grant_id` is provided for the `create` action, the authorization server SHALL respond with an error code `invalid_request`.
 
-In case the `grant_id` is provided and action is not specified, the authorization server SHALL respond with an error code `invalid_request`.
+In case the `grant_id` is provided and the action is not specified, the authorization server SHALL respond with an error code `invalid_request`.
 
 In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, the authorization server SHALL respond with an error code `invalid_request`.
 
