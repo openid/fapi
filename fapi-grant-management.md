@@ -35,9 +35,13 @@ fullname="Dima Postnikov"
 
 %%%
 
-.# Abstract
+# Abstract
 
 This specification defines an extension of OAuth 2.0 [@!RFC6749] to allow clients to explicitly manage their grants with the authorization server.
+
+# Notational Conventions
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [BCP14] [RFC2119] [RFC8174] when, and only when, they appear in all capitals, as shown here.
 
 {mainmatter}
 
@@ -378,10 +382,8 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could,
-for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
-the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested and consented in one or more authorization requests associated with the respective grant.
+* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could, for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with the resource parameter values as requested and approved in a certain authorization request.
+* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the End-User in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
@@ -512,7 +514,32 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
           </author>
           <date day="8" month="Nov" year="2014"/>
         </front>
- </reference>
+</reference>
+
+<reference anchor="BCP14" target="https://tools.ietf.org/rfc/bcp/bcp14">
+    <front>
+        <title>Best Current Practice: Key words for use in RFCs to Indicate Requirement Levels</title>
+    </front>
+</reference>
+
+<reference anchor="RFC2119" target="https://datatracker.ietf.org/doc/html/rfc2119">
+    <front>
+        <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+        <author fullname="S. Bradner">
+          <organization>Harvard University</organization>
+        </author>
+    </front>
+</reference>
+
+<reference anchor="RFC8174" target="https://datatracker.ietf.org/doc/html/rfc8174">
+    <front>
+        <title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+        <author fullname="B. Leiba">
+          <organization>Huawei Technologies</organization>
+        </author>
+    </front>
+</reference>
+
 
 # IANA Considerations
 
