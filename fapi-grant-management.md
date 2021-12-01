@@ -35,9 +35,13 @@ fullname="Dima Postnikov"
 
 %%%
 
-.# Abstract
+# Abstract
 
 This specification defines an extension of OAuth 2.0 [@!RFC6749] to allow clients to explicitly manage their grants with the authorization server.
+
+# Notational Conventions
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [BCP14] [RFC2119] [RFC8174] when, and only when, they appear in all capitals, as shown here.
 
 {mainmatter}
 
@@ -510,7 +514,32 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
           </author>
           <date day="8" month="Nov" year="2014"/>
         </front>
- </reference>
+</reference>
+
+<reference anchor="BCP14" target="https://tools.ietf.org/rfc/bcp/bcp14">
+    <front>
+        <title>Best Current Practice: Key words for use in RFCs to Indicate Requirement Levels</title>
+    </front>
+</reference>
+
+<reference anchor="RFC2119" target="https://datatracker.ietf.org/doc/html/rfc2119">
+    <front>
+        <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+        <author fullname="S. Bradner">
+          <organization>Harvard University</organization>
+        </author>
+    </front>
+</reference>
+
+<reference anchor="RFC8174" target="https://datatracker.ietf.org/doc/html/rfc8174">
+    <front>
+        <title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+        <author fullname="B. Leiba">
+          <organization>Huawei Technologies</organization>
+        </author>
+    </front>
+</reference>
+
 
 # IANA Considerations
 
