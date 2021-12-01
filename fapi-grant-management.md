@@ -353,10 +353,8 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could,
-for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
-the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OIDC]) as requested by the client (acting as OpenID Connect RP) and consented by the End-User in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
+* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could, for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with the resource parameter values as requested and approved in a certain authorization request.
+* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the End-User in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
