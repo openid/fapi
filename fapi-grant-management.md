@@ -125,9 +125,9 @@ The client might also have to start another authorization process if a certain A
 
 Examples that can be implemented using "update":
 
-* Time extension of an authorization.
-
-* Other use cases that are covered by OAuth 2.0 Incremental Authorization (https://tools.ietf.org/html/draft-ietf-oauth-incremental-authz-04).
+* Time extension of an authorization
+* Add additional scopes without requiring authorization for pre-existing scopes
+* Add additional claims to an existing grant without reauthorizing other components of the grant (ie. scopes)
 
 ## Support for concurrent grants
 
