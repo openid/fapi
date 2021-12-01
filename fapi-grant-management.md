@@ -125,9 +125,9 @@ The client might also have to start another authorization process if a certain A
 
 Examples that can be implemented using "update":
 
-* Time extension of an authorization.
-
-* Other use cases that are covered by OAuth 2.0 Incremental Authorization (https://tools.ietf.org/html/draft-ietf-oauth-incremental-authz-04).
+* Time extension of an authorization
+* Add additional scopes without requiring authorization for pre-existing scopes
+* Add additional claims to an existing grant without reauthorizing other components of the grant (ie. scopes)
 
 ## Support for concurrent grants
 
@@ -203,6 +203,10 @@ Host: as.example.com
 
 In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
 
+In case the `grant_id` is provided for the `create` action, the authorization server SHALL respond with an error code `invalid_request`.
+
+In case the `grant_id` is provided and the action is not specified, the authorization server SHALL respond with an error code `invalid_request`.
+
 In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, the authorization server SHALL respond with an error code `invalid_request`.
 
 ## Token Response
@@ -275,6 +279,8 @@ The token is required to be associated with the following scope value:
 ## Endpoint
 
 The Grant Management API is a new endpoint provided by the authorization server. The client MAY utilize the server metadata parameter `grant_management_endpoint` (see (#server_metadata)) to obtain the endpoint URL.
+
+Communication with the Grant Management API MUST use the "https" scheme.
 
 ## Grant Resource URL
 
@@ -349,10 +355,10 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretaion of the AS. The AS could,
+* `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could,
 for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with
 the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OIDC]) as requested and consented in one or more authorization requests associated with the respective grant.
+* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested and consented in one or more authorization requests associated with the respective grant.
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
@@ -447,7 +453,7 @@ During the execution of a transaction utilizing grant mode `replace`, it is poss
  </front>
 </reference>
 
-<reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
+<reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
     <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
     <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
