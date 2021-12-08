@@ -7,10 +7,10 @@ pipelines:
         services:
           - docker
         script:
-          - docker run -v `pwd`:/data danielfett/markdown2rfc FAPI_2_0_Baseline_Profile.md
-          - mv fapi-2_0-baseline-01.html fapi-2_0-baseline.html
+          - ./build-all.py
         artifacts:
-          - fapi-2_0-baseline.html
+          - '*.html'
+          - '*.xml'
   branches:
     master:
       - step:
@@ -18,10 +18,10 @@ pipelines:
           services:
             - docker
           script:
-            - docker run -v `pwd`:/data danielfett/markdown2rfc FAPI_2_0_Baseline_Profile.md
-            - mv fapi-2_0-baseline-01.html fapi-2_0-baseline.html
+            - ./build-all.py
           artifacts:
-            - fapi-2_0-baseline.html
+            - '*.html'
+            - '*.xml'
       - step:
           name: publish
           clone:
@@ -32,7 +32,7 @@ pipelines:
             - git config --global push.default simple
             - git clone git@bitbucket.org:openid/openid.bitbucket.io.git
             - mkdir -p openid.bitbucket.io/fapi/
-            - cp fapi-2_0-baseline.html openid.bitbucket.io/fapi/
+            - cp *.html openid.bitbucket.io/fapi/
             - cd openid.bitbucket.io/fapi
             - git add *
             - git commit -m "Automatic update of FAPI drafts by pipeline"
