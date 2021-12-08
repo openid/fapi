@@ -2,7 +2,7 @@
 title = "FAPI 2.0 Baseline Profile"
 abbrev = "fapi-2-baseline"
 ipr = "none"
-workgroup = "connect"
+workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]

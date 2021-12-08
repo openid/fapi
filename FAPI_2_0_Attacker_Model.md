@@ -2,7 +2,7 @@
 title = "FAPI 2.0 Attacker Model"
 abbrev = "fapi-2_0-attacker-model"
 ipr = "none"
-workgroup = "connect"
+workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
