@@ -452,6 +452,12 @@ Implementations may wish to consider solutions to allow for addressibility of in
 * Including a unique identifier within the authorization object (ie. `id` within the RAR) or;
 * Defining a comparison algorithm for the grant to allow for derivation of update and append actions
 
+## Access Tokens and Introspection Responses
+
+The grant resource's data model serves the purpose of making the content of a grant transparent to the respective client. The way grant data (e.g. scopes) is conveyed between AS and RS is at the discretion of AS and RS.
+
+Deployments should ensure access tokens are issued with an audience restricted to a certain resource server. This is good security practice and it allows implementations implementations to use the existing claim aud to convey the resource value in addition to the scope claim in access tokens and respective introspection responses.
+
 # Privacy Consideration {#Privacy}
 
 `grant_id` is issued by the authorization server for each established grant between a client and a user. This should prevent correlation between different clients.
