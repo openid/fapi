@@ -186,8 +186,8 @@ This specification introduces the authorization request parameters `grant_id` an
 `grant_management_action`: String value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: The AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant.
-* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request.
+* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant and SHALL invalidate existing refresh tokens associated with the updated grant.
+* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request and SHALL invalidate existing refresh tokens associated with the replaced grant.
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
 
