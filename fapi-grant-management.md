@@ -203,6 +203,9 @@ GET /authorize?response_type=code&
 Host: as.example.com 
 ```
 
+## Authorization Response
+This specification doesn't introduce any changes to authorization response. `grant_id` will not be included in the authorization response.
+
 ## Authorization Error Response
 
 In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
