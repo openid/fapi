@@ -18,9 +18,6 @@ This is the official repository for OpenID Foundation Financial-grade API (FAPI)
 * Other documents
     * [Cross-Browser Payment Initiation Attack](TR-Cross_browser_payment_initiation_attack.md)
 
-
-OpenID Foundation FAPI Working Group is creating a Financial API standard that is applicable internationally. It is taking requirements from Open Banking Standard document, and has started working on based on the [contributed FS-ISAC Durable Data API](http://lists.openid.net/pipermail/openid-specs-fapi/attachments/20160609/df29d295/attachment-0001.pdf). 
-
 You can find the overview and rationale of the working group at [the WG page](http://openid.net/wg/fapi/). 
 
 ### Contribution guidelines ###
