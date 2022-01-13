@@ -7,7 +7,7 @@ keyword = ["security", "fapi", "deployment-advice"]
 
 [seriesInfo]
 name = "Informational"
-value = "fapi-implementation-deployment-advice"
+value = "fapi-implementation-deployment-advice-01"
 status = "standard"
 
 [[author]]
@@ -61,13 +61,15 @@ The Financial-grade API Standard provides a profile for OAuth 2.0 suitable for u
 
 .# Introduction
 
+The Financial-grade API working group members have gained considerable insight on using the standards in multiple ecosystems. This document attempts to capture some of the experience of using FAPI in 'real world' situations.
+
 .# Warning
 
 This document is not an OIDF International Standard. It is distributed for review and comment. It is subject to change without notice and may not be referred to as an International Standard.
 
 Recipients of this draft are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.
 
-## Copyright notice
+.# Copyright notice
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
@@ -91,6 +93,8 @@ Future parts may follow.
 
 This part is intended to provide practical guidance around how to use the Financial-grade API.
 
+{mainmatter}
+
 # Financial-grade API: Implementation and Deployment Advice
 
 The Financial-grade API Standard provides a profile for OAuth 2.0 suitable for use in financial services. When an ecosystem adopts Financial-grade API, there are many decisions to be made and it is not always obvious what is the correct way to apply the standard to maximise the benefits.
@@ -104,8 +108,6 @@ ISO Directive Part 2 [@!ISODIR2].
 These keywords are not used as dictionary terms such that
 any occurrence of them shall be interpreted as keywords
 and are not to be interpreted with their natural language meanings.
-
-{mainmatter}
 
 # Scope
 
