@@ -7,7 +7,7 @@ keyword = ["security", "fapi", "http-signing"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-http-signing-requirements"
+value = "fapi-http-signing-requirements-01"
 status = "standard"
 
 [[author]]
