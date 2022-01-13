@@ -11,41 +11,11 @@ value = "fapi-http-signing-requirements"
 status = "standard"
 
 [[author]]
-initials="N."
-surname="Sakimura"
-fullname="Nat Sakimura"
-organization="Nomura Research Institute"
-role="editor"
-
-[[author]]
-initials="A."
-surname="Saxana"
-fullname="Anoop Saxana"
-organization="Intuit"
-
-[[author]]
-initials="A."
-surname="Nadalin"
-fullname="Anthony Nadalin"
-organization="Microsoft"
-
-[[author]]
-initials="B."
-surname="Campbell"
-fullname="Brian Campbell"
-organization="Ping Identity"
-
-[[author]]
-initials="J."
-surname="Bradley"
-fullname="John Bradley"
-organization="Yubico"
-
-[[author]]
 initials="J."
 surname="Heenan"
 fullname="Joseph Heenan"
 organization="Authlete"
+role="editor"
 
 %%%
 
