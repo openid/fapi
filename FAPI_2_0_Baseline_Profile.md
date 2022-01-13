@@ -21,14 +21,17 @@ organization="yes.com"
 
 %%%
 
-.# Abstract 
+.# Foreword
+
+The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.
+
+Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be the subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
 
 The Financial-grade API (FAPI) 2.0 Baseline profile is an API security profile
 based on the OAuth 2.0 Authorization Framework [@!RFC6749]. 
 
-{mainmatter}
+.# Introduction
 
-# Introduction
 Financial-grade API (FAPI) 2.0 is an API security profile based on the OAuth 2.0
 Authorization Framework [@!RFC6749] and related specifications suitable for
 protecting APIs in high-value scenarios. While the security profile was
@@ -36,7 +39,8 @@ initially developed with a focus on financial applications, it is designed to be
 universally applicable for protecting APIs exposing high-value and sensitive
 (personal and other) data, for example, in e-health and e-government
 applications. 
-## Warning
+
+.# Warning
 
 This document is not an OIDF International Standard. It is distributed for
 review and comment. It is subject to change without notice and may not be
@@ -46,7 +50,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 
-## Notational Conventions
+.# Notational Conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -54,7 +58,23 @@ this document are to be interpreted as described in ISO Directive Part 2
 occurrence of them shall be interpreted as keywords and are not to be
 interpreted with their natural language meanings.
 
+{mainmatter}
+
+# Scope
+
+TBD
+
+# Terms and definitions
+
+For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
+
+# Symbols and Abbreviated terms
+
+TBD
+
 # Baseline Profile
+
+## Introduction
 
 OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
@@ -243,7 +263,16 @@ Resource servers with the FAPI endpoints
 | `exp` claim in request object            | -                                   | ?                                                                                                     |
 | `x-fapi-*` headers                       | -                                   | Removed pending further discussion                                                                    |
 | MTLS for sender-constrained access tokens | MTLS or DPoP                                             |                                                                                                       |
-## Acknowledgements
+
+# Security considerations
+
+TBD
+
+# Privacy considerations
+
+TBD
+
+# Acknowledgements
 
 We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
 
