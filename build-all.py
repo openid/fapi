@@ -22,7 +22,6 @@ dirs_exclude = [
 files_exclude = [
     './FAPI_2_0_Advanced_Authorization_Profile.md',
     './Financial_API_HTTP_Signing.md',
-    './Financial_API_Implementation_And_Deployment_Advice.md',
     './Financial_API_JWT_Secured_Authorization_Response_Mode.md',
     './Financial_API_Lodging_Intent.md',
     './Financial_API_Pushed_Request_Object.md',
