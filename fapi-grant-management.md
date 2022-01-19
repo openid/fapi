@@ -204,7 +204,7 @@ Host: as.example.com
 ```
 
 ## Authorization Response
-This specification doesn't introduce any changes to authorization response. `grant_id` will not be included in the authorization response.
+This specification doesn't introduce any changes to authorization response. `grant_id` should not be included in the authorization response.
 
 ## Authorization Error Response
 
