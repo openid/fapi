@@ -456,7 +456,7 @@ Implementations may wish to consider solutions to allow for addressibility of in
 
 The grant resource's data model serves the purpose of making the content of a grant transparent to the respective client. The way grant data (e.g. scopes) is conveyed between AS and RS is at the discretion of AS and RS.
 
-Deployments should ensure access tokens are issued with an audience restricted to a certain resource server. This is good security practice and it allows implementations implementations to use the existing claim "aud" to convey the resource value in addition to the scope in access tokens and respective introspection responses.
+Deployments should ensure access tokens are issued with an audience restricted to a certain resource server. This is good security practice and it allows implementations to use the existing claim "aud" to convey the resource value in addition to the scope in access tokens and respective introspection responses.
 
 # Privacy Consideration {#Privacy}
 
