@@ -63,24 +63,33 @@ laid out in the Attacker Model [@!attackermodel].
 ## Network Layer Protections
 
 To protect against network attackers, clients, authorization servers, and
-resource servers shall only offer TLS protected endpoints and shall establish
-connections to other servers using TLS. TLS connections shall be set up to use
-TLS version 1.2 or later and follow [@!RFC7525].
+resource servers:
 
-Endpoints for the use by web browsers shall use methods to ensure that
-connections cannot be downgraded using TLS Stripping attacks. A preloaded
-[@preload] HTTP Strict Transport Security policy [@!RFC6797] can be used for
-this purpose. Some top-level domains, like .bank and .insurance, have set such a
-policy and therefore protect all second-level domains below them.
+ 1. shall only offer TLS protected endpoints and shall establish connections 
+    to other servers using TLS. TLS connections shall be set up to use
+    TLS version 1.2 or later
+ 2. when using TLS 1.2, shall follow the guidance and recommendations in [@!RFC7525]
+ 3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
+    the issuance of rogue domain-validated TLS certificates.
 
-For a comprehensive protection against network attackers, all endpoints should
-additionally use DNSSEC to protect against DNS spoofing attacks that can lead to
-the issuance of rogue domain-validated TLS certificates. Note: Even if an
-endpoint uses only organization validated (OV) or extended validation (EV) TLS
-certificates, rogue domain-validated certificates can be used to impersonate the
-endpoints and conduct man-in-the-middle attacks. CAA records [@!RFC8659] can
-help to mitigate this risk.
+**NOTE**: Clause 2 above means that recommendations and "should" clauses in 
+[@!RFC7525] are to be treated as "shall" to be compliant with this specification. 
+As an example the ciphers listed in 4.2 of [@!RFC7525] are mandatory to implement 
+if TLS 1.2 is being used.
 
+**NOTE**: Even if an endpoint uses only organization validated (OV) or extended 
+validation (EV) TLS certificates, rogue domain-validated certificates can be used 
+to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records 
+[@!RFC8659] can help to mitigate this risk.
+
+Endpoints for the use by web browsers 
+
+  1. shall use methods to ensure that connections cannot be downgraded using 
+     TLS Stripping attacks. A preloaded [@preload] HTTP Strict Transport Security 
+     policy [@!RFC6797] can be used for this purpose. Some top-level domains, 
+     like .bank and .insurance, have set such a policy and therefore protect all 
+     second-level domains below them.
+ 
 ## Profile
 
 In the following, a profile of the following technologies is defined:
