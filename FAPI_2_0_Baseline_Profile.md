@@ -148,7 +148,7 @@ Authorization servers
  19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
  20. shall not use refresh token rotation unless, in the case a response with a new 
-     refresh tokenis not fully processed by the client, retrying the request (with 
+     refresh token is not fully processed by the client, retrying the request (with 
      the previous refresh token) will succeed.
 
 
@@ -163,7 +163,7 @@ or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used.
 
 **NOTE**: The restriction on the use of refresh token rotation is to address operational
-issues that have had a large impact in ecosystems using FAPI 1
+issues that have had a large impact in ecosystems implementing refresh token rotation. 
 
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
