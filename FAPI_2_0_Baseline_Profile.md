@@ -62,25 +62,35 @@ laid out in the Attacker Model [@!attackermodel].
 
 ## Network Layer Protections
 
+### Requirements for all endpoints
+
 To protect against network attackers, clients, authorization servers, and
 resource servers:
 
  1. shall only offer TLS protected endpoints and shall establish connections 
     to other servers using TLS. TLS connections shall be set up to use
     TLS version 1.2 or later
- 2. when using TLS 1.2, shall follow the guidance and recommendations in [@!RFC7525]
+ 2. when using TLS 1.2, the recommendations for Secure Use of Transport Layer Security
+    in [@!RFC7525] should be followed
  3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
     the issuance of rogue domain-validated TLS certificates.
-
-**NOTE**: Clause 2 above means that recommendations and "should" clauses in 
-[@!RFC7525] are to be treated as "shall" to be compliant with this specification. 
-As an example the ciphers listed in 4.2 of [@!RFC7525] are mandatory to implement 
-if TLS 1.2 is being used.
+ 4. shall perform a TLS server certificate check, as per [@!RFC6125].
 
 **NOTE**: Even if an endpoint uses only organization validated (OV) or extended 
 validation (EV) TLS certificates, rogue domain-validated certificates can be used 
 to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records 
 [@!RFC8659] can help to mitigate this risk.
+
+### Requirements for endpoints not used by web browsers
+
+ 1. when using TLS 1.2, only the following 4 cipher suites shall be permitted:
+    * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
+    * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
+    * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
+ 2. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
+ key lengths of at least 2048 bits are required.
+
+### Requirements for endpoints user by web browswers
 
 Endpoints for the use by web browsers 
 
@@ -89,6 +99,7 @@ Endpoints for the use by web browsers
      policy [@!RFC6797] can be used for this purpose. Some top-level domains, 
      like .bank and .insurance, have set such a policy and therefore protect all 
      second-level domains below them.
+  2. when using TLS 1.2, shall only use cipher suites allowed in [@!RFC7525]
  
 ## Profile
 
