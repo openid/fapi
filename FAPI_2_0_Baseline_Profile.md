@@ -112,7 +112,7 @@ In the following, a profile of the following technologies is defined:
     Tokens (MTLS) [@!RFC8705]
   * OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
     [@!I-D.ietf-oauth-dpop]
-  * OAuth 2.0 Pushed Authorization Requests (PAR) [@!I-D.ietf-oauth-par]
+  * OAuth 2.0 Pushed Authorization Requests (PAR) [@!RFC9126]
   * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
   * OAuth 2.0 Authorization Server Issuer Identifier in Authorization Response [@!I-D.ietf-oauth-iss-auth-resp]
@@ -128,9 +128,9 @@ Authorization servers
  3. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749]
  4. shall support client-authenticated pushed authorization requests
-    according to [@!I-D.ietf-oauth-par]
+    according to [@!RFC9126]
  5. shall reject authorization requests sent without
-    [@!I-D.ietf-oauth-par]
+    [@!RFC9126]
  6. shall reject pushed authorization requests without client authentication
  7. shall support the `authorization_details` parameter according to
     [@!I-D.ietf-oauth-rar] to convey the authorization clients want to obtain if
@@ -190,7 +190,7 @@ the token response, the authorization server shall support OpenID Connect
 Clients
 
  1. shall use the authorization code grant described in [@!RFC6749]
- 2. shall use pushed authorization requests according to [@!I-D.ietf-oauth-par]
+ 2. shall use pushed authorization requests according to [@!RFC9126]
  3. shall support sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
