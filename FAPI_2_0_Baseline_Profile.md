@@ -71,7 +71,7 @@ resource servers:
     to other servers using TLS. TLS connections shall be set up to use
     TLS version 1.2 or later
  2. when using TLS 1.2, the recommendations for Secure Use of Transport Layer Security
-    in [@!RFC7525] should be followed
+    in [@!RFC7525] shall be followed
  3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
     the issuance of rogue domain-validated TLS certificates.
  4. shall perform a TLS server certificate check, as per [@!RFC6125].
