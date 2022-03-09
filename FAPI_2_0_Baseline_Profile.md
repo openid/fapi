@@ -291,7 +291,7 @@ Resource servers with the FAPI endpoints
 | pre-registered redirect URIs              | redirect URIs in PAR                       | pre-registration is not required with client authentication and PAR                                   |
 | response types `code id_token` or `code`  | response type `code`                       | improve security: no ID token in front-channel; not needed                                            |
 | ID Token as detached signature            | -                                          | ID token does not need to serve as a detached signature                                               |
-| signed and encrypted ID Tokens            | signing and encryption not required        | ID Tokens only exchanged in back channel                                                              |
+| potentially encrypted ID Tokens           | encryption not required                    | ID Tokens only exchanged in back channel                                                              |
 | `nbf` & `exp` claims in request object    | request_uri has lifetime under 300 seconds | Prevents pre-generation of requests.                                                                  |
 | `x-fapi-*` headers                        | -                                          | Removed pending further discussion                                                                    |
 | MTLS for sender-constrained access tokens | MTLS or DPoP                               |                                                                                                       |
