@@ -151,7 +151,6 @@ Authorization servers
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
 
-
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -162,9 +161,12 @@ is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used.
 
-**NOTE**: This specification discourages the use of refresh token rotation as it doesn't
-bring any security benefits for confidential clients, and can cause significant operational
-issues. However to allow for operational agility, Authorization Servers may implement it providing they meet the requirement in clause 20.
+**NOTE**: Refresh token rotation is an optional feature defined in [@!RFC6749] section 6
+where the Authorization Server issues a new refresh token to the client as part of the
+`refresh_token` grant. This specification discourages the use of this feature as it 
+doesn't bring any security benefits for confidential clients, and can cause significant 
+operational issues. However to allow for operational agility, Authorization Servers 
+may implement it providing they meet the requirement in clause 20.
 
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
