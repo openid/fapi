@@ -181,12 +181,13 @@ Authorization servers
  17. should use the HTTP 303 status code when redirecting the user agent using status codes;
  18. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
- 19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
+ 20. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
  20. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
-
+ 22. shall issue pushed authorization requests `request_uri` with `expires_in` values 
+     of between 5 and 600 seconds. 
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -281,19 +282,19 @@ Resource servers with the FAPI endpoints
 
 ## Differences to FAPI 1.0
 
-| FAPI 1.0 Read/Write                      | FAPI 2.0                            | Reasons                                                                                               |
-| :--------------------------------------- | :---------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| JAR, JARM                                | PAR                                 | integrity protection and compatibility improvements for authorization requests; only code in response |
-| -                                        | RAR                                 | support complex and structured information about authorizations                                       |
-| -                                        | shall adhere to Security BCP        |                                                                                                       |
-| `s_hash`                                 | -                                   | state integrity is protected by PAR; protection provided by state is now provided by PKCE             |
-| pre-registered redirect URIs             | redirect URIs in PAR                | pre-registration is not required with client authentication and PAR                                   |
-| response types `code id_token` or `code` | response type `code`                | improve security: no ID token in front-channel; not needed                                            |
-| ID Token as detached signature           | -                                   | ID token does not need to serve as a detached signature                                               |
-| signed and encrypted ID Tokens           | signing and encryption not required | ID Tokens only exchanged in back channel                                                              |
-| `exp` claim in request object            | -                                   | ?                                                                                                     |
-| `x-fapi-*` headers                       | -                                   | Removed pending further discussion                                                                    |
-| MTLS for sender-constrained access tokens | MTLS or DPoP                                             |                                                                                                       |
+| FAPI 1.0 Read/Write                       | FAPI 2.0                                   | Reasons                                                                                               |
+|:------------------------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------|
+| JAR, JARM                                 | PAR                                        | integrity protection and compatibility improvements for authorization requests; only code in response |
+| -                                         | RAR                                        | support complex and structured information about authorizations                                       |
+| -                                         | shall adhere to Security BCP               |                                                                                                       |
+| `s_hash`                                  | -                                          | state integrity is protected by PAR; protection provided by state is now provided by PKCE             |
+| pre-registered redirect URIs              | redirect URIs in PAR                       | pre-registration is not required with client authentication and PAR                                   |
+| response types `code id_token` or `code`  | response type `code`                       | improve security: no ID token in front-channel; not needed                                            |
+| ID Token as detached signature            | -                                          | ID token does not need to serve as a detached signature                                               |
+| signed and encrypted ID Tokens            | signing and encryption not required        | ID Tokens only exchanged in back channel                                                              |
+| `nbf` & `exp` claims in request object    | request_uri has lifetime under 300 seconds | Prevents pre-generation of requests.                                                                  |
+| `x-fapi-*` headers                        | -                                          | Removed pending further discussion                                                                    |
+| MTLS for sender-constrained access tokens | MTLS or DPoP                               |                                                                                                       |
 
 # Security considerations
 
