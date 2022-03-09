@@ -154,11 +154,7 @@ Authorization servers
      Redirection as described in [@!RFC8252], Section 7.3,
  15. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
      been previously used
- 16. shall provide a means for resource servers to verify the validity,
-     integrity, sender-constraining, scope (incl. `authorization_details`),
-     expiration and revocation status of an access token, either by providing an
-     introspection endpoint [@!RFC7662], by exposing signature verification
-     keys, or by deployment-specific means.
+ 16. (withdrawn)
  17. shall not use the HTTP 307 status code when redirecting a request that contains 
      user credentials to avoid forwarding the credentials to a third party accidentally 
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
