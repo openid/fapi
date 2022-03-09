@@ -115,9 +115,8 @@ Authorization servers
     [@I-D.ietf-oauth-jwsreq] at the PAR endpoint
     [@I-D.ietf-oauth-par]
  2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
- 3. may support OpenID Connect [@!OIDC] ID Tokens as detached signatures for backward compatibility with existing implementations
- 4. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
- 5. OPEN QUESTION: how to sign resource requests and responses?
+ 3. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
+ 4. OPEN QUESTION: how to sign resource requests and responses?
 
 ### Requirements for Clients
 
