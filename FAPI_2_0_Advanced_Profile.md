@@ -103,9 +103,33 @@ as well, with the extensions described in the following.
 In addition to the technologies used in the [Baseline Profile], the
 following standards are used in the Advanced Profile:
 
-  * OAuth 2.0 JWT Secured Authorization Request (JAR) [@I-D.ietf-oauth-jwsreq]
+  * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101]
   * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
   * OAuth 2.0 Token Introspection [@!RFC7662] with signed introspection responses [@I-D.ietf-oauth-jwt-introspection-response]
+  * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures]
+  * Digest Fields [I-D.ietf-httpbis-digest-headers]
+
+### HTTP Message Signing
+
+This profile supports HTTP Message Signing using the *HTTP Message Signatures* specification
+being developed by the IETF HTTP Working Group.
+
+The signer creates an HTTP Message Signature as described in [I-D.ietf-httpbis-message-signatures].
+
+The covered components of the signature shall include the following:
+
+ - "@method":  The method used in the HTTP request.
+ - "@target-uri":  The full request URI of the HTTP request.
+
+When the message contains a request body, the covered components shall
+also include the following:
+
+ - "content-digest":  The Content-Digest header as defined in [I-D.ietf-httpbis-digest-headers].  
+ The signer shall calculate this header value and the verifier shall validate this field value.  
+ Use of content-encoding agnostic digest methods (such as sha-256) is RECOMMENDED.
+
+When an HTTP request contains an HTTP Message Signature, the response should be signed using
+*Request-Response Signature Binding* as defined in 2.2.11 in [I-D.ietf-httpbis-message-signatures].
 
 ### Requirements for Authorization Servers
 
@@ -116,7 +140,9 @@ Authorization servers
     [@I-D.ietf-oauth-par]
  2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
  3. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
- 4. OPEN QUESTION: how to sign resource requests and responses?
+ 3. may support OpenID Connect [@!OIDC] ID Tokens as detached signatures for backward compatibility with existing implementations
+ 4. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
+ 5. all HTTP requests and responses should be signed using the method specified in the *HTTP Message Signing* section
 
 ### Requirements for Clients
 
@@ -126,6 +152,8 @@ Clients
  1. shall ensure that authorization responses are signed using either [@!JARM] or via an ID Token as a detached signature [@!OIDC]
  2. shall verify the respective signatures
  3. when using token introspection [@!RFC7662], shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response]
+ 4. all HTTP requests and responses should be signed using the method specified in the *HTTP Message Signing* section
+
  
 ### Requirements for Resource Servers
 
@@ -133,8 +161,7 @@ The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that perform s
 
 Resource servers with the FAPI endpoints
 
-1. OPEN QUESTION: shall support which signing mechanisms?
-
+1. all HTTP requests and responses should be signed using the method specified in the *HTTP Message Signing* section
 
 ## Acknowledgements
 (todo)
