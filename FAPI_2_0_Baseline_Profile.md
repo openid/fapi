@@ -64,8 +64,8 @@ laid out in the Attacker Model [@!attackermodel].
 
 ### Requirements for all endpoints
 
-To protect against network attackers, clients, authorization servers, and
-resource servers:
+TLS connections shall be protected against network attackers. To this end, clients, 
+authorization servers, and resource servers:
 
  1. shall only offer TLS protected endpoints and shall establish connections 
     to other servers using TLS. TLS connections shall be set up to use
@@ -86,6 +86,7 @@ to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records
     * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
     * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
+    * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
  2. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
  key lengths of at least 2048 bits are required.
 
