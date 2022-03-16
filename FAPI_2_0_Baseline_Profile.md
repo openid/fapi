@@ -167,6 +167,10 @@ Authorization servers
      [@I-D.ietf-oauth-security-topics])
  19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
+ 20. shall not use refresh token rotation unless, in the case a response with a new 
+     refresh token is not received and stored by the client, retrying the request (with 
+     the previous refresh token) will succeed.
+
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -177,8 +181,16 @@ is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used.
 
+**NOTE**: Refresh token rotation is an optional feature defined in [@!RFC6749] section 6
+where the Authorization Server issues a new refresh token to the client as part of the
+`refresh_token` grant. This specification discourages the use of this feature as it 
+doesn't bring any security benefits for confidential clients, and can cause significant 
+operational issues. However to allow for operational agility, Authorization Servers 
+may implement it providing they meet the requirement in clause 20.
+
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
+
 #### Returning Authenticated User's Identifier
 
 If it is desired to provide the authenticated user's identifier to the client in
@@ -207,6 +219,7 @@ Clients
  9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
+10. shall support refresh tokens and their rotation.
 
 ### Requirements for Resource Servers
 
