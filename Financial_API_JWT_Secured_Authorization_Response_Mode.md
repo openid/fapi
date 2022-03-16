@@ -418,7 +418,7 @@ The following people contributed to this document:
 * Ralph Bragg (Raidiam)
 * Vladimir Dzhuvinov (Connect2ID)
 * Michael Schwartz (Gluu)
-* Filip Skokan
+* Filip Skokan (Auth0|Okta)
 
 ## 10. IANA Considerations
 ### 10.1 OAuth Dynamic Client Registration Metadata Registration
