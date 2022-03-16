@@ -124,7 +124,7 @@ Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
     the metadata document as specified in [@!OIDD] and [@!RFC8414]
- 2. shall use the authorization code grant (response_type=code & grant_type=authorization_code)
+ 2. shall support the authorization code grant (response_type=code & grant_type=authorization_code)
     described in [@!RFC6749]
  3. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749]
