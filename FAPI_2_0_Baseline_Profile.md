@@ -265,10 +265,12 @@ Resource servers with the FAPI endpoints
 ## Cryptography and Secrets
 
  
- 1. Authorization Servers, Clients, and Resource Servers shall adhere to
-    [@!RFC8725] when creating or processing JWTs. In particular,
-     * the algorithm-specific recommendations in Section 3.2 shall be followed,
-     * and the `none` algorithm shall not be used or accepted.
+ 1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
+
+    1. adhere to [@!RFC8725]
+    2. use `PS256` or `ES256` algorithms
+    3. not use or accept the `none` algorithm
+
  2. RSA keys shall have a minimum length of 2048 bits.
  3. Elliptic curve keys shall have a minimum length of 160 bits.
  4. Credentials not intended for handling by end-users (e.g., access tokens,
