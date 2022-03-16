@@ -126,7 +126,7 @@ Authorization servers
     the metadata document as specified in [@!OIDD] and [@!RFC8414]
  2. shall support the authorization code grant described in [@!RFC6749]
  3. shall reject requests using the resource owner password credentials grant or
-    the implicit grant described in [@!RFC6749]
+    the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
  4. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126]
  5. shall reject authorization requests sent without
