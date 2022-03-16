@@ -181,12 +181,12 @@ Authorization servers
  17. should use the HTTP 303 status code when redirecting the user agent using status codes;
  18. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
- 20. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
+ 19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
  20. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
- 22. shall issue pushed authorization requests `request_uri` with `expires_in` values 
+ 21. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of between 5 and 600 seconds. 
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
