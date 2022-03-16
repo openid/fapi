@@ -237,6 +237,7 @@ Clients
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
 10. shall support refresh tokens and their rotation.
+11. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
 
 ### Requirements for Resource Servers
 
