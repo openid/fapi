@@ -199,7 +199,7 @@ Clients
  9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
-10. shall support refresh token rotation
+10. shall support refresh tokens and their rotation.
 
 ### Requirements for Resource Servers
 
