@@ -18,6 +18,14 @@ organization="yes.com"
     [author.address]
     email = "mail@danielfett.de"
 
+[[author]]
+initials="D."
+surname="Tonge"
+fullname="Dave Tonge"
+organization="Moneyhub Financial Technology"
+    [author.address]
+    email = "dave@tonge.org"
+
 
 %%%
 
@@ -103,37 +111,103 @@ as well, with the extensions described in the following.
 In addition to the technologies used in the [Baseline Profile], the
 following standards are used in the Advanced Profile:
 
-  * OAuth 2.0 JWT Secured Authorization Request (JAR) [@I-D.ietf-oauth-jwsreq]
-  * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
-  * OAuth 2.0 Token Introspection [@!RFC7662] with signed introspection responses [@I-D.ietf-oauth-jwt-introspection-response]
+  * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
+  * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM] for signing authorization responses 
+  * OAuth 2.0 Token Introspection [@!RFC7662] with [@I-D.ietf-oauth-jwt-introspection-response] for signing introspection responses
+  * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [I-D.ietf-httpbis-digest-headers]
+  for signing HTTP requests to and responses from Resource Servers.
 
-### Requirements for Authorization Servers
+We understand that some ecosystems may only desire to implement 1 or 2 of the above 3, it is therefore 
+anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
+will be separate tests for the following:
 
-Authorization servers
+ * FAPI2Advanced-JAR
+ * FAPI2Advanced-JARM
+ * FAPI2Advanced-JIR
+ * FAPI2Advanced-HTTPSig
 
- 1. shall support signed request objects according to JAR
-    [@I-D.ietf-oauth-jwsreq] at the PAR endpoint
-    [@I-D.ietf-oauth-par]
- 2. shall support signed authorization responses via JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM]
- 3. when offering token introspection [@!RFC7662], shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
- 4. OPEN QUESTION: how to sign resource requests and responses?
+### Signing Authorization Requests
 
-### Requirements for Clients
+#### Requirements for Authorization Servers
 
-Clients
+Authorization servers implementing FAPI2 authorization request signing
 
- 1. shall sign request objects according to JAR [@I-D.ietf-oauth-jwsreq] at the PAR endpoint [@I-D.ietf-oauth-par]
- 1. shall ensure that authorization responses are signed using either [@!JARM] or via an ID Token as a detached signature [@!OIDC]
- 2. shall verify the respective signatures
- 3. when using token introspection [@!RFC7662], shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response]
+ 1. shall support and verify signed request objects according to JAR
+    [@!RFC9101] at the PAR endpoint [@!RFC9126]
+
+#### Requirements for Clients
+
+Clients implementing FAPI2 authorization request signing
+
+ 1. shall sign request objects according to JAR [@!RFC9101] that are sent to the PAR 
+    endpoint [@!RFC9126]
  
-### Requirements for Resource Servers
+### Signing Authorization Responses
+
+
+
+#### Requirements for Authorization Servers
+
+Authorization servers implementing FAPI2 authorization response signing
+
+ 1. shall support and issue signed authorization responses via JWT Secured Authorization 
+    Response Mode for OAuth 2.0 [@!JARM]
+
+#### Requirements for Clients
+
+Clients implementing FAPI2 authorization response signing
+
+ 1. shall set the `response_mode` to `jwt` in the authorization request as defined in [@!JARM]
+ 2. shall verify signed authorization responses according to [@!JARM]
+
+### Signing Introspection Responses
+
+#### Requirements for Authorization Servers
+
+Authorization servers implementing FAPI2 introspection response signing
+
+ 1. shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
+
+#### Requirements for Clients
+
+Clients implementing FAPI2 introspection response signing
+
+ 1. shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response] 
+ 2. shall verify the signed token introspection responses
+
+
+### HTTP Message Signing
+
+This profile supports HTTP Message Signing using the *HTTP Message Signatures* specification
+being developed by the IETF HTTP Working Group.
+
+#### Requirements for Clients
+
+Clients implementing HTTP Message Signing
+
+ 1. shall create an HTTP Message Signature as described in [I-D.ietf-httpbis-message-signatures]. 
+ 2. shall include `@method` (the method used in the HTTP request) in the signature input
+ 3. shall include `@target-uri` (the full request URI of the HTTP request) in the signature input
+ 4. when the message contains a request body, include the `content-digest` header as defined in 
+    [I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature input. 
+    Content-encoding agnostic digest methods (such as sha-256) should be used.
+ 5. shall accept and verify the signature in the response as described in [I-D.ietf-httpbis-message-signatures]
+
+#### Requirements for Resource Servers
 
 The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that perform sensitive actions and return protected information for the resource owner associated with the submitted access token.
 
-Resource servers with the FAPI endpoints
+Resource servers with FAPI endpoints implementing HTTP Message Signing
 
-1. OPEN QUESTION: shall support which signing mechanisms?
+ 1. shall verify the signature received from the Client as described in [I-D.ietf-httpbis-message-signatures]. 
+ 2. shall reject requests with missing or invalid signatures using HTTP Status Code 401
+ 3. shall create an HTTP Message Signature for the response as described in [I-D.ietf-httpbis-message-signatures].
+ 4. shall cryptographically link the response to the request using `@request-response` in the signature
+    input as defined in 2.2.11 in [I-D.ietf-httpbis-message-signatures]
+ 5. shall include the `content-digest` header as defined in 
+    [I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. 
+    Content-encoding agnostic digest methods (such as sha-256) should be used.
+ 6. shall include `@status` (the status code of the response) in the signature input
 
 
 ## Acknowledgements
