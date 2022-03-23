@@ -135,7 +135,7 @@ In the following, a profile of the following technologies is defined:
   * OAuth 2.0 Pushed Authorization Requests (PAR) [@!RFC9126]
   * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
-  * OAuth 2.0 Authorization Server Issuer Identifier in Authorization Response [@!I-D.ietf-oauth-iss-auth-resp]
+  * OAuth 2.0 Authorization Server Issuer Identification [@!RFC9207]
   * OpenID Connect Core 1.0 incorporating errata set 1 [@!OIDC]
   
 ### Requirements for Authorization Servers
@@ -168,7 +168,7 @@ Authorization servers
 
  12. shall require the `redirect_uri` parameter in pushed authorization requests
  13. shall return an `iss` parameter in the authorization response according to
-     [@!I-D.ietf-oauth-iss-auth-resp]
+     [@!RFC9207]
  14. shall not transmit authorization responses over unencrypted network
      connections, and, to this end, shall not allow redirect URIs that use the
      "http" scheme except for native clients that use Loopback Interface
@@ -230,7 +230,7 @@ Clients
  6. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750]
  7. shall check the `iss` parameter in the authorization response according to
-    [@!I-D.ietf-oauth-iss-auth-resp] to prevent Mix-Up attacks
+    [@!RFC9207] to prevent Mix-Up attacks
  8. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
  9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
@@ -278,7 +278,7 @@ Resource servers with the FAPI endpoints
  4. Credentials not intended for handling by end-users (e.g., access tokens,
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
-    computationally infeasible. Cf. Section 10.10 ofÂ  [@!RFC6749].
+    computationally infeasible. Cf. Section 10.10 of  [@!RFC6749].
 
 
 ## Differences to FAPI 1.0
