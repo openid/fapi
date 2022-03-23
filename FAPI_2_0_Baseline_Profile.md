@@ -278,7 +278,7 @@ Resource servers with the FAPI endpoints
  4. Credentials not intended for handling by end-users (e.g., access tokens,
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
-    computationally infeasible. Cf. Section 10.10 of  [@!RFC6749].
+    computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
 
 
 ## Differences to FAPI 1.0
