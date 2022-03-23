@@ -113,6 +113,7 @@ following standards are used in the Advanced Profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
   * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM] for signing authorization responses 
+  * OAuth 2.0 Token Introspection [@!RFC7662] with [@I-D.ietf-oauth-jwt-introspection-response] for signing introspection responses
   * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [I-D.ietf-httpbis-digest-headers]
   for signing HTTP requests to and responses from Resource Servers.
 
@@ -122,6 +123,7 @@ will be separate tests for the following:
 
  * FAPI2Advanced-JAR
  * FAPI2Advanced-JARM
+ * FAPI2Advanced-JIR
  * FAPI2Advanced-HTTPSig
 
 ### Signing Authorization Requests
@@ -142,6 +144,8 @@ Clients implementing FAPI2 authorization request signing
  
 ### Signing Authorization Responses
 
+
+
 #### Requirements for Authorization Servers
 
 Authorization servers implementing FAPI2 authorization response signing
@@ -151,10 +155,26 @@ Authorization servers implementing FAPI2 authorization response signing
 
 #### Requirements for Clients
 
-Clients implementing FAPI2 authorization request response signing
+Clients implementing FAPI2 authorization response signing
 
  1. shall set the `response_mode` to `query.jwt` in the authorization request as defined in [@!JARM]
  2. shall verify signed authorization responses according to [@!JARM]
+
+### Signing Introspection Responses
+
+#### Requirements for Authorization Servers
+
+Authorization servers implementing FAPI2 introspection response signing
+
+ 1. shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
+
+#### Requirements for Clients
+
+Clients implementing FAPI2 introspection response signing
+
+ 1. shall request signed token introspection responses according to [@I-D.ietf-oauth-jwt-introspection-response] 
+ 2. shall verify the signed token introspection responses
+
 
 ### HTTP Message Signing
 
