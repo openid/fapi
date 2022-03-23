@@ -157,7 +157,7 @@ Authorization servers implementing FAPI2 authorization response signing
 
 Clients implementing FAPI2 authorization response signing
 
- 1. shall set the `response_mode` to `query.jwt` in the authorization request as defined in [@!JARM]
+ 1. shall set the `response_mode` to `jwt` in the authorization request as defined in [@!JARM]
  2. shall verify signed authorization responses according to [@!JARM]
 
 ### Signing Introspection Responses
