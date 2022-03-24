@@ -134,6 +134,9 @@ Authorization servers implementing FAPI2 authorization request signing
 
  1. shall support and verify signed request objects according to JAR
     [@!RFC9101] at the PAR endpoint [@!RFC9126]
+ 2. shall require the aud claim in the request object to be, or to be an array containing, the OP's Issuer Identifier URL;
+ 3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
+ 4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 
 #### Requirements for Clients
 
@@ -141,6 +144,9 @@ Clients implementing FAPI2 authorization request signing
 
  1. shall sign request objects according to JAR [@!RFC9101] that are sent to the PAR 
     endpoint [@!RFC9126]
+ 2. shall send the `aud` claim in the request object as the OP's Issuer Identifier URL;
+ 3. shall send a `nbf` claim in the request object;
+ 4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
  
 ### Signing Authorization Responses
 
