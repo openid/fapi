@@ -244,17 +244,17 @@ Pragma: no-cache
 which results in the following POST request to the client's redirect URI.
 
 ```
-  POST /cb HTTP/1.1
-  Host: client.example.org
-  Content-Type: application/x-www-form-urlencoded
+POST /cb HTTP/1.1
+Host: client.example.org
+Content-Type: application/x-www-form-urlencoded
 
-   response=eyJraWQiOiJsYWViIiwiYWxnIjoiRVMyNTYifQ.eyAgImlzcyI6ICJodHRw
-   czovL2FjY291bnRzLmV4YW1wbGUuY29tIiwgICJhdWQiOiAiczZCaGRSa3F0MyIsICAi
-   ZXhwIjogMTMxMTI4MTk3MCwgICJhY2Nlc3NfdG9rZW4iOiAiMllvdG5GWkZFanIxekNz
-   aWNNV3BBQSIsICAic3RhdGUiOiAiUzhOSjd1cWs1Zlk0RWpOdlBfR19GdHlKdTZwVXN2
-   SDlqc1luaTlkTUFKdyIsICAidG9rZW5fdHlwZSI6ICJiZWFyZXIiLCAgImV4cGlyZXNf
-   aW4iOiAzNjAwLCAgInNjb3BlIjogImV4YW1wbGUifQ.g_96IM2t_6Dazm1Jpb2gbO2EX
-   e5IKTw2bYS7l9Y1RI8HbNPYN5EdNjxcWeL5LTQaUAZ2PtJoHbTdjMvNa3xbVg
+response=eyJraWQiOiJsYWViIiwiYWxnIjoiRVMyNTYifQ.eyAgImlzcyI6ICJodHRw
+czovL2FjY291bnRzLmV4YW1wbGUuY29tIiwgICJhdWQiOiAiczZCaGRSa3F0MyIsICAi
+ZXhwIjogMTMxMTI4MTk3MCwgICJhY2Nlc3NfdG9rZW4iOiAiMllvdG5GWkZFanIxekNz
+aWNNV3BBQSIsICAic3RhdGUiOiAiUzhOSjd1cWs1Zlk0RWpOdlBfR19GdHlKdTZwVXN2
+SDlqc1luaTlkTUFKdyIsICAidG9rZW5fdHlwZSI6ICJiZWFyZXIiLCAgImV4cGlyZXNf
+aW4iOiAzNjAwLCAgInNjb3BlIjogImV4YW1wbGUifQ.g_96IM2t_6Dazm1Jpb2gbO2EX
+e5IKTw2bYS7l9Y1RI8HbNPYN5EdNjxcWeL5LTQaUAZ2PtJoHbTdjMvNa3xbVg
 ```  
     
 ### Response Mode "jwt"
