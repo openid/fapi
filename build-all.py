@@ -21,7 +21,6 @@ dirs_exclude = [
 # Some of them we likely don't care about, but some of them should be fixed and removed from the list
 files_exclude = [
     './FAPI_2_0_Advanced_Authorization_Profile.md',
-    './Financial_API_JWT_Secured_Authorization_Response_Mode.md',
     './Financial_API_Lodging_Intent.md',
     './Financial_API_Pushed_Request_Object.md',
     './Financial_API_Simple_HTTP_Message_Integrity_Protocol.md',
