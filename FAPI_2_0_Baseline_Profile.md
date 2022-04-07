@@ -62,7 +62,9 @@ interpreted with their natural language meanings.
 
 # Scope
 
-TBD
+This document specifies the requirements for confidential Clients to securely obtain
+OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
+Resource Servers.
 
 # Terms and definitions
 
@@ -70,7 +72,23 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 # Symbols and Abbreviated terms
 
-TBD
+**API** – Application Programming Interface
+
+**FAPI** - Financial-grade API
+
+**HTTP** – Hyper Text Transfer Protocol
+
+**REST** – Representational State Transfer
+
+**TLS** – Transport Layer Security
+
+**DNS** - Domain Name System
+
+**DNSSEC** -  Domain Name System Security Extensions  
+
+**CAA** - Certificate Authority Authorization
+
+**URI** - Uniform Resource Identifier
 
 # Baseline Profile
 
