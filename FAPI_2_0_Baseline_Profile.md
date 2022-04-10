@@ -188,7 +188,8 @@ Authorization servers
      the previous refresh token) will succeed.
  21. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of between 5 and 600 seconds. 
- 
+ 22. if using DPoP, shall not use the nonce mechanism defined in [@!I-D.ietf-oauth-dpop]
+
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
 received in the `aud` claim received in client authentication assertions.
@@ -207,6 +208,11 @@ may implement it providing they meet the requirement in clause 20.
 
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
+
+**NOTE**: The use of the nonce as defined in sections 8 and 9 of [@!I-D.ietf-oauth-dpop]
+has no obvious security benefit in the case of a confidential client and hence is not
+permitted in order to simplify client implementations. This may change in a future version
+of this specification.
 
 #### Returning Authenticated User's Identifier
 
