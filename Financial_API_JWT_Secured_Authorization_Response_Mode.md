@@ -82,7 +82,7 @@ For the purpose of this document, the terms defined in [@!RFC6749] and [@OIDC] a
 
 This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional fields used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this draft defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.  
 
-## The JWT Response Document 
+## The JWT Response Document {#jwt-response}
 
 The JWT always contains the following data utilized to secure the transmission:
 
@@ -160,13 +160,13 @@ The following example shows the claims of the JWT for a successful "token" autho
 ``` 
 In case of an error response, the JWT contains the error response parameters in the same manner as with the response type "code".
 
-## Signing and Encryption
+## Signing and Encryption {#signing-and-encryption}
 
 The JWT is either signed, or signed and encrypted. If the JWT is both signed and encrypted, the JSON document will be signed then encrypted, with the result being a Nested JWT, as defined in [@!RFC7519].
 
-The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this draft (see section 5).
+The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this draft (see (#client-metadata)).
 
-For guidance on key management in general and especially on use of symmetric algorithms for signing and encrypting based on client secrets see sections 10.1 and 10.2 of [@OIDC].
+For guidance on key management in general and especially on use of symmetric algorithms for signing and encrypting based on client secrets see section 10 of [@OIDC].
 
 ## Response Encoding
 
@@ -179,7 +179,7 @@ This draft defines the following response mode values:
 
 ### Response Mode "query.jwt"
 
-The response mode "query.jwt" causes the authorization server to send the authorization response as HTTP redirect to the redirect URI of the client. The authorization server adds the parameter `response` containing the JWT as defined in section 4.1. to the query component of the redirect URI using the "application/x-www-form-urlencoded" format.
+The response mode "query.jwt" causes the authorization server to send the authorization response as HTTP redirect to the redirect URI of the client. The authorization server adds the parameter `response` containing the JWT as defined in (#jwt-response). to the query component of the redirect URI using the "application/x-www-form-urlencoded" format.
 
 This is an example response (line breaks for display purposes only): 
 
@@ -197,7 +197,7 @@ Note: "query.jwt" MUST NOT be used in conjunction with response types that conta
 
 ### Response Mode "fragment.jwt"
 
-The response mode "fragment.jwt" causes the authorization server to send the authorization response as HTTP redirect to the redirect URI of the client. The authorization server adds the parameter `response` containing the JWT as defined in section 4.1. to the fragment component of the redirect URI using the "application/x-www-form-urlencoded" format.
+The response mode "fragment.jwt" causes the authorization server to send the authorization response as HTTP redirect to the redirect URI of the client. The authorization server adds the parameter `response` containing the JWT as defined in (#jwt-response). to the fragment component of the redirect URI using the "application/x-www-form-urlencoded" format.
 
 This is an example response (line breaks for display purposes only): 
 
@@ -267,7 +267,7 @@ Assumption: the client remembers the authorization server to which it sent the a
 
 The client is obliged to process the JWT secured response as follows:
 
-1. (OPTIONAL) The client decrypts the JWT using the default key for the respective issuer or, if applicable, determined by the `kid` JWT header parameter. The key might be a private key, where the corresponding public key is registered with the expected issuer of the response ("use":"enc" via the client's metadata `jwks` or `jwks_uri`) or a key derived from its client secret (see section 4.2). 
+1. (OPTIONAL) The client decrypts the JWT using the default key for the respective issuer or, if applicable, determined by the `kid` JWT header parameter. The key might be a private key, where the corresponding public key is registered with the expected issuer of the response ("use":"enc" via the client's metadata `jwks` or `jwks_uri`) or a key derived from its client secret (see (#signing-and-encryption)). 
 1. The client obtains the `iss` element from the JWT and checks whether its value is well known and identifies the expected issuer of the authorization process in examination. If the check fails, the client MUST abort processing and refuse the response.
 1. The client obtains the `aud` element from the JWT and checks whether it matches the client id the client used to identify itself in the corresponding authorization request. If the check fails, the client MUST abort processing and refuse the response.
 1. The client checks the JWT's `exp` element to determine if the JWT is still valid. If the check fails, the client MUST abort processing and refuse the response. 
@@ -279,7 +279,7 @@ Note: The way the client obtains the keys for verifying the JWT's signature (ste
 
 The client MUST NOT process the grant type specific authorization response parameters before all checks succeed. 
 
-# Client Metadata
+# Client Metadata {#client-metadata}
 
 The Dynamic Client Registration Protocol [@RFC7591] defines an API
 for dynamically registering OAuth 2.0 client metadata with authorization servers.
@@ -296,7 +296,7 @@ The following client metadata parameters are introduced by this specification:
 
 Clients may register their public encryption keys using the `jwks_uri` or `jwks` metadata parameters.
 
-# Authorization Server Metadata
+# Authorization Server Metadata {#as-metadata}
 
 Authorization servers SHOULD publish the supported algorithms for signing and encrypting the JWT of an authorization response by utilizing OAuth 2.0 Authorization Server Metadata [@RFC8414] parameters.
 
@@ -369,15 +369,15 @@ This specification requests registration of the following client metadata defini
 * Client Metadata Name: `authorization_signed_response_alg`
 * Client Metadata Description: String value indicating the client's desired introspection response signing algorithm.
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of [[ this specification ]]
 * Client Metadata Name: `authorization_encrypted_response_alg`
 * Client Metadata Description: String value specifying the desired introspection response encryption algorithm (alg value).
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of [[ this specification ]]
 * Client Metadata Name: `authorization_encrypted_response_enc`
 * Client Metadata Description: String value specifying the desired introspection response encryption algorithm (enc value).
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of [[ this specification ]]
 
 ## OAuth Authorization Server Metadata Registration
 This specification requests registration of the following value in the IANA "OAuth Authorization Server Metadata" registry established by [@RFC8414].
@@ -387,15 +387,15 @@ This specification requests registration of the following value in the IANA "OAu
 * Metadata Name: `authorization_signing_alg_values_supported`
 * Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response signing.
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of [[ this specification ]]
 * Metadata Name: `authorization_encryption_alg_values_supported`
 * Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response encryption (alg value).
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of [[ this specification ]]
 * Metadata Name: `authorization_encryption_enc_values_supported`
 * Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response encryption (enc value).
 * Change Controller: IESG
-* Specification Document(s): Section 5 of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of [[ this specification ]]
 
 {backmatter}
 
