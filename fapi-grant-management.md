@@ -181,13 +181,13 @@ Grant management is restricted to confidential only clients due to security reas
 
 This specification introduces the authorization request parameters `grant_id` and `grant_management_action`. These parameters can be used with any request serving as authorization request, e.g. it may be used with CIBA requests.
 
-`grant_id`: OPTIONAL. String value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value MUST have been issued by the respective authorization server and the respective client MUST be authorized to use the particular grant id.  
+`grant_id`: OPTIONAL. String value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value must have been issued by the respective authorization server and the respective client must be authorized to use the particular grant id.  
 
 `grant_management_action`: String value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: The AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant and SHALL invalidate existing refresh tokens associated with the updated grant.
-* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request and SHALL invalidate existing refresh tokens associated with the replaced grant.
+* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant and shall invalidate existing refresh tokens associated with the updated grant.
+* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request and shall invalidate existing refresh tokens associated with the replaced grant.
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
 
@@ -208,21 +208,21 @@ This specification doesn't introduce any changes to authorization response. `gra
 
 ## Authorization Error Response
 
-In case the `grant_id` is unknown or invalid, the authorization server SHALL respond with an error code `invalid_grant_id`.
+In case the `grant_id` is unknown or invalid, the authorization server shall respond with an error code `invalid_grant_id`.
 
-In case the `grant_id` is provided for the `create` action, the authorization server SHALL respond with an error code `invalid_request`.
+In case the `grant_id` is provided for the `create` action, the authorization server shall respond with an error code `invalid_request`.
 
-In case the `grant_id` is provided and the action is not specified, the authorization server SHALL respond with an error code `invalid_request`.
+In case the `grant_id` is provided and the action is not specified, the authorization server shall respond with an error code `invalid_request`.
 
-In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, the authorization server SHALL respond with an error code `invalid_request`.
+In case the AS does not support a grant management action requested by the client, or the grant management action is required (according to `grant_management_action_required` metadata) but not specified, the authorization server shall respond with an error code `invalid_request`.
 
 ## Token Response
 
 This specification introduces the token response parameter `grant_id`:
 
-`grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value MUST be unique in the context of a certain authorization server and SHOULD have enough entropy to make it impractical to guess it.
+`grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value must be unique in the context of a certain authorization server and should have enough entropy to make it impractical to guess it.
 
-The AS MUST return a `grant_id` if the `grant_management_action` request parameter is provided and specified action is valid and supported (for example, `create`, `update` or `replace`).
+The AS must return a `grant_id` if the `grant_management_action` request parameter is provided and specified action is valid and supported (for example, `create`, `update` or `replace`).
 
 Here is an example response:
 
@@ -285,9 +285,9 @@ The token is required to be associated with the following scope value:
 
 ## Endpoint
 
-The Grant Management API is a new endpoint provided by the authorization server. The client MAY utilize the server metadata parameter `grant_management_endpoint` (see (#server_metadata)) to obtain the endpoint URL.
+The Grant Management API is a new endpoint provided by the authorization server. The client may utilize the server metadata parameter `grant_management_endpoint` (see (#server_metadata)) to obtain the endpoint URL.
 
-Communication with the Grant Management API MUST use the "https" scheme.
+Communication with the Grant Management API must use the "https" scheme.
 
 ## Grant Resource URL
 
@@ -409,7 +409,7 @@ Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA
 HTTP/1.1 204 No Content
 ```
 
-The AS MUST revoke the grant and all refresh tokens issued based on that particular grant, it SHOULD revoke all access tokens issued based on that particular grant.
+The AS MUST revoke the grant and all refresh tokens issued based on that particular grant, it should revoke all access tokens issued based on that particular grant.
 
 Note: Token revocation as defined in [@RFC7009] differentiates from grant revocation as defined in this specification in that token revocation is not required to cause the revocation of the underlying grant. It is at the discretion of the AS to retain a grant in case of token revocation and allow the client to re-connect to this grant through a subsequent authorization request. This decoupling may improve user experience in case the client just wanted to discard the token as a credential.
 
@@ -440,13 +440,13 @@ If omitted, the AS does not support any grant management actions.
 OPTIONAL. URL of the authorization server's Grant Management Administration Endpoint.
 
 `grant_management_action_required`:
-OPTIONAL. Boolean where, if `true`, all authorization requests MUST specify a `grant_management_action`. If omitted, it defaults to `false`.
+OPTIONAL. Boolean where, if `true`, all authorization requests must specify a `grant_management_action`. If omitted, it defaults to `false`.
 
 # Implementation Considerations {#Implementation}
 
 ## Client to grant relationship
 
-A client (as logical entity) MAY use multiple client ids to deliver its service across different platforms, e.g. apps for iOS and Android and a Web App. It is RECOMMENDED that the AS support sharing of grants among client ids belonging to the same client. Sector identifier URIs as defined in [@OpenID.Registration] is one option to group client ids under single administrative control.
+A client (as logical entity) may use multiple client ids to deliver its service across different platforms, e.g. apps for iOS and Android and a Web App. It is recommended that the AS support sharing of grants among client ids belonging to the same client. Sector identifier URIs as defined in [@OpenID.Registration] is one option to group client ids under single administrative control.
 
 ## Addressibility of grant components
 
@@ -471,7 +471,7 @@ It must not be possible to identify the user or derive any personally identifiab
 
 # Security Considerations {#Security}
 
-A grant id is considered a public identifier, it is not a secret. Implementations MUST assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant MUST NOT be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
+A grant id is considered a public identifier, it is not a secret. Implementations must assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant must not be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
 
 During the execution of a transaction utilizing grant mode `replace`, it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self-contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
 
