@@ -64,7 +64,7 @@ interpreted with their natural language meanings.
 
 This document specifies the requirements for confidential Clients to securely obtain
 OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
-Resource Servers.
+Resource Servers. We are not currently aware of any mechanisms that would allow public clients to be secured to the same degree and hence their use is not within the scope of this specification.
 
 # Terms and definitions
 
