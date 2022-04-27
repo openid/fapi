@@ -270,7 +270,7 @@ Resource servers with the FAPI endpoints
  1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
 
     1. adhere to [@!RFC8725]
-    2. use `PS256` or `ES256` algorithms
+    2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` subtype) algorithms
     3. not use or accept the `none` algorithm
 
  2. RSA keys shall have a minimum length of 2048 bits.
