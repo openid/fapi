@@ -64,7 +64,7 @@ interpreted with their natural language meanings.
 
 This document specifies the requirements for confidential Clients to securely obtain
 OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
-Resource Servers. We are not currently aware of any mechanisms that would allow public clients to be secured to the same degree and hence their use is not within the scope of this specification.
+Resource Servers. 
 
 # Terms and definitions
 
@@ -97,6 +97,10 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
 laid out in the Attacker Model [@!attackermodel].
+
+We are not currently aware of any mechanisms that would allow public clients 
+to be secured to the same degree and hence their use is not within the scope 
+of this specification.
 
 ## Network Layer Protections
 
