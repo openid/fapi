@@ -215,6 +215,15 @@ Resource servers with FAPI endpoints implementing HTTP Message Signing
     Content-encoding agnostic digest methods (such as sha-256) should be used.
  6. shall include `@status` (the status code of the response) in the signature input
 
+## MTLS Protection of all endpoints
+
+Some ecosystems are choosing to require clients accessing their endpoints to supply a TLS client certificate at
+endpoints that would not otherwise require a TLS client certificate (for example, the PAR endpoint when using
+private_key_jwt authentication).
+
+This is outside of the scope of both [@!RFC8705] and the FAPI standards, however in the interests of interoperability we
+state that when using TLS as a transport level protection in this manner, authorization servers should expect clients to
+call the endpoints located in the root of the server metadata, and not those found in `mtls_endpoint_aliases`.
 
 ## Acknowledgements
 (todo)
