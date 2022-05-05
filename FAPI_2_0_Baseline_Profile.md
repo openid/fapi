@@ -249,7 +249,7 @@ Resource servers with the FAPI endpoints
    of OAuth 2.0 Bearer Token Usage [@!RFC6750]
 1. shall verify the validity, integrity, expiration and revocation status of
    access tokens
-1. shall verify that the scope (incl. `authorization_details`) of the access
+1. shall verify that the scope of the access
    token authorizes the access to the resource it is representing
 1. shall support and verify sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
