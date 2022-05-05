@@ -133,7 +133,6 @@ In the following, a profile of the following technologies is defined:
   * OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
     [@!I-D.ietf-oauth-dpop]
   * OAuth 2.0 Pushed Authorization Requests (PAR) [@!RFC9126]
-  * OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
   * OAuth 2.0 Authorization Server Issuer Identification [@!RFC9207]
   * OpenID Connect Core 1.0 incorporating errata set 1 [@!OIDC]
@@ -153,40 +152,37 @@ Authorization servers
  5. shall reject authorization requests sent without
     [@!RFC9126]
  6. shall reject pushed authorization requests without client authentication
- 7. shall support the `authorization_details` parameter according to
-    [@!I-D.ietf-oauth-rar] to convey the authorization clients want to obtain if
-    the `scope` parameter is not expressive enough for that purpose
- 8. shall support confidential clients as defined in [@!RFC6749]
- 9. shall only issue sender-constrained access tokens using one of the following
+ 7. shall support confidential clients as defined in [@!RFC6749]
+ 8. shall only issue sender-constrained access tokens using one of the following
     methods:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
- 10. shall authenticate clients using one of the following methods:
+ 9. shall authenticate clients using one of the following methods:
      - MTLS as specified in section 2 of [@!RFC8705]
      - `private_key_jwt` as specified in section 9 of [@!OIDC]
- 11. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
+ 10. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
 
- 12. shall require the `redirect_uri` parameter in pushed authorization requests
- 13. shall return an `iss` parameter in the authorization response according to
+ 11. shall require the `redirect_uri` parameter in pushed authorization requests
+ 12. shall return an `iss` parameter in the authorization response according to
      [@!RFC9207]
- 14. shall not transmit authorization responses over unencrypted network
+ 13. shall not transmit authorization responses over unencrypted network
      connections, and, to this end, shall not allow redirect URIs that use the
      "http" scheme except for native clients that use Loopback Interface
      Redirection as described in [@!RFC8252], Section 7.3,
- 15. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
+ 14. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
      been previously used
- 16. shall not use the HTTP 307 status code when redirecting a request that contains 
+ 15. shall not use the HTTP 307 status code when redirecting a request that contains 
      user credentials to avoid forwarding the credentials to a third party accidentally 
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
- 17. should use the HTTP 303 status code when redirecting the user agent using status codes;
- 18. shall not expose open redirectors (see section 4.10 of
+ 16. should use the HTTP 303 status code when redirecting the user agent using status codes;
+ 17. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
- 19. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
+ 18. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
- 20. shall not use refresh token rotation unless, in the case a response with a new 
+ 19. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
- 21. shall issue pushed authorization requests `request_uri` with `expires_in` values 
+ 20. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of between 5 and 600 seconds. 
  22. if using DPoP, shall not use the nonce mechanism defined in [@!I-D.ietf-oauth-dpop]
 
@@ -259,7 +255,7 @@ Resource servers with the FAPI endpoints
    of OAuth 2.0 Bearer Token Usage [@!RFC6750]
 1. shall verify the validity, integrity, expiration and revocation status of
    access tokens
-1. shall verify that the scope (incl. `authorization_details`) of the access
+1. shall verify that the scope of the access
    token authorizes the access to the resource it is representing
 1. shall support and verify sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
@@ -292,7 +288,6 @@ Resource servers with the FAPI endpoints
 | FAPI 1.0 Read/Write                       | FAPI 2.0                                   | Reasons                                                                                               |
 |:------------------------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------|
 | JAR, JARM                                 | PAR                                        | integrity protection and compatibility improvements for authorization requests; only code in response |
-| -                                         | RAR                                        | support complex and structured information about authorizations                                       |
 | -                                         | shall adhere to Security BCP               |                                                                                                       |
 | `s_hash`                                  | -                                          | state integrity is protected by PAR; protection provided by state is now provided by PKCE             |
 | pre-registered redirect URIs              | redirect URIs in PAR                       | pre-registration is not required with client authentication and PAR                                   |
