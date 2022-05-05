@@ -132,7 +132,7 @@ to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records
  2. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
  key lengths of at least 2048 bits are required.
 
-### Requirements for endpoints user by web browswers
+### Requirements for endpoints user by web browsers
 
 Endpoints for the use by web browsers 
 
