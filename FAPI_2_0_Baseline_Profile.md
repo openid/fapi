@@ -167,6 +167,7 @@ Authorization servers
     the metadata document as specified in [@!OIDD] and [@!RFC8414]
  1. shall support the authorization code grant (response_type=code & grant_type=authorization_code)
     described in [@!RFC6749]
+ 1. may support the client credentials grant described in [@!RFC6749]
  1. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
  1. shall support confidential clients as defined in [@!RFC6749]
