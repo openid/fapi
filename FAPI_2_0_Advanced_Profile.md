@@ -169,12 +169,16 @@ Authorization servers implementing FAPI2 authorization response signing
  1. shall support and issue signed authorization responses via JWT Secured Authorization 
     Response Mode for OAuth 2.0 [@!JARM]
 
+**NOTE**: When using [@!JARM] an AS should only include the `iss` authorization response parameter 
+inside the JWT and not ouside as required in [@!RFC9207] 
+
 #### Requirements for Clients
 
 Clients implementing FAPI2 authorization response signing
 
  1. shall set the `response_mode` to `jwt` in the authorization request as defined in [@!JARM]
  2. shall verify signed authorization responses according to [@!JARM]
+
 
 ### Signing Introspection Responses
 
@@ -185,7 +189,7 @@ To support non-repudiation for NR6 in the [@!attackermodel], Introspection Respo
 Authorization servers implementing FAPI2 introspection response signing
 
  1. shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
-
+ 
 #### Requirements for Clients
 
 Clients implementing FAPI2 introspection response signing
