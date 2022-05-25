@@ -208,7 +208,7 @@ This specification doesn't introduce any changes to authorization response. `gra
 
 ## Authorization Error Response
 
-In case the `grant_id` is unknown, invalid or logged in user doesn't match the resource owner originally authorized the grant, the authorization server shall respond with an error code `invalid_grant_id`.
+In case the `grant_id` is unknown, invalid or logged in user doesn't match a resource owner, the authorization server shall respond with an error code `invalid_grant_id`.
 
 In case the `grant_id` is provided for the `create` action, the authorization server shall respond with an error code `invalid_request`.
 
