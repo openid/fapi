@@ -206,6 +206,7 @@ Authorization servers
      the previous refresh token) will succeed.
  20. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of between 5 and 600 seconds. 
+ 21. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -256,6 +257,7 @@ Clients
     The issuer identifier value shall be sent as a string not as an item in an array.
 10. shall support refresh tokens and their rotation.
 11. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
+12. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
 
 ### Requirements for Resource Servers
 
@@ -271,16 +273,13 @@ Resource servers with the FAPI endpoints
    of OAuth 2.0 Bearer Token Usage [@!RFC6750]
 1. shall verify the validity, integrity, expiration and revocation status of
    access tokens
-1. shall verify that the scope of the access
-   token authorizes the access to the resource it is representing
+1. shall verify that the authorization represented by the access token is sufficient 
+   for the requested resource access and otherwise return errors as in section 3.1 
+   of [@!RFC6750]
 1. shall support and verify sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
-2. shall identify the associated entity to the access token
-3. shall only return the resource identified by the combination of the entity
-   implicit in the access and the granted scope and otherwise return errors as
-   in section 3.1 of [@!RFC6750]
-
+    
 
 ## Cryptography and Secrets
 
