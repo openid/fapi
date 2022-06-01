@@ -224,6 +224,9 @@ doesn't bring any security benefits for confidential clients, and can cause sign
 operational issues. However to allow for operational agility, Authorization Servers 
 may implement it providing they meet the requirement in clause 20.
 
+**NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
+the Client Initiated Backchannel Authentication grant, etc.
+
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
 
