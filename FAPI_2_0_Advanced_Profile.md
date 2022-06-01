@@ -126,7 +126,17 @@ will be separate tests for the following:
  * FAPI2Advanced-JIR
  * FAPI2Advanced-HTTPSig
 
+
+## Non-Repudiation
+
+In the context of this specification, non-repudiation refers to the assurance that the owner of 
+a signature key pair that was capable of generating an existing signature corresponding to certain 
+data cannot convincingly deny having signed the data ([@!NIST.SP.800-133]).
+
+
 ### Signing Authorization Requests
+
+To support non-repudiation for NR1 in the [@!attackermodel] Authorization Requests can be signed.
 
 #### Requirements for Authorization Servers
 
@@ -150,7 +160,7 @@ Clients implementing FAPI2 authorization request signing
  
 ### Signing Authorization Responses
 
-
+To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed.
 
 #### Requirements for Authorization Servers
 
@@ -168,6 +178,8 @@ Clients implementing FAPI2 authorization response signing
 
 ### Signing Introspection Responses
 
+To support non-repudiation for NR6 in the [@!attackermodel], Introspection Responses can be signed.
+
 #### Requirements for Authorization Servers
 
 Authorization servers implementing FAPI2 introspection response signing
@@ -183,6 +195,9 @@ Clients implementing FAPI2 introspection response signing
 
 
 ### HTTP Message Signing
+
+To support non-repudiation for NR7, NR8 and NR9 in the [@!attackermodel], HTTP requests and responses
+can be signed.
 
 This profile supports HTTP Message Signing using the *HTTP Message Signatures* specification
 being developed by the IETF HTTP Working Group.
@@ -294,6 +309,20 @@ call the endpoints located in the root of the server metadata, and not those fou
    <date day="17" month="Oct" year="2018"/>
   </front>
 </reference>
+
+<reference anchor="NIST.SP.800-133" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-133.pdf">
+  <front>
+    <title>NIST Special Publication 800-133</title>
+     <author fullname="Elaine Barker">
+      <organization></organization>
+    </author>
+     <author fullname="Allen Roginsky ">
+      <organization></organization>
+    </author>
+   <date day="23" month="July" year="2019"/>
+  </front>
+</reference>
+
 
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
