@@ -51,9 +51,9 @@ OAuth authorization servers issue access and refresh tokens based on privileges 
 
 Although this concept is fundamental to OAuth, there is no explicit representation of the grant in the OAuth protocol. This leads to the situation that clients cannot explicitly manage grants, e.g. query the status or revoke a grant that is no longer needed. The status is implicitly communicated if an access token refresh succeeds or fails or if an API call using an access token fails with HTTP status codes 401 (token is invalid) or 403 (token lacks privileges).
 
-It also means the client cannot explicitly ask the authorization server to update a certain grant that is bound to a certain user. Instead the authorization server, typically, will determine a pre-existing grant using the client id from the authorization request and the user id of the authenticated resource owner.
+It also means the client cannot explicitly ask the authorization server to update a certain grant that is bound to a certain resource owner. Instead the authorization server, typically, will determine a pre-existing grant using the client id from the authorization request and the user id of the authenticated resource owner.
 
-If a client wants the authorization server to update a pre-existing grant, it needs to obtain identity data about the user and utilize it in a login hint kind of parameter to refer to the "same user as last time", exposing more identity data to the client than necessary.
+If a client wants the authorization server to update a pre-existing grant, it needs to obtain identity data about the resource owner and utilize it in a login hint kind of parameter to refer to the "same user as last time", exposing more identity data to the client than necessary.
 
 Another pattern that was proposed is to use refresh tokens to refer to grants. This would require to send the refresh token as part of the authorization request through the front channel, which poses security issues since the refresh token is a credential and could leak and be injected that way.
 
@@ -63,7 +63,7 @@ In order to support the before mentioned use cases, this specification introduce
 
 ## Terminology
 
-* Grant is a set of permissions (authorization) granted by a User to a Client. Grant is a resource captured and managed by an Authorization Server.
+* Grant is a set of permissions (authorization) granted by a Resource Owner to a Client. Grant is a resource captured and managed by an Authorization Server.
 
 * Consent is a legal concept that can result in a grant being created, but also can include legal, audit, reporting, archiving and non-repudiation requirements. Grant is an authorization created as a result of consent.
 
@@ -164,7 +164,7 @@ Grant Management specification allows a client to query the status and contents 
 
 ## Consent resource shared with other parties
 
-There is a use case where end user might want to share their consents with third parties (e.g. centralized consent management dashboards).
+There is a use case where resource owner might want to share their consents with third parties (e.g. centralized consent management dashboards).
 A new Consent Resource API could be created for this purpose.
 This is out of scope for this specification.  
 
@@ -186,8 +186,8 @@ This specification introduces the authorization request parameters `grant_id` an
 `grant_management_action`: String value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: The AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the user in the actual request with those which already exist within the grant and shall invalidate existing refresh tokens associated with the updated grant.
-* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the user in the actual request and shall invalidate existing refresh tokens associated with the replaced grant.
+* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the resource owner in the actual request with those which already exist within the grant and shall invalidate existing refresh tokens associated with the updated grant.
+* `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the resource owner in the actual request and shall invalidate existing refresh tokens associated with the replaced grant.
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
 
@@ -208,7 +208,7 @@ This specification doesn't introduce any changes to authorization response. `gra
 
 ## Authorization Error Response
 
-In case the `grant_id` is unknown or invalid, the authorization server shall respond with an error code `invalid_grant_id`.
+In case the `grant_id` is unknown, invalid or logged in user doesn't match a resource owner, the authorization server shall respond with an error code `invalid_grant_id`.
 
 In case the `grant_id` is provided for the `create` action, the authorization server shall respond with an error code `invalid_request`.
 
@@ -386,7 +386,7 @@ Content-Type: application/json
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
 * `scopes`: JSON array where every entry contains a `scope` field and may contain one or more `resource` fields. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could, for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the End-User in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
+* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the Resource Owner in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
 * `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
@@ -463,7 +463,7 @@ Deployments should ensure access tokens are issued with an audience restricted t
 
 # Privacy Consideration {#Privacy}
 
-`grant_id` is issued by the authorization server for each established grant between a client and a user. This should prevent correlation between different clients.
+`grant_id` is issued by the authorization server for each established grant between a client and a resource owner. This should prevent correlation between different clients.
 
 It must not be possible to identify the user or derive any personally identifiable information (PII) based on `grant_id` alone.
 
