@@ -161,61 +161,34 @@ In the following, a profile of the following technologies is defined:
   
 ### Requirements for Authorization Servers
 
+#### General Requirements
+
 Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
     the metadata document as specified in [@!OIDD] and [@!RFC8414]
- 2. shall support the authorization code grant (response_type=code & grant_type=authorization_code)
-    described in [@!RFC6749]
- 3. shall reject requests using the resource owner password credentials grant or
+ 1. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
- 4. shall support client-authenticated pushed authorization requests
-    according to [@!RFC9126]
- 5. shall reject authorization requests sent without
-    [@!RFC9126]
- 6. shall reject pushed authorization requests without client authentication
- 7. shall support confidential clients as defined in [@!RFC6749]
- 8. shall only issue sender-constrained access tokens using one of the following
+ 1. shall support confidential clients as defined in [@!RFC6749]
+ 1. shall only issue sender-constrained access tokens using one of the following
     methods:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
- 9. shall authenticate clients using one of the following methods:
+ 1. shall authenticate clients using one of the following methods:
      - MTLS as specified in section 2 of [@!RFC8705]
      - `private_key_jwt` as specified in section 9 of [@!OIDC]
- 10. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
-
- 11. shall require the `redirect_uri` parameter in pushed authorization requests
- 12. shall return an `iss` parameter in the authorization response according to
-     [@!RFC9207]
- 13. shall not transmit authorization responses over unencrypted network
-     connections, and, to this end, shall not allow redirect URIs that use the
-     "http" scheme except for native clients that use Loopback Interface
-     Redirection as described in [@!RFC8252], Section 7.3,
- 14. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
-     been previously used
- 15. shall not use the HTTP 307 status code when redirecting a request that contains 
-     user credentials to avoid forwarding the credentials to a third party accidentally 
-     (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
- 16. should use the HTTP 303 status code when redirecting the user agent using status codes;
- 17. shall not expose open redirectors (see section 4.10 of
+ 1. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
- 18. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
+ 1. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
      received in client authentication assertions.
- 19. shall not use refresh token rotation unless, in the case a response with a new 
+ 1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
- 20. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of between 5 and 600 seconds. 
- 21. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
 received in the `aud` claim received in client authentication assertions.
-
-**NOTE**: If replay identification of the authorization code is not possible, it
-is desirable to set the validity period of the authorization code to one minute
-or a suitable short period of time. The validity period may act as a cache
-control indicator of when to clear the authorization code cache if one is used.
 
 **NOTE**: Refresh token rotation is an optional feature defined in [@!RFC6749] section 6
 where the Authorization Server issues a new refresh token to the client as part of the
@@ -226,6 +199,39 @@ may implement it providing they meet the requirement in clause 20.
 
 **NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
 the Client Initiated Backchannel Authentication grant, etc.
+
+#### Authorization Code Flow
+
+For the Authorization Code flow, Authorization servers
+
+1. shall support the authorization code grant (`response_type=code` & `grant_type=authorization_code`)
+    described in [@!RFC6749]
+1. shall support client-authenticated pushed authorization requests
+    according to [@!RFC9126]
+1. shall reject authorization requests sent without
+    [@!RFC9126]
+1. shall reject pushed authorization requests without client authentication
+1. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
+1. shall require the `redirect_uri` parameter in pushed authorization requests
+1. shall return an `iss` parameter in the authorization response according to [@!RFC9207]
+1. shall not transmit authorization responses over unencrypted network
+     connections, and, to this end, shall not allow redirect URIs that use the
+     "http" scheme except for native clients that use Loopback Interface
+     Redirection as described in [@!RFC8252], Section 7.3,
+1. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
+     been previously used
+1. shall not use the HTTP 307 status code when redirecting a request that contains 
+     user credentials to avoid forwarding the credentials to a third party accidentally 
+     (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
+1. should use the HTTP 303 status code when redirecting the user agent using status codes;
+1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
+     of between 5 and 600 seconds. 
+
+
+ **NOTE**: If replay identification of the authorization code is not possible, it
+is desirable to set the validity period of the authorization code to one minute
+or a suitable short period of time. The validity period may act as a cache
+control indicator of when to clear the authorization code cache if one is used
 
 **NOTE**: To enable an interoperable solution to consent management it is anticipated that 
 future versions of this specification will reference the FAPI WG's Grant Management API. 
@@ -238,29 +244,40 @@ the token response, the authorization server shall support OpenID Connect
 
 ### Requirements for Clients
 
+#### General Requirements
+
 Clients
 
- 1. shall use the authorization code grant described in [@!RFC6749]
- 2. shall use pushed authorization requests according to [@!RFC9126]
- 3. shall support sender-constrained access tokens using one of the following methods:
+ 1. shall support sender-constrained access tokens using one of the following methods:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
- 4. shall support client authentication using one of the following methods:
+ 1. shall support client authentication using one of the following methods:
     - MTLS as specified in section 2 of [@!RFC8705]
     - `private_key_jwt` as specified in section 9 of [@!OIDC]
- 5. shall use PKCE [@!RFC7636] with `S256` as the code challenge method
- 6. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
+ 1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750]
- 7. shall check the `iss` parameter in the authorization response according to
-    [@!RFC9207] to prevent Mix-Up attacks
- 8. shall not expose open redirectors (see section 4.10 of
+ 1. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics])
- 9. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
+ 1. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
-10. shall support refresh tokens and their rotation.
-11. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
-12. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. shall support refresh tokens and their rotation.
+ 1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
+   the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
+ 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+
+
+#### Authorization Code Flow
+
+For the Authorization Code flow, Clients
+
+ 1. shall use the authorization code grant described in [@!RFC6749]
+ 1. shall use pushed authorization requests according to [@!RFC9126]
+ 1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method
+ 1. shall check the `iss` parameter in the authorization response according to
+    [@!RFC9207] to prevent Mix-Up attacks
+
+
 
 ### Requirements for Resource Servers
 
