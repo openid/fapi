@@ -165,8 +165,6 @@ Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
     the metadata document as specified in [@!OIDD] and [@!RFC8414]
- 1. shall support the authorization code grant (response_type=code & grant_type=authorization_code)
-    described in [@!RFC6749]
  1. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
  1. shall support confidential clients as defined in [@!RFC6749]
@@ -199,8 +197,13 @@ may implement it providing they meet the requirement in clause 20.
 
 **NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
 the Client Initiated Backchannel Authentication grant, etc.
+
+#### Authorization Code Flow
+
 For the Authorization Code flow, Authorization servers
 
+1. shall support the authorization code grant (`response_type=code` & `grant_type=authorization_code`)
+    described in [@!RFC6749]
 1. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126]
 1. shall reject authorization requests sent without
@@ -259,6 +262,8 @@ Clients
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
 
+
+#### Authorization Code Flow
 
 For the Authorization Code flow, Clients
 
