@@ -102,6 +102,19 @@ We are not currently aware of any mechanisms that would allow public clients
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
 
+This profile is the base of the FAPI 2.0 Framework. Other specifications that are
+part of this framework and may be used together with this profile include:
+
+1. FAPI Message Signing, we recommend this specification when messages are
+   required to be signed for the purposes of non-repudiation.  
+1. FAPI CIBA, we recommend that this specificaiton is used when support is required for
+   decoupled or cross device flows.
+1. Grant Management, we recommend this specification for ecosystems that require interopable 
+   grant management.
+1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar], we recommend that this 
+   specification is used wherever the `scope` parameter is not expressive enough to convey
+   the authorization that a client wants to obtain.
+
 ## Network Layer Protections
 
 ### Requirements for all endpoints
