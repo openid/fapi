@@ -161,6 +161,8 @@ In the following, a profile of the following technologies is defined:
   
 ### Requirements for Authorization Servers
 
+#### General Requirements
+
 Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
@@ -241,6 +243,8 @@ the token response, the authorization server shall support OpenID Connect
 [@!OIDC].
 
 ### Requirements for Clients
+
+#### General Requirements
 
 Clients
 
