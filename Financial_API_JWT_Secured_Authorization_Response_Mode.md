@@ -49,9 +49,9 @@ Final drafts adopted by the Workgroup through consensus are circulated publicly 
 
 This document defines a new JWT-based mode to encode OAuth authorization responses. Clients are enabled to request
 the transmission of the authorization response parameters along with additional data in JWT format.
-This mechanism enhances the security of the standard authorization response since it adds support for signing
-and encryption, sender authentication, audience restriction as well as protection from replay, credential leakage,
-and mix-up attacks. It can be combined with any response type.
+This mechanism enhances the security of the standard authorization response with support for signing and optional encryption of the response.
+A signed response provides message integrity, sender authentication, audience restriction, and protection from mix-up attacks. Encrypting the response provides confidentiality of the response parameter values.
+The JWT authorization response mode can be used in conjunction with any response type.
 
 ## Notational Conventions
 
@@ -70,8 +70,6 @@ For the purpose of this document, the terms defined in [@!RFC6749] and [@OIDC] a
 
 **CSRF** - Cross Site Request Forgery
 
-**FAPI** - Financial-grade API
-
 **HTTP** – Hyper Text Transfer Protocol
 
 **OIDF** - OpenID Foundation
@@ -80,7 +78,7 @@ For the purpose of this document, the terms defined in [@!RFC6749] and [@OIDC] a
 
 # JWT-based Response Mode
 
-This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional fields used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this draft defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.  
+This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional claims used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this draft defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.
 
 ## The JWT Response Document {#jwt-response}
 
@@ -325,7 +323,7 @@ The client therefore MUST first check that the issuer of the JWT is well-known
 and expected for the particular authorization response before it uses this data 
 to obtain the key needed to check the JWT's signature.  
 
-## Code Replay
+## Code Replay {#code-replay}
 An authorization code (obtained on a different device with the same client) could be 
 injected into an authorization response in order to impersonate the legitimate resource 
 owner (see [@I-D.ietf-oauth-security-topics]). 
@@ -345,6 +343,7 @@ The JWT secured response mode enables clients to detect this attack by providing
 
 ## Code Leakage
 Authorization servers MAY encrypt the authorization response therewith providing a means to prevent leakage of authorization codes in the user agent (e.g. during transmission, in browser history or via referrer headers). 
+Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms like PKCE [@RFC7636] or the use of state parameter as described in (#code-replay).
 
 # Acknowledgements
 
