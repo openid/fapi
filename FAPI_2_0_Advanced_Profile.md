@@ -160,7 +160,7 @@ Clients implementing FAPI2 authorization request signing
  
 ### Signing Authorization Responses
 
-To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed. Note: FAPI2 does not require Authorization Response encryption. 
+To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed. Note: In FAPI2, there is no confidential information in the Authorization Response, hence encryption of the Authorization Response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
 
 #### Requirements for Authorization Servers
 
