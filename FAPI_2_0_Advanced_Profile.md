@@ -169,8 +169,10 @@ Authorization servers implementing FAPI2 authorization response signing
  1. shall support and issue signed authorization responses via JWT Secured Authorization 
     Response Mode for OAuth 2.0 [@!JARM]
 
-**NOTE**: When using [@!JARM] an AS should only include the `iss` authorization response parameter 
-inside the JWT and not ouside as required in [@!RFC9207] 
+**NOTE**: When using [@!JARM] an AS should only include the iss authorization response 
+parameter defined by [@!RFC9207] inside the JWT. This is because [@!RFC9207] defines iss 
+to be an authorization response parameter, and [@!JARM] section 4.1 requires all authorization 
+response parameters to be inside the JWT.
 
 #### Requirements for Clients
 
