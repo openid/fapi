@@ -160,7 +160,7 @@ Clients implementing FAPI2 authorization request signing
  
 ### Signing Authorization Responses
 
-To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed.
+To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed. 
 
 #### Requirements for Authorization Servers
 
@@ -239,6 +239,11 @@ private_key_jwt authentication).
 This is outside of the scope of both [@!RFC8705] and the FAPI standards, however in the interests of interoperability we
 state that when using TLS as a transport level protection in this manner, authorization servers should expect clients to
 call the endpoints located in the root of the server metadata, and not those found in `mtls_endpoint_aliases`.
+
+## Security considerations
+In FAPI2, there is no confidential information in the Authorization Response, hence encryption of the Authorization Response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
+
+Usage of PKCE in FAPI 2 provides protection for code leakage described in 5.4 [@!JARM].
 
 ## Acknowledgements
 (todo)
