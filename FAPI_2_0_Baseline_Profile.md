@@ -1,13 +1,13 @@
 %%%
-title = "FAPI 2.0 Baseline Profile"
-abbrev = "fapi-2-baseline"
+title = "FAPI 2.0 Security Profile"
+abbrev = "fapi-2-security"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-baseline-01"
+value = "fapi-2_0-security-01"
 status = "standard"
 
 [[author]]
@@ -27,13 +27,11 @@ The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID communit
 
 Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be the subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
 
-The Financial-grade API (FAPI) 2.0 Baseline profile is an API security profile
-based on the OAuth 2.0 Authorization Framework [@!RFC6749]. 
 
 .# Introduction
 
-Financial-grade API (FAPI) 2.0 is an API security profile based on the OAuth 2.0
-Authorization Framework [@!RFC6749] and related specifications suitable for
+The FAPI 2.0 Security Profile is an API security profile based on the 
+OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications suitable for
 protecting APIs in high-value scenarios. While the security profile was
 initially developed with a focus on financial applications, it is designed to be
 universally applicable for protecting APIs exposing high-value and sensitive
@@ -74,8 +72,6 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **API** – Application Programming Interface
 
-**FAPI** - Financial-grade API
-
 **HTTP** – Hyper Text Transfer Protocol
 
 **REST** – Representational State Transfer
@@ -90,13 +86,24 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **URI** - Uniform Resource Identifier
 
-# Baseline Profile
+# Security Profile
 
 ## Introduction
 
-OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
-Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
-laid out in the Attacker Model [@!attackermodel].
+The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 Authorization
+Framework [@!RFC6749], that aims to reach the security goals laid out in the Attacker 
+Model [@!attackermodel].
+
+This profile is the base of the FAPI 2.0 Framework. Other specifications that are
+part of this framework and may be used together with this profile include:
+
+1. FAPI Message Signing is recommended when messages are required to be signed for the 
+   purposes of non-repudiation.  
+1. FAPI CIBA is recommended when support is required for decoupled or cross device flows.
+1. Grant Management is recommended for ecosystems that require interopable grant management.
+1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar] is recommended when 
+   the `scope` parameter is not expressive enough to convey the authorization that a client 
+   wants to obtain.
 
 We are not currently aware of any mechanisms that would allow public clients 
 to be secured to the same degree and hence their use is not within the scope 
@@ -232,9 +239,6 @@ For the Authorization Code flow, Authorization servers
 is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used
-
-**NOTE**: To enable an interoperable solution to consent management it is anticipated that 
-future versions of this specification will reference the FAPI WG's Grant Management API. 
 
 #### Returning Authenticated User's Identifier
 
