@@ -127,7 +127,7 @@ The client only has to specify additional or amended authorization details. The 
 
 The client might also have to start another authorization process if a certain API request fails due to missing privileges (typically an HTTP status code 403).
 
-Examples that can be implemented using "update":
+Examples that can be implemented using "merge" action:
 
 * Time extension of an authorization
 * Add additional scopes without requiring authorization for pre-existing scopes
@@ -186,7 +186,7 @@ This specification introduces the authorization request parameters `grant_id` an
 `grant_management_action`: String value controlling the way the authorization server shall handle the grant when processing an authorization request. This specification defines the following values:
 
 * `create`: The AS will create a fresh grant if the AS supports the grant management action `create`.
-* `update`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `update`, the AS will merge the permissions consented by the resource owner in the actual request with those which already exist within the grant and shall invalidate existing refresh tokens associated with the updated grant.
+* `merge`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `merge`, the AS will merge the permissions consented by the resource owner in the actual request with those which already exist within the grant and shall invalidate existing refresh tokens associated with the updated grant.
 * `replace`: This mode requires the client to specify a grant id using the `grant_id` parameter. If the parameter is present and the AS supports the grant management action `replace`, the AS will change the grant to be ONLY the permissions requested by the client and consented by the resource owner in the actual request and shall invalidate existing refresh tokens associated with the replaced grant.
 
 The following example shows how a client may ask the authorization request to use a certain grant id:
@@ -194,7 +194,7 @@ The following example shows how a client may ask the authorization request to us
 ```http
 GET /authorize?response_type=code&
      client_id=s6BhdRkqt3
-     &grant_management_action=update
+     &grant_management_action=merge
      &grant_id=TSdqirmAxDa0_-DB_1bASQ
      &scope=write
      &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
@@ -426,11 +426,11 @@ If the request lacks a valid access token, the authorization server responds wit
 ## Authorization server's metadata {#server_metadata}
 
 `grant_management_actions_supported`:
-OPTIONAL. JSON array containing the actions supported by the AS. Allowed values are `query`, `revoke`, `update`, `replace` and `create`.
+OPTIONAL. JSON array containing the actions supported by the AS. Allowed values are `query`, `revoke`, `merge`, `replace` and `create`.
 
 * `query`: The AS allows clients to query the permissions associated with a certain grant.
 * `revoke`: The AS allows clients to revoke grants.
-* `update`: The AS allows clients to update existing grants.
+* `merge`: The AS allows clients to update existing grants.
 * `replace`: The AS allows clients to replace existing grants.
 * `create`: The AS allows clients to request the creation of a new grant.
 
@@ -655,8 +655,12 @@ The technology described in this specification was made available from contribut
 
    [[ To be removed from the final specification ]]
 
-   -02
+   -03
+   
+   * renamed `update` action to `merge`
 
+   -02
+   
    * added `replace` grant management action to server metadata
    * added IANA section content
       
