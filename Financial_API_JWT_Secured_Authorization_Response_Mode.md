@@ -311,7 +311,9 @@ Authorization servers SHOULD publish the supported response mode values utilizin
 *  `form_post.jwt`
 *  `jwt`
 
-# Security considerations
+# Security Considerations
+
+As JARM is used as a component in OAuth, many of the security considerations listed in OAuth 2.0 Security Best Current Practice [@I-D.ietf-oauth-security-topics] apply. In addition, for the mechanisms described in this document, the following security considerations apply.
 
 ## DoS using specially crafted JWTs
 JWTs could be crafted to have an issuer that resolves to a JWK set URL with
@@ -323,14 +325,14 @@ The client therefore MUST first check that the issuer of the JWT is well-known
 and expected for the particular authorization response before it uses this data 
 to obtain the key needed to check the JWT's signature.  
 
-## Code Replay {#code-replay}
-An authorization code (obtained on a different device with the same client) could be 
-injected into an authorization response in order to impersonate the legitimate resource 
-owner (see [@I-D.ietf-oauth-security-topics]). 
-
-The JWT secured response mode enables clients to detect such an attack. The signature binds 
-the authorization code to the state value sent by the client and therewith transitively to 
-the transaction in the respective user agent.
+## Protocol Run Integrity
+An OAuth protocol run is made of many distinct message exchanges between the client and server
+to complete the issuance of access and refresh tokens. Even if every message itself is integrity
+protected, it is still conceivable that one or more of the messages are exchanged with another
+message created for a different protocol run. The leakage and reuse of encrypted messages in
+(#code-leakage) is an example of such problems. To mitigate this problem, it is considered good
+practice to implement additional protection provided by PKCE [@RFC7636]
+as described in [@I-D.ietf-oauth-security-topics].
 
 ## Mix-Up
 Mix-up is an attack on scenarios where an OAuth client interacts with
@@ -341,9 +343,9 @@ the respective endpoint at the authorization/resource server.
    
 The JWT secured response mode enables clients to detect this attack by providing an identification of the sender (`iss`) and the intended audience of the authorization response (`aud`). 
 
-## Code Leakage
+## Code Leakage {#code-leakage}
 Authorization servers MAY encrypt the authorization response therewith providing a means to prevent leakage of authorization codes in the user agent (e.g. during transmission, in browser history or via referrer headers). 
-Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms like PKCE [@RFC7636] or the use of state parameter as described in (#code-replay).
+Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms such as PKCE [@RFC7636].
 
 # Acknowledgements
 
