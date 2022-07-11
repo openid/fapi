@@ -88,13 +88,13 @@ The JWT always contains the following data utilized to secure the transmission:
 * `aud` - the client_id of the client the response is intended for
 * `exp` - expiration of the JWT. A maximum JWT lifetime of 10 minutes is RECOMMENDED.
  
-The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsections illustrate the pattern with the response types "code" and "token".
+The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsection illustrate the pattern with the response type "code".
 
 Note: Additional authorization endpoint response parameters defined by extensions, e.g. `session_state` as defined in [@OISM], will also be added to the JWT. 
 
 The JWT response document MAY contain further element, e.g. the claims defined in [@!RFC7519]. Implementation SHOULD adhere to the respective processing rules and ignore unrecognized elements.
 
-### Response Type "code"
+### Example Response Type "code" 
 
 For the grant type authorization "code" the JWT contains the response parameters as defined in [@!RFC6749], sections 4.1.2:
 
@@ -131,32 +131,6 @@ The following example shows the JWT payload for such an error response:
    "state":"S8NJ7uqk5fY4EjNvP_G_FtyJu6pUsvH9jsYni9dMAJw"
 }
 ```
-
-### Response Type "token"
-
-For the grant type "token" the JWT contains the response parameters as defined in [@!RFC6749], sections 4.2.2:
-
-* `access_token` - the access token
-* `token_type` - the type of the access token
-* `expires_in` - when the access token expires
-* `scope` - the scope granted with the access token
-*  `state` - the state value as sent by the client in the authorization request (if applicable)
-
-The following example shows the claims of the JWT for a successful "token" authorization response:
-
-```
-{  
-   "iss":"https://accounts.example.com",
-   "aud":"s6BhdRkqt3",
-   "exp":1311281970,
-   "access_token":"2YotnFZFEjr1zCsicMWpAA",
-   "state":"S8NJ7uqk5fY4EjNvP_G_FtyJu6pUsvH9jsYni9dMAJw",
-   "token_type":"bearer",
-   "expires_in":3600,
-   "scope":"example"   
-}
-``` 
-In case of an error response, the JWT contains the error response parameters in the same manner as with the response type "code".
 
 ## Signing and Encryption {#signing-and-encryption}
 
