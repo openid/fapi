@@ -88,7 +88,7 @@ The JWT always contains the following data utilized to secure the transmission:
 * `aud` - the client_id of the client the response is intended for
 * `exp` - expiration of the JWT. A maximum JWT lifetime of 10 minutes is RECOMMENDED.
  
-The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsection illustrate the pattern with the response type "code".
+The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsection illustrates the pattern for the response type "code".
 
 Note: Additional authorization endpoint response parameters defined by extensions, e.g. `session_state` as defined in [@OISM], will also be added to the JWT. 
 
