@@ -345,6 +345,13 @@ The JWT secured response mode enables clients to detect this attack by providing
 Authorization servers MAY encrypt the authorization response therewith providing a means to prevent leakage of authorization codes in the user agent (e.g. during transmission, in browser history or via referrer headers). 
 Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms like PKCE [@RFC7636] or the use of state parameter as described in (#code-replay).
 
+# Privacy Considerations
+
+JARM only defines an alternative way of encoding the authorization response message and therefore does not materially impact the privacy considerations
+of OAuth 2.0, which is a complex and flexible framework with broad-ranging privacy implications. 
+
+The content of a conventional authorization response message (e.g., `code` and `state`) does not typically convey personally identifiable information (PII). However, using encrypted JARM may improve privacy by reducing the potential for inadvertent information disclosure in cases where the authorization response might contain PII (such as other response types or extensions).
+
 # Acknowledgements
 
 The following people contributed to this document:
