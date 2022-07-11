@@ -288,9 +288,14 @@ Such implementations will typically have some sort of user interface available f
 
 The following client metadata parameters are introduced by this specification:
 
-* `authorization_signed_response_alg` JWS [@!RFC7515] `alg` algorithm JWA [@!RFC7518] REQUIRED for signing authorization responses. If this is specified, the response will be signed using JWS and the configured algorithm. If unspecified, the default algorithm to use for signing authorization responses is `RS256`. The algorithm `none` is not allowed.
-* `authorization_encrypted_response_alg` JWE [@!RFC7516] `alg` algorithm JWA [@!RFC7518] REQUIRED for encrypting authorization responses.  If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT, as defined in JWT [@!RFC7519].  The default, if omitted, is that no encryption is performed.
-* `authorization_encrypted_response_enc` JWE [@!RFC7516] `enc` algorithm JWA [@!RFC7518] REQUIRED for encrypting authorization responses.  If `authorization_encrypted_response_alg` is specified, the default for this value is A128CBC-HS256.  When `authorization_encrypted_response_enc` is included, `authorization_encrypted_response_alg` MUST also be provided.
+`authorization_signed_response_alg`
+:   The JWS [@!RFC7515] `alg` algorithm REQUIRED for signing authorization responses. If this is specified, the response will be signed using JWS and the configured algorithm. If unspecified, the default algorithm to use for signing authorization responses is `RS256`. The algorithm `none` is not allowed.
+
+`authorization_encrypted_response_alg`
+:   The JWE [@!RFC7516] `alg` algorithm REQUIRED for encrypting authorization responses.  If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT, as defined in JWT [@!RFC7519].  The default, if omitted, is that no encryption is performed.
+
+`authorization_encrypted_response_enc`
+:   The JWE [@!RFC7516] `enc` algorithm REQUIRED for encrypting authorization responses.  If `authorization_encrypted_response_alg` is specified, the default for this value is `A128CBC-HS256`.  When `authorization_encrypted_response_enc` is included, `authorization_encrypted_response_alg` MUST also be provided.
 
 Clients may register their public encryption keys using the `jwks_uri` or `jwks` metadata parameters.
 
@@ -300,9 +305,14 @@ Authorization servers SHOULD publish the supported algorithms for signing and en
 
 The following parameters are introduced by this specification:
 
-* `authorization_signing_alg_values_supported` OPTIONAL.  JSON array containing a list of the JWS [@!RFC7515] signing algorithms (`alg` values) JWA [@!RFC7518] supported by the authorization endpoint to sign the response.
-* `authorization_encryption_alg_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`alg` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
-* `authorization_encryption_enc_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`enc` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
+`authorization_signing_alg_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWS [@!RFC7515] signing algorithms (`alg` values) supported by the authorization endpoint to sign the response.
+
+`authorization_encryption_alg_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`alg` values) supported by the authorization endpoint to encrypt the response.
+
+`authorization_encryption_enc_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`enc` values)  supported by the authorization endpoint to encrypt the response.
 
 Authorization servers SHOULD publish the supported response mode values utilizing the parameter `response_modes_supported` as defined in [@RFC8414]. This draft introduces the following possible values:
 
