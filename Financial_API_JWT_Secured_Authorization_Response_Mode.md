@@ -345,20 +345,6 @@ The JWT secured response mode enables clients to detect this attack by providing
 Authorization servers MAY encrypt the authorization response therewith providing a means to prevent leakage of authorization codes in the user agent (e.g. during transmission, in browser history or via referrer headers). 
 Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms like PKCE [@RFC7636] or the use of state parameter as described in (#code-replay).
 
-# Acknowledgements
-
-The following people contributed to this document:
-
-* Torsten Lodderstedt (YES), Editor
-* Brian Campbell (Ping Identity), Co-editor
-* Nat Sakimura (NAT Consulting LLC) -- Chair
-* Dave Tonge (Momentum Financial Technology) -- Chair 
-* Joseph Heenan (Authlete)
-* Ralph Bragg (Raidiam)
-* Vladimir Dzhuvinov (Connect2ID)
-* Michael Schwartz (Gluu)
-* Filip Skokan (Auth0|Okta)
-
 # IANA Considerations
 ## OAuth Dynamic Client Registration Metadata Registration
 This specification requests registration of the following client metadata definitions in the IANA "OAuth Dynamic Client Registration Metadata" registry established by [@RFC7591]:
@@ -492,6 +478,20 @@ This specification requests registration of the following value in the IANA "OAu
   <date day="14" month="March" year="2022" />
 </front>
 </reference>
+
+# Acknowledgements
+
+The following people contributed to this document:
+
+* Torsten Lodderstedt (YES), Editor
+* Brian Campbell (Ping Identity), Co-editor
+* Nat Sakimura (NAT Consulting LLC) -- Chair
+* Dave Tonge (Momentum Financial Technology) -- Chair
+* Joseph Heenan (Authlete)
+* Ralph Bragg (Raidiam)
+* Vladimir Dzhuvinov (Connect2ID)
+* Michael Schwartz (Gluu)
+* Filip Skokan (Auth0|Okta)
 
 # Notices
 
