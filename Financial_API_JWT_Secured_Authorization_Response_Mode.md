@@ -271,7 +271,7 @@ The following client metadata parameters are introduced by this specification:
 `authorization_encrypted_response_enc`
 :   The JWE [@!RFC7516] `enc` algorithm REQUIRED for encrypting authorization responses.  If `authorization_encrypted_response_alg` is specified, the default for this value is `A128CBC-HS256`.  When `authorization_encrypted_response_enc` is included, `authorization_encrypted_response_alg` MUST also be provided.
 
-Clients may register their public encryption keys using the `jwks_uri` or `jwks` metadata parameters.
+The `jwks_uri` or `jwks` metadata parameters can be used by clients to register their public encryption keys.
 
 # Authorization Server Metadata {#as-metadata}
 
