@@ -78,7 +78,7 @@ For the purpose of this document, the terms defined in [@!RFC6749] and [@OIDC] a
 
 # JWT-based Response Mode
 
-This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional claims used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this draft defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.
+This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional claims used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this document defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.
 
 ## The JWT Response Document {#jwt-response}
 
@@ -162,13 +162,13 @@ In case of an error response, the JWT contains the error response parameters in 
 
 The JWT is either signed, or signed and encrypted. If the JWT is both signed and encrypted, the JSON document will be signed then encrypted, with the result being a Nested JWT, as defined in [@!RFC7519].
 
-The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this draft (see (#client-metadata)).
+The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this document (see (#client-metadata)).
 
 For guidance on key management in general and especially on use of symmetric algorithms for signing and encrypting based on client secrets see section 10 of [@OIDC].
 
 ## Response Encoding
 
-This draft defines the following response mode values:
+This document defines the following response mode values:
 
 * `query.jwt`
 * `fragment.jwt`
@@ -273,7 +273,7 @@ The client MUST process the JWT secured response as follows:
 
 The client will perform further checks, e.g. for CSRF detection, which are out of scope of this specification. Please see [@I-D.ietf-oauth-security-topics] for more security recommendations.
 
-Note: The way the client obtains the keys for verifying the JWT's signature (step 5) is out of scope of this draft. Established mechanism such as [@OIDD] or [@RFC8414] SHOULD be utilized.
+Note: The way the client obtains the keys for verifying the JWT's signature (step 5) is out of scope of this document. Established mechanism such as [@OIDD] or [@RFC8414] SHOULD be utilized.
 
 The client MUST NOT process the grant type specific authorization response parameters before all checks succeed. 
 
@@ -304,7 +304,7 @@ The following parameters are introduced by this specification:
 * `authorization_encryption_alg_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`alg` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
 * `authorization_encryption_enc_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`enc` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
 
-Authorization servers SHOULD publish the supported response mode values utilizing the parameter `response_modes_supported` as defined in [@RFC8414]. This draft introduces the following possible values:
+Authorization servers SHOULD publish the supported response mode values utilizing the parameter `response_modes_supported` as defined in [@RFC8414]. This document introduces the following possible values:
 
 *  `query.jwt`
 *  `fragment.jwt`
