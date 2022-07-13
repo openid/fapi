@@ -263,13 +263,13 @@ The response mode "jwt" is a shortcut and indicates the default redirect encodin
 
 Assumption: the client remembers the authorization server to which it sent the authorization request and binds this information to the user agent.
 
-The client is obliged to process the JWT secured response as follows:
+The client MUST process the JWT secured response as follows:
 
 1. (OPTIONAL) The client decrypts the JWT using the default key for the respective issuer or, if applicable, determined by the `kid` JWT header parameter. The key might be a private key, where the corresponding public key is registered with the expected issuer of the response ("use":"enc" via the client's metadata `jwks` or `jwks_uri`) or a key derived from its client secret (see (#signing-and-encryption)). 
 1. The client obtains the `iss` element from the JWT and checks whether its value is well known and identifies the expected issuer of the authorization process in examination. If the check fails, the client MUST abort processing and refuse the response.
 1. The client obtains the `aud` element from the JWT and checks whether it matches the client id the client used to identify itself in the corresponding authorization request. If the check fails, the client MUST abort processing and refuse the response.
 1. The client checks the JWT's `exp` element to determine if the JWT is still valid. If the check fails, the client MUST abort processing and refuse the response. 
-1. The client obtains the key needed to check the signature based on the JWT's `iss` element and, if present, the `kid` header element and checks its signature. If the check fails, the client MUST abort processing and refuse the response.
+1. The client MUST check the signature of the JWT according to [@!RFC7515] and the algorithm `none` (`"alg":"none"`) MUST NOT be accepted. If the check fails, the client MUST abort processing and refuse the response.
 
 The client will perform further checks, e.g. for CSRF detection, which are out of scope of this specification. Please see [@I-D.ietf-oauth-security-topics] for more security recommendations.
 
