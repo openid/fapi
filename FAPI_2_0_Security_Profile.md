@@ -177,8 +177,8 @@ Authorization servers
  1. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
  1. shall support confidential clients as defined in [@!RFC6749]
- 1. shall only issue sender-constrained access tokens using one of the following
-    methods:
+ 1. shall only issue sender-constrained access tokens,
+ 1. shall use one of the following methods for sender-constrained access tokens:
     -  MTLS as described in [@!RFC8705]
     -  DPoP as described in [@!I-D.ietf-oauth-dpop]
  1. shall authenticate clients using one of the following methods:
@@ -269,6 +269,13 @@ Clients
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+
+ **NOTE**: 
+
+This profile may be used by Confidential Clients on a user-controlled device where the system 
+clock may not be accurate, this may cause `private_key_jwt` client authentication to fail. 
+In such circumstances a Client should consider using the HTTP Date header returned from the 
+server to synchronise it's own clock when generating client assertions.
 
 
 #### Authorization Code Flow
