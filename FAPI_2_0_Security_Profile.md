@@ -344,9 +344,38 @@ Resource servers with the FAPI endpoints
 | `x-fapi-*` headers                        | -                                          | Removed pending further discussion                                                                    |
 | MTLS for sender-constrained access tokens | MTLS or DPoP                               |                                                                                                       |
 
-# Security considerations
+## Security Considerations
 
-TBD
+### JWKS URIs
+
+This profile supports the use of `private_key_jwt` and in addition allows the use of 
+OpenID Connect. When these are used Clients and Authorization Servers need to verify 
+payloads with keys from another party. For AS's this profile strongly recommends 
+the use of JWKS URI endpoints to distribute public keys. For Client's key management this 
+profile recommends either the use of JWKS URI endpoints or the use of the `jwks` 
+parameter in combination with [@!RFC7591] and [@!RFC7592].
+
+The definition of the AS `jwks_uri` can be found in [@!RFC8414], while the definition
+of the Client `jwks_uri` can be found in [@!RFC7591].
+
+In addition, this profile
+
+1. requires that `jwks_uri` endpoints shall be served over TLS;
+1. recommends that JOSE headers for `x5u` and `jku` should not be used; and
+1. recommends that the JWK set does not contain multiple keys with the same `kid`.
+
+### Duplicate Key Identifiers
+
+JWK sets should not contain multiple keys with the same `kid`. However, to increase 
+interoperability when there are multiple keys with the same `kid`,  the verifier shall 
+consider other JWK attributes, such as `kty`, `use`, `alg`, etc., when selecting the
+verification key for the particular JWS message. For example, the following algorithm 
+could be used in selecting which key to use to verify a message signature:
+
+1. find keys with a `kid` that matches the `kid` in the JOSE header;
+2. if a single key is found, use that key;
+3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
+
 
 # Privacy considerations
 

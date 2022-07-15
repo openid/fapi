@@ -102,13 +102,13 @@ Authorization Framework [@!RFC6749]. This Advanced Profile aims to
 reach the security goals and the non-repudiation goals laid out in the
 Attacker Model [@!attackermodel].
 
-All provisions of the [Baseline Profile] apply to the Advanced Profile
+All provisions of the [Security Profile] apply to the Advanced Profile
 as well, with the extensions described in the following.
 
 
 ## Profile
 
-In addition to the technologies used in the [Baseline Profile], the
+In addition to the technologies used in the [Security Profile], the
 following standards are used in the Advanced Profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
@@ -169,8 +169,8 @@ Authorization servers implementing FAPI2 authorization response signing
  1. shall support and issue signed authorization responses via JWT Secured Authorization 
     Response Mode for OAuth 2.0 [@!JARM]
 
-**NOTE**: When using [@!JARM] an AS should only include the iss authorization response 
-parameter defined by [@!RFC9207] inside the JWT. This is because [@!RFC9207] defines iss 
+**NOTE**: When using [@!JARM] an Authorization Server should only include the iss authorization response 
+parameter defined by [@!RFC9207] inside the JWT. This is because [@!RFC9207] defines `iss` 
 to be an authorization response parameter, and [@!JARM] section 4.1 requires all authorization 
 response parameters to be inside the JWT.
 
@@ -213,28 +213,41 @@ being developed by the IETF HTTP Working Group.
 Clients implementing HTTP Message Signing
 
  1. shall create an HTTP Message Signature as described in [I-D.ietf-httpbis-message-signatures]. 
- 2. shall include `@method` (the method used in the HTTP request) in the signature input
- 3. shall include `@target-uri` (the full request URI of the HTTP request) in the signature input
- 4. when the message contains a request body, include the `content-digest` header as defined in 
+ 1. shall include `@method` (the method used in the HTTP request) in the signature input
+ 1. shall include `date` (the HTTP date header value) in the signature input
+ 1. shall include `@target-uri` (the full request URI of the HTTP request) in the signature input
+ 1. when the message contains a request body, include the `content-digest` header as defined in 
     [I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature input. 
     Content-encoding agnostic digest methods (such as sha-256) should be used.
- 5. shall accept and verify the signature in the response as described in [I-D.ietf-httpbis-message-signatures]
+ 1. shall retrieve the valid public key for the Resource Server.
+ 1. shall accept and verify the signature in the response as described in [I-D.ietf-httpbis-message-signatures]
 
+**NOTE:** This specification doesn't specify the exact means by which a Client can retrieve
+ the key for the Resource Server. Together with the identity of the Resource Server and the 
+ `keyId` in the `Signature-Input` field, the Client can retrieve the key from a trusted third 
+ party or by some other means. 
+ 
 #### Requirements for Resource Servers
 
 The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that perform sensitive actions and return protected information for the resource owner associated with the submitted access token.
 
 Resource servers with FAPI endpoints implementing HTTP Message Signing
 
+ 1. shall retrieve the valid public key for the client
  1. shall verify the signature received from the Client as described in [I-D.ietf-httpbis-message-signatures]. 
- 2. shall reject requests with missing or invalid signatures using HTTP Status Code 401
- 3. shall create an HTTP Message Signature for the response as described in [I-D.ietf-httpbis-message-signatures].
- 4. shall cryptographically link the response to the request using `@request-response` in the signature
-    input as defined in 2.2.11 in [I-D.ietf-httpbis-message-signatures]
- 5. shall include the `content-digest` header as defined in 
-    [I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. 
-    Content-encoding agnostic digest methods (such as sha-256) should be used.
- 6. shall include `@status` (the status code of the response) in the signature input
+ 1. shall reject requests with missing or invalid signatures using HTTP Status Code 401
+ 1. shall create an HTTP Message Signature for the response as described in [I-D.ietf-httpbis-message-signatures].
+ 1. shall cryptographically link the response to the request by including the request signature in the response signature input by means of the `req` boolean flag defined in 2.3 in [I-D.ietf-httpbis-message-signatures]
+ 1. shall include the `content-digest` header as defined in 
+    [I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. Content-encoding agnostic digest methods (such as sha-256) should be used.
+ 1. shall include `@status` (the status code of the response) in the signature input
+ 1. shall include `date` (the HTTP date header value) in the signature input
+
+ **NOTE:** This specification doesn't specify the exact means by which a Resource Server can retrieve
+ the key for the Client. The Resource Server can obtain an identifier for the Client either from a 
+ mutual TLS cerficiate or from a JWT access token or from a token introspection response. With a Client
+ identifier and the `keyId` in the `Signature-Input` field, the Resource Server can retrieve the key from 
+ a trusted third party or by some other means.
 
 ## MTLS Protection of all endpoints
 
@@ -246,7 +259,10 @@ This is outside of the scope of both [@!RFC8705] and the FAPI standards, however
 state that when using TLS as a transport level protection in this manner, authorization servers should expect clients to
 call the endpoints located in the root of the server metadata, and not those found in `mtls_endpoint_aliases`.
 
-## Security considerations
+## Security Considerations
+
+### Authorization Response Encryption
+
 In FAPI2, there is no confidential information in the Authorization Response, hence encryption of the Authorization Response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
 
 Usage of PKCE in FAPI 2 provides protection for code leakage described in 5.4 [@!JARM].
