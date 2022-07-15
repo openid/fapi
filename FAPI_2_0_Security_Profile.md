@@ -350,13 +350,13 @@ Resource servers with the FAPI endpoints
 
 This profile supports the use of `private_key_jwt` and in addition allows the use of 
 OpenID Connect. When these are used Clients and Authorization Servers need to verify 
-payloads with keys from another party. For AS's this profile strongly recommends 
-the use of JWKS URI endpoints to distribute public keys. For Client's key management this 
-profile recommends either the use of JWKS URI endpoints or the use of the `jwks` 
-parameter in combination with [@!RFC7591] and [@!RFC7592].
+payloads with keys from another party. For Authorization Server's this profile strongly
+recommends  the use of JWKS URI endpoints to distribute public keys. For Client's key 
+management this profile recommends either the use of JWKS URI endpoints or the use of 
+the `jwks` parameter in combination with [@!RFC7591] and [@!RFC7592].
 
-The definition of the AS `jwks_uri` can be found in [@!RFC8414], while the definition
-of the Client `jwks_uri` can be found in [@!RFC7591].
+The definition of the Authorization Server `jwks_uri` can be found in [@!RFC8414], 
+while the definition of the Client `jwks_uri` can be found in [@!RFC7591].
 
 In addition, this profile
 
