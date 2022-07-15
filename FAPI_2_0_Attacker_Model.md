@@ -39,7 +39,7 @@ Since OIDF FAPI aims at providing an API protection profile for high-risk
 scenarios, clearly defined security requirements are indispensable. In this
 document, the security requirements are expressed through attacker models,
 security goals, and non-repudiation requirements. From these requirements, the
-utilized security mechanisms are derived in the Baseline and Advanced profiles.
+utilized security mechanisms are derived in the Baseline and Message Signing profiles.
 
 The ultimate aim is to provide systematic proofs of the security of the FAPI
 profiles similar to those in [@arXiv.1901.11520]. Formal proofs can rule out
