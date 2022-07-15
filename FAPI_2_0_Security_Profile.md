@@ -379,7 +379,56 @@ could be used in selecting which key to use to verify a message signature:
 
 # Privacy considerations
 
-TBD
+There are many factors to be considered in terms of privacy when implementing
+this specification. Since this specification is a profile of OAuth 2.0 and
+OpenID Connect, the privacy considerations are not specific to this document and
+generally apply to OAuth or OpenID Connect. Implementers are advised to perform
+a thorough privacy impact assessment and manage identified risks appropriately.
+
+Note: Implementers can consult documents like [ISO29100] and [ISO29134] for this
+purpose.
+
+Privacy threats to OAuth and OpenID Connect implementations include the following:
+
+  * **Inappropriate privacy notice**:  A privacy notice (e.g., provided at a
+    `policy_url`) or by other means can be inappropriate or insufficient.
+  * **Inadequate choice**:  Providing a consent screen without adequate choices
+    does not form consent.
+  * **Misuse of data**:  An authorization server, resource server or client can
+    potentially use the data not according to the purpose that was agreed.
+  * **Collection minimization violation**:  A client asking for more data than
+    it absolutely needs to fulfill the purpose is violating the collection
+    minimization principle.
+  * **Unsolicited personal data from the resource server**:  Some bad resource
+    server implementations may return more data than requested. If the data is
+    personal data, then this would be a violation of privacy principles.
+  * **Data minimization violation**:  Any process that is processing more data
+    than it needs is violating the data minimization principle.
+  * **Authorization servers tracking end-users**:  Authorization servers
+    identifying what data is being provided to which client for which end-user.
+  * **End-user tracking by clients**:  Two or more clients correlating access
+    tokens or ID Tokens to track users.
+  * **Client misidentification by end-users**:  End-user misunderstands who the
+    client is due to a confusing representation of the client at the
+    authorization server's authorization page.
+  * **Insufficient understanding of the end-user granting access to data**: To
+    enhance the trust of the ecosystem, best practice is for the authorization
+    server to make clear what is included in the authorization request (for
+    example, what data will be released to the client).
+  * **Attacker observing personal data in authorization request/response**:  The authorization request or response might contain personal
+    data. In some jurisdictions, even security parameters can be considered
+    personal data. This profile aims to reduce the data sent in the
+    authorization request and response to an absolute minimum, but nonetheless,
+    an attacker might observe some data.
+  * **Data leak from authorization server**:  The authorization server generally
+    stores personal data. If it becomes compromised, this data can leak or be
+    modified.
+  * **Data leak from resource servers**:  Some resource servers store personal
+    data. If a resource server becomes compromised, this data can leak or be
+    modified.
+  * **Data leak from clients**:  Some clients store personal data. If the client
+    becomes compromised, this data can leak or be modified.
+
 
 # Acknowledgements
 
