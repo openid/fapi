@@ -78,7 +78,7 @@ For the purpose of this document, the terms defined in [@!RFC6749] and [@OIDC] a
 
 # JWT-based Response Mode
 
-This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional claims used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this draft defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.
+This document defines a new JWT-based [@!RFC7519] mode to encode OAuth [@!RFC6749] authorization response parameters. All response parameters defined for a given response type are conveyed in a JWT along with additional claims used to further protect the transmission. Since there are different techniques to encode the JWT itself in the response to the client, namely query URI parameter, fragment component and form post, this document defines a set of response mode values in accordance with [@!OIDM] corresponding to these techniques.
 
 ## The JWT Response Document {#jwt-response}
 
@@ -88,13 +88,13 @@ The JWT always contains the following data utilized to secure the transmission:
 * `aud` - the client_id of the client the response is intended for
 * `exp` - expiration of the JWT. A maximum JWT lifetime of 10 minutes is RECOMMENDED.
  
-The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsections illustrate the pattern with the response types "code" and "token".
+The JWT MUST furthermore contain the authorization endpoint response parameters as defined for the particular response types, even in case of an error response. Authorization endpoint response parameter names and string values are included as JSON strings and numerical values (e.g., `expires_in` value) are included as JSON numbers. This pattern is applicable to all response types including those defined in [@!OIDM]. The following subsection illustrates the pattern for the response type "code".
 
 Note: Additional authorization endpoint response parameters defined by extensions, e.g. `session_state` as defined in [@OISM], will also be added to the JWT. 
 
 The JWT response document MAY contain further element, e.g. the claims defined in [@!RFC7519]. Implementation SHOULD adhere to the respective processing rules and ignore unrecognized elements.
 
-### Response Type "code"
+### Example Response Type "code" 
 
 For the grant type authorization "code" the JWT contains the response parameters as defined in [@!RFC6749], sections 4.1.2:
 
@@ -132,43 +132,17 @@ The following example shows the JWT payload for such an error response:
 }
 ```
 
-### Response Type "token"
-
-For the grant type "token" the JWT contains the response parameters as defined in [@!RFC6749], sections 4.2.2:
-
-* `access_token` - the access token
-* `token_type` - the type of the access token
-* `expires_in` - when the access token expires
-* `scope` - the scope granted with the access token
-*  `state` - the state value as sent by the client in the authorization request (if applicable)
-
-The following example shows the claims of the JWT for a successful "token" authorization response:
-
-```
-{  
-   "iss":"https://accounts.example.com",
-   "aud":"s6BhdRkqt3",
-   "exp":1311281970,
-   "access_token":"2YotnFZFEjr1zCsicMWpAA",
-   "state":"S8NJ7uqk5fY4EjNvP_G_FtyJu6pUsvH9jsYni9dMAJw",
-   "token_type":"bearer",
-   "expires_in":3600,
-   "scope":"example"   
-}
-``` 
-In case of an error response, the JWT contains the error response parameters in the same manner as with the response type "code".
-
 ## Signing and Encryption {#signing-and-encryption}
 
 The JWT is either signed, or signed and encrypted. If the JWT is both signed and encrypted, the JSON document will be signed then encrypted, with the result being a Nested JWT, as defined in [@!RFC7519].
 
-The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this draft (see (#client-metadata)).
+The authorization server determines what algorithm to employ to secure the JWT for a particular authorization response. This decision can be based on registered metadata parameters for the client as defined by this document (see (#client-metadata)).
 
 For guidance on key management in general and especially on use of symmetric algorithms for signing and encrypting based on client secrets see section 10 of [@OIDC].
 
 ## Response Encoding
 
-This draft defines the following response mode values:
+This document defines the following response mode values:
 
 * `query.jwt`
 * `fragment.jwt`
@@ -263,17 +237,17 @@ The response mode "jwt" is a shortcut and indicates the default redirect encodin
 
 Assumption: the client remembers the authorization server to which it sent the authorization request and binds this information to the user agent.
 
-The client is obliged to process the JWT secured response as follows:
+The client MUST process the JWT secured response as follows:
 
 1. (OPTIONAL) The client decrypts the JWT using the default key for the respective issuer or, if applicable, determined by the `kid` JWT header parameter. The key might be a private key, where the corresponding public key is registered with the expected issuer of the response ("use":"enc" via the client's metadata `jwks` or `jwks_uri`) or a key derived from its client secret (see (#signing-and-encryption)). 
 1. The client obtains the `iss` element from the JWT and checks whether its value is well known and identifies the expected issuer of the authorization process in examination. If the check fails, the client MUST abort processing and refuse the response.
 1. The client obtains the `aud` element from the JWT and checks whether it matches the client id the client used to identify itself in the corresponding authorization request. If the check fails, the client MUST abort processing and refuse the response.
 1. The client checks the JWT's `exp` element to determine if the JWT is still valid. If the check fails, the client MUST abort processing and refuse the response. 
-1. The client obtains the key needed to check the signature based on the JWT's `iss` element and, if present, the `kid` header element and checks its signature. If the check fails, the client MUST abort processing and refuse the response.
+1. The client MUST check the signature of the JWT according to [@!RFC7515] and the algorithm `none` (`"alg":"none"`) MUST NOT be accepted. If the check fails, the client MUST abort processing and refuse the response.
 
 The client will perform further checks, e.g. for CSRF detection, which are out of scope of this specification. Please see [@I-D.ietf-oauth-security-topics] for more security recommendations.
 
-Note: The way the client obtains the keys for verifying the JWT's signature (step 5) is out of scope of this draft. Established mechanism such as [@OIDD] or [@RFC8414] SHOULD be utilized.
+Note: The way the client obtains the keys for verifying the JWT's signature (step 5) is out of scope of this document. Established mechanism such as [@OIDD] or [@RFC8414] SHOULD be utilized.
 
 The client MUST NOT process the grant type specific authorization response parameters before all checks succeed. 
 
@@ -288,11 +262,16 @@ Such implementations will typically have some sort of user interface available f
 
 The following client metadata parameters are introduced by this specification:
 
-* `authorization_signed_response_alg` JWS [@!RFC7515] `alg` algorithm JWA [@!RFC7518] REQUIRED for signing authorization responses. If this is specified, the response will be signed using JWS and the configured algorithm. If unspecified, the default algorithm to use for signing authorization responses is `RS256`. The algorithm `none` is not allowed.
-* `authorization_encrypted_response_alg` JWE [@!RFC7516] `alg` algorithm JWA [@!RFC7518] REQUIRED for encrypting authorization responses.  If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT, as defined in JWT [@!RFC7519].  The default, if omitted, is that no encryption is performed.
-* `authorization_encrypted_response_enc` JWE [@!RFC7516] `enc` algorithm JWA [@!RFC7518] REQUIRED for encrypting authorization responses.  If `authorization_encrypted_response_alg` is specified, the default for this value is A128CBC-HS256.  When `authorization_encrypted_response_enc` is included, `authorization_encrypted_response_alg` MUST also be provided.
+`authorization_signed_response_alg`
+:   The JWS [@!RFC7515] `alg` algorithm REQUIRED for signing authorization responses. If this is specified, the response will be signed using JWS and the configured algorithm. If unspecified, the default algorithm to use for signing authorization responses is `RS256`. The algorithm `none` is not allowed.
 
-Clients may register their public encryption keys using the `jwks_uri` or `jwks` metadata parameters.
+`authorization_encrypted_response_alg`
+:   The JWE [@!RFC7516] `alg` algorithm REQUIRED for encrypting authorization responses.  If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT, as defined in JWT [@!RFC7519].  The default, if omitted, is that no encryption is performed.
+
+`authorization_encrypted_response_enc`
+:   The JWE [@!RFC7516] `enc` algorithm REQUIRED for encrypting authorization responses.  If `authorization_encrypted_response_alg` is specified, the default for this value is `A128CBC-HS256`.  When `authorization_encrypted_response_enc` is included, `authorization_encrypted_response_alg` MUST also be provided.
+
+The `jwks_uri` or `jwks` metadata parameters can be used by clients to register their public encryption keys.
 
 # Authorization Server Metadata {#as-metadata}
 
@@ -300,18 +279,25 @@ Authorization servers SHOULD publish the supported algorithms for signing and en
 
 The following parameters are introduced by this specification:
 
-* `authorization_signing_alg_values_supported` OPTIONAL.  JSON array containing a list of the JWS [@!RFC7515] signing algorithms (`alg` values) JWA [@!RFC7518] supported by the authorization endpoint to sign the response.
-* `authorization_encryption_alg_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`alg` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
-* `authorization_encryption_enc_values_supported`  OPTIONAL.  JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`enc` values) JWA [@!RFC7518] supported by the authorization endpoint to encrypt the response.
+`authorization_signing_alg_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWS [@!RFC7515] signing algorithms (`alg` values) supported by the authorization endpoint to sign the response.
 
-Authorization servers SHOULD publish the supported response mode values utilizing the parameter `response_modes_supported` as defined in [@RFC8414]. This draft introduces the following possible values:
+`authorization_encryption_alg_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`alg` values) supported by the authorization endpoint to encrypt the response.
+
+`authorization_encryption_enc_values_supported`
+:   OPTIONAL.  A JSON array containing a list of the JWE [@!RFC7516] encryption algorithms (`enc` values)  supported by the authorization endpoint to encrypt the response.
+
+Authorization servers SHOULD publish the supported response mode values utilizing the parameter `response_modes_supported` as defined in [@RFC8414]. This document introduces the following possible values:
 
 *  `query.jwt`
 *  `fragment.jwt`
 *  `form_post.jwt`
 *  `jwt`
 
-# Security considerations
+# Security Considerations
+
+As JARM is used as a component in OAuth, many of the security considerations listed in OAuth 2.0 Security Best Current Practice [@I-D.ietf-oauth-security-topics] apply. In addition, for the mechanisms described in this document, the following security considerations apply.
 
 ## DoS using specially crafted JWTs
 JWTs could be crafted to have an issuer that resolves to a JWK set URL with
@@ -323,14 +309,14 @@ The client therefore MUST first check that the issuer of the JWT is well-known
 and expected for the particular authorization response before it uses this data 
 to obtain the key needed to check the JWT's signature.  
 
-## Code Replay {#code-replay}
-An authorization code (obtained on a different device with the same client) could be 
-injected into an authorization response in order to impersonate the legitimate resource 
-owner (see [@I-D.ietf-oauth-security-topics]). 
-
-The JWT secured response mode enables clients to detect such an attack. The signature binds 
-the authorization code to the state value sent by the client and therewith transitively to 
-the transaction in the respective user agent.
+## Protocol Run Integrity
+An OAuth protocol run is made of many distinct message exchanges between the client and server
+to complete the issuance of access and refresh tokens. Even if every message itself is integrity
+protected, it is still conceivable that one or more of the messages are exchanged with another
+message created for a different protocol run. The leakage and reuse of encrypted messages in
+(#code-leakage) is an example of such problems. To mitigate this problem, it is considered good
+practice to implement additional protection provided by PKCE [@RFC7636]
+as described in [@I-D.ietf-oauth-security-topics].
 
 ## Mix-Up
 Mix-up is an attack on scenarios where an OAuth client interacts with
@@ -341,23 +327,16 @@ the respective endpoint at the authorization/resource server.
    
 The JWT secured response mode enables clients to detect this attack by providing an identification of the sender (`iss`) and the intended audience of the authorization response (`aud`). 
 
-## Code Leakage
+## Code Leakage {#code-leakage}
 Authorization servers MAY encrypt the authorization response therewith providing a means to prevent leakage of authorization codes in the user agent (e.g. during transmission, in browser history or via referrer headers). 
-Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms like PKCE [@RFC7636] or the use of state parameter as described in (#code-replay).
+Note, however, that the entire response is then potentially subject to leakage. An encrypted response doesn't remove the need for additional protections provided by mechanisms such as PKCE [@RFC7636].
 
-# Acknowledgements
+# Privacy Considerations
 
-The following people contributed to this document:
+JARM only defines an alternative way of encoding the authorization response message and therefore does not materially impact the privacy considerations
+of OAuth 2.0, which is a complex and flexible framework with broad-ranging privacy implications. 
 
-* Torsten Lodderstedt (YES), Editor
-* Brian Campbell (Ping Identity), Co-editor
-* Nat Sakimura (NAT Consulting LLC) -- Chair
-* Dave Tonge (Momentum Financial Technology) -- Chair 
-* Joseph Heenan (Authlete)
-* Ralph Bragg (Raidiam)
-* Vladimir Dzhuvinov (Connect2ID)
-* Michael Schwartz (Gluu)
-* Filip Skokan (Auth0|Okta)
+The content of a conventional authorization response message (e.g., `code` and `state`) does not typically convey personally identifiable information (PII). However, using encrypted JARM may improve privacy by reducing the potential for inadvertent information disclosure in cases where the authorization response might contain PII (such as other response types or extensions).
 
 # IANA Considerations
 ## OAuth Dynamic Client Registration Metadata Registration
@@ -493,9 +472,23 @@ This specification requests registration of the following value in the IANA "OAu
 </front>
 </reference>
 
+# Acknowledgements
+
+The following people contributed to this document:
+
+* Torsten Lodderstedt (YES), Editor
+* Brian Campbell (Ping Identity), Co-editor
+* Nat Sakimura (NAT Consulting LLC) -- Chair
+* Dave Tonge (Momentum Financial Technology) -- Chair
+* Joseph Heenan (Authlete)
+* Ralph Bragg (Raidiam)
+* Vladimir Dzhuvinov (Connect2ID)
+* Michael Schwartz (Gluu)
+* Filip Skokan (Auth0|Okta)
+
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2022 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
