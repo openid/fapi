@@ -269,6 +269,7 @@ Clients
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
 
  **NOTE**: 
 
