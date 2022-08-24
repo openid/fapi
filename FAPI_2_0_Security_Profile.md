@@ -347,6 +347,25 @@ Resource servers with the FAPI endpoints
 
 ## Security Considerations
 
+### DPoP Proof Replay
+
+An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
+that they can then replay.
+
+This may also allow reuse of the DPoP proof with an alterered request, as DPoP does
+not sign the body of HTTP requests nor most headers. For example, for a payment request
+the attacker might be able to specify a different amount or destination account.
+
+Possible mitigations for this are:
+
+1. Resource servers uses short-lived DPoP nonces to reduce the time window where a request can be replayed
+2. Resource servers implement replay preventation using the `jti` header as explained in [@!I-D.ietf-oauth-dpop]
+3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
+4. Consider MTLS sender-constraining instead of DPoP
+
+These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7 is
+represents a powerful attacker and mitigations may not be necessary for many ecosystems.
+
 ### JWKS URIs
 
 This profile supports the use of `private_key_jwt` and in addition allows the use of 
