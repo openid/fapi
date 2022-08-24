@@ -396,6 +396,33 @@ could be used in selecting which key to use to verify a message signature:
 2. if a single key is found, use that key;
 3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
 
+### Injection of stolen access tokens
+
+There are potential situations where the attacker may be able to inject stolen access
+tokens into a client to bypass [@!RFC8705] or [@!I-D.ietf-oauth-dpop]
+sender-constraining of the access token, as described in "Cuckoo's Token Attack" in
+[@FAPI1SEC].
+
+A pre-condition for this attack is that the attacker has control of an authorization
+server that is trusted by the client to issue access token for the target resource
+server. An attacker may obtain control of an authorization server by:
+
+1. Compromising the security of a different authorization server that the client trusts, or
+2. Acting as an authorization server and establishing a trust relationship with a client using social engineering, or by
+   compromising the client
+
+The attack may be easier if a centralised directory or other resource server discovery mechanism allows the attacker to
+cause the client to send the stolen access token received from the attacker controlled Authorization Server to an honest
+Resource Server.
+
+The pre-conditions for this attack do not apply to many ecosystems and require a powerful attacker. In situations
+where the pre-conditions may be met, the possible mitigations include:
+
+1. Clients using different DPoP keys or MTLS certificates at each authorization server
+2. Clients sending the issuer identifier the access token was obtained from to the resource server, and requiring
+   resource servers to verify the issuer matches the authorization server that originally issued the token (though
+   there is no standardized method for clients to send the issuer to the resource server)
+3. Reducing the time window for the attack by using short lived access tokens alongside refresh tokens
 
 # Privacy considerations
 
@@ -526,6 +553,24 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
     </author>
 </front>
 </reference>
+
+
+<reference anchor="FAPI1SEC" target="https://arxiv.org/abs/1901.11520">
+  <front>
+    <title>An Extensive Formal Security Analysis of the OpenID Financial-grade API</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>yes.com AG</organization>
+    </author>
+    <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="R." surname="Kuesters" fullname="Ralf Kuesters">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <date day="31" month="Jan" year="2019"/>
+  </front>
+</reference>
+
 
 # Notices
 
