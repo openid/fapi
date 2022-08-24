@@ -330,20 +330,21 @@ Resource servers with the FAPI endpoints
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
 
 
-## Differences to FAPI 1.0
+## Main Differences to FAPI 1.0
 
-| FAPI 1.0 Read/Write                       | FAPI 2.0                                   | Reasons                                                                                               |
-|:------------------------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------|
-| JAR, JARM                                 | PAR                                        | integrity protection and compatibility improvements for authorization requests; only code in response |
-| -                                         | shall adhere to Security BCP               |                                                                                                       |
-| `s_hash`                                  | -                                          | state integrity is protected by PAR; protection provided by state is now provided by PKCE             |
-| pre-registered redirect URIs              | redirect URIs in PAR                       | pre-registration is not required with client authentication and PAR                                   |
-| response types `code id_token` or `code`  | response type `code`                       | improve security: no ID token in front-channel; not needed                                            |
-| ID Token as detached signature            | -                                          | ID token does not need to serve as a detached signature                                               |
-| potentially encrypted ID Tokens           | encryption not required                    | ID Tokens only exchanged in back channel                                                              |
-| `nbf` & `exp` claims in request object    | request_uri has lifetime under 300 seconds | Prevents pre-generation of requests.                                                                  |
-| `x-fapi-*` headers                        | -                                          | Removed pending further discussion                                                                    |
-| MTLS for sender-constrained access tokens | MTLS or DPoP                               |                                                                                                       |
+| FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                | Reasons                                                                                                                                 |
+| :--------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| JAR                                                  | PAR                                                                     | integrity protection and compatibility improvements for authorization requests                                                          |
+| JARM                                                 | only code in response                                                   | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
+| BCM principles, defenses based on particular threats | attacker model, security goals, best practices from the OAuth Security BCP | clearer design guideline, suitability for formal analysis                                                                               |
+| `s_hash`                                             | PKCE                                                                       | protection provided by `state` (in particular against CSRF) is now provided by PKCE; `state` integrity is partially protected by PAR    |
+| pre-registered redirect URIs                         | redirect URIs in PAR                                                    | pre-registration is not required with client authentication and PAR                                                                     |
+| response types `code id_token` or `code`             | response type `code`                                                    | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
+| ID Token as detached signature                       | PKCE                                                                       | ID token does not need to serve as a detached signature                                                                                 |
+| potentially encrypted ID Tokens in the front channel | No encryption and no ID Tokens in the front channel                                                 | ID Tokens only exchanged in back channel                                                                                                |
+| `nbf` & `exp` claims in request object               | `request_uri` has lifetime under 300 seconds                            | Prevents pre-generation of requests                                                                                                     |
+| `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                                                                       | Not relevant to the core of the security profile                                                                                        |
+| MTLS for sender-constrained access tokens            | MTLS or DPoP                                                            | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
 ## Security Considerations
 
