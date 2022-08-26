@@ -7,7 +7,7 @@ keyword = ["security", "oauth2"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid-fapi-jarm-03"
+value = "oauth-v2-jarm-03"
 status = "standard"
 
 [[author]]
