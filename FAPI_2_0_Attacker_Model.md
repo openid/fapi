@@ -191,6 +191,17 @@ since these messages pass through the complex environment of the
 user's browser/app/OS with a larger attack surface. This demands for a
 more fine-grained analysis.
 
+**Note:** For the authorization endpoint, it is assumed that the attacker can
+only passively read messages, whereas for the token and resource endpoints, it
+is assumed that the attacker can also tamper with messages. Since messages to
+and from the authorization endpoint are sent through the user's browser and the
+attacker can redirect the user to arbitrary URLs anyway (see A1), the attacker
+can already redirect the user to faked/spoofed authorization request and
+response URLs. At the same time, while leakages from the authorization request
+or response are very common in practice, a fully compromised connection to the
+authorization endpoint is not. Most user authentication schemes would be broken
+in this setting, undermining the security completely. 
+
 #### A3a - Read Authorization Request
 
 The capabilities of the web attacker, but can also read the authorization

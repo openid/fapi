@@ -113,7 +113,7 @@ following standards are used in this profile:
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
   * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM] for signing authorization responses 
   * OAuth 2.0 Token Introspection [@!RFC7662] with [@I-D.ietf-oauth-jwt-introspection-response] for signing introspection responses
-  * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [I-D.ietf-httpbis-digest-headers]
+  * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [@I-D.ietf-httpbis-digest-headers]
   for signing HTTP requests to and responses from Resource Servers.
 
 We understand that some ecosystems may only desire to implement 1 or 2 of the above 3, it is therefore 
@@ -211,15 +211,15 @@ being developed by the IETF HTTP Working Group.
 
 Clients implementing HTTP Message Signing
 
- 1. shall create an HTTP Message Signature as described in [I-D.ietf-httpbis-message-signatures]. 
+ 1. shall create an HTTP Message Signature as described in [@I-D.ietf-httpbis-message-signatures].
  1. shall include `@method` (the method used in the HTTP request) in the signature input
  1. shall include `date` (the HTTP date header value) in the signature input
  1. shall include `@target-uri` (the full request URI of the HTTP request) in the signature input
  1. when the message contains a request body, include the `content-digest` header as defined in 
-    [I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature input. 
+    [@I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature input.
     Content-encoding agnostic digest methods (such as sha-256) should be used.
  1. shall retrieve the valid public key for the Resource Server.
- 1. shall accept and verify the signature in the response as described in [I-D.ietf-httpbis-message-signatures]
+ 1. shall accept and verify the signature in the response as described in [@I-D.ietf-httpbis-message-signatures]
 
 **NOTE:** This specification doesn't specify the exact means by which a Client can retrieve
  the key for the Resource Server. Together with the identity of the Resource Server and the 
@@ -233,12 +233,12 @@ The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that perform s
 Resource servers with FAPI endpoints implementing HTTP Message Signing
 
  1. shall retrieve the valid public key for the client
- 1. shall verify the signature received from the Client as described in [I-D.ietf-httpbis-message-signatures]. 
+ 1. shall verify the signature received from the Client as described in [@I-D.ietf-httpbis-message-signatures].
  1. shall reject requests with missing or invalid signatures using HTTP Status Code 401
- 1. shall create an HTTP Message Signature for the response as described in [I-D.ietf-httpbis-message-signatures].
- 1. shall cryptographically link the response to the request by including the request signature in the response signature input by means of the `req` boolean flag defined in 2.3 in [I-D.ietf-httpbis-message-signatures]
+ 1. shall create an HTTP Message Signature for the response as described in [@I-D.ietf-httpbis-message-signatures].
+ 1. shall cryptographically link the response to the request by including the request signature in the response signature input by means of the `req` boolean flag defined in 2.3 in [@I-D.ietf-httpbis-message-signatures]
  1. shall include the `content-digest` header as defined in 
-    [I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. Content-encoding agnostic digest methods (such as sha-256) should be used.
+    [@I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. Content-encoding agnostic digest methods (such as sha-256) should be used.
  1. shall include `@status` (the status code of the response) in the signature input
  1. shall include `date` (the HTTP date header value) in the signature input
 

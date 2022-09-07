@@ -269,6 +269,7 @@ Clients
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
 
  **NOTE**: 
 
@@ -329,22 +330,42 @@ Resource servers with the FAPI endpoints
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
 
 
-## Differences to FAPI 1.0
+## Main Differences to FAPI 1.0
 
-| FAPI 1.0 Read/Write                       | FAPI 2.0                                   | Reasons                                                                                               |
-|:------------------------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------|
-| JAR, JARM                                 | PAR                                        | integrity protection and compatibility improvements for authorization requests; only code in response |
-| -                                         | shall adhere to Security BCP               |                                                                                                       |
-| `s_hash`                                  | -                                          | state integrity is protected by PAR; protection provided by state is now provided by PKCE             |
-| pre-registered redirect URIs              | redirect URIs in PAR                       | pre-registration is not required with client authentication and PAR                                   |
-| response types `code id_token` or `code`  | response type `code`                       | improve security: no ID token in front-channel; not needed                                            |
-| ID Token as detached signature            | -                                          | ID token does not need to serve as a detached signature                                               |
-| potentially encrypted ID Tokens           | encryption not required                    | ID Tokens only exchanged in back channel                                                              |
-| `nbf` & `exp` claims in request object    | request_uri has lifetime under 300 seconds | Prevents pre-generation of requests.                                                                  |
-| `x-fapi-*` headers                        | -                                          | Removed pending further discussion                                                                    |
-| MTLS for sender-constrained access tokens | MTLS or DPoP                               |                                                                                                       |
+| FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                | Reasons                                                                                                                                 |
+| :--------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| JAR                                                  | PAR                                                                     | integrity protection and compatibility improvements for authorization requests                                                          |
+| JARM                                                 | only code in response                                                   | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
+| BCM principles, defenses based on particular threats | attacker model, security goals, best practices from the OAuth Security BCP | clearer design guideline, suitability for formal analysis                                                                               |
+| `s_hash`                                             | PKCE                                                                       | protection provided by `state` (in particular against CSRF) is now provided by PKCE; `state` integrity is partially protected by PAR    |
+| pre-registered redirect URIs                         | redirect URIs in PAR                                                    | pre-registration is not required with client authentication and PAR                                                                     |
+| response types `code id_token` or `code`             | response type `code`                                                    | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
+| ID Token as detached signature                       | PKCE                                                                       | ID token does not need to serve as a detached signature                                                                                 |
+| potentially encrypted ID Tokens in the front channel | No encryption and no ID Tokens in the front channel                                                 | ID Tokens only exchanged in back channel                                                                                                |
+| `nbf` & `exp` claims in request object               | `request_uri` has lifetime under 300 seconds                            | Prevents pre-generation of requests                                                                                                     |
+| `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                                                                       | Not relevant to the core of the security profile                                                                                        |
+| MTLS for sender-constrained access tokens            | MTLS or DPoP                                                            | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
 ## Security Considerations
+
+### DPoP Proof Replay
+
+An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
+that they can then replay.
+
+This may also allow reuse of the DPoP proof with an alterered request, as DPoP does
+not sign the body of HTTP requests nor most headers. For example, for a payment request
+the attacker might be able to specify a different amount or destination account.
+
+Possible mitigations for this are:
+
+1. Resource servers uses short-lived DPoP nonces to reduce the time window where a request can be replayed
+2. Resource servers implement replay preventation using the `jti` header as explained in [@!I-D.ietf-oauth-dpop]
+3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
+4. Consider MTLS sender-constraining instead of DPoP
+
+These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7 is
+represents a powerful attacker and mitigations may not be necessary for many ecosystems.
 
 ### JWKS URIs
 
@@ -376,10 +397,86 @@ could be used in selecting which key to use to verify a message signature:
 2. if a single key is found, use that key;
 3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
 
+### Injection of stolen access tokens
+
+There are potential situations where the attacker may be able to inject stolen access
+tokens into a client to bypass [@!RFC8705] or [@!I-D.ietf-oauth-dpop]
+sender-constraining of the access token, as described in "Cuckoo's Token Attack" in
+[@FAPI1SEC].
+
+A pre-condition for this attack is that the attacker has control of an authorization
+server that is trusted by the client to issue access token for the target resource
+server. An attacker may obtain control of an authorization server by:
+
+1. Compromising the security of a different authorization server that the client trusts, or
+2. Acting as an authorization server and establishing a trust relationship with a client using social engineering, or by
+   compromising the client
+
+The attack may be easier if a centralised directory or other resource server discovery mechanism allows the attacker to
+cause the client to send the stolen access token received from the attacker controlled Authorization Server to an honest
+Resource Server.
+
+The pre-conditions for this attack do not apply to many ecosystems and require a powerful attacker. In situations
+where the pre-conditions may be met, the possible mitigations include:
+
+1. Clients using different DPoP keys or MTLS certificates at each authorization server
+2. Clients sending the issuer identifier the access token was obtained from to the resource server, and requiring
+   resource servers to verify the issuer matches the authorization server that originally issued the token (though
+   there is no standardized method for clients to send the issuer to the resource server)
+3. Reducing the time window for the attack by using short lived access tokens alongside refresh tokens
 
 # Privacy considerations
 
-TBD
+There are many factors to be considered in terms of privacy when implementing
+this specification. Since this specification is a profile of OAuth 2.0 and
+OpenID Connect, the privacy considerations are not specific to this document and
+generally apply to OAuth or OpenID Connect. Implementers are advised to perform
+a thorough privacy impact assessment and manage identified risks appropriately.
+
+Note: Implementers can consult documents like [ISO29100] and [ISO29134] for this
+purpose.
+
+Privacy threats to OAuth and OpenID Connect implementations include the following:
+
+  * **Inappropriate privacy notice**:  A privacy notice (e.g., provided at a
+    `policy_url`) or by other means can be inappropriate or insufficient.
+  * **Inadequate choice**:  Providing a consent screen without adequate choices
+    does not form consent.
+  * **Misuse of data**:  An authorization server, resource server or client can
+    potentially use the data not according to the purpose that was agreed.
+  * **Collection minimization violation**:  A client asking for more data than
+    it absolutely needs to fulfill the purpose is violating the collection
+    minimization principle.
+  * **Unsolicited personal data from the resource server**:  Some bad resource
+    server implementations may return more data than requested. If the data is
+    personal data, then this would be a violation of privacy principles.
+  * **Data minimization violation**:  Any process that is processing more data
+    than it needs is violating the data minimization principle.
+  * **Authorization servers tracking end-users**:  Authorization servers
+    identifying what data is being provided to which client for which end-user.
+  * **End-user tracking by clients**:  Two or more clients correlating access
+    tokens or ID Tokens to track users.
+  * **Client misidentification by end-users**:  End-user misunderstands who the
+    client is due to a confusing representation of the client at the
+    authorization server's authorization page.
+  * **Insufficient understanding of the end-user granting access to data**: To
+    enhance the trust of the ecosystem, best practice is for the authorization
+    server to make clear what is included in the authorization request (for
+    example, what data will be released to the client).
+  * **Attacker observing personal data in authorization request/response**:  The authorization request or response might contain personal
+    data. In some jurisdictions, even security parameters can be considered
+    personal data. This profile aims to reduce the data sent in the
+    authorization request and response to an absolute minimum, but nonetheless,
+    an attacker might observe some data.
+  * **Data leak from authorization server**:  The authorization server generally
+    stores personal data. If it becomes compromised, this data can leak or be
+    modified.
+  * **Data leak from resource servers**:  Some resource servers store personal
+    data. If a resource server becomes compromised, this data can leak or be
+    modified.
+  * **Data leak from clients**:  Some clients store personal data. If the client
+    becomes compromised, this data can leak or be modified.
+
 
 # Acknowledgements
 
@@ -457,6 +554,24 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
     </author>
 </front>
 </reference>
+
+
+<reference anchor="FAPI1SEC" target="https://arxiv.org/abs/1901.11520">
+  <front>
+    <title>An Extensive Formal Security Analysis of the OpenID Financial-grade API</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>yes.com AG</organization>
+    </author>
+    <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="R." surname="Kuesters" fullname="Ralf Kuesters">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <date day="31" month="Jan" year="2019"/>
+  </front>
+</reference>
+
 
 # Notices
 
