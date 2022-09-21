@@ -351,6 +351,16 @@ Resource servers with the FAPI endpoints
 
 ## Security Considerations
 
+### Access token lifetimes
+
+The use of short lived access tokens (combined with refresh tokens) potentially reduces the time window for some attacks.
+
+The use of refresh tokens also allows clients to rotate their sender-constraining keys without loss of grants, either because of compromise of the key or as part of good security hygiene. 
+
+If issuing long-lived grants (e.g. days/weeks), the use of short lived (e.g. minutes/hours) access tokens combined with refresh tokens should be considered.
+
+There is a performance and resiliency trade off, setting the access token life time too short can increase the load on and dependency on the authorization server.
+
 ### DPoP Proof Replay
 
 An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
