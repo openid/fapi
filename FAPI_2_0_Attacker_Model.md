@@ -225,7 +225,12 @@ This attacker makes the client use a token endpoint that is not the one of the
 honest AS. This attacker can read and tamper with messages sent to and from this
 token endpoint that the client thinks as of an honest AS.
 
-Note: When the token endpoint address is obtained from an authoritative source and via a protected channel, e.g., through OAuth Metadata obtained from the honest AS, this attacker is not relevant.
+Important: This attacker is a model for misconfigured token endpoint URLs that
+were considered in FAPI 1.0. Since the FAPI 2.0 Security Profile mandates that
+the token endpoint address is obtained from an authoritative source and via a
+protected channel, i.e., through OAuth Metadata obtained from the honest AS,
+this attacker is not relevant in FAPI 2.0. The description here is kept for
+informative purposes only.
 
 ### Attackers at the Resource Server
 
