@@ -93,13 +93,11 @@ ISO Directive Part 2 [@!ISODIR2].
 These keywords are not used as dictionary terms such that
 any occurrence of them shall be interpreted as keywords
 and are not to be interpreted with their natural language meanings.
-
-
 # Message Signing Profile
 
-OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0
-Authorization Framework [@!RFC6749]. This Message Signing Profile aims to
-reach the non-repudiation goals laid out in the Attacker Model [@!attackermodel].
+OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
+Framework [@!RFC6749]. This Message Signing Profile aims to reach the security goals
+laid out in the Attacker Model [@!attackermodel] plus the non-repudiation goals listed below.
 
 All provisions of the [Security Profile] apply to the Message Signing Profile
 as well, with the extensions described in the following.
@@ -128,14 +126,33 @@ will be separate tests for the following:
 
 ## Non-Repudiation
 
+Beyond what is captured by the security goals and the attacker model in
+[@!attackermodel], parties could try to deny having sent a particular message,
+for example, a payment request. For this purpose, non-repudiation is needed.
+
 In the context of this specification, non-repudiation refers to the assurance that the owner of 
 a signature key pair that was capable of generating an existing signature corresponding to certain 
 data cannot convincingly deny having signed the data ([@!NIST.SP.800-133]).
 
+This is usually achieved by providing application-level signatures that can be
+stored together with the payload and meaningful metadata of a request or
+response. 
+
+The following messages are affected by this specification:
+
+  * NR1: Pushed Authorization Requests
+  * NR2: Authorization Requests (Front-Channel)
+  * NR3: Authorization Responses (Front-Channel)  
+  * NR4: Introspection Responses
+  * NR5: Resource Requests
+  * NR6: Resource Responses
 
 ### Signing Authorization Requests
 
-To support non-repudiation for NR1 in the [@!attackermodel] Authorization Requests can be signed.
+To support non-repudiation for NR1, Pushed Authorization Requests can be signed. 
+Because FAPI2 uses [@!RFC9126], NR2 is achieved by default when the Pushed Authorization request
+is signed.
+
 
 #### Requirements for Authorization Servers
 
@@ -159,7 +176,7 @@ Clients implementing FAPI2 authorization request signing
  
 ### Signing Authorization Responses
 
-To support non-repudiation for NR4 in the [@!attackermodel], Authorization Responses can be signed. 
+To support non-repudiation for NR3, Authorization Responses can be signed. 
 
 #### Requirements for Authorization Servers
 
@@ -183,7 +200,7 @@ Clients implementing FAPI2 authorization response signing
 
 ### Signing Introspection Responses
 
-To support non-repudiation for NR6 in the [@!attackermodel], Introspection Responses can be signed.
+To support non-repudiation for NR4, Introspection Responses can be signed.
 
 #### Requirements for Authorization Servers
 
@@ -201,7 +218,7 @@ Clients implementing FAPI2 introspection response signing
 
 ### HTTP Message Signing
 
-To support non-repudiation for NR7, NR8 and NR9 in the [@!attackermodel], HTTP requests and responses
+To support non-repudiation for NR5 and NR6, HTTP requests and responses
 can be signed.
 
 This profile supports HTTP Message Signing using the *HTTP Message Signatures* specification

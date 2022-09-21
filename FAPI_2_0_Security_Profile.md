@@ -192,6 +192,7 @@ Authorization servers
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
  1. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. shall issue authorization codes with a maximum lifetime of 60 seconds
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -265,11 +266,13 @@ Clients
  1. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
- 1. shall support refresh tokens and their rotation.
+ 1. shall support refresh tokens and their rotation
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
- 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop])
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
+ 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match
 
  **NOTE**: 
 
@@ -348,6 +351,16 @@ Resource servers with the FAPI endpoints
 
 ## Security Considerations
 
+### Access token lifetimes
+
+The use of short lived access tokens (combined with refresh tokens) potentially reduces the time window for some attacks.
+
+The use of refresh tokens also allows clients to rotate their sender-constraining keys without loss of grants, either because of compromise of the key or as part of good security hygiene. 
+
+If issuing long-lived grants (e.g. days/weeks), the use of short lived (e.g. minutes/hours) access tokens combined with refresh tokens should be considered.
+
+There is a performance and resiliency trade off, setting the access token life time too short can increase the load on and dependency on the authorization server.
+
 ### DPoP Proof Replay
 
 An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
@@ -424,6 +437,37 @@ where the pre-conditions may be met, the possible mitigations include:
    resource servers to verify the issuer matches the authorization server that originally issued the token (though
    there is no standardized method for clients to send the issuer to the resource server)
 3. Reducing the time window for the attack by using short lived access tokens alongside refresh tokens
+
+### Authorization Request Leaks lead to CSRF
+
+An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
+Authorization Server, receive an authorization code and redirect the honest user via a CSRF attack to 
+the honest client but with the attacker's authorization code. This results in the user accessing the 
+attackers resources, thus breaking session integrity.
+
+It is important to note that all practically used redirect-based flows are
+susceptible to this attack, as redirection does not allow for a tight coupling
+of the session between the user's browser and the client on the one side and the
+session between the user's browser and the authorization server on the other
+side.  This attack, however, requires a strong attacker who can read
+authorization requests and perform a CSRF attack in a short time window. 
+
+Possible mitigations for this are:
+
+1. Requiring the Authorization Server to only accept a `request_uri` once. This
+   will prevent attacks where the attacker was able to read the authorization
+   request, but not use the `request_uri` before the honest user does so. 
+2. Requiring the Client to only make one authorization code grant call for each
+   authorization endpoint call. This will prevent attacks where the attacker was
+   unable to send the authorization response before the honest user does so.
+3. Reducing the lifetime of the authorization code - this will reduce the window
+   in which the CSRF attack has to be performed.
+
+An attacker that has the option to block a user's request completely can
+circumvent the first and second defenses. In practice, however, attackers can
+often read an authorization request (e.g., from a log file or via some other
+side-channel), but not block the request from being sent. If the victim's
+internet connection is slow, this might increase the attacker's chances.
 
 # Privacy considerations
 
