@@ -64,6 +64,26 @@ This document specifies the requirements for confidential Clients to securely ob
 OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
 Resource Servers. 
 
+# Normative references
+
+The following documents are referred to in the text in such a way that some or all of their content
+constitutes requirements of this document. For dated references, only the edition cited applies. For
+undated references, the latest edition of the referenced document (including any amendments) applies.
+
+* [@!RFC6125]
+* [@!RFC7525]
+* [@!OIDD] 
+* [@!RFC8414]
+* [@!OIDC]
+* [@!RFC6749]
+* [@!RFC8705]
+* [@!I-D.ietf-oauth-dpop]
+* [@!RFC9126]
+* [@!RFC7636]
+* [@!RFC8252]
+* [@!RFC6750]
+
+
 # Terms and definitions
 
 For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
