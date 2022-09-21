@@ -265,11 +265,13 @@ Clients
  1. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
     value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
     The issuer identifier value shall be sent as a string not as an item in an array.
- 1. shall support refresh tokens and their rotation.
+ 1. shall support refresh tokens and their rotation
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
- 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop])
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
+ 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match
 
  **NOTE**: 
 
