@@ -425,6 +425,37 @@ where the pre-conditions may be met, the possible mitigations include:
    there is no standardized method for clients to send the issuer to the resource server)
 3. Reducing the time window for the attack by using short lived access tokens alongside refresh tokens
 
+### Authorization Request Leaks lead to CSRF
+
+An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
+Authorization Server, receive an authorization code and redirect the honest user via a CSRF attack to 
+the honest client but with the attacker's authorization code. This results in the user accessing the 
+attackers resources, thus breaking session integrity.
+
+It is important to note that all practically used redirect-based flows are
+susceptible to this attack, as redirection does not allow for a tight coupling
+of the session between the user's browser and the client on the one side and the
+session between the user's browser and the authorization server on the other
+side.  This attack, however, requires a strong attacker who can read
+authorization requests and perform a CSRF attack in a short time window. 
+
+Possible mitigations for this are:
+
+1. Requiring the Authorization Server to only accept a `request_uri` once. This
+   will prevent attacks where the attacker was able to read the authorization
+   request, but not use the `request_uri` before the honest user does so. 
+2. Requiring the Client to only make one authorization code grant call for each
+   authorization endpoint call. This will prevent attacks where the attacker was
+   unable to send the authorization response before the honest user does so.
+3. Reducing the lifetime of the authorization code - this will reduce the window
+   in which the CSRF attack has to be performed.
+
+An attacker that has the option to block a user's request completely can
+circumvent the first and second defenses. In practice, however, attackers can
+often read an authorization request (e.g., from a log file or via some other
+side-channel), but not block the request from being sent. If the victim's
+internet connection is slow, this might increase the attacker's chances.
+
 # Privacy considerations
 
 There are many factors to be considered in terms of privacy when implementing
