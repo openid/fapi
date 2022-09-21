@@ -192,6 +192,7 @@ Authorization servers
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed.
  1. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
+ 1. shall issue authorization codes with a maximum lifetime of 60 seconds
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
