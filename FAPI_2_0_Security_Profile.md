@@ -193,6 +193,7 @@ Authorization servers
      the previous refresh token) will succeed.
  1. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
  1. shall issue authorization codes with a maximum lifetime of 60 seconds
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by section 10.1 of [@!I-D.ietf-oauth-dpop]).
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -280,6 +281,10 @@ This profile may be used by Confidential Clients on a user-controlled device whe
 clock may not be accurate, this may cause `private_key_jwt` client authentication to fail. 
 In such circumstances a Client should consider using the HTTP Date header returned from the 
 server to synchronise it's own clock when generating client assertions.
+
+**NOTE**:
+
+Although Authorization Servers are required to support "Authorization Code Binding to DPoP Key" (as defined by section 10.1 of [@!I-D.ietf-oauth-dpop]), clients are not required to use it.
 
 
 #### Authorization Code Flow
