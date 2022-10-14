@@ -66,23 +66,7 @@ Resource Servers.
 
 # Normative references
 
-The following documents are referred to in the text in such a way that some or all of their content
-constitutes requirements of this document. For dated references, only the edition cited applies. For
-undated references, the latest edition of the referenced document (including any amendments) applies.
-
-* [@!RFC6125]
-* [@!RFC7525]
-* [@!OIDD] 
-* [@!RFC8414]
-* [@!OIDC]
-* [@!RFC6749]
-* [@!RFC8705]
-* [@!I-D.ietf-oauth-dpop]
-* [@!RFC9126]
-* [@!RFC7636]
-* [@!RFC8252]
-* [@!RFC6750]
-
+See section 8 for normative references.
 
 # Terms and definitions
 
