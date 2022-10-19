@@ -83,21 +83,22 @@ regards to authorization and, when OpenID Connect is used, authentication, are
 defined. 
 
 ## Authorization
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker can access
-protected resources.**
+The FAPI 2.0 Security Profile shall aim to ensure that **no attacker can
+access protected resources** other than his own.
 
 The access token is the ultimate credential for access to resources in
 OAuth. Therefore, this security goal is fulfilled if no attacker can
-successfully obtain and use an access token.
+successfully obtain and use an access token for access to protected
+resources other than his own.
 
 ## Authentication
 
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker is able to
-log in at a client under the identity of a user.**
+The FAPI 2.0 Security Profile shall aim to ensure that **no attacker is
+able to log in at a client under the identity of another user.**
 
 The ID token is the credential for authentication in OpenID Connect.
-This security goal therefore is fulfilled if no attacker can obtain
-and use an ID token carrying the identity of a user for login.
+This security goal therefore is fulfilled if no attacker can obtain and
+use an ID token identifying another user for login.
 
 
 ## Session Integrity
@@ -124,9 +125,9 @@ attackers are assumed very powerful, including having access to otherwise
 encrypted communication.
 
 This model does intentionally not define concrete threats. For example, an
-attacker that has the ability to eavesdrop on an authorization response might be
+attacker that has the ability to eavesdrop on an authorization request might be
 able to use this capability for various types of attacks posing different
-threats, e.g., session swapping or authorization code injection. In a complex
+threats, e.g., injecting a modified authorization request. In a complex
 protocol like OAuth or OpenID Connect, however, yet unknown types of threats and
 variants of existing threats can emerge, as has been shown in the past. In order
 to not overlook any potential attacks, FAPI 2.0 therefore aims not to address
@@ -179,7 +180,7 @@ protocols flows as a normal user. Can use arbitrary tools (e.g., browser
 developer tools, custom software, local interception proxies) on their own
 endpoints to tamper with messages and assemble new messages. Can send links to
 honest users that are then visited by these users. This means that the web
-attacker has the ability to cause, arbitrary requests from users' browsers, as
+attacker has the ability to cause arbitrary requests from users' browsers, as
 long as the contents are known to the attacker.
 
 Cannot intercept or block messages sent between other parties, and cannot break
@@ -231,11 +232,11 @@ for URLs), on all operating systems through the browser history, or due to
 Cross-Site Scripting on the AS. There have been cases where anti-virus software
 intercepts TLS connections and stores/analyzes URLs.
 
-### A3b - Read Authorization Response
-
-The capabilities of the web attacker, but can also read the authorization
-response. This can happen e.g., due to the URL leaking in proxy logs, web
-browser logs, web browser history, or on mobile operating systems.
+Note: An attacker that can read the authorization response is not
+considered here, as, with current browser technology, such an attacker
+can undermine most security protocols. This is discussed
+in "Browser Swapping Attacks" in the Security Considerations in the FAPI
+2.0 Security Profile.
 
 ## Attackers at the Token Endpoint
 

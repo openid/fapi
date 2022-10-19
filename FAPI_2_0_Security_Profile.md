@@ -480,6 +480,46 @@ often read an authorization request (e.g., from a log file or via some other
 side-channel), but not block the request from being sent. If the victim's
 internet connection is slow, this might increase the attacker's chances.
 
+### Browser-Swapping Attacks
+
+An attacker that has access to the authorization response sent through a
+victim's browser can perform a browser-swapping attack as follows:
+
+ 1. The attacker starts a new flow using his own browser and some
+    client. The client sends a pushed authorization request to the
+    authorization server and receives a `request_uri` in the response.
+    The client then redirects the attacker's browser to the
+    authorization server.
+ 2. The attacker intercepts this redirection and forwards the URL to a
+    victim. For example, the attacker can embed a link to this URL in a
+    phishing website, an email, or a QR code.
+ 3. The victim may be tricked into believing that an
+    authentication/authorization is legitimately required. The victim
+    therefore authenticates at the authorization server and may grant
+    the client access to their data.
+ 4. The attacker can now intercept the authorization response in the
+    victim's browser and forward it to the client using his own browser. 
+ 5. The client will recognize that the authorization response belongs to
+    the same browser that initially started the transaction (the
+    attacker's browser) and exchange the authorization code for an
+    access token and/or obtain user information.
+ 6. Via the client, the attacker now has access to the user's resources
+    or is logged in as the user.
+
+
+With currently deployed technology, there is no way to completely
+prevent this attack if the authorization response leaks to an attacker
+in any redirect-based protocol. It is therefore important to keep the
+authorization response confidential. The requirements in this security
+profile are designed to achieve that, e.g., by disallowing open
+redirectors and requiring that the `redirect_uri` is sent via an
+authenticated and encrypted channel, the pushed authorization request,
+ensuring that the `redirect_uri` cannot be manipulated by the attacker. 
+
+Implementers need to consider the confidentiality of the authorization
+response critical when designing their systems, in particular when this
+security profile is used in other contexts, e.g., mobile applications.
+
 # Privacy considerations
 
 There are many factors to be considered in terms of privacy when implementing
