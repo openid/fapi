@@ -234,13 +234,19 @@ For the Authorization Code flow, Authorization servers
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of between 5 and 600 seconds. 
+     of less than 600 seconds.
 
 
  **NOTE**: If replay identification of the authorization code is not possible, it
 is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used
+
+**NOTE**: The `request_uri` `expires_in` time must be sufficient for
+the user's device to receive the link and the user to complete the
+process of opening the link. In many cases (poor network connection or
+where the user has to manually select the browser to be used) this can
+easily take over 30 seconds.
 
 #### Returning Authenticated User's Identifier
 
