@@ -64,6 +64,10 @@ This document specifies the requirements for confidential Clients to securely ob
 OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
 Resource Servers. 
 
+# Normative references
+
+See section 8 for normative references.
+
 # Terms and definitions
 
 For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
