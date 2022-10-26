@@ -64,6 +64,10 @@ This document specifies the requirements for confidential Clients to securely ob
 OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
 Resource Servers. 
 
+# Normative references
+
+See section 8 for normative references.
+
 # Terms and definitions
 
 For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
@@ -234,13 +238,19 @@ For the Authorization Code flow, Authorization servers
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of between 5 and 600 seconds. 
+     of less than 600 seconds.
 
 
  **NOTE**: If replay identification of the authorization code is not possible, it
 is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
 control indicator of when to clear the authorization code cache if one is used
+
+**NOTE**: The `request_uri` `expires_in` time must be sufficient for
+the user's device to receive the link and the user to complete the
+process of opening the link. In many cases (poor network connection or
+where the user has to manually select the browser to be used) this can
+easily take over 30 seconds.
 
 #### Returning Authenticated User's Identifier
 
@@ -350,7 +360,7 @@ Resource servers with the FAPI endpoints
 | response types `code id_token` or `code`             | response type `code`                                                    | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
 | ID Token as detached signature                       | PKCE                                                                       | ID token does not need to serve as a detached signature                                                                                 |
 | potentially encrypted ID Tokens in the front channel | No encryption and no ID Tokens in the front channel                                                 | ID Tokens only exchanged in back channel                                                                                                |
-| `nbf` & `exp` claims in request object               | `request_uri` has lifetime under 300 seconds                            | Prevents pre-generation of requests                                                                                                     |
+| `nbf` & `exp` claims in request object               | `request_uri` has limited lifetime                                      | Prevents pre-generation of requests                                                                                                     |
 | `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                                                                       | Not relevant to the core of the security profile                                                                                        |
 | MTLS for sender-constrained access tokens            | MTLS or DPoP                                                            | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
@@ -473,6 +483,46 @@ circumvent the first and second defenses. In practice, however, attackers can
 often read an authorization request (e.g., from a log file or via some other
 side-channel), but not block the request from being sent. If the victim's
 internet connection is slow, this might increase the attacker's chances.
+
+### Browser-Swapping Attacks
+
+An attacker that has access to the authorization response sent through a
+victim's browser can perform a browser-swapping attack as follows:
+
+ 1. The attacker starts a new flow using his own browser and some
+    client. The client sends a pushed authorization request to the
+    authorization server and receives a `request_uri` in the response.
+    The client then redirects the attacker's browser to the
+    authorization server.
+ 2. The attacker intercepts this redirection and forwards the URL to a
+    victim. For example, the attacker can embed a link to this URL in a
+    phishing website, an email, or a QR code.
+ 3. The victim may be tricked into believing that an
+    authentication/authorization is legitimately required. The victim
+    therefore authenticates at the authorization server and may grant
+    the client access to their data.
+ 4. The attacker can now intercept the authorization response in the
+    victim's browser and forward it to the client using his own browser. 
+ 5. The client will recognize that the authorization response belongs to
+    the same browser that initially started the transaction (the
+    attacker's browser) and exchange the authorization code for an
+    access token and/or obtain user information.
+ 6. Via the client, the attacker now has access to the user's resources
+    or is logged in as the user.
+
+
+With currently deployed technology, there is no way to completely
+prevent this attack if the authorization response leaks to an attacker
+in any redirect-based protocol. It is therefore important to keep the
+authorization response confidential. The requirements in this security
+profile are designed to achieve that, e.g., by disallowing open
+redirectors and requiring that the `redirect_uri` is sent via an
+authenticated and encrypted channel, the pushed authorization request,
+ensuring that the `redirect_uri` cannot be manipulated by the attacker. 
+
+Implementers need to consider the confidentiality of the authorization
+response critical when designing their systems, in particular when this
+security profile is used in other contexts, e.g., mobile applications.
 
 # Privacy considerations
 
