@@ -255,17 +255,11 @@ informative purposes only.
 
 ## Attackers at the Resource Server
 
-### A7 - Read Resource Requests and Responses
+### A7 - Read Resource Requests
 
 The capabilities of the web attacker, but this attacker can also read requests
-sent to and from the resource server, for example because the attacker can read
+sent to the resource server after they have been processed by the resource server, for example because the attacker can read
 TLS intercepting proxy logs on the RS's side.
-
-### A8 - Tamper with Resource Responses
-
-The capabilities of A7, but this attacker can also tamper with responses from
-the resource servers (e.g., a compromised reverse proxy in front of the resource
-server). 
 
 
 
