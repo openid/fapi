@@ -255,17 +255,11 @@ informative purposes only.
 
 ## Attackers at the Resource Server
 
-### A7 - Read Resource Requests and Responses
+### A7 - Read Resource Requests
 
 The capabilities of the web attacker, but this attacker can also read requests
-sent to and from the resource server, for example because the attacker can read
+sent to the resource server after they have been processed by the resource server, for example because the attacker can read
 TLS intercepting proxy logs on the RS's side.
-
-### A8 - Tamper with Resource Responses
-
-The capabilities of A7, but this attacker can also tamper with responses from
-the resource servers (e.g., a compromised reverse proxy in front of the resource
-server). 
 
 
 
@@ -279,14 +273,14 @@ model above, it is important to note the following limitations:
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
 protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
-under certain conditions. The attacker model, however, aims to take breaks in
+under certain conditions. The attacker model, however, takes some breaks in
 the end-to-end security provided by TLS into account by already including the
-respective attacker models (A3a/A3b/A5/A7/A8). Similarly, many other attacks on
+respective attacker models (A3a/A5/A7). Similarly, many other attacks on
 lower layers are already accounted for, for example:
 
  * DNS spoofing attacks are covered by the network attacker (A2)
- * Leakages of authorization request or response data, e.g., through
-   misconfigured URLs or system/firewall logs, are covered by A3a and A3b
+ * Leakages of authorization request data, e.g., through
+   misconfigured URLs or system/firewall logs, are covered by A3a
  * Directing users to malicious websites is within the capabilities of the web
    attacker (A1)
 
