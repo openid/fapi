@@ -273,14 +273,14 @@ model above, it is important to note the following limitations:
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
 protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
-under certain conditions. The attacker model, however, aims to take breaks in
+under certain conditions. The attacker model, however, takes some breaks in
 the end-to-end security provided by TLS into account by already including the
 respective attacker models (A3a/A5/A7). Similarly, many other attacks on
 lower layers are already accounted for, for example:
 
  * DNS spoofing attacks are covered by the network attacker (A2)
  * Leakages of authorization request or response data, e.g., through
-   misconfigured URLs or system/firewall logs, are covered by A3a and A3b
+   misconfigured URLs or system/firewall logs, are covered by A3a
  * Directing users to malicious websites is within the capabilities of the web
    attacker (A1)
 
