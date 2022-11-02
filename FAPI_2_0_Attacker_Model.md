@@ -279,7 +279,7 @@ respective attacker models (A3a/A5/A7). Similarly, many other attacks on
 lower layers are already accounted for, for example:
 
  * DNS spoofing attacks are covered by the network attacker (A2)
- * Leakages of authorization request or response data, e.g., through
+ * Leakages of authorization request data, e.g., through
    misconfigured URLs or system/firewall logs, are covered by A3a
  * Directing users to malicious websites is within the capabilities of the web
    attacker (A1)
