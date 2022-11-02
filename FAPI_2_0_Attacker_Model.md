@@ -83,7 +83,7 @@ regards to authorization and, when OpenID Connect is used, authentication, are
 defined. 
 
 ## Authorization
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker can
+The FAPI 2.0 Security Profile aims to ensure that **no attacker can
 access protected resources** other than their own.
 
 The access token is the ultimate credential for access to resources in
@@ -93,7 +93,7 @@ resources other than their own.
 
 ## Authentication
 
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker is
+The FAPI 2.0 Security Profile aims to ensure that **no attacker is
 able to log in at a client under the identity of another user.**
 
 The ID token is the credential for authentication in OpenID Connect.
@@ -110,10 +110,10 @@ against by using “state” in OAuth) and session swapping attacks.
 
 In detail:
 
-  * For authentication: The FAPI 2.0 Security Profile shall aim to ensure that
+  * For authentication: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to be logged in under the identity of
     the attacker.**
-  * For authorization: The FAPI 2.0 Security Profile shall aim to ensure that
+  * For authorization: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to use resources of the attacker.**
 
 # Attacker Model 
