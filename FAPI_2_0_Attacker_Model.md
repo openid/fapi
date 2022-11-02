@@ -84,12 +84,12 @@ defined.
 
 ## Authorization
 The FAPI 2.0 Security Profile shall aim to ensure that **no attacker can
-access protected resources** other than his own.
+access protected resources** other than their own.
 
 The access token is the ultimate credential for access to resources in
 OAuth. Therefore, this security goal is fulfilled if no attacker can
 successfully obtain and use an access token for access to protected
-resources other than his own.
+resources other than their own.
 
 ## Authentication
 

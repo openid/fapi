@@ -506,7 +506,7 @@ internet connection is slow, this might increase the attacker's chances.
 An attacker that has access to the authorization response sent through a
 victim's browser can perform a browser-swapping attack as follows:
 
- 1. The attacker starts a new flow using his own browser and some
+ 1. The attacker starts a new flow using their own browser and some
     client. The client sends a pushed authorization request to the
     authorization server and receives a `request_uri` in the response.
     The client then redirects the attacker's browser to the
@@ -519,7 +519,7 @@ victim's browser can perform a browser-swapping attack as follows:
     therefore authenticates at the authorization server and may grant
     the client access to their data.
  4. The attacker can now intercept the authorization response in the
-    victim's browser and forward it to the client using his own browser. 
+    victim's browser and forward it to the client using their own browser. 
  5. The client will recognize that the authorization response belongs to
     the same browser that initially started the transaction (the
     attacker's browser) and exchange the authorization code for an
