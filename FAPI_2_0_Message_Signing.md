@@ -147,14 +147,14 @@ The following messages are affected by this specification:
   * NR5: Resource Requests
   * NR6: Resource Responses
 
-### Signing Authorization Requests
+## Signing Authorization Requests
 
 To support non-repudiation for NR1, Pushed Authorization Requests can be signed. 
 Because FAPI2 uses [@!RFC9126], NR2 is achieved by default when the Pushed Authorization request
 is signed.
 
 
-#### Requirements for Authorization Servers
+### Requirements for Authorization Servers
 
 Authorization servers implementing FAPI2 authorization request signing
 
@@ -164,7 +164,7 @@ Authorization servers implementing FAPI2 authorization request signing
  3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
  4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 
-#### Requirements for Clients
+### Requirements for Clients
 
 Clients implementing FAPI2 authorization request signing
 
@@ -174,11 +174,11 @@ Clients implementing FAPI2 authorization request signing
  3. shall send a `nbf` claim in the request object;
  4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
  
-### Signing Authorization Responses
+## Signing Authorization Responses
 
 To support non-repudiation for NR3, Authorization Responses can be signed. 
 
-#### Requirements for Authorization Servers
+### Requirements for Authorization Servers
 
 Authorization servers implementing FAPI2 authorization response signing
 
@@ -190,7 +190,7 @@ parameter defined by [@!RFC9207] inside the JWT. This is because [@!RFC9207] def
 to be an authorization response parameter, and [@!JARM] section 4.1 requires all authorization 
 response parameters to be inside the JWT.
 
-#### Requirements for Clients
+### Requirements for Clients
 
 Clients implementing FAPI2 authorization response signing
 
@@ -198,17 +198,17 @@ Clients implementing FAPI2 authorization response signing
  2. shall verify signed authorization responses according to [@!JARM]
 
 
-### Signing Introspection Responses
+## Signing Introspection Responses
 
 To support non-repudiation for NR4, Introspection Responses can be signed.
 
-#### Requirements for Authorization Servers
+### Requirements for Authorization Servers
 
 Authorization servers implementing FAPI2 introspection response signing
 
  1. shall sign introspection responses that are issued in JWT format according to [@I-D.ietf-oauth-jwt-introspection-response]
  
-#### Requirements for Clients
+### Requirements for Clients
 
 Clients implementing FAPI2 introspection response signing
 
@@ -216,7 +216,7 @@ Clients implementing FAPI2 introspection response signing
  2. shall verify the signed token introspection responses
 
 
-### HTTP Message Signing
+## HTTP Message Signing
 
 To support non-repudiation for NR5 and NR6, HTTP requests and responses
 can be signed.
@@ -224,46 +224,84 @@ can be signed.
 This profile supports HTTP Message Signing using the *HTTP Message Signatures* specification
 being developed by the IETF HTTP Working Group.
 
-#### Requirements for Clients
 
-Clients implementing HTTP Message Signing
+### Requirements for signing and verifying resource requests
 
- 1. shall create an HTTP Message Signature as described in [@I-D.ietf-httpbis-message-signatures].
- 1. shall include `@method` (the method used in the HTTP request) in the signature input
- 1. shall include `date` (the HTTP date header value) in the signature input
- 1. shall include `@target-uri` (the full request URI of the HTTP request) in the signature input
- 1. when the message contains a request body, include the `content-digest` header as defined in 
-    [@I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature input.
+#### Clients
+
+Clients sending signed resource requests act in the role of "signer" as defined by 
+[@I-D.ietf-httpbis-message-signatures]. The signer has the following requirements:
+
+1. shall create an HTTP Message Signature as described in [@I-D.ietf-httpbis-message-signatures]
+1. shall include `@method` (the method used in the HTTP request) in the signature
+1. shall include `@target-uri` (the full request URI of the HTTP request) in the signature
+1. shall include the `created` parameter (the signature creation time) in the signature
+1. shall include the `tag` parameter with a value of `fapi-2-request` in the signature
+1. shall include the `Authorization` header in the signature
+1. when DPoP is in use, shall include the `DPoP` header in the signature
+1. when the message contains a request body, shall include the `content-digest` header as defined in 
+    [@I-D.ietf-httpbis-digest-headers] in the request, and include that header in the signature.
     Content-encoding agnostic digest methods (such as sha-256) should be used.
- 1. shall retrieve the valid public key for the Resource Server.
- 1. shall accept and verify the signature in the response as described in [@I-D.ietf-httpbis-message-signatures]
-
-**NOTE:** This specification doesn't specify the exact means by which a Client can retrieve
- the key for the Resource Server. Together with the identity of the Resource Server and the 
- `keyId` in the `Signature-Input` field, the Client can retrieve the key from a trusted third 
- party or by some other means. 
  
-#### Requirements for Resource Servers
+#### Resource Servers 
 
-The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that perform sensitive actions and return protected information for the resource owner associated with the submitted access token.
+Resource servers receiving signed resource requests act in the role of "verifier" as 
+defined by [@I-D.ietf-httpbis-message-signatures]. The verifier has the following requirements:
 
-Resource servers with FAPI endpoints implementing HTTP Message Signing
+1. shall retrieve the valid public key for the client
+1. shall verify the signature received from the Client as described in [@I-D.ietf-httpbis-message-signatures].
+1. shall reject requests with missing or invalid signatures using HTTP Status Code 401
+1. shall reject requests which don't have a tag parameter with the value of `fapi-2-request` in the signature
+1. shall reject requests with signatures that are missing `@method`, `@target-uri`, or `Authorization` in the signature
+1. shall reject requests with signatures that are missing the `created` parameter or have a `created` value 
+   that is greater than an acceptable range. (1 minute is recommended)
+1. when a `DPoP` header is present in the request, shall reject requests that are missing `DPoP` in the signature
+1. when the request contains a request body, shall reject requests that are missing `content-digest` in the signature
 
- 1. shall retrieve the valid public key for the client
- 1. shall verify the signature received from the Client as described in [@I-D.ietf-httpbis-message-signatures].
- 1. shall reject requests with missing or invalid signatures using HTTP Status Code 401
- 1. shall create an HTTP Message Signature for the response as described in [@I-D.ietf-httpbis-message-signatures].
- 1. shall cryptographically link the response to the request by including the request signature in the response signature input by means of the `req` boolean flag defined in 2.3 in [@I-D.ietf-httpbis-message-signatures]
- 1. shall include the `content-digest` header as defined in 
-    [@I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature input. Content-encoding agnostic digest methods (such as sha-256) should be used.
- 1. shall include `@status` (the status code of the response) in the signature input
- 1. shall include `date` (the HTTP date header value) in the signature input
 
- **NOTE:** This specification doesn't specify the exact means by which a Resource Server can retrieve
- the key for the Client. The Resource Server can obtain an identifier for the Client either from a 
- mutual TLS cerficiate or from a JWT access token or from a token introspection response. With a Client
- identifier and the `keyId` in the `Signature-Input` field, the Resource Server can retrieve the key from 
- a trusted third party or by some other means.
+**NOTE:** This specification doesn't specify the exact means by which a Resource Server can retrieve
+the key for the Client. The Resource Server can obtain an identifier for the Client either from a 
+mutual TLS cerficiate or from a JWT access token or from a token introspection response. With a Client
+identifier and the `keyid` in the `Signature-Input` field, the Resource Server can retrieve the key from 
+a trusted third party or by some other means.
+ 
+ 
+### Requirements for signing and verifying resource responses
+
+#### Resource Servers 
+
+Resource servers responding with a signed resource response act in the role of "signer" as defined 
+by [@I-D.ietf-httpbis-message-signatures]. The signer has the following requirements:
+
+1. shall create an HTTP Message Signature for the response as described in [@I-D.ietf-httpbis-message-signatures].
+1. shall cryptographically link the response to the request by including the request signature in the response signature input by means of the `req` boolean flag defined in 2.4 in [@I-D.ietf-httpbis-message-signatures] on the signature field  of the request that caused the response
+1. shall include `@status` (the status code of the response) in the signature
+1. shall include the `created` parameter (the signature creation time) in the signature
+1. shall include the `tag` parameter with a value of `fapi-2-response` in the signature
+1. when the response contains a response body, shall include the `content-digest` header as defined in 
+    [@I-D.ietf-httpbis-digest-headers] in the response, and include that header in the signature. Content-encoding agnostic digest methods (such as sha-256) should be used. 
+
+ 
+#### Clients
+
+Clients receiving signed resource responses act in the role of "verifier" as 
+defined by [@I-D.ietf-httpbis-message-signatures]. The verifier has the following requirements:
+
+1. shall retrieve the valid public key for the Resource Server.
+1. shall accept and verify the signature in the response as described in [@I-D.ietf-httpbis-message-signatures]
+1. shall verify that `@status` and `created` are included in the signature
+1. if the response contains a body, shall verify that `content-digest` is in the signature
+1. shall verify that the signature contains the tag parameter with a value of `fapi-2-response`
+
+ 
+**NOTE:** This specification doesn't specify the exact means by which a Client can retrieve
+the key for the Resource Server. Together with the identity of the Resource Server and the 
+`keyid` in the `Signature-Input` field, the Client can retrieve the key from a trusted third 
+party or by some other means. 
+
+**NOTE:** As noted in [@I-D.ietf-httpbis-message-signatures] section 2.4, the Client will need to 
+keep the request signature value in order to verify the response signature.
+
 
 ## MTLS Protection of all endpoints
 
