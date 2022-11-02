@@ -113,6 +113,23 @@ We are not currently aware of any mechanisms that would allow public clients
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
 
+### Profiling this specification
+
+This specification is a general purpose high security profile of
+OAuth 2.0 that has been proved by formal analysis to meet the stated
+attacker model.
+
+This specification, and the underlying specifications, leave a number
+of choices open to implementors, deployers and/or ecosystems - with
+knowledge of the exact use cases, further reducing the number of
+choices may further improve security, or make implementation or
+interoperability easier.
+
+However, for a profile to be compliant with this specification, the
+profile shall not remove or override mandatory behaviours - as doing
+so is likely to invalidate the formal security analysis and reduce
+security in potentially unpredictable ways.
+
 ## Network Layer Protections
 
 ### Requirements for all endpoints
