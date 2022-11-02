@@ -275,7 +275,7 @@ authentication on certain protocol layers. As described above, attacks on lower
 protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
 under certain conditions. The attacker model, however, aims to take breaks in
 the end-to-end security provided by TLS into account by already including the
-respective attacker models (A3a/A3b/A5/A7/A8). Similarly, many other attacks on
+respective attacker models (A3a/A5/A7). Similarly, many other attacks on
 lower layers are already accounted for, for example:
 
  * DNS spoofing attacks are covered by the network attacker (A2)
