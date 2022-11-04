@@ -83,17 +83,17 @@ regards to authorization and, when OpenID Connect is used, authentication, are
 defined. 
 
 ## Authorization
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker can
-access protected resources** other than his own.
+The FAPI 2.0 Security Profile aims to ensure that **no attacker can
+access protected resources** other than their own.
 
 The access token is the ultimate credential for access to resources in
 OAuth. Therefore, this security goal is fulfilled if no attacker can
 successfully obtain and use an access token for access to protected
-resources other than his own.
+resources other than their own.
 
 ## Authentication
 
-The FAPI 2.0 Security Profile shall aim to ensure that **no attacker is
+The FAPI 2.0 Security Profile aims to ensure that **no attacker is
 able to log in at a client under the identity of another user.**
 
 The ID token is the credential for authentication in OpenID Connect.
@@ -110,10 +110,10 @@ against by using “state” in OAuth) and session swapping attacks.
 
 In detail:
 
-  * For authentication: The FAPI 2.0 Security Profile shall aim to ensure that
+  * For authentication: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to be logged in under the identity of
     the attacker.**
-  * For authorization: The FAPI 2.0 Security Profile shall aim to ensure that
+  * For authorization: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to use resources of the attacker.**
 
 # Attacker Model 
@@ -255,17 +255,11 @@ informative purposes only.
 
 ## Attackers at the Resource Server
 
-### A7 - Read Resource Requests and Responses
+### A7 - Read Resource Requests
 
 The capabilities of the web attacker, but this attacker can also read requests
-sent to and from the resource server, for example because the attacker can read
+sent to the resource server after they have been processed by the resource server, for example because the attacker can read
 TLS intercepting proxy logs on the RS's side.
-
-### A8 - Tamper with Resource Responses
-
-The capabilities of A7, but this attacker can also tamper with responses from
-the resource servers (e.g., a compromised reverse proxy in front of the resource
-server). 
 
 
 
@@ -279,14 +273,14 @@ model above, it is important to note the following limitations:
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
 protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
-under certain conditions. The attacker model, however, aims to take breaks in
+under certain conditions. The attacker model, however, takes some breaks in
 the end-to-end security provided by TLS into account by already including the
-respective attacker models (A3a/A3b/A5/A7/A8). Similarly, many other attacks on
+respective attacker models (A3a/A5/A7). Similarly, many other attacks on
 lower layers are already accounted for, for example:
 
  * DNS spoofing attacks are covered by the network attacker (A2)
- * Leakages of authorization request or response data, e.g., through
-   misconfigured URLs or system/firewall logs, are covered by A3a and A3b
+ * Leakages of authorization request data, e.g., through
+   misconfigured URLs or system/firewall logs, are covered by A3a
  * Directing users to malicious websites is within the capabilities of the web
    attacker (A1)
 

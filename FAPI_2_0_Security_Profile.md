@@ -113,6 +113,23 @@ We are not currently aware of any mechanisms that would allow public clients
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
 
+### Profiling this specification
+
+This specification is a general purpose high security profile of
+OAuth 2.0 that has been proved by formal analysis to meet the stated
+attacker model.
+
+This specification, and the underlying specifications, leave a number
+of choices open to implementors, deployers and/or ecosystems - with
+knowledge of the exact use cases, further reducing the number of
+choices may further improve security, or make implementation or
+interoperability easier.
+
+However, for a profile to be compliant with this specification, the
+profile shall not remove or override mandatory behaviours - as doing
+so is likely to invalidate the formal security analysis and reduce
+security in potentially unpredictable ways.
+
 ## Network Layer Protections
 
 ### Requirements for all endpoints
@@ -489,7 +506,7 @@ internet connection is slow, this might increase the attacker's chances.
 An attacker that has access to the authorization response sent through a
 victim's browser can perform a browser-swapping attack as follows:
 
- 1. The attacker starts a new flow using his own browser and some
+ 1. The attacker starts a new flow using their own browser and some
     client. The client sends a pushed authorization request to the
     authorization server and receives a `request_uri` in the response.
     The client then redirects the attacker's browser to the
@@ -502,7 +519,7 @@ victim's browser can perform a browser-swapping attack as follows:
     therefore authenticates at the authorization server and may grant
     the client access to their data.
  4. The attacker can now intercept the authorization response in the
-    victim's browser and forward it to the client using his own browser. 
+    victim's browser and forward it to the client using their own browser. 
  5. The client will recognize that the authorization response belongs to
     the same browser that initially started the transaction (the
     attacker's browser) and exchange the authorization code for an
