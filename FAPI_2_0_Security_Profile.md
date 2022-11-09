@@ -152,13 +152,17 @@ to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records
 
 ### Requirements for endpoints not used by web browsers
 
- 1. when using TLS 1.2, only the following 4 cipher suites shall be permitted:
-    * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
-    * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
-    * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
-    * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
- 2. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
+ 1. when using TLS 1.2, the server shall only permit the cipher suites listed in (#tls-12-ciphers)
+ 2. when using TLS 1.2, the client should only permit the cipher suites listed in (#tls-12-ciphers)
+ 3. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
  key lengths of at least 2048 bits are required.
+
+#### TLS 1.2 permitted cipher suites {#tls-12-ciphers}
+
+  * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
+  * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
+  * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
+  * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
 
 ### Requirements for endpoints used by web browsers
 
