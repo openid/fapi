@@ -334,14 +334,14 @@ Content-Type: application/json
             "https://rs.example.com/api1"
          ]
       },
-     {
+      {
          "scope":"write",
          "resource":[
             "https://rs.example.com/api2",
             "https://rs.example.com/api3"
          ]
-      },
-     {
+       },
+      {
          "scope":"openid"
       }
    ],
