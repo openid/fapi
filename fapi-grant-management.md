@@ -329,11 +329,18 @@ Content-Type: application/json
 {
    "scopes":[
       {
-         "scope":"contacts read write",
+         "scope":"contacts read",
          "resource":[
-            "https://rs.example.com/api"
+            "https://rs.example.com/api1"
          ]
       },
+      {
+         "scope":"write",
+         "resource":[
+            "https://rs.example.com/api2",
+            "https://rs.example.com/api3"
+         ]
+       },
       {
          "scope":"openid"
       }
@@ -385,9 +392,9 @@ Content-Type: application/json
 
 The privileges associated with the grant will be provided as a JSON array containing objects with the following structure:
 
-* `scopes`: JSON array where every entry contains a `scope` field of type JSON string and may contain a `resources` field with an array of resource indicators. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with. The concrete mapping is at the discretion of the AS. The AS could, for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with the resource parameter values as requested and approved in a certain authorization request.
-* `claims`: JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the Resource Owner in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. profile).
-* `authorization_details`: JSON Object as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
+* `scopes`: (optional) JSON array where every JSON object may contain a `scope` field of type JSON string and may contain a `resource` field with an array of resource indicators. The `resource` array contains one or more absolute URIs referencing the resources (as defined in [RFC8707]) authorized for that scope. This structure allows the AS to represent the relationship between scope values and the resource indicators (as defined in [@!RFC8707]) that were requested and approved with (or pre-defined `resource` value by the AS and approved). The concrete mapping is at the discretion of the AS. The AS could, for example, organize those objects "by resource", i.e. for every resource there is a list of related scope values. It could also store chunks of scope values along with the `resource` parameter values as requested and approved in a certain authorization request.
+* `claims`: (optional) JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the Resource Owner in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. `profile`).
+* `authorization_details`: (optional) JSON array of JSON objects as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The response structure MAY also include further elements defined by extensions.
 
