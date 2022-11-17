@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-security-01"
+value = "fapi-2_0-security-02"
 status = "standard"
 
 [[author]]
@@ -604,13 +604,13 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
 
 {backmatter}
 
-<reference anchor="attackermodel" target="https://bitbucket.org/openid/fapi/src/master/FAPI_2_0_Attacker_Model.md">
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-2_0-attacker-model.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>yes.com</organization>
     </author>
-   <date day="28" month="Jul" year="2021"/>
+   <date day="14" month="Nov" year="2022"/>
   </front>
 </reference>
 
@@ -695,7 +695,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2022 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
