@@ -363,7 +363,11 @@ Content-Type: application/json
             "https://example.com/accounts"
          ]
       }
-   ]
+   ],
+   "created_at":1356123600,
+   "last_updated_at":1356123600,
+   "expires_at":1356123600,
+   "updated_by":"client"
 }
 ```
 
@@ -396,6 +400,14 @@ The privileges associated with the grant will be provided as a JSON array contai
 * `claims`: (optional) JSON array containing the names of all OpenID Connect claims (see [@!OpenID.Core]) as requested by the client (acting as OpenID Connect RP) and consented by the Resource Owner in one or more authorization requests associated with the respective grant. The definition of consented claims is left up to the implementation when special scopes are used (e.g. `profile`).
 * `authorization_details`: (optional) JSON array of JSON objects as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
+The following information about the grant may be provided:
+* `last_updated`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
+* `expires_at`: (optional) time when the grant expires expressed as a number containing a NumericDate value.
+* `created_at`: (optional) time when the grant was originally created expressed as a number containing a NumericDate value.
+* `updated_by`: (optional) string value that indicates who updated the grant. Allowed values are 'client' and “authorization_server“.
+
+`NumericDate` is JSON numeric value representing the number of seconds from 1970-01-01T00:00:00Z UTC until the specified UTC date/time, ignoring leap seconds.  This is equivalent to the IEEE Std 1003.1, 2013 Edition [POSIX.1] definition "Seconds Since the Epoch", in which each day is accounted for by exactly 86400 seconds, other than that non-integer values can be represented.  See RFC 3339 [RFC3339] for details regarding date/times in general and UTC in particular.
+      
 The response structure MAY also include further elements defined by extensions.
 
 Where an OP is currently experiencing high load it may return an HTTP 503 with a Retry-After response header as described in Section 7.1.3 of [@!RFC7231]. Clients should respect such headers and only retry after the time indicated in the header.
@@ -665,6 +677,7 @@ The technology described in this specification was made available from contribut
    -03
    
    * renamed `update` action to `merge`
+   * added `exp`, `created_at`, `updated_at` and `updated_by`
 
    -02
    
