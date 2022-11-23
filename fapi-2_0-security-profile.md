@@ -1,13 +1,13 @@
 %%%
 title = "FAPI 2.0 Security Profile"
-abbrev = "fapi-2-security"
+abbrev = "fapi-2-security-profile"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-security-02"
+value = "fapi-2_0-security-profile-02"
 status = "standard"
 
 [[author]]
