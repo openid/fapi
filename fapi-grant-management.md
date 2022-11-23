@@ -677,7 +677,7 @@ The technology described in this specification was made available from contribut
    -03
    
    * renamed `update` action to `merge`
-   * added `exp`, `created_at`, `updated_at` and `updated_by`
+   * added `expires_at`, `created_at`, `last_updated` and `updated_by`
    * clarifications
 
    -02
