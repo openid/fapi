@@ -100,14 +100,13 @@ For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636
 
 ### 5.1 Introduction
 
-The OIDF Financial-grade API (FAPI) is a REST API that provides JSON data representing
-higher risk data. These APIs are protected by the
-OAuth 2.0 Authorization Framework that consists of [RFC6749], [RFC6750],
-[RFC7636], and other specifications.
+The OIDF Financial-grade API (FAPI) is a REST API that provides JSON data representing higher risk data. These APIs are protected by the OAuth 2.0 Authorization Framework that consists of [RFC6749], [RFC6750], [RFC7636], and other specifications.
+
+The standard OAuth method for the client to send the resource owner to the authorization server is to use an HTTP redirect. FAPI specification support this interaction model and are suitable for use cases where the resource owner is interacting with the client on a device they control that has a web browser. There are however many use-cases for initiating payments where the resource owner is not interacting with the client in such a manner. For example, the resource owner may want to authorize a payment at a "point of sale" terminal at a shop or fuel station.
 
 The Client Initiated Backchannel Authentication Flow [CIBA] specifies an alternate method of users granting access to their resources whereby the flow is started from a consumption device, but authorized on an authentication device.
 
-The following sections specify a profile of CIBA that is suited for financial-grade APIs.
+The following sections specify a profile of CIBA that is suited for high-value transactions and sensitive (personal and other) data.
 
 ### 5.2 Client Initiated Backchannel Authentication Security Provisions
 
