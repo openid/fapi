@@ -413,7 +413,7 @@ Possible mitigations for this are:
 3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
 4. Consider MTLS sender-constraining instead of DPoP
 
-These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7 is
+These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
 
 ### JWKS URIs
