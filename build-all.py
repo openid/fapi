@@ -20,7 +20,7 @@ dirs_exclude = [
 # This list is currently a list of files that fail to process
 # Some of them we likely don't care about, but some of them should be fixed and removed from the list
 files_exclude = [
-     './FAPI_2_0_Advanced_Profile.md',
+    './FAPI_2_0_Advanced_Profile.md',
     './FAPI_2_0_Advanced_Authorization_Profile.md',
     './FAPI_2_0_Baseline_Profile.md',
     './Financial_API_JWT_Secured_Authorization_Response_Mode.md',
@@ -38,7 +38,9 @@ files_exclude = [
     './fapi-grant-management.md',
     './FAPI_1.0/changes-between-id2-and-final.md',
     './FAPI_1.0/openid-financial-api-part-1-1_0.md',
-    './FAPI_1.0/openid-financial-api-part-2-1_0.md'
+    './FAPI_1.0/openid-financial-api-part-2-1_0.md',
+    './FAPI_2_0_Message_Signing.md',
+    './FAPI_2_0_Security_Profile.md'
 ]
 
 failed = []

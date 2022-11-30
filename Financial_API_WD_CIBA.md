@@ -175,13 +175,29 @@ In situations where the client does not control the consumption device, the clie
 1. shall not send `x-fapi-customer-ip-address` or `x-fapi-auth-date` headers; and
 1. should send metadata about the consumption device, for example geolocation and device type.
 
-## 7. Security Considerations
+## 7. Registration and Discovery Metadata 
 
-### 7.1 Introduction
+This specification adds additional metadata parameters for OAuth Authorization Server Metadata as defined in [RFC8414] 
+and Dynamic Client Registration Metadata as defined in [RFC7591].
+
+OAuth Authorization Server Metadata:
+
+1. `backchannel_endpoint_login_hint_token_types_supported`: OPTIONAL. JSON array of strings that the AS can use to advertise which
+types of `login_hint_token` it supports. The values in this parameter are likely to be ecosystem specific.
+
+Dynamic Client Registration Metadata:
+
+1. `backchannel_endpoint_login_hint_token_types`: OPTIONAL. JSON array of strings that the Client can use to register the type of
+`login_hint_token` that it will use.
+
+
+## 8. Security Considerations
+
+### 8.1 Introduction
 
 The [CIBA] specification introduces some new attack vectors not present in OAuth 2 redirect based flows. This profile aims to help implementers of [CIBA] for financial-grade APIs to reduce or eliminate these attack vectors. There are however further security considerations that should be taken into account when implementing this specification.
 
-### 7.2 Authentication sessions started without a users knowledge or consent
+### 8.2 Authentication sessions started without a users knowledge or consent
 
 As this specification allows the client to initiate an authentication request it is important for the authorization server to know whether the user is aware and has consented to the authentication process. If widely known user identifiers (e.g. phone numbers) are used as the `login_hint` in the authentication request then this risk is worsened. An attacker could start unsolicited authentication sessions on large numbers of authentication devices, causing distress and potentially enabling fraud.
 For this reason this profile highly recommends `login_hint` to have the properties of a nonce with the expectation being that it will be generated from an authorization server owned client authentication device. Given the high levels of friction that this may impose it's anticipated that Authorization Servers may have to accept an `id_token_hint` as an alternative mechanism for Client Subject identification.
@@ -191,17 +207,17 @@ For illustration a QR code on a 'club card' may be an appropriate identifier whe
 
 In addition, [CIBA] provides an optional `user_code` mechanism to specifically mitigate this issue, it may be appropriate to require the use of `user_code` in certain deployments. 
 
-### 7.3 Reliance on user to confirm binding messages
+### 8.3 Reliance on user to confirm binding messages
 
 Depending on the hint used to identify the user and the Client's user authentication processes, it may be possible for a fraudster to start a malicious [CIBA] flow at the same time as a genuine flow, with both flows using the genuine user’s identifier. If the scope of access requested is similar then the only way to ensure that a user is authorizing the correct transaction is for the user to compare the binding messages on the Authentication and Consumption devices.
 
 If this risk is deemed unacceptable then implementers should either consider alternative mechanisms of verifying the binding message (e.g. conveying it to the Authentication device via a QR code), or use ephemeral user identifiers generated on the Authentication device.
 
-### 7.4 Loss of fraud markers to OpenID provider
+### 8.4 Loss of fraud markers to OpenID provider
 
 In a redirect-based flow, the authorization server can collect useful fraud markers from the user-agent. In a [CIBA] flow the separation of consumption and authentication devices reduces the data that can be collected. This could reduce the effectiveness of any fraud detection system.
 
-### 7.5 Incomplete or incorrect implementations of the specifications
+### 8.5 Incomplete or incorrect implementations of the specifications
 
 To achieve the full security benefits, it is important the implementation of this specification, and the underlying OpenID Connect and OAuth specifications, are both complete and correct.
 
@@ -215,17 +231,17 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-### 7.6 JWS/JWE Algorithm considerations
+### 8.6 JWS/JWE Algorithm considerations
 
 CIBA Authorization Servers and Clients shall follow the guidance around JWT signing and encryption Algorithms in [FAPI2] 8.6 and 8.6.1.
 
-### 7.7 Authentication Device security
+### 8.7 Authentication Device security
 
 This profile and the underlying specifications do not specify how the Authorization Server should initiate and perform user authentication and authorization of consent on the authentication device.
 
 Implementors must use appropriately strong methods to communicate with the authentication device and to authenticate the end user.
 
-### 7.8 CIBA token delivery modes
+### 8.8 CIBA token delivery modes
 
 [CIBA] defines 3 ways that tokens can be delivered to the client.
 
@@ -235,7 +251,7 @@ The `poll` and `ping` modes both follow the established convention of retrieving
 
 The `ping` mode delivers a notification to an endpoint owned by the client. The information contained in this notification is limited to the `auth_req_id` for the request, as described in [CIBA] 10.2. The bearer token used by the authorization server to access this resource is not sender constrained. If the `backchannel_client_notification_endpoint`, the `auth_req_id` and the `client_notification_token` are known to an attacker, they may be able to force the client to call the token endpoint repeatedly or before the authentication has completed. For most deployments this is not a significant issue.
 
-### 7.9 TLS considerations
+### 8.9 TLS considerations
 
 As confidential information is being exchanged, all interactions shall be encrypted with TLS (HTTPS).
 
@@ -250,7 +266,7 @@ The recommendations for Secure Use of Transport Layer Security in [BCP195] shall
     * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
 1. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, key lengths of at least 2048 bits are required.
 
-### 7.10 Algorithm considerations
+### 8.10 Algorithm considerations
 
 For JWS, both clients and authorization servers:
 
@@ -258,17 +274,17 @@ For JWS, both clients and authorization servers:
 1. should not use algorithms that use RSASSA-PKCS1-v1_5 (e.g. `RS256`);
 1. shall not use `none`;
 
-### 7.10.1 Encryption algorithm considerations
+### 8.10.1 Encryption algorithm considerations
 
 For JWE, both clients and authorization servers
 
 1. shall not use the `RSA1_5` algorithm.
 
-## 8. Privacy Considerations
+## 9. Privacy Considerations
 
 There are no additional privacy considerations beyond those in [CIBA] 15.
 
-## 9. Acknowledgement
+## 10. Acknowledgement
 
 The following people contributed heavily towards this document:
 
@@ -296,6 +312,29 @@ The following people contributed heavily towards this document:
 
 [OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
 [OIDC]: http://openid.net/specs/openid-connect-core-1_0.html
+
+## 12. IANA Considerations
+
+### 12.1 OAuth Authorization Server Metadata Registration
+
+This specification adds the following values to the IANA "OAuth Authorization Server Metadata" registry 
+established by [RFC8414]:
+
+* Server Metadata Name: backchannel_endpoint_login_hint_token_types_supported
+* Server Metadata Description: Supported CIBA login hint token types.
+* Change Controller: OpenID Foundation Financial-Grade API Working Group - openid-specs-fapi@lists.openid.net
+* Specification Document(s): Section 7 of [[ this specification ]]
+
+### 12.2 OAuth Dynamic Client Registration Metadata Registration
+
+This specification requests registration of the following client metadata definitions in the 
+IANA "OAuth Dynamic Client Registration Metadata" registry established by [RFC7591]: 
+
+* Client Metadata Name: backchannel_endpoint_login_hint_token_types
+* Client Metadata Description: The supported CIBA login hint token types that the client will use to initiate CIBA requests. 
+* Change Controller: OpenID Foundation Financial-Grade API Working Group - openid-specs-fapi@lists.openid.net
+* Specification Document(s): Section 7 of [[ this specification ]]
+
 
 ## Appendix A - Examples
 
