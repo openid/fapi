@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-attacker-model-01"
+value = "fapi-2_0-attacker-model-02"
 status = "standard"
 
 [[author]]
@@ -335,6 +335,17 @@ this document.
 
 {backmatter}
 
+<reference anchor="securityprofile" target="https://openid.net/specs/fapi-2_0-security.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>yes.com</organization>
+    </author>
+   <date day="28" month="Jul" year="2021"/>
+  </front>
+</reference>
+
+
 <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
     <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
@@ -381,7 +392,7 @@ this document.
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2022 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
