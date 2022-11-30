@@ -402,14 +402,14 @@ There is a performance and resiliency trade off, setting the access token life t
 An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
 that they can then replay.
 
-This may also allow reuse of the DPoP proof with an alterered request, as DPoP does
+This may also allow reuse of the DPoP proof with an altered request, as DPoP does
 not sign the body of HTTP requests nor most headers. For example, for a payment request
 the attacker might be able to specify a different amount or destination account.
 
 Possible mitigations for this are:
 
 1. Resource servers uses short-lived DPoP nonces to reduce the time window where a request can be replayed
-2. Resource servers implement replay preventation using the `jti` header as explained in [@!I-D.ietf-oauth-dpop]
+2. Resource servers implement replay prevention using the `jti` header as explained in [@!I-D.ietf-oauth-dpop]
 3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
 4. Consider MTLS sender-constraining instead of DPoP
 
@@ -420,7 +420,7 @@ represents a powerful attacker and mitigations may not be necessary for many eco
 
 This profile supports the use of `private_key_jwt` and in addition allows the use of 
 OpenID Connect. When these are used Clients and Authorization Servers need to verify 
-payloads with keys from another party. For Authorization Server's this profile strongly
+payloads with keys from another party. For Authorization Servers this profile strongly
 recommends  the use of JWKS URI endpoints to distribute public keys. For Client's key 
 management this profile recommends either the use of JWKS URI endpoints or the use of 
 the `jwks` parameter in combination with [@!RFC7591] and [@!RFC7592].
@@ -454,14 +454,14 @@ sender-constraining of the access token, as described in "Cuckoo's Token Attack"
 [@FAPI1SEC].
 
 A pre-condition for this attack is that the attacker has control of an authorization
-server that is trusted by the client to issue access token for the target resource
+server that is trusted by the client to issue access tokens for the target resource
 server. An attacker may obtain control of an authorization server by:
 
 1. Compromising the security of a different authorization server that the client trusts, or
 2. Acting as an authorization server and establishing a trust relationship with a client using social engineering, or by
-   compromising the client
+3. compromising the client
 
-The attack may be easier if a centralised directory or other resource server discovery mechanism allows the attacker to
+The attack may be easier if a centralized directory or other resource server discovery mechanism allows the attacker to
 cause the client to send the stolen access token received from the attacker controlled Authorization Server to an honest
 Resource Server.
 
