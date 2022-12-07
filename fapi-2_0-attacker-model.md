@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-attacker-model-02"
+value = "fapi-2_0-attacker-model-03"
 status = "standard"
 
 [[author]]
@@ -329,9 +329,9 @@ development of these specifications.
 
 # Acknowledgements
 
-We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell and Torsten
-Lodderstedt for their valuable feedback and contributions that helped to evolve
-this document.
+We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
+Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their 
+valuable feedback and contributions that helped to evolve this document.
 
 {backmatter}
 
