@@ -78,6 +78,9 @@ The following referenced documents are indispensable for the application of this
 [FAPILI] - FAPI Lodging Intent
 [FAPILI]: https://bitbucket.org/openid/fapi/src/master/Financial_API_Lodging_Intent.md
 
+[RAR] - OAuth 2.0 Rich Authorization Requests
+[RAR]: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rar
+
 ## 3. Terms and definitions
 
 For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636, OpenID Connect Core and OpenID Connect Client Initiated Backchannel Authentication Core apply.
@@ -135,7 +138,7 @@ In addition the Authorization server, for all operations,
 1. may require clients to provide a `request_context` claim as defined in section 5.3 of this profile; and
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata
 
-**NOTE:** As per [CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the Client to the AS, implementers should consider the "lodging intent" pattern described in [FAPILI]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification. Examples of both patterns are shown in [FAPILI].
+**NOTE:** As per [CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the Client to the AS, implementers should consider using OAuth 2.0 Rich Authorization Requests [RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
 
 **NOTE:** The binding message is required to protect the user by binding the session on the consumption device with the session on the authentication device. An example use case is when a user is paying at POS terminal. The user will enter their user identifier to start the [CIBA] flow, the terminal will then display a code, the user will receive a notification on their phone (the authentication device) to ask them to authenticate and authorize the transaction, as part of the authorization process the user will be shown a code and will be asked to check that it is the same as the one shown on the terminal.
 
