@@ -75,9 +75,6 @@ The following referenced documents are indispensable for the application of this
 [FAPI2] - FAPI Part 2: Advanced Security Profile
 [FAPI2]: https://openid.net/specs/openid-financial-api-part-2.html
 
-[FAPILI] - FAPI Lodging Intent
-[FAPILI]: https://bitbucket.org/openid/fapi/src/master/Financial_API_Lodging_Intent.md
-
 [RAR] - OAuth 2.0 Rich Authorization Requests
 [RAR]: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rar
 
