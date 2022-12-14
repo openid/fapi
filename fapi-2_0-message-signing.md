@@ -313,9 +313,9 @@ This is outside of the scope of both [@!RFC8705] and the FAPI standards, however
 state that when using TLS as a transport level protection in this manner, authorization servers should expect clients to
 call the endpoints located in the root of the server metadata, and not those found in `mtls_endpoint_aliases`.
 
-## Security Considerations
+# Security Considerations
 
-### Authorization Response Encryption
+## Authorization Response Encryption
 
 In FAPI2, there is no confidential information in the Authorization Response, hence encryption of the Authorization Response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
 
