@@ -323,8 +323,8 @@ Usage of PKCE in FAPI 2 provides protection for code leakage described in 5.4 [@
 
 # Acknowledgements
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Dima Postnikov, Joseph Heenan, Brian Campbell, Ralph Bragg, Justin Richer and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
-     
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postnikov, Joseph Heenan, Brian Campbell, Ralph Bragg, Justin Richer and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
+
 
 {backmatter}
 
