@@ -154,7 +154,7 @@ Examples:
 
 ## Obtaining new tokens for existing grants
 
-Clients can also obtain fresh access and, optionally refresh tokens based on existing grants if they re-issue an authorization request, reference an existing grant and follow the rest of the authorization code flow.
+Clients can also obtain fresh access and, optionally refresh tokens based on existing grants if they re-issue an authorization request with all request parameters, reference an existing grant, specify `merge` as `grant_management_action` and follow the rest of the authorization flow (e.g.: redirect or decoupled).
 
 # Use cases not supported
 
