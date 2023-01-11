@@ -116,12 +116,12 @@ following standards are used in this profile:
 
 We understand that some ecosystems may only desire to implement 1 or 2 of the above 3, it is therefore 
 anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
-will be separate tests for the following:
+will be separate test options for each of the following:
 
- * FAPI2-JAR
- * FAPI2-JARM
- * FAPI2-JIR
- * FAPI2-HTTPSig
+ * Signed Authorization Requests
+ * Signed Authorization Responses
+ * Signed Introspection Responses
+ * Signed HTTP Messages
 
 
 ## Non-Repudiation
