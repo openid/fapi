@@ -1,4 +1,4 @@
-# Financial-grade API: Client Initiated Backchannel Authentication Profile
+# FAPI: Client Initiated Backchannel Authentication Profile
 
 ## Warning
 
@@ -18,13 +18,13 @@ The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID communit
 
 Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50 % of the members casting a vote. There is a possibility that some of the elements of this document may be the subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
 
-Financial-grade API consists of the following parts:
+FAPI consists of the following parts:
 
 * Part 1: Baseline Security Profile
 * Part 2: Advanced Security Profile
-* Financial-grade API: Client Initiated Backchannel Authentication Profile
-* Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
-* Financial-grade API: Implementation and Deployment Advice
+* FAPI: Client Initiated Backchannel Authentication Profile
+* FAPI: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+* FAPI: Implementation and Deployment Advice
 
 Future parts may follow.
 
@@ -32,7 +32,7 @@ This part is intended to be used with [RFC6749], [RFC6750], [RFC7636], [OIDC] an
 
 ##Introduction
 
-The Financial-grade API Standard provides a profile for OAuth 2.0 suitable for use in financial services. The standard OAuth method for the client to send the resource owner to the authorization server is to use an HTTP redirect. Parts 1 and 2 of this specification support this interaction model and are suitable for use cases where the resource owner is interacting with the client on a device they control that has a web browser. There are however many use-cases for initiating payments where the resource owner is not interacting with the client in such a manner. For example, the resource owner may want to authorize a payment at a "point of sale" terminal at a shop or fuel station.
+The FAPI Security Profile is an API security profile based on the OAuth 2.0 Authorization Framework and related specifications suitable for protecting APIs in high-value scenarios. While the security profile was initially developed with a focus on financial applications, it is designed to be universally applicable for protecting APIs exposing high-value and sensitive (personal and other) data, for example, in e-health and e-government applications.
 
 This document is a profile of the OpenID Connect Client Initiated Backchannel Authentication Flow [CIBA] that supports this decoupled interaction method. The CIBA spec allows a client that gains knowledge of an identifier for the user to obtain tokens from the authorization server. The user consent is given at the user's Authentication Device mediated by the authorization server. This document profiles the CIBA specification to bring it in line with the other FAPI parts and provides security recommendations for its use with APIs that require financial-grade security. 
 
@@ -48,7 +48,7 @@ These keywords are not used as dictionary terms such that
 any occurrence of them shall be interpreted as keywords
 and are not to be interpreted with their natural language meanings.
 
-# **Financial-grade API: Client Initiated Backchannel Authentication Profile**
+# **FAPI: Client Initiated Backchannel Authentication Profile**
 
 [TOC]
 
@@ -56,7 +56,7 @@ and are not to be interpreted with their natural language meanings.
 
 This document specifies the method for an application to:
 
-* obtain OAuth tokens via a backchannel authentication flow in an appropriately secure manner for financial data access and other similar situations where the risk is higher;
+* obtain OAuth tokens via a backchannel authentication flow in an appropriately secure manner for high-value data access and other similar situations where the risk is higher;
 * use tokens to interact with protected data via REST endpoints.
 
 ## 2. Normative references
@@ -89,7 +89,7 @@ For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636
 
 **API** – Application Programming Interface
 
-**FAPI** - Financial-grade API
+**FAPI** - FAPI Security profile
 
 **HTTP** – Hyper Text Transfer Protocol
 
@@ -103,14 +103,13 @@ For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636
 
 ### 5.1 Introduction
 
-The OIDF Financial-grade API (FAPI) is a REST API that provides JSON data representing
-higher risk data. These APIs are protected by the
-OAuth 2.0 Authorization Framework that consists of [RFC6749], [RFC6750],
-[RFC7636], and other specifications.
+The FAPI Security Profile is an API security profile based on the OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications suitable for protecting APIs in high-value scenarios. 
+
+The standard OAuth method for the client to send the resource owner to the authorization server is to use an HTTP redirect. FAPI specification support this interaction model and are suitable for use cases where the resource owner is interacting with the client on a device they control that has a web browser. There are however many use-cases for initiating payments where the resource owner is not interacting with the client in such a manner. For example, the resource owner may want to authorize a payment at a "point of sale" terminal at a shop or fuel station.
 
 The Client Initiated Backchannel Authentication Flow [CIBA] specifies an alternate method of users granting access to their resources whereby the flow is started from a consumption device, but authorized on an authentication device.
 
-The following sections specify a profile of CIBA that is suited for financial-grade APIs.
+The following sections specify a profile of CIBA that is suited for high-value transactions and sensitive (personal and other) data.
 
 ### 5.2 Client Initiated Backchannel Authentication Security Provisions
 
