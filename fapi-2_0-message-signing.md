@@ -389,16 +389,16 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
   </front>
 </reference>
 
-<reference anchor="JARM" target="https://openid.net/specs/openid-financial-api-jarm.html">
+<reference anchor="JARM" target="https://openid.net/specs/oauth-v2-jarm-final.html">
   <front>
-    <title>Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
+    <title>JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
     <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
       <organization>Yes</organization>
     </author>
     <author initials="B." surname="Campbell" fullname="Brian Campbell">
       <organization>Ping</organization>
     </author>
-   <date day="17" month="Oct" year="2018"/>
+   <date day="9" month="Nov" year="2022"/>
   </front>
 </reference>
 
