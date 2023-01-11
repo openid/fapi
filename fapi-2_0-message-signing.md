@@ -99,13 +99,13 @@ OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Message Signing Profile aims to reach the security goals
 laid out in the Attacker Model [@!attackermodel] plus the non-repudiation goals listed below.
 
-All provisions of the [Security Profile] apply to the Message Signing Profile
+All provisions of the [@!FAPI2_Security_Profile_ID2] apply to the Message Signing Profile
 as well, with the extensions described in the following.
 
 
 ## Profile
 
-In addition to the technologies used in the [Security Profile], the
+In addition to the technologies used in the [@!FAPI2_Security_Profile_ID2], the
 following standards are used in this profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
@@ -327,13 +327,23 @@ Usage of PKCE in FAPI 2 provides protection for code leakage described in 5.4 [@
 
 {backmatter}
 
-<reference anchor="attackermodel" target="https://bitbucket.org/openid/fapi/src/master/FAPI_2_0_Attacker_Model.md">
+<reference anchor="FAPI2_Security_Profile_ID2" target="https://openid.net/specs/fapi-2_0-security-02.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>yes.com</organization>
+    </author>
+   <date day="14" month="Nov" year="2022"/>
+  </front>
+</reference>
+
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-2_0-attacker-model-02.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>yes.com</organization>
     </author>
-   <date day="28" month="Jul" year="2021"/>
+   <date day="14" month="Nov" year="2022"/>
   </front>
 </reference>
 
