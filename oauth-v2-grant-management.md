@@ -36,8 +36,6 @@ organization="Independent"
 
 %%%
 
-{mainmatter}
-
 # Abstract
 
 This specification defines an extension of OAuth 2.0 [@!RFC6749] to allow clients to explicitly manage their grants with the authorization server.
