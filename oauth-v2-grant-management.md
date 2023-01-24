@@ -1,13 +1,13 @@
 %%%
 title = "Grant Management for OAuth 2.0"
-abbrev = "fapi-grant-management"
+abbrev = "oauth-v2-grant-management"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "oauth", "grant management", "consent management"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-grant-management-02"
+value = "oauth-v2-grant-management-02"
 status = "standard"
 
 [[author]]
@@ -660,11 +660,11 @@ Specification Document(s):
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Vladimir Dzhuvinov, Takahiko Kawasaki, Roland Hedberg, Filip Skokan, Dave Tonge, Brian Campbell and Ralph Bragg for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Vladimir Dzhuvinov, Takahiko Kawasaki, Roland Hedberg, Filip Skokan, Dave Tonge, Brian Campbell, Ralph Bragg, Jacob Ideskog, Lukasz Jaromin, Joseph Heenan and Travis Spencer for their valuable feedback and contributions that helped to evolve this specification.
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2023 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
@@ -674,14 +674,11 @@ The technology described in this specification was made available from contribut
 
    [[ To be removed from the final specification ]]
 
-   -03
+   -02
    
    * renamed `update` action to `merge`
    * added `expires_at`, `created_at`, `last_updated` and `updated_by`
    * clarifications
-
-   -02
-   
    * added `replace` grant management action to server metadata
    * added IANA section content
       
