@@ -1,9 +1,9 @@
 %%%
 title = "Grant Management for OAuth 2.0"
-abbrev = "oauth-v2-grant-management"
+abbrev = "OAuth GM"
 ipr = "none"
-workgroup = "fapi"
-keyword = ["security", "oauth", "grant management", "consent management"]
+workgroup = "FAPI"
+keyword = ["security", "oauth", "grant", "consent"]
 
 [seriesInfo]
 name = "Internet-Draft"
@@ -30,10 +30,13 @@ organization="Biza.io"
 initials="D."
 surname="Postnikov"
 fullname="Dima Postnikov"
+organization="Independent"
     [author.address]
     email = "dima@postnikov.net"
 
 %%%
+
+{mainmatter}
 
 # Abstract
 
