@@ -19,6 +19,51 @@ organization="yes.com"
     email = "mail@danielfett.de"
 
 
+[[contact]]
+fullname="Takahiko Kawasaki"
+
+[[contact]]
+fullname="Filip Skokan"
+
+[[contact]]
+fullname="Dave Tonge"
+
+[[contact]]
+fullname="Nat Sakimura"
+
+[[contact]]
+fullname="Stuart Low"
+
+[[contact]]
+fullname="Dima Postnikov"
+
+[[contact]]
+fullname="Torsten Lodderstedt"
+
+[[contact]]
+fullname="Joseph Heenan"
+
+[[contact]]
+fullname="Travis Spencer"
+
+[[contact]]
+fullname="Brian Campbell"
+
+[[contact]]
+fullname="Ralph Bragg"
+
+[[contact]]
+fullname="Lukasz Jaromin"
+
+[[contact]]
+fullname="Pedram Hosseyni"
+
+[[contact]]
+fullname="Ralf Küsters"
+
+[[contact]]
+fullname="Tim Würtele"
+
 %%%
 
 .# Foreword
@@ -599,8 +644,11 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 
 # Acknowledgements
+We would like to thank [@Takahiko Kawasaki], [@Filip Skokan], [@Dave Tonge], [@Nat Sakimura], [@Stuart Low], [@Dima Postnikov], [@Torsten Lodderstedt], [@Joseph Heenan], [@Travis Spencer], [@Brian Campbell], [@Ralph Bragg], [@Lukasz Jaromin], [@Pedram Hosseyni], [@Ralf Küsters] and [@Tim Würtele] for their valuable feedback and contributions that helped to evolve this specification.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim W<xml><u format="{lit}">ü</u></xml>rtele for their valuable feedback and contributions that helped to evolve this specification.
+
+
 
 {backmatter}
 
