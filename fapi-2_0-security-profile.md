@@ -25,7 +25,7 @@ organization="yes.com"
 
 The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.
 
-Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be the subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
+Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
 
 
 .# Introduction
@@ -104,7 +104,7 @@ part of this framework and may be used together with this profile include:
 1. FAPI Message Signing is recommended when messages are required to be signed for the 
    purposes of non-repudiation.  
 1. FAPI CIBA is recommended when support is required for decoupled or cross device flows.
-1. Grant Management is recommended for ecosystems that require interopable grant management.
+1. Grant Management is recommended for ecosystems that require interoperable grant management.
 1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar] is recommended when 
    the `scope` parameter is not expressive enough to convey the authorization that a client 
    wants to obtain.
@@ -147,7 +147,7 @@ authorization servers, and resource servers:
 
 **NOTE**: Even if an endpoint uses only organization validated (OV) or extended 
 validation (EV) TLS certificates, rogue domain-validated certificates can be used 
-to impersonate the endpoints and conduct man-in-the-middle attacks. CAA records 
+to impersonate the endpoint and conduct man-in-the-middle attacks. CAA records
 [@!RFC8659] can help to mitigate this risk.
 
 ### Requirements for endpoints not used by web browsers
