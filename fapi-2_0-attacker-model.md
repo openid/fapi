@@ -19,6 +19,30 @@ organization="yes.com"
     email = "mail@danielfett.de"
 
 
+[[contact]]
+fullname="Dave Tonge"
+
+[[contact]]
+fullname="Nat Sakimura"
+
+[[contact]]
+fullname="Torsten Lodderstedt"
+
+[[contact]]
+fullname="Joseph Heenan"
+
+[[contact]]
+fullname="Brian Campbell"
+
+[[contact]]
+fullname="Pedram Hosseyni"
+
+[[contact]]
+fullname="Ralf Küsters"
+
+[[contact]]
+fullname="Tim Würtele"
+
 %%%
 
 .# Abstract 
@@ -329,9 +353,19 @@ development of these specifications.
 
 # Acknowledgements
 
-We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
-Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their 
-valuable feedback and contributions that helped to evolve this document.
+This specification was developed by the OpenID FAPI Working Group. 
+
+We would like to thank 
+[@Brian Campbell], 
+[@Joseph Heenan], 
+[@Pedram Hosseyni], 
+[@Ralf Küsters], 
+[@Torsten Lodderstedt], 
+[@Nat Sakimura], 
+[@Dave Tonge], and 
+[@Tim Würtele]
+for their valuable feedback and contributions that helped to evolve this specification.
+
 
 {backmatter}
 

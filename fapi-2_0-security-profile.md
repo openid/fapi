@@ -644,11 +644,26 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 
 # Acknowledgements
-We would like to thank [@Takahiko Kawasaki], [@Filip Skokan], [@Dave Tonge], [@Nat Sakimura], [@Stuart Low], [@Dima Postnikov], [@Torsten Lodderstedt], [@Joseph Heenan], [@Travis Spencer], [@Brian Campbell], [@Ralph Bragg], [@Lukasz Jaromin], [@Pedram Hosseyni], [@Ralf Küsters] and [@Tim Würtele] for their valuable feedback and contributions that helped to evolve this specification.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim W<xml><u format="{lit}">ü</u></xml>rtele for their valuable feedback and contributions that helped to evolve this specification.
+This specification was developed by the OpenID FAPI Working Group. 
 
-
+We would like to thank 
+[@Ralph Bragg], 
+[@Brian Campbell], 
+[@Joseph Heenan], 
+[@Pedram Hosseyni], 
+[@Lukasz Jaromin], 
+[@Takahiko Kawasaki], 
+[@Ralf Küsters], 
+[@Torsten Lodderstedt], 
+[@Stuart Low], 
+[@Dima Postnikov], 
+[@Nat Sakimura], 
+[@Filip Skokan], 
+[@Travis Spencer], 
+[@Dave Tonge], and 
+[@Tim Würtele]
+for their valuable feedback and contributions that helped to evolve this specification.
 
 {backmatter}
 

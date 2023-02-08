@@ -27,6 +27,33 @@ organization="Moneyhub Financial Technology"
     email = "dave@tonge.org"
 
 
+[[contact]]
+fullname="Takahiko Kawasaki"
+
+[[contact]]
+fullname="Filip Skokan"
+
+[[contact]]
+fullname="Nat Sakimura"
+
+[[contact]]
+fullname="Dima Postnikov"
+
+[[contact]]
+fullname="Joseph Heenan"
+
+[[contact]]
+fullname="Brian Campbell"
+
+[[contact]]
+fullname="Ralph Bragg"
+
+[[contact]]
+fullname="Lukasz Jaromin"
+
+[[contact]]
+fullname="Justin Richer"
+
 %%%
 
 .# Abstract 
@@ -323,7 +350,20 @@ Usage of PKCE in FAPI 2 provides protection for code leakage described in 5.4 [@
 
 # Acknowledgements
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postnikov, Joseph Heenan, Brian Campbell, Ralph Bragg, Justin Richer and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
+This specification was developed by the OpenID FAPI Working Group. 
+
+
+We would like to thank 
+[@Ralph Bragg], 
+[@Brian Campbell], 
+[@Joseph Heenan], 
+[@Lukasz Jaromin],
+[@Takahiko Kawasaki], 
+[@Dima Postnikov], 
+[@Justin Richer],
+[@Nat Sakimura], and
+[@Filip Skokan] 
+for their valuable feedback and contributions that helped to evolve this specification.
 
 
 {backmatter}
