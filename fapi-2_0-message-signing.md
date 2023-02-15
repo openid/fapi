@@ -319,23 +319,23 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
 
 {backmatter}
 
-<reference anchor="FAPI2_Security_Profile_ID2" target="https://openid.net/specs/fapi-2_0-security-02.html">
+<reference anchor="FAPI2_Security_Profile_ID2" target="https://openid.net/specs/fapi-2_0-security-profile-ID2.html">
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>yes.com</organization>
     </author>
-   <date day="14" month="Nov" year="2022"/>
+   <date day="7" month="Dec" year="2022"/>
   </front>
 </reference>
 
-<reference anchor="attackermodel" target="https://openid.net/specs/fapi-2_0-attacker-model-02.html">
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-2_0-attacker-model-ID2.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>yes.com</organization>
     </author>
-   <date day="14" month="Nov" year="2022"/>
+   <date day="7" month="Dec" year="2022"/>
   </front>
 </reference>
 
