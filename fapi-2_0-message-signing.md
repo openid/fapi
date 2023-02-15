@@ -26,73 +26,64 @@ organization="Moneyhub Financial Technology"
     [author.address]
     email = "dave@tonge.org"
 
-
 %%%
 
-.# Abstract 
+.# Foreword
 
-OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0
-Authorization Framework [@!RFC6749].
+The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.
+
+Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be the subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
+
+
+.# Introduction
+
+OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
+Framework [@!RFC6749]. This Message Signing Profile is part of the FAPI 2.0 family of specifications with a focus on providing interoperable support for non-repudiation across OAuth 2.0 based requests and responses. 
+
+.# Warning
+
+This document is not an OIDF International Standard. It is distributed for
+review and comment. It is subject to change without notice and may not be
+referred to as an International Standard.
+
+Recipients of this draft are invited to submit, with their comments,
+notification of any relevant patent rights of which they are aware and to
+provide supporting documentation.
+
+.# Notational Conventions
+
+The keywords "shall", "shall not", "should", "should not", "may", and "can" in
+this document are to be interpreted as described in ISO Directive Part 2
+[@!ISODIR2]. These keywords are not used as dictionary terms such that any
+occurrence of them shall be interpreted as keywords and are not to be
+interpreted with their natural language meanings.
 
 {mainmatter}
 
-# Introduction
+# Scope
 
-## Warning
+This document specifies the methods for Clients, Authorization Servers and Resource Servers to sign and verify messages.
 
-This document is not an OIDF International Standard. It is distributed
-for review and comment. It is subject to change without notice and may
-not be referred to as an International Standard.
+# Normative references
 
-Recipients of this draft are invited to submit, with their comments,
-notification of any relevant patent rights of which they are aware and
-to provide supporting documentation.
+See section 8 for normative references.
 
-## Copyright notice & license
+# Terms and definitions
 
-The OpenID Foundation (OIDF) grants to any Contributor, developer,
-implementer, or other interested party a non-exclusive, royalty free,
-worldwide copyright license to reproduce, prepare derivative works
-from, distribute, perform and display, this Implementers Draft or
-Final Specification solely for the purposes of (i) developing
-specifications, and (ii) implementing Implementers Drafts and Final
-Specifications based on such documents, provided that attribution be
-made to the OIDF as the source of the material, but that such
-attribution does not indicate an endorsement by the OIDF.
+For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
 
-The technology described in this specification was made available from
-contributions from various sources, including members of the OpenID
-Foundation and others. Although the OpenID Foundation has taken steps
-to help ensure that the technology is available for distribution, it
-takes no position regarding the validity or scope of any intellectual
-property or other rights that might be claimed to pertain to the
-implementation or use of the technology described in this
-specification or the extent to which any license under such rights
-might or might not be available; neither does it represent that it has
-made any independent effort to identify any such rights. The OpenID
-Foundation and the contributors to this specification make no (and
-hereby expressly disclaim any) warranties (express, implied, or
-otherwise), including implied warranties of merchantability,
-non-infringement, fitness for a particular purpose, or title, related
-to this specification, and the entire risk as to implementing this
-specification is assumed by the implementer. The OpenID Intellectual
-Property Rights policy requires contributors to offer a patent promise
-not to assert certain patent claims against other contributors and
-against implementers. The OpenID Foundation invites any interested
-party to bring to its attention any copyrights, patents, patent
-applications, or other proprietary rights that may cover technology
-that may be required to practice this specification.
+# Symbols and Abbreviated terms
 
+**API** – Application Programming Interface
 
-## Notational Conventions
+**HTTP** – Hyper Text Transfer Protocol
 
-The keywords "shall", "shall not",
-"should", "should not", "may", and
-"can" in this document are to be interpreted as described in
-ISO Directive Part 2 [@!ISODIR2].
-These keywords are not used as dictionary terms such that
-any occurrence of them shall be interpreted as keywords
-and are not to be interpreted with their natural language meanings.
+**REST** – Representational State Transfer
+
+**TLS** – Transport Layer Security
+
+**URI** - Uniform Resource Identifier
+
 # Message Signing Profile
 
 OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
