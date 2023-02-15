@@ -9,7 +9,6 @@ keyword = ["security", "openid"]
 name = "Internet-Draft"
 value = "fapi-2_0-attacker-model-03"
 status = "standard"
-stream = "IETF"
 
 [[author]]
 initials="D."
