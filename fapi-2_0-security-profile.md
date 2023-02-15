@@ -477,7 +477,7 @@ where the pre-conditions may be met, the possible mitigations include:
 ### Authorization Request Leaks lead to CSRF
 
 An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
-Authorization Server, receive an authorization code and redirect the honest user via a CSRF attack to 
+Authorization Server, receive an authorization code and redirect the honest user via a Cross-Site Request Forgery (CSRF) attack to 
 the honest client but with the attacker's authorization code. This results in the user accessing the 
 attackers resources, thus breaking session integrity.
 
@@ -544,6 +544,28 @@ ensuring that the `redirect_uri` cannot be manipulated by the attacker.
 Implementers need to consider the confidentiality of the authorization
 response critical when designing their systems, in particular when this
 security profile is used in other contexts, e.g., mobile applications.
+
+### User Context
+
+Attackers might be able to trick users into consenting to a flow that
+they did not intend to consent to. This can happen, for example, if a
+phishing website starts an authorization flow using an
+attacker-controlled client ID and credentials. Alternatively, to confuse
+the user, a malicious client might start an authorization flow at a
+moment when a user expected to start an authorization flow with a
+different, non-malicious client. 
+
+Authorization servers therefore should provide the user with all
+necessary information to make an informed decision about whether to
+consent to the authorization request, including the identity of the
+client and the scope of the authorization.
+
+On the client's side, an authorization code flow should not be initiated
+without the End-User's explicit or implicit consent, thereby enabling
+the End-User to be aware of the context in which a flow was started.
+This process should be protected against CSRF attacks, i.e., an attacker
+must not be able to initiate an authorization flow on a third-party
+website by sending a request to that website.
 
 # Privacy considerations
 
