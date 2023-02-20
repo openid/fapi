@@ -259,7 +259,11 @@ For the Authorization Code flow, Authorization servers
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of less than 600 seconds.
+     of less than 600 seconds;
+1. should provide End-Users with all necessary information to make an
+   informed decision about whether to consent to the authorization
+   request, including the identity of the client and the scope of the
+   authorization.
 
 
  **NOTE**: If replay identification of the authorization code is not possible, it
@@ -305,6 +309,11 @@ Clients
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker
  1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match
+ 1. shall initiate an authorization process only with the End-User's
+    explicit or implicit consent and protect initiation of an
+    authorization process against Cross-Site Request Forgery, thereby
+    enabling the End-User to be aware of the context in which a flow was
+    started
 
  **NOTE**: 
 
@@ -544,28 +553,6 @@ ensuring that the `redirect_uri` cannot be manipulated by the attacker.
 Implementers need to consider the confidentiality of the authorization
 response critical when designing their systems, in particular when this
 security profile is used in other contexts, e.g., mobile applications.
-
-### User Context
-
-Attackers might be able to trick users into consenting to a flow that
-they did not intend to consent to. This can happen, for example, if a
-phishing website starts an authorization flow using an
-attacker-controlled client ID and credentials. Alternatively, to confuse
-the user, a malicious client might start an authorization flow at a
-moment when a user expected to start an authorization flow with a
-different, non-malicious client. 
-
-Authorization servers therefore should provide the user with all
-necessary information to make an informed decision about whether to
-consent to the authorization request, including the identity of the
-client and the scope of the authorization.
-
-On the client's side, an authorization code flow should not be initiated
-without the End-User's explicit or implicit consent, thereby enabling
-the End-User to be aware of the context in which a flow was started.
-This process should be protected against CSRF attacks, i.e., an attacker
-must not be able to initiate an authorization flow on a third-party
-website by sending a request to that website.
 
 # Privacy considerations
 
