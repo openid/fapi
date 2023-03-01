@@ -329,6 +329,8 @@ development of these specifications.
 
 # Acknowledgements
 
+This document was developed by the OpenID FAPI Working Group. 
+
 We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
 Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their 
 valuable feedback and contributions that helped to evolve this document.

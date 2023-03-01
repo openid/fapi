@@ -109,7 +109,7 @@ part of this framework and may be used together with this profile include:
    the `scope` parameter is not expressive enough to convey the authorization that a client 
    wants to obtain.
 
-We are not currently aware of any mechanisms that would allow public clients 
+The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow public clients 
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
 
@@ -120,13 +120,13 @@ OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model.
 
 This specification, and the underlying specifications, leave a number
-of choices open to implementors, deployers and/or ecosystems - with
+of choices open to implementors, deployers and/or ecosystems. With
 knowledge of the exact use cases, further reducing the number of
 choices may further improve security, or make implementation or
 interoperability easier.
 
 However, for a profile to be compliant with this specification, the
-profile shall not remove or override mandatory behaviours - as doing
+profile shall not remove or override mandatory behaviors, as doing
 so is likely to invalidate the formal security analysis and reduce
 security in potentially unpredictable ways.
 
@@ -134,15 +134,17 @@ security in potentially unpredictable ways.
 
 ### Requirements for all endpoints
 
-TLS connections shall be protected against network attackers. To this end, clients, 
-authorization servers, and resource servers:
+All TLS connections between web browsers, clients, authorization
+servers, and resource servers shall be protected against network
+attackers. To this end, clients, authorization servers, and resource
+servers
 
  1. shall only offer TLS protected endpoints and shall establish connections 
-    to other servers using TLS. TLS connections shall be set up to use
-    TLS version 1.2 or later.
- 2. when using TLS 1.2, follow the recommendations for Secure Use of Transport Layer Security in [@!RFC7525].
+    to other servers using TLS;
+ 1. shall set up TLS connections using TLS version 1.2 or later;
+ 2. when using TLS 1.2, shall follow the recommendations for Secure Use of Transport Layer Security in [@!RFC7525];
  3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
-    the issuance of rogue domain-validated TLS certificates.
+    the issuance of rogue domain-validated TLS certificates; and
  4. shall perform a TLS server certificate check, as per [@!RFC6125].
 
 **NOTE**: Even if an endpoint uses only organization validated (OV) or extended 
@@ -152,12 +154,17 @@ to impersonate the endpoint and conduct man-in-the-middle attacks. CAA records
 
 ### Requirements for endpoints not used by web browsers
 
- 1. when using TLS 1.2, the server shall only permit the cipher suites listed in (#tls-12-ciphers)
- 2. when using TLS 1.2, the client should only permit the cipher suites listed in (#tls-12-ciphers)
+For server-to-server communication endpoints that are not used by web
+browsers, the following requirements apply:
+
+ 1. When using TLS 1.2, servers shall only permit the cipher suites listed in (#tls-12-ciphers).
+ 2. When using TLS 1.2, clients should only permit the cipher suites listed in (#tls-12-ciphers).
  3. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, 
  key lengths of at least 2048 bits are required.
 
 #### TLS 1.2 permitted cipher suites {#tls-12-ciphers}
+
+For TLS 1.2, only the following cipher suites shall be used:
 
   * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
   * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
@@ -166,14 +173,17 @@ to impersonate the endpoint and conduct man-in-the-middle attacks. CAA records
 
 ### Requirements for endpoints used by web browsers
 
-Endpoints for the use by web browsers 
+For endpoints that are used by web browsers, the following additional
+requirements apply:
 
-  1. shall use methods to ensure that connections cannot be downgraded using 
-     TLS Stripping attacks. A preloaded [@preload] HTTP Strict Transport Security 
-     policy [@!RFC6797] can be used for this purpose. Some top-level domains, 
-     like .bank and .insurance, have set such a policy and therefore protect all 
-     second-level domains below them.
-  2. when using TLS 1.2, shall only use cipher suites allowed in [@!RFC7525]
+  1. Servers shall use methods to ensure that connections cannot be
+     downgraded using TLS Stripping attacks. A preloaded [@preload] HTTP
+     Strict Transport Security policy [@!RFC6797] can be used for this
+     purpose. Some top-level domains, like `.bank` and `.insurance`,
+     have set such a policy and therefore protect all second-level
+     domains below them.
+  2. When using TLS 1.2, servers shall only use cipher suites allowed in
+     [@!RFC7525].
  
 ## Profile
 
@@ -198,38 +208,38 @@ In the following, a profile of the following technologies is defined:
 Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
-    the metadata document as specified in [@!OIDD] and [@!RFC8414]
+    the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall reject requests using the resource owner password credentials grant or
-    the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC]
- 1. shall support confidential clients as defined in [@!RFC6749]
- 1. shall only issue sender-constrained access tokens,
+    the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC];
+ 1. shall support confidential clients as defined in [@!RFC6749];
+ 1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
-    -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
+    -  MTLS as described in [@!RFC8705], or
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop];
  1. shall authenticate clients using one of the following methods:
-     - MTLS as specified in section 2 of [@!RFC8705]
-     - `private_key_jwt` as specified in section 9 of [@!OIDC]
+     - MTLS as specified in Section 2 of [@!RFC8705], or
+     - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall not expose open redirectors (see section 4.10 of
-     [@I-D.ietf-oauth-security-topics])
+     [@I-D.ietf-oauth-security-topics]);
  1. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
-     received in client authentication assertions.
+     received in client authentication assertions;
  1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
-     the previous refresh token) will succeed.
- 1. if using DPoP, may use the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop]).
- 1. shall issue authorization codes with a maximum lifetime of 60 seconds
- 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by section 10.1 of [@!I-D.ietf-oauth-dpop]).
+     the previous refresh token) will succeed;
+ 1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!I-D.ietf-oauth-dpop]);
+ 1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!I-D.ietf-oauth-dpop]).
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
-accept  its token endpoint URL or the URL of the endpoint at which the assertion was 
+accept its token endpoint URL or the URL of the endpoint at which the assertion was 
 received in the `aud` claim received in client authentication assertions.
 
-**NOTE**: Refresh token rotation is an optional feature defined in [@!RFC6749] section 6
+**NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
 `refresh_token` grant. This specification discourages the use of this feature as it 
 doesn't bring any security benefits for confidential clients, and can cause significant 
 operational issues. However to allow for operational agility, Authorization Servers 
-may implement it providing they meet the requirement in clause 9.
+may implement it providing they meet the requirement in Clause 9.
 
 **NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
 the Client Initiated Backchannel Authentication grant, etc.
@@ -238,26 +248,25 @@ the Client Initiated Backchannel Authentication grant, etc.
 
 For the Authorization Code flow, Authorization servers
 
-1. shall support the authorization code grant (`response_type=code` & `grant_type=authorization_code`)
-    described in [@!RFC6749]
+1. shall support the authorization code grant (`response_type=code` &
+    `grant_type=authorization_code`) described in [@!RFC6749];
 1. shall support client-authenticated pushed authorization requests
-    according to [@!RFC9126]
-1. shall reject authorization requests sent without
-    [@!RFC9126]
-1. shall reject pushed authorization requests without client authentication
-1. shall require PKCE [@!RFC7636] with `S256` as the code challenge method
-1. shall require the `redirect_uri` parameter in pushed authorization requests
-1. shall return an `iss` parameter in the authorization response according to [@!RFC9207]
+    according to [@!RFC9126];
+1. shall reject authorization requests sent without [@!RFC9126];
+1. shall reject pushed authorization requests without client authentication;
+1. shall require PKCE [@!RFC7636] with `S256` as the code challenge method;
+1. shall require the `redirect_uri` parameter in pushed authorization requests;
+1. shall return an `iss` parameter in the authorization response according to [@!RFC9207];
 1. shall not transmit authorization responses over unencrypted network
      connections, and, to this end, shall not allow redirect URIs that use the
      "http" scheme except for native clients that use Loopback Interface
-     Redirection as described in [@!RFC8252], Section 7.3,
-1. shall reject an authorization code (section 1.3.1 of [@!RFC6749]) if it has
-     been previously used
+     Redirection as described in Section 7.3 of [@!RFC8252];
+1. shall reject an authorization code (Section 1.3.1 of [@!RFC6749]) if it has
+     been previously used;
 1. shall not use the HTTP 307 status code when redirecting a request that contains 
      user credentials to avoid forwarding the credentials to a third party accidentally 
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
-1. should use the HTTP 303 status code when redirecting the user agent using status codes;
+1. should use the HTTP 303 status code when redirecting the user agent using status codes; and
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of less than 600 seconds;
 1. should provide End-Users with all necessary information to make an
@@ -289,53 +298,57 @@ the token response, the authorization server shall support OpenID Connect
 
 Clients
 
- 1. shall support sender-constrained access tokens using one of the following methods:
-    -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
- 1. shall support client authentication using one of the following methods:
-    - MTLS as specified in section 2 of [@!RFC8705]
-    - `private_key_jwt` as specified in section 9 of [@!OIDC]
+ 1. shall support sender-constrained access tokens using one or both of the following methods:
+    -  MTLS as described in [@!RFC8705], or
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop];
+ 1. shall support client authentication using one or both of the following methods:
+    - MTLS as specified in section 2 of [@!RFC8705], or
+    - `private_key_jwt` as specified in section 9 of [@!OIDC];
  1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
-    Bearer Token Usage [@!RFC6750]
- 1. shall not expose open redirectors (see section 4.10 of
-     [@I-D.ietf-oauth-security-topics])
- 1. if using `private_key_jwt`, shall use the Authorization Server's issuer identifier 
-    value (as defined in [@RFC8414]) in the `aud` claim sent in client authentication assertions. 
-    The issuer identifier value shall be sent as a string not as an item in an array.
- 1. shall support refresh tokens and their rotation
+    Bearer Token Usage [@!RFC6750];
+ 1. shall not expose open redirectors (see Section 4.10 of
+     [@I-D.ietf-oauth-security-topics]);
+ 1. if using `private_key_jwt`, shall use the Authorization Server's
+    issuer identifier value (as defined in [@RFC8414]) in the `aud`
+    claim sent in client authentication assertions, and the issuer
+    identifier value shall be sent as a string not as an item in an
+    array;
+ 1. shall support refresh tokens and their rotation;
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
-   the `mtls_endpoint_aliases` metadata defined in [@!RFC8705]
- 1. if using DPoP, shall support the server provided nonce mechanism (as defined in section 8 of [@!I-D.ietf-oauth-dpop])
- 1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
- 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker
- 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match
+    the `mtls_endpoint_aliases` metadata defined in [@!RFC8705];
+ 1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!I-D.ietf-oauth-dpop]);
+ 1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
+ 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker; and
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match;
  1. shall initiate an authorization process only with the End-User's
     explicit or implicit consent and protect initiation of an
     authorization process against Cross-Site Request Forgery, thereby
     enabling the End-User to be aware of the context in which a flow was
-    started
+    started.
 
  **NOTE**: 
 
 This profile may be used by Confidential Clients on a user-controlled device where the system 
-clock may not be accurate, this may cause `private_key_jwt` client authentication to fail. 
+clock may not be accurate, causing `private_key_jwt` client authentication to fail. 
 In such circumstances a Client should consider using the HTTP Date header returned from the 
-server to synchronise it's own clock when generating client assertions.
+server to synchronize it's own clock when generating client assertions.
 
 **NOTE**:
 
-Although Authorization Servers are required to support "Authorization Code Binding to DPoP Key" (as defined by section 10.1 of [@!I-D.ietf-oauth-dpop]), clients are not required to use it.
+Although Authorization Servers are required to support "Authorization
+Code Binding to DPoP Key" (as defined by Section 10.1 of
+[@!I-D.ietf-oauth-dpop]), clients are not required to use it.
 
 
 #### Authorization Code Flow
 
 For the Authorization Code flow, Clients
 
- 1. shall use the authorization code grant described in [@!RFC6749]
- 1. shall use pushed authorization requests according to [@!RFC9126]
- 1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method
+ 1. shall use the authorization code grant described in [@!RFC6749];
+ 1. shall use pushed authorization requests according to [@!RFC9126];
+ 1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method; and
  1. shall check the `iss` parameter in the authorization response according to
-    [@!RFC9207] to prevent Mix-Up attacks
+    [@!RFC9207] to prevent Mix-Up attacks.
 
 
 
@@ -348,17 +361,17 @@ access token.
 Resource servers with the FAPI endpoints
 
 1. shall accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
-   Bearer Token Usage [@!RFC6750]
+   Bearer Token Usage [@!RFC6750];
 1. shall not accept access tokens in the query parameters stated in Section 2.3
-   of OAuth 2.0 Bearer Token Usage [@!RFC6750]
+   of OAuth 2.0 Bearer Token Usage [@!RFC6750];
 1. shall verify the validity, integrity, expiration and revocation status of
-   access tokens
+   access tokens;
 1. shall verify that the authorization represented by the access token is sufficient 
-   for the requested resource access and otherwise return errors as in section 3.1 
-   of [@!RFC6750]
-1. shall support and verify sender-constrained access tokens using one of the following methods:
-    -  MTLS as described in [@!RFC8705]
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop]
+   for the requested resource access and otherwise return errors as in Section 3.1 
+   of [@!RFC6750];
+1. shall support and verify sender-constrained access tokens using one or both of the following methods:
+    -  MTLS as described in [@!RFC8705], or
+    -  DPoP as described in [@!I-D.ietf-oauth-dpop].
     
 
 ## Cryptography and Secrets
@@ -366,13 +379,13 @@ Resource servers with the FAPI endpoints
  
  1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
 
-    1. adhere to [@!RFC8725]
-    2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` subtype) algorithms
-    3. not use or accept the `none` algorithm
+    1. adhere to [@!RFC8725];
+    2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` subtype) algorithms; and
+    3. not use or accept the `none` algorithm.
 
  2. RSA keys shall have a minimum length of 2048 bits.
  3. Elliptic curve keys shall have a minimum length of 160 bits.
- 4. Credentials not intended for handling by end-users (e.g., access tokens,
+ 4. Credentials not intended for handling by End-Users (e.g., access tokens,
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
@@ -609,7 +622,11 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 # Acknowledgements
 
+This specification was developed by the OpenID FAPI Working Group. 
+
 We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
+
+
 
 {backmatter}
 
