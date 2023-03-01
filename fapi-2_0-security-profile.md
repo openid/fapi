@@ -259,7 +259,11 @@ For the Authorization Code flow, Authorization servers
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of less than 600 seconds.
+     of less than 600 seconds;
+1. should provide End-Users with all necessary information to make an
+   informed decision about whether to consent to the authorization
+   request, including the identity of the client and the scope of the
+   authorization.
 
 
  **NOTE**: If replay identification of the authorization code is not possible, it
@@ -305,6 +309,11 @@ Clients
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414]
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker
  1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match
+ 1. shall initiate an authorization process only with the End-User's
+    explicit or implicit consent and protect initiation of an
+    authorization process against Cross-Site Request Forgery, thereby
+    enabling the End-User to be aware of the context in which a flow was
+    started
 
  **NOTE**: 
 
@@ -477,7 +486,7 @@ where the pre-conditions may be met, the possible mitigations include:
 ### Authorization Request Leaks lead to CSRF
 
 An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
-Authorization Server, receive an authorization code and redirect the honest user via a CSRF attack to 
+Authorization Server, receive an authorization code and redirect the honest user via a Cross-Site Request Forgery (CSRF) attack to 
 the honest client but with the attacker's authorization code. This results in the user accessing the 
 attackers resources, thus breaking session integrity.
 
