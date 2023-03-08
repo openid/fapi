@@ -234,6 +234,17 @@ In FAPI2, there is no confidential information in the Authorization Response, he
 
 Usage of PKCE in FAPI 2 provides protection for code leakage described in Section 5.4 of [@!JARM].
 
+
+# Privacy considerations
+
+In addition to the privacy considerations detailed in [@!FAPI2_Security_Profile_ID2] implementers should consider
+the privacy implications of storing messages for the purpose of non-repudiation. 
+
+Such messages may well contain personally identifiable information and implementers should evaluate 
+whether such messages need to be stored. If they are stored then adequate access controls must be 
+put in place to protect that data. Such controls should follow data minimisation principles and ensure that 
+there are tamper-proof audit logs.
+
 # Acknowledgements
 
 This specification was developed by the OpenID FAPI Working Group. 
