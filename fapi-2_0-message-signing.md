@@ -366,25 +366,6 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
   </front>
 </reference>
 
-<reference anchor="OIDD" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
-  <front>
-    <title>OpenID Connect Discovery 1.0 incorporating errata set 1</title>
-    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
-      <organization>NRI</organization>
-    </author>
-    <author initials="J." surname="Bradley" fullname="John Bradley">
-      <organization>Ping Identity</organization>
-    </author>
-    <author initials="M." surname="Jones" fullname="Mike Jones">
-      <organization>Microsoft</organization>
-    </author>
-    <author initials="E." surname="Jay" fullname="Edmund Jay">
-      <organization>Illumila</organization>
-    </author>
-    <date day="8" month="Nov" year="2014"/>
-  </front>
-</reference>
-
 <reference anchor="JARM" target="https://openid.net/specs/oauth-v2-jarm-final.html">
   <front>
     <title>JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
@@ -421,13 +402,3 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
     </author>
 </front>
 </reference>
-
-<reference anchor="preload" target="https://hstspreload.org/">
-<front>
-<title>HSTS Preload List Submission</title>
-    <author fullname="Anonymous">
-      <organization></organization>
-    </author>
-</front>
-</reference>
-
