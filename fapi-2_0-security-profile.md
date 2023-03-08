@@ -346,11 +346,9 @@ For the Authorization Code flow, Clients
 
  1. shall use the authorization code grant described in [@!RFC6749];
  1. shall use pushed authorization requests according to [@!RFC9126];
- 1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method; and
- 1. shall check the `iss` parameter in the authorization response according to
-    [@!RFC9207] to prevent Mix-Up attacks.
-
-
+ 1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method;
+ 1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent Mix-Up attacks; and
+ 1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126])'.
 
 ### Requirements for Resource Servers
 
