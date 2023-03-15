@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Message Signing"
+title = "FAPI 2.0 Message Signing (Draft)"
 abbrev = "fapi-2-message-signing"
 ipr = "none"
 workgroup = "fapi"
