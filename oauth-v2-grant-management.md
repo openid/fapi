@@ -1,5 +1,5 @@
 %%%
-title = "Grant Management for OAuth 2.0"
+title = "Grant Management for OAuth 2.0 (Draft)"
 abbrev = "OAuth GM"
 ipr = "none"
 workgroup = "FAPI"
