@@ -221,8 +221,9 @@ Authorization servers
      - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall not expose open redirectors (see section 4.10 of
      [@I-D.ietf-oauth-security-topics]);
- 1. shall accept its issuer identifier value (as defined in [@RFC8414]) in the `aud` claim 
-     received in client authentication assertions;
+ 1. shall accept its issuer identifier value (as defined in [@RFC8414]) either as the
+    `aud` claim (when a string) or as a member of the `aud` claim (when an array) received
+    in client authentication assertions;
  1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed;
@@ -311,7 +312,7 @@ Clients
  1. if using `private_key_jwt`, shall use the Authorization Server's
     issuer identifier value (as defined in [@RFC8414]) in the `aud`
     claim sent in client authentication assertions, and the issuer
-    identifier value shall be sent as a string not as an item in an
+    identifier value should be sent as a string not as an item in an
     array;
  1. shall support refresh tokens and their rotation;
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
