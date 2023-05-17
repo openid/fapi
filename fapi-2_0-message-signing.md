@@ -149,7 +149,7 @@ is signed.
 
 Authorization servers implementing FAPI2 authorization request signing
 
- 1. shall support and verify signed request objects according to JAR
+ 1. shall support, require use of, and verify signed request objects according to JAR
     [@!RFC9101] at the PAR endpoint [@!RFC9126];
  2. shall require the aud claim in the request object to be, or to be an array containing, the OP's Issuer Identifier URL;
  3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
@@ -159,11 +159,27 @@ Authorization servers implementing FAPI2 authorization request signing
 
 Clients implementing FAPI2 authorization request signing
 
- 1. shall sign request objects according to JAR [@!RFC9101] that are sent to the PAR 
-    endpoint [@!RFC9126];
+ 1. shall send all authorization parameters to the PAR endpoint [@!RFC9126] in a JAR
+    [@!RFC9101] signed requested object;
  2. shall send the `aud` claim in the request object as the OP's Issuer Identifier URL;
  3. shall send a `nbf` claim in the request object;
  4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes.
+
+### Client Metadata {#client-metadata}
+
+The Dynamic Client Registration Protocol [@RFC7591] defines an API
+for dynamically registering OAuth 2.0 client metadata with authorization servers.
+The metadata defined by [@RFC7591], and registered extensions to it,
+also imply a general data model for clients that is useful for authorization server implementations
+even when the Dynamic Client Registration Protocol isn't in play.
+Such implementations will typically have some sort of user interface available for managing client configuration.
+
+The following client metadata parameter is introduced by this specification:
+
+* `response_modes`: 
+    * OPTIONAL. A JSON array of strings containing the list of Response Modes that
+      the Client may use. If omitted, the default is that the Client may use any of
+      the Response Modes supported by the Authorization Server.
  
 ## Signing Authorization Responses
 
@@ -173,7 +189,7 @@ To support non-repudiation for NR3, Authorization Responses can be signed.
 
 Authorization servers implementing FAPI2 authorization response signing
 
- 1. shall support and issue signed authorization responses via JWT Secured Authorization 
+ 1. shall support, require use of, and issue signed authorization responses via JWT Secured Authorization 
     Response Mode for OAuth 2.0 [@!JARM].
 
 **NOTE**: When using [@!JARM] an Authorization Server should only include the iss authorization response 
@@ -244,6 +260,20 @@ Such messages may well contain personally identifiable information and implement
 whether such messages need to be stored. If they are stored then adequate access controls must be 
 put in place to protect that data. Such controls should follow data minimisation principles and ensure that 
 there are tamper-proof audit logs.
+
+# IANA Considerations
+## OAuth Dynamic Client Registration Metadata Registration
+
+This specification requests registration of the following client metadata
+definitions in the IANA "OAuth Dynamic Client Registration Metadata" registry
+established by [@RFC7591]:
+
+### Registry Contents
+
+* Client Metadata Name: `response_modes`
+* Client Metadata Description: Array of the response modes that the client may use
+* Change Controller: IESG
+* Specification Document(s): (#client-metadata) of [[ this specification ]]
 
 # Acknowledgements
 
