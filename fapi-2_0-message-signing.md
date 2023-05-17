@@ -9,14 +9,6 @@ keyword = ["security", "openid"]
 name = "Internet-Draft"
 value = "fapi-2_0-message-signing-01"
 status = "standard"
- 
-[[author]]
-initials="D."
-surname="Fett"
-fullname="Daniel Fett"
-organization="yes.com"
-    [author.address]
-    email = "mail@danielfett.de"
 
 [[author]]
 initials="D."
@@ -25,6 +17,14 @@ fullname="Dave Tonge"
 organization="Moneyhub Financial Technology"
     [author.address]
     email = "dave@tonge.org"
+ 
+[[author]]
+initials="D."
+surname="Fett"
+fullname="Daniel Fett"
+organization="Authlete"
+    [author.address]
+    email = "mail@danielfett.de"
 
 %%%
 

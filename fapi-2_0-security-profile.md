@@ -14,9 +14,17 @@ status = "standard"
 initials="D."
 surname="Fett"
 fullname="Daniel Fett"
-organization="yes.com"
+organization="Authlete"
     [author.address]
     email = "mail@danielfett.de"
+
+[[author]]
+initials="D."
+surname="Tonge"
+fullname="Dave Tonge"
+organization="Moneyhub Financial Technology"
+    [author.address]
+    email = "dave@tonge.org"
 
 
 %%%
@@ -623,7 +631,7 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 This specification was developed by the OpenID FAPI Working Group. 
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Dave Tonge, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
 
 
 
