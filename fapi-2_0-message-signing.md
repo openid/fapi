@@ -105,9 +105,9 @@ following standards are used in this profile:
   * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [@I-D.ietf-httpbis-digest-headers]
   for signing HTTP requests to and responses from Resource Servers.
 
-We understand that some ecosystems may only desire to implement 1 or 2 of the above 3, it is therefore 
+We understand that some ecosystems may only desire to implement 1, 2 or 3 of the above 4, it is therefore
 anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
-will be separate test options for each of the following:
+will be separate conformance testing options for each of the following:
 
  * Signed Authorization Requests
  * Signed Authorization Responses
