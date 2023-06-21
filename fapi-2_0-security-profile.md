@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Security Profile"
+title = "FAPI 2.0 Security Profile — draft"
 abbrev = "fapi-2-security-profile"
 ipr = "none"
 workgroup = "fapi"
