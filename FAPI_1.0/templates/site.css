@@ -1,0 +1,551 @@
+html {
+  color: #555;
+  margin: auto;
+  padding: 10px;
+  max-width: 76em;
+}
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-size: 14px;
+  font-family: var(--font-sans);
+	line-height: 1.6;
+	max-width: 90%;
+	right: 20em;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  scroll-behavior: smooth;
+}
+
+.subtitle {
+  font-size: 18pt;
+  font-style: italic;
+}
+.abstract-title {font-weight: bold; font-size: 18px;}
+.abstract {margin-bottom: 3em;}
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+.btn {
+  font-family: Arial, Verdana, sans-serif;
+  background-color: #337ab7;
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  white-space: normal;
+  border-radius: 12px;
+}
+.extension-checkbox {
+  float: right;
+  opacity: 0.5;
+  cursor: help;
+}
+.container {
+  display: flex;
+}
+
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre, code {
+  font-size: 95%;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+main {
+  position: relative; /* needed for the anchor links to work */
+  order: 1;
+  min-width: 300px;
+  padding-bottom: 60em; /* ensure that any anchor can be at top */
+}
+#input-search {
+  font-family: Arial, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 13pt;
+  border-radius: 24px;
+}
+#input-search {
+  border-style: none;
+  border: 1px solid grey;
+}
+#submit-search {
+  border-style: none;
+  background-color: #337ab7;
+  color: white;
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 12pt;
+  font-weight: normal;
+  border-radius: 6px;
+  padding: 4px;
+}
+.modal {
+  display: none;
+}
+.modal.scrollable {
+  height: 32em;
+  overflow-y: scroll;
+}
+.modal.show {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 90%;
+  margin: auto;
+  background: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.modal-header {
+background-color: cyan;
+  margin: 0;
+  padding: 4pt 0pt 4pt 0pt;
+  font-size: 13pt;
+  font-weight: 600;
+}
+.modal-title {
+}
+.modal-body {
+  padding: 6pt;
+}
+header span {
+  font-family: Arial, Verdana, sans-serif;
+}
+header .big {
+  font-size: 36pt;
+border: none;
+}
+header .small {
+  font-size: 22pt;
+  color: gray;
+}
+h1.title {
+  clear: both;
+  font-size: 28px;
+  padding: 1em 0 0.5em;
+}
+h1, h2, h3 {
+  padding-bottom: 3px;
+  border-bottom: 1px solid black;
+}
+h4 { font-size: 14pt;
+  font-weight: bold;
+  margin-top: 1em;
+}
+h1 {
+  font-size: 18pt;
+}
+h2 {
+  font-size: 16pt;
+}
+h3 {
+  font-size: 14pt;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+
+
+code{
+  white-space: pre-wrap;
+  font-size: 1em;
+  font-family: monospace;
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  white-space: break-spaces;
+  background-color: var(--color-neutral-muted);
+  border-radius: 6px;
+  background-color: #eeeeee;
+}
+span.nowrap code { white-space: nowrap; }
+a.option code { color: inherit; }
+pre{ font-size: 11pt; }
+.smallcaps{font-variant: small-caps;}
+.line-block{white-space: pre-line;}
+.column{display: inline-block;}
+q { quotes: "窶�" "窶�" "窶�" "窶�"; }
+a {
+  color: #22e;
+  text-decoration: none;
+}
+
+.card-header {
+  background-color: #eee;
+  border-radius: 24px 24px 24px 24px;
+  padding: 3pt 6pt 3pt 6pt;
+}
+.show .card-header {
+  border-radius: 24px 24px 0px 0px;
+}
+.card {
+  padding: 0pt;
+  margin: 6pt;
+  border: 1px solid grey;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 24px;
+}
+.card-body {
+  padding: 6pt;
+  display: none;
+}
+.show .card-body {
+  display: block;
+}
+table {
+  margin-top: 1em;
+	margin-bottom: 1em;
+}
+table th {
+  border-bottom: 1px solid black;
+}
+
+th, td {
+  padding-right: 10pt;
+  vertical-align: top;
+}
+.twocol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.col {
+  min-width: 12em;
+  max-width: 22em;
+}
+ul ul {
+  margin-bottom: 0.5em
+}
+ul { list-style-type: square; }
+dl { margin-top: auto; }
+dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
+dd {
+  margin-left: 0em;
+}
+hr {
+  height: 1px;
+  color: #aaa;
+  background-color: #aaa;
+  border: 0;
+  margin: .2em 0 .2em 0;
+}
+blockquote {
+  padding: 0 1.6em;
+		color: #666;
+		background-color: #eeeeee;
+}
+footer {
+  padding: 1em;
+  color: #888;
+  text-align: center;
+  font-size: 12pt;
+}
+/* show the anchor links in headings if one hovers over the heading. */
+.anchor:before {
+  /* link symbol + variation selector-15 (UFE0E); the latter forces to use the
+   current font, not some special emoji. */
+  content: '迫\FE0E';
+  display: inline-block;
+  font-size: 14pt;
+  left: -1.75em;
+  line-height: 1.66;
+  opacity: 0.2;
+  padding-right: 0.5em;
+  position: absolute;
+}
+.anchor:hover {
+  text-decoration: none;
+}
+h1:hover > .anchor::before,
+h2:hover > .anchor::before,
+h3:hover > .anchor::before {
+  opacity: 1;
+}
+/* end: heading anchor links */
+
+/* Print CSS */
+@media print {
+  body {
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height: 1.4;
+  word-spacing:1.1pt;
+  letter-spacing:0.2pt;
+  font-family: "Times New Roman", serif;
+  color: #000;
+  background: none;
+  }
+  /*Headings */
+  h1,h2,h3,h4,h5,h6 { font-family: Helvetica, Arial, sans-serif; }
+  h1{font-size:19pt;}
+  h2{font-size:17pt;}
+  h3{font-size:15pt;}
+  h4,h5,h6{font-size:12pt;}
+
+  pre, code { font: 10pt Courier, monospace; }
+  blockquote { margin: 1.3em; padding: 1em;  font-size: 10pt; }
+  hr { background-color: #ccc; }
+
+  /* Images */
+  img { float: left; margin: 1em 1.5em 1.5em 0; }
+  a img { border: none; }
+
+  /* Links */
+  a:link, a:visited { background: transparent; font-weight: normal; text-decoration: underline; color:#333; }
+  a:link[href^="http://"]:after, a[href^="http://"]:visited:after { content: " (" attr(href) ")"; font-size: 90%; }
+  a[href^="http://"] {color:#000; }
+
+  /* Table */
+  table { margin: 1px; text-align:left; }
+  th { font-weight: bold; }
+  th,td { padding: 4px 10px 4px 0; }
+  tfoot { font-style: italic; }
+  caption { background: #fff; margin-bottom:2em; text-align:left; }
+  thead {display: table-header-group;}
+  tr {page-break-inside: avoid;}
+
+  /*hide various parts from the site*/
+  .extension-checkbox { display: none; }
+}
+
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}

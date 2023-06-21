@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+  <meta name="description" content="$description-meta$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+  <style>
+    $styles.html$
+  </style>
+$for(css)$
+  <link rel="stylesheet" href="$css$" />
+$endfor$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+$if(math)$
+$if(mathjax)$
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+$endif$
+  $math$
+$endif$
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+<table><tr>
+  <td>Working Group:</td><td>$WG$</td></tr>
+  <tr><td>Authors: </td>
+$for(author)$
+<td>$author$</td>
+$endfor$
+</tr>
+$if(date)$
+<tr>
+<td>Date:</td><td>$date$</td>
+</tr>
+$endif$
+</table>
+$if(title)$
+<header id="title-block-header">
+<h1 class="title">$title$
+$if(draft)$
+— draft-$ver$
+$endif$
+</h1>
+$if(subtitle)$
+<p class="subtitle">$subtitle$</p>
+$endif$
+
+$if(abstract)$
+<div class="abstract">
+<div class="abstract-title">$abstract-title$</div>
+$abstract$
+</div>
+$endif$
+
+
+$if(draft)$
+    <div id="warning">
+        <h2 id="name-warning">
+            Warning
+        </h2>
+        <p>This document is not an OIDF International Standard. It is distributed for
+            review and comment. It is subject to change without notice and may not be
+            referred to as an International Standard.</p>
+        <p>Recipients of this draft are invited to submit, with their comments,
+            notification of any relevant patent rights of which they are aware and to
+            provide supporting documentation.</p>
+    </div>
+$endif$
+
+
+</header>
+$endif$
+
+$if(toc)$
+      <div id="toc">
+          <a href="#" onclick="scroll(0,0)" class="toplink">▲</a>
+$if(toc-title)$
+          <h2 id="$idprefix$toc-title"><a href="#$idprefix$TOC" class="section-name selfRef">$toc-title$</a></h2>
+$endif$
+        <nav id="$idprefix$TOC" class="toc" role="doc-toc">
+$table-of-contents$
+        </nav>
+      </div>
+$endif$
+
+        <section class="note" id="section-note.1">
+      <h2 id="name-foreword">
+Foreword
+      </h2>
+<p>The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.</p>
+<p>Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.</p>
+</section>
+
+<section class="note" id="section-note.4">
+      <h2 id="name-notational-conventions">
+Notational Conventions
+      </h2>
+<p id="section-note.4-1">The keywords "shall", "shall not", "should", "should not", "may", and "can" in
+this document are to be interpreted as described in ISO Directive Part 2
+<span>[<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml" class="cite xref">ISODIR2</a>]</span>. These keywords are not used as dictionary terms such that any
+occurrence of them shall be interpreted as keywords and are not to be
+interpreted with their natural language meanings.
+They are all in lower case to rule out the dictionary meaning use of these words so that they can be translated easily.
+Following is a summary of the keywords.
+</p>
+<p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Kind</th>
+<th style="text-align: center;">Keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Requirement</td>
+<td style="text-align: center;">shall, shall not</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Recommendation</td>
+<td style="text-align: center;">should, should not</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Permission</td>
+<td style="text-align: center;">may</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Possibility</td>
+<td style="text-align: center;">can, cannot</td>
+</tr>
+</tbody>
+</table>
+</p>
+</section>
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+      </div>
+<div id="notices">
+      <h2 id="name-notices">
+Notices
+      </h2>
+<p>Copyright (c) 2023 The OpenID Foundation.</p>
+<p>The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.</p>
+<p>The technology described in this specification was made available
+from contributions from various sources, including members of
+the OpenID Foundation and others.
+Although the OpenID Foundation has taken steps to help ensure that
+the technology is available for distribution, it takes no position
+regarding the validity or scope of any intellectual property or other
+rights that might be claimed to pertain to the implementation or use of
+the technology described in this specification or the extent to which
+any license under such rights might or might not be available; neither
+does it represent that it has made any independent effort to identify
+any such rights. The OpenID Foundation and the contributors to
+this specification make no (and hereby expressly disclaim any)
+warranties (express, implied, or otherwise), including implied
+warranties of merchantability, non-infringement, fitness for a particular
+purpose, or title, related to this specification, and the entire risk as
+to implementing this specification is assumed by the implementer.
+The OpenID Intellectual Property Rights policy requires contributors to offer
+a patent promise not to assert certain patent claims against other contributors
+and against implementers. The OpenID Foundation invites any interested party to
+ bring to its attention any copyrights, patents, patent applications,
+or other proprietary rights that may cover technology
+that may be required to practice this specification.</p>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+    toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+    toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
