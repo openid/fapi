@@ -200,7 +200,7 @@ If the client requests the openid scope, the authorization server
 
 #### 5.2.2.3 Clients not requesting openid scope
 
-If the client does not requests the openid scope, the authorization server
+If the client does not request the openid scope, the authorization server
 
 1. shall require the `state` parameter defined in Section 4.1.1 of [RFC6749].
 
@@ -224,7 +224,7 @@ If `openid` is not in the `scope` value, then the public client
 
 9. shall include the `state` parameter defined in Section 4.1.1 of [RFC6749];
 10. shall verify that the `scope` received in the token response is either an exact match,
-or contains a subset of the `scope` sent in the authorization request; and
+or contains a subset of the `scope` sent in the authorization request if the request was passed in the front channel and was not integrity protected; and
 11. shall only use Authorization Server metadata obtained from the metadata document published by the Authorization Server at its well known endpoint as defined in [OIDD] or [RFC8414].
 
     **NOTE**: Adherence to [RFC7636] means that the token request includes `code_verifier` parameter in the request.
