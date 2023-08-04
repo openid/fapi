@@ -250,6 +250,20 @@ In FAPI2, there is no confidential information in the Authorization Response, he
 
 Usage of PKCE in FAPI 2 provides protection for code leakage described in Section 5.4 of [@!JARM].
 
+## Confusion between Resource Servers and Clients in Introspection Request
+
+In [@!I-D.ietf-oauth-jwt-introspection-response], the resource server accessing
+the introspection response is seen in the role of a client towards the
+authorization server that is providing the introspection endpoint. A malicious
+client (that is not a resource server) could attempt to call the introspection
+endpoint directly, and thus gather information about a leaked or stolen access
+token that it is not supposed to have access to, e.g., personal information
+about the resource owner.
+
+The authorization server therefore must ensure that the resource server is not
+confused with a regular client that is not supposed to call the introspection
+endpoint, and that the resource server has the necessary authorization to access
+the information associated with the access token.
 
 # Privacy considerations
 
