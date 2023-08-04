@@ -253,7 +253,7 @@ Usage of PKCE in FAPI 2 provides protection for code leakage described in Sectio
 ## Confusion between Resource Servers and Clients in Introspection Request
 
 In [@!I-D.ietf-oauth-jwt-introspection-response], the resource server accessing
-the introspection response is seen in the role of a client towards the
+the introspection endpoint is seen in the role of a client towards the
 authorization server that is providing the introspection endpoint. A malicious
 client (that is not a resource server) could attempt to call the introspection
 endpoint directly, and thus gather information about a leaked or stolen access
