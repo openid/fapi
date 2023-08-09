@@ -87,11 +87,11 @@ The following referenced documents are indispensable for the application of this
 
 [OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
 
-[OIDC]: http://openid.net/specs/openid-connect-core-1_0.html
+[OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
 [OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
 
-[OIDD]: http://openid.net/specs/openid-connect-discovery-1_0.html
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
 [MTLS] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
@@ -571,7 +571,7 @@ The following people contributed to this document:
 * [ISODIR2] ISO/IEC Directives Part 2
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: http://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
+[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 * [ISO29184] ISO/IEC 29184 Information technology — Online privacy notices and consent

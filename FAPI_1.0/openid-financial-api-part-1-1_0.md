@@ -102,7 +102,7 @@ The following referenced documents are indispensable for the application of this
 
 [OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
 
-[OIDD]: http://openid.net/specs/openid-connect-discovery-1_0.html
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
 [RFC7231] - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
 
@@ -505,7 +505,7 @@ The following people contributed to this document:
 * [ISODIR2] ISO/IEC Directives Part 2
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: http://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
+[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 * [RFC4122] A Universally Unique IDentifier (UUID) URN Namespace
