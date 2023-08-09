@@ -423,8 +423,6 @@ Registration.
 
 # 8. Privacy considerations
 
-## 8.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
