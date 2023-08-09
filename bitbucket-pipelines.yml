@@ -12,7 +12,7 @@ pipelines:
           - '*.html'
           - '*.xml'
   branches:
-    master:
+    pipeline-fix:
       - step:
           name: build
           services:
@@ -35,5 +35,5 @@ pipelines:
             - cp *.html openid.bitbucket.io/fapi/
             - cd openid.bitbucket.io/fapi
             - git add *
-            - git commit -m "Automatic update of FAPI drafts by pipeline"
+            - git diff-index --quiet HEAD || git commit -m "Automatic update of FAPI drafts by pipeline"
             - git push origin master
