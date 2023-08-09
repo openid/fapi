@@ -339,10 +339,13 @@ from the authorization endpoint.
 
 In this document, the authorization request is not encrypted. 
 Thus, it is possible to leak the information contained 
-if the web browser is compromised. 
+if the web browser is compromised. If authorization request 
+encryption is desired, the use of 
+[FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
-Authorization response can be encrypted as ID Token 
-can be encrypted. 
+The leakage of information from the ID token can be mitigated by encrypting the ID token. 
+If the leakage of any other information in the authorization response is of concern 
+then consider using [JARM] with encryption.
 
 It is possible to leak the information through the logs 
 if the parameters were recorded in the logs and 
@@ -457,7 +460,7 @@ what data will be released to the RP).
 These threats can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
 For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
 using `request_uri` or by encrypting the request object. 
-Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
+Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or [JARM] response. 
 
 # 9. Acknowledgement
 
@@ -533,6 +536,11 @@ The following people contributed to this document:
 * [PRELOAD] HSTS Preload List Submission
 
 [PRELOAD]: https://hstspreload.org/
+
+* [JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+
+[JARM]: https://openid.net/specs/oauth-v2-jarm.html
+
 
 # Appendix A Changes {-}
 * -01
