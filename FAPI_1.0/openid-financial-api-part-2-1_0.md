@@ -23,14 +23,14 @@ abstract: FAPI 1.0 security profile - part 2&colon; Baseline is an OAuth profile
 
 FAPI 1.0 consists of the following parts:
 
-* [Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1]
-* Financial-grade API Security Profile 1.0 - Part 2: Advanced
+* [FAPI Security Profile 1.0 - Part 1: Baseline][Part1]
+* FAPI Security Profile 1.0 - Part 2: Advanced
 
 These parts are intended to be used with [RFC6749], [RFC6750], [RFC7636], and [OIDC].
 
 # Introduction
 
-The Financial-grade API is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The Financial-grade API security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impresonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require financial institutions to allow what appears to be an automated attack against their applications.
+FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impersonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require institutions to allow what appears to be an automated attack against their applications.
 
 This document is Part 2 of FAPI Security Profile 1.0 that specifies an advanced security profile of OAuth that is suitable to be used for protecting APIs with high inherent risk. Examples include APIs that give access to highly sensitive data or that can be used to trigger financial transactions (e.g., payment initiation). This document specifies the controls against attacks such as: authorization request tampering, authorization response tampering including code injection, state injection, and token request phishing. Additional details are available in the security considerations section.
 
@@ -87,27 +87,27 @@ The following referenced documents are indispensable for the application of this
 
 [OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
 
-[OIDC]: http://openid.net/specs/openid-connect-core-1_0.html
+[OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
 [OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
 
-[OIDD]: http://openid.net/specs/openid-connect-discovery-1_0.html
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
 [MTLS] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
 [MTLS]: https://tools.ietf.org/html/rfc8705
 
-[JARM] - Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
-[JARM]: https://bitbucket.org/openid/fapi/src/master/Financial_API_JWT_Secured_Authorization_Response_Mode.md
+[JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
 [PAR] - OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://tools.ietf.org/html/draft-ietf-oauth-par
+[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
 
 [JAR] - OAuth 2.0 JWT Secured Authorization Request
 
-[JAR]: https://tools.ietf.org/html/draft-ietf-oauth-jwsreq
+[JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
@@ -133,7 +133,7 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 ## 5.1 Introduction
 
-The OIDF Financial-grade API (FAPI) security profile specifies security requirements
+The OIDF FAPI security profile specifies security requirements
 for high risk API resources protected by the OAuth 2.0 Authorization Framework that 
 consists of [RFC6749], [RFC6750], [RFC7636], and other specifications.
 
@@ -142,7 +142,7 @@ For example, read and write access to a bank API has a higher financial risk tha
 such, the security profiles of the authorization framework protecting these
 APIs are also different. 
 
-This profile describes security provisions for the server and client that are appropriate for Financial-grade APIs by defining the measures to mitigate:
+This profile describes security provisions for the server and client that are appropriate for highly secured APIs by defining the measures to mitigate:
 
 * attacks that leverage the weak binding of endpoints in [RFC6749] (e.g. malicious endpoint attacks, IdP mix-up attacks), and
 * attacks that modify authorization requests and responses unprotected in [RFC6749].
@@ -172,7 +172,7 @@ The `s_hash` value is a case sensitive string.
 
 An authorization server may protect authorization responses to clients using the "JWT Secured Authorization Response Mode" [JARM].
 
-[JARM] allows a client to request that an authorization server encodes the authorization response (of any response type) in a JWT. It is an alternative to utilizing ID Tokens as detached signatures for providing financial-grade security on authorization responses and can be used with plain OAuth.
+[JARM] allows a client to request that an authorization server encodes the authorization response (of any response type) in a JWT. It is an alternative to utilizing ID Tokens as detached signatures for providing increased security on authorization responses and can be used with plain OAuth.
 
 This specification facilitates use of [JARM] in conjunction with the response type `code`.
 
@@ -193,7 +193,7 @@ As a profile of the OAuth 2.0 Authorization Framework, this document mandates th
 ### 5.2.2 Authorization server
 
 The authorization server shall support the provisions specified in clause 5.2.2 of 
-[Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1], with the exception
+[FAPI Security Profile 1.0 - Part 1: Baseline][Part1], with the exception
 that Section 5.2.2-7 (enforcement of [RFC7636]) is not required.
 
 In addition, the authorization server
@@ -246,7 +246,7 @@ In addition, if the `response_type` value `code` is used in conjunction with the
 
 ### 5.2.3 Confidential client
 
-A confidential client shall support the provisions specified in clause 5.2.3 and 5.2.4 of [Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1], except for [RFC7636] support.
+A confidential client shall support the provisions specified in clause 5.2.3 and 5.2.4 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], except for [RFC7636] support.
 
 In addition, the confidential client
 
@@ -284,10 +284,6 @@ In addition, if the `response_type` value `code` is used in conjunction with the
 
 1. shall verify the authorization responses as specified in [JARM], Section 4.4.
 
-### 5.2.4 (withdrawn)
-
-### 5.2.5 (withdrawn)
-
 # 6. Accessing protected resources (using tokens)
 
 ## 6.1 Introduction
@@ -300,12 +296,12 @@ The FAPI endpoints are OAuth 2.0 protected resource endpoints that return protec
 
 The protected resources supporting this document
 
-1. shall support the provisions specified in clause 6.2.1 [Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1]; and
+1. shall support the provisions specified in clause 6.2.1 [FAPI Security Profile 1.0 - Part 1: Baseline][Part1]; and
 1. shall adhere to the requirements in [MTLS].
 
 ### 6.2.2 Client provisions
 
-The client supporting this document shall support the provisions specified in clause 6.2.2 of [Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1].
+The client supporting this document shall support the provisions specified in clause 6.2.2 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1].
 
 # 7. (Withdrawn)
 
@@ -389,7 +385,7 @@ The server can verify that the state is the same as what was stored in the brows
 ## 8.5 TLS considerations
 As confidential information is being exchanged, all interactions shall be encrypted with TLS (HTTPS).
 
-Section 7.1 of [Financial-grade API Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
+Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. For TLS versions below 1.3, only the following 4 cipher suites shall be permitted:
     * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
@@ -564,14 +560,14 @@ The following people contributed to this document:
 
 # 11. Bibliography
 
-* [Part1] Financial-grade API Security Profile 1.0 - Part 1: Baseline
+* [Part1] FAPI Security Profile 1.0 - Part 1: Baseline
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
 * [ISODIR2] ISO/IEC Directives Part 2
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: http://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
+[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 * [ISO29184] ISO/IEC 29184 Information technology — Online privacy notices and consent
@@ -590,7 +586,7 @@ The following people contributed to this document:
 * [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
 * [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 * [MTLS] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
-* [JARM] Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0
+* [JARM] JWT Secured Authorization Response Mode for OAuth 2.0
 * [PAR] OAuth 2.0 Pushed Authorization Requests
 * [JAR] OAuth 2.0 JWT Secured Authorization Request
 * [SoK] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
@@ -614,7 +610,7 @@ established by [RFC7519].
 
 * Claim name: s_hash
 * Claim Description: State hash value
-* Change Controller: OpenID Foundation Financial-Grade API Working Group - openid-specs-fapi@lists.openid.net
+* Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
 * Reference: Section 5 of [[ this specification ]]
 
 
