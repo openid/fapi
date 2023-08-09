@@ -108,14 +108,14 @@ shall support the general requirements for Authorization Servers listed in claus
 In addition the Authorization server
 
 1. shall only support Confidential Clients for Client Initiated Backchannel Authentication flows;
-1. shall ensure unique authorization context exists in the authorization request or require a binding_message in the authentication request;
+1. shall ensure unique authorization context exists in the authentication request or require a binding_message in the authentication request;
 1. shall not support CIBA push mode;
 1. shall support CIBA poll mode;
 1. may support CIBA ping mode;
 1. shall require user authentication to an appropriate level for the operations the client will be authorized to perform on behalf of the user;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata; and
-1. may require clients to provide a `request_context` claim as defined in section 5.3 of this profile.
+1. may require clients to provide a `request_context` claim as defined in section 4.3 of this profile.
 
 When this profile is used with the FAPI 1.0 specifications, the Authorization Server
 
@@ -127,8 +127,6 @@ When this profile is used with the FAPI 1.0 specifications, the Authorization Se
 **NOTE:** The binding message is required to protect the user by binding the session on the consumption device with the session on the authentication device. An example use case is when a user is paying at POS terminal. The user will enter their user identifier to start the [@!CIBA] flow, the terminal will then display a code, the user will receive a notification on their phone (the authentication device) to ask them to authenticate and authorize the transaction, as part of the authorization process the user will be shown a code and will be asked to check that it is the same as the one shown on the terminal.
 
 **NOTE:** The FAPI CIBA profile only supports CIBA ping and poll modes, therefore it is only possible to retrieve access tokens and optionally refresh tokens from the token endpoint.
-
-**NOTE:** Given that the CIBA flow places an added level of trust on the Client, the FAPI CIBA profile requires the use of Signed Authentication Requests. This will enable the Authorization Server to store such requests, in an easily verifiable form, for future auditing purposes.
 
 **NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider https://tools.ietf.org/html/draft-ietf-secevent-subject-identifiers for a standards based method of communicating user identifiers.
 
@@ -164,7 +162,7 @@ When this profile is used with the FAPI 1.0 specifications, the provisions for a
 protected resources detailed in [@!FAPI1.1] and [@!FAPI1.2] apply fully.
 
 When this profile is used with the FAPI 2.0 specifications, the provisions for accessing
-protected resources detailed in [FAPI12] apply fully.
+protected resources detailed in [@!FAPI2] apply fully.
 
 ### Client Provisions
 
@@ -193,7 +191,11 @@ Dynamic Client Registration Metadata:
 
 ## Introduction
 
-The [@!CIBA] specification introduces some new attack vectors not present in OAuth 2 redirect based flows. This profile aims to help implementers of [@!CIBA] for financial-grade APIs to reduce or eliminate these attack vectors. There are however further security considerations that should be taken into account when implementing this specification.
+The [@!CIBA] specification introduces some new attack vectors not present in OAuth 2 
+redirect based flows. This profile aims to help implementers of [@!CIBA] for 
+higher security needs to reduce or eliminate these attack vectors. There are 
+however further security considerations that should be taken into account when 
+implementing this specification.
 
 ## Authentication sessions started without a users knowledge or consent
 
@@ -205,7 +207,7 @@ An attacker could start unsolicited authentication sessions on large numbers of 
 devices, causing distress and potentially enabling fraud.
 
 For this reason this profile highly recommends `login_hint` to have the properties of a
-nonce with the expectation bein g that it will be generated from an authorization server
+nonce with the expectation being that it will be generated from an authorization server
 owned client authentication device. Given the high levels of friction that this may impose
 it's anticipated that Authorization Servers may have to accept an `id_token_hint` as an
 alternative mechanism for Client Subject identification.
