@@ -284,10 +284,6 @@ In addition, if the `response_type` value `code` is used in conjunction with the
 
 1. shall verify the authorization responses as specified in [JARM], Section 4.4.
 
-### 5.2.4 (withdrawn)
-
-### 5.2.5 (withdrawn)
-
 # 6. Accessing protected resources (using tokens)
 
 ## 6.1 Introduction
