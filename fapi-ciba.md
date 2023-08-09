@@ -1,5 +1,5 @@
 %%%
-title = "FAPI Client Initiated Backchannel Authentication Profile"
+title = "FAPI Client Initiated Backchannel Authentication Profile - draft"
 abbrev = "fapi-ciba"
 ipr = "none"
 workgroup = "fapi"
@@ -7,7 +7,7 @@ keyword = ["security", "openid", "ciba"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "Financial_API_WD_CIBA-01"
+value = "fapi-ciba-03"
 status = "standard"
 
 [[author]]
