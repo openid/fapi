@@ -97,17 +97,17 @@ The following referenced documents are indispensable for the application of this
 
 [MTLS]: https://tools.ietf.org/html/rfc8705
 
-[JARM] - Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
-[JARM]: https://bitbucket.org/openid/fapi/src/master/Financial_API_JWT_Secured_Authorization_Response_Mode.md
+[JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
 [PAR] - OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://tools.ietf.org/html/draft-ietf-oauth-par
+[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
 
 [JAR] - OAuth 2.0 JWT Secured Authorization Request
 
-[JAR]: https://tools.ietf.org/html/draft-ietf-oauth-jwsreq
+[JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
@@ -590,7 +590,7 @@ The following people contributed to this document:
 * [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
 * [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 * [MTLS] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
-* [JARM] Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0
+* [JARM] JWT Secured Authorization Response Mode for OAuth 2.0
 * [PAR] OAuth 2.0 Pushed Authorization Requests
 * [JAR] OAuth 2.0 JWT Secured Authorization Request
 * [SoK] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
