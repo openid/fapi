@@ -339,9 +339,10 @@ In [@!I-D.ietf-oauth-jwt-introspection-response], the resource server accessing
 the introspection endpoint is seen in the role of a client towards the
 authorization server that is providing the introspection endpoint. A malicious
 client (that is not a resource server) could attempt to call the introspection
-endpoint directly, and thus gather information about a leaked or stolen access
-token that it is not supposed to have access to, e.g., personal information
-about the resource owner.
+endpoint directly, and thus gather information about an access token to which it
+is not supposed to have access. This may, for example, leak secrets including,
+if the access token was leaked or stolen, personal information about an
+End-User.
 
 The authorization server therefore must ensure that the resource server is not
 confused with a regular client that is not supposed to call the introspection
