@@ -92,9 +92,9 @@ The following referenced documents are indispensable for the application of this
 
 [X.1254]: https://www.itu.int/rec/T-REC-X.1254
 
-[MTLS] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
-[MTLS]: https://tools.ietf.org/html/rfc8705
+[RFC8705]: https://tools.ietf.org/html/rfc8705
 
 [RFC8414] - OAuth 2.0 Authorization Server Metadata
 
@@ -147,7 +147,7 @@ The authorization server
 1. should support public clients; 
 1. shall provide a client secret that adheres to the requirements in Section 16.19 of [OIDC] if a symmetric key is used;
 1. shall authenticate the confidential client using one of the following methods:
-    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [MTLS], or
+    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [RFC8705], or
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall require and use a key of size 2048 bits or larger for RSA algorithms;
 1. shall require and use a key of size 160 bits or larger for elliptic curve algorithms;
@@ -169,6 +169,7 @@ the generated token is computationally infeasible as per [RFC6749] Section 10.10
 1. shall require redirect URIs to use the https scheme;
 1. should issue access tokens with a lifetime of under 10 minutes unless the tokens are sender-constrained; and
 1. shall support [OIDD], may support [RFC8414] and shall not distribute discovery metadata (such as the authorization endpoint) by any other means.
+1. shall require the `response_type` values `code` or `code id_token`
 
     **NOTE**: The use of refresh tokens instead of long-lived access tokens for both 
     public and confidential clients is recommended.
@@ -235,7 +236,7 @@ or contains a subset of the `scope` sent in the authorization request if the req
 In addition to the provisions for a public client, a confidential client
 
 1. shall support the following methods to authenticate against the token endpoint:
-    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [MTLS], and
+    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [RFC8705], and
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall use RSA keys with a minimum 2048 bits if using RSA cryptography; 
 1. shall use elliptic curve keys with a minimum of 160 bits if using Elliptic Curve cryptography; and
@@ -530,7 +531,7 @@ The following people contributed to this document:
 * [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 * [OIDC] OpenID Connect Core 1.0 incorporating errata set 1
 * [X.1254] Entity authentication assurance framework
-* [MTLS] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+* [RFC8705] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 * [PRELOAD] HSTS Preload List Submission
 
 [PRELOAD]: https://hstspreload.org/
