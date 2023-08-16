@@ -169,6 +169,7 @@ the generated token is computationally infeasible as per [RFC6749] Section 10.10
 1. shall require redirect URIs to use the https scheme;
 1. should issue access tokens with a lifetime of under 10 minutes unless the tokens are sender-constrained; and
 1. shall support [OIDD], may support [RFC8414] and shall not distribute discovery metadata (such as the authorization endpoint) by any other means.
+1. shall require the `response_type` values `code` or `code id_token`
 
     **NOTE**: The use of refresh tokens instead of long-lived access tokens for both 
     public and confidential clients is recommended.
