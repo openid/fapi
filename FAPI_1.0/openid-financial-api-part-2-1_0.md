@@ -93,9 +93,9 @@ The following referenced documents are indispensable for the application of this
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
-[MTLS] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
-[MTLS]: https://tools.ietf.org/html/rfc8705
+[RFC8705]: https://tools.ietf.org/html/rfc8705
 
 [JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
@@ -205,7 +205,7 @@ In addition, the authorization server
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
 1. shall only issue sender-constrained access tokens;
-1. shall support [MTLS] as mechanism for constraining the legitimate senders of access tokens;
+1. shall support [RFC8705] as mechanism for constraining the legitimate senders of access tokens;
 1. (withdrawn);
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
@@ -214,7 +214,7 @@ In addition, the authorization server
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2-4):
-    1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [MTLS], or
+    1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC8705], or
     2. `private_key_jwt` as specified in section 9 of [OIDC];
 1. shall require the aud claim in the request object to be, or to be an array containing, the OP's Issuer Identifier URL;
 1. shall not support public clients;
@@ -250,7 +250,7 @@ A confidential client shall support the provisions specified in clause 5.2.3 and
 
 In addition, the confidential client
 
-1. shall support [MTLS] as mechanism for sender-constrained access tokens;
+1. shall support [RFC8705] as mechanism for sender-constrained access tokens;
 1. shall include the `request` or `request_uri` parameter as defined in Section 6 of [OIDC] in the authentication request;
 1. shall ensure the Authorization Server has authenticated the user to an appropriate Level of Assurance for the client's intended purpose;
 1. (moved to 5.2.3.1);
@@ -297,7 +297,7 @@ The FAPI endpoints are OAuth 2.0 protected resource endpoints that return protec
 The protected resources supporting this document
 
 1. shall support the provisions specified in clause 6.2.1 [FAPI Security Profile 1.0 - Part 1: Baseline][Part1]; and
-1. shall adhere to the requirements in [MTLS].
+1. shall adhere to the requirements in [RFC8705].
 
 ### 6.2.2 Client provisions
 
@@ -315,7 +315,7 @@ There is no way that the client can find out whether the resource access was gra
 The two differ in the risk profile and the client may want to differentiate them.
 The protected resources that conform to this document differentiate them.
 The protected resources that conform to this document shall not accept a bearer access token.
-They shall only support sender-constrained access tokens via [MTLS].
+They shall only support sender-constrained access tokens via [RFC8705].
 
 ## 8.3 Attacks using weak binding of authorization server endpoints
 
@@ -334,7 +334,7 @@ In this attack, the client developer is socially engineered into believing that 
 to the URL that is controlled by the attacker. As a result, the client sends the `code` and the client secret to 
 the attacker, which will be replayed subsequently. 
 
-When the FAPI Security Profile 1.0 client uses [MTLS], the client's secret (the private key corresponding to its TLS certificate) is
+When the FAPI Security Profile 1.0 client uses [RFC8705], the client's secret (the private key corresponding to its TLS certificate) is
 not exposed to the attacker, which therefore cannot authenticate towards the token endpoint of the authorization server.
 
 ### 8.3.3 Identity provider (IdP) mix-up attack
@@ -354,7 +354,7 @@ issuer URL of the IdP it sent the authorization request to (the rogue IdP). The 
 ### 8.3.4 (removed)
 
 ### 8.3.5 Access token phishing
-Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 Advanced clients use [MTLS] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
+Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 Advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
 
 ## 8.4 Attacks that modify authorization requests and responses
 
@@ -464,9 +464,9 @@ In addition, this profile
 
 ## 8.10 Multiple clients sharing the same key
 
-The use of [MTLS] for client authentication and sender constraining access tokens brings
+The use of [RFC8705] for client authentication and sender constraining access tokens brings
 significant security benefits over the use of shared secrets. However in some deployments
-the certificates used for [MTLS] are issued by a Certificate Authority at an organization
+the certificates used for [RFC8705] are issued by a Certificate Authority at an organization
 level rather than a client level. In such situations it may be common for an organization 
 with multiple clients to use the same certificates (or certificates with the same DN) 
 across clients. Implementers should be aware that such sharing means that a compromise 
@@ -585,7 +585,7 @@ The following people contributed to this document:
 * [OIDC] OpenID Connect Core 1.0 incorporating errata set 1
 * [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
 * [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-* [MTLS] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+* [RFC8705] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 * [JARM] JWT Secured Authorization Response Mode for OAuth 2.0
 * [PAR] OAuth 2.0 Pushed Authorization Requests
 * [JAR] OAuth 2.0 JWT Secured Authorization Request
