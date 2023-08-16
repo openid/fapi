@@ -30,7 +30,7 @@ These parts are intended to be used with [RFC6749], [RFC6750], [RFC7636], and [O
 
 # Introduction {-}
 
-The FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impresonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require financial institutions to allow what appears to be an automated attack against their applications.
+FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impresonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require financial institutions to allow what appears to be an automated attack against their applications.
 
 This document is Part 1 of FAPI Security Profile 1.0. It specifies a baseline security profile of OAuth that is suitable for protecting APIs with a moderate inherent risk. Importantly, this profile does not provide non-repudiation (signing of authorization requests and responses) and sender-constrained access tokens. If such features or a higher level of security is desired, the use of [FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
@@ -102,7 +102,7 @@ The following referenced documents are indispensable for the application of this
 
 [OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
 
-[OIDD]: http://openid.net/specs/openid-connect-discovery-1_0.html
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
 [RFC7231] - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
 
@@ -200,7 +200,7 @@ If the client requests the openid scope, the authorization server
 
 #### 5.2.2.3 Clients not requesting openid scope
 
-If the client does not requests the openid scope, the authorization server
+If the client does not request the openid scope, the authorization server
 
 1. shall require the `state` parameter defined in Section 4.1.1 of [RFC6749].
 
@@ -224,7 +224,7 @@ If `openid` is not in the `scope` value, then the public client
 
 9. shall include the `state` parameter defined in Section 4.1.1 of [RFC6749];
 10. shall verify that the `scope` received in the token response is either an exact match,
-or contains a subset of the `scope` sent in the authorization request; and
+or contains a subset of the `scope` sent in the authorization request if the request was passed in the front channel and was not integrity protected; and
 11. shall only use Authorization Server metadata obtained from the metadata document published by the Authorization Server at its well known endpoint as defined in [OIDD] or [RFC8414].
 
     **NOTE**: Adherence to [RFC7636] means that the token request includes `code_verifier` parameter in the request.
@@ -339,10 +339,13 @@ from the authorization endpoint.
 
 In this document, the authorization request is not encrypted. 
 Thus, it is possible to leak the information contained 
-if the web browser is compromised. 
+if the web browser is compromised. If authorization request 
+encryption is desired, the use of 
+[FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
-Authorization response can be encrypted as ID Token 
-can be encrypted. 
+The leakage of information from the ID token can be mitigated by encrypting the ID token. 
+If the leakage of any other information in the authorization response is of concern 
+then consider using [JARM] with encryption.
 
 It is possible to leak the information through the logs 
 if the parameters were recorded in the logs and 
@@ -420,8 +423,6 @@ Registration.
 
 # 8. Privacy considerations
 
-## 8.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
@@ -457,7 +458,7 @@ what data will be released to the RP).
 These threats can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
 For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
 using `request_uri` or by encrypting the request object. 
-Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
+Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or [JARM] response. 
 
 # 9. Acknowledgement
 
@@ -502,7 +503,7 @@ The following people contributed to this document:
 * [ISODIR2] ISO/IEC Directives Part 2
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: http://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
+[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 * [RFC4122] A Universally Unique IDentifier (UUID) URN Namespace
@@ -533,6 +534,11 @@ The following people contributed to this document:
 * [PRELOAD] HSTS Preload List Submission
 
 [PRELOAD]: https://hstspreload.org/
+
+* [JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+
+[JARM]: https://openid.net/specs/oauth-v2-jarm.html
+
 
 # Appendix A Changes {-}
 * -01
