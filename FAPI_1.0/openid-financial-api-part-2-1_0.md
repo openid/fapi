@@ -356,6 +356,12 @@ issuer URL of the IdP it sent the authorization request to (the rogue IdP). The 
 ### 8.3.5 Access token phishing
 Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 Advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
 
+For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the client's misconfigured token endpoint. The attacker then gains access to resources of the honest resource owner through the client.
+
+Misconfigured endpoints are mitigated by using metadata in the Authorization Server's published metadata document as defined in [OIDD] or [RFC8414].
+
+ID Token replay can be mitigated by requiring the `at_hash` in the token endpoint's ID Token response to verify the validity of the access token.
+
 ## 8.4 Attacks that modify authorization requests and responses
 
 ### 8.4.1 Introduction
