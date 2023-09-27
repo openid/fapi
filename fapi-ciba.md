@@ -112,7 +112,6 @@ In addition the Authorization server
 1. shall not support CIBA push mode;
 1. shall support CIBA poll mode;
 1. may support CIBA ping mode;
-1. shall require user authentication to an appropriate level for the operations the client will be authorized to perform on behalf of the user;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata; and
 1. may require clients to provide a `request_context` claim as defined in section 4.3 of this profile.
@@ -145,6 +144,8 @@ In addition, the Confidential Client
 When this profile is used with the FAPI 1.0 specifications, the Confidential Client
 
 1. should only send Signed Authentication Requests as defined in [@!CIBA] 7.1.1 to the Backchannel Authentication Endpoint.
+
+##NOTE:## When used with FAPI 2.0, both signed and unsigned requests are supported.
 
 ### Extensions to CIBA authentication request
 
