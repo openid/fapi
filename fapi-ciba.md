@@ -141,7 +141,6 @@ support the general requirements for Clients listed in clause 5.3.2.1 of [@!FAPI
 In addition, the Confidential Client
 
 1. shall ensure sufficient authorization context exists in authorization request or shall include a binding_message in the authentication request; and
-1. shall ensure the Authorization Server has authenticated the user to an appropriate level for the client's intended purpose.
 
 When this profile is used with the FAPI 1.0 specifications, the Confidential Client
 
