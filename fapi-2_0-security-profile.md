@@ -229,8 +229,7 @@ Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
     the metadata document as specified in [@!OIDD] and [@!RFC8414];
- 1. shall reject requests using the resource owner password credentials grant or
-    the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC];
+ 1. shall reject requests using the resource owner password credentials grant;
  1. shall only support confidential clients as defined in [@!RFC6749];
  1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
@@ -280,8 +279,7 @@ This specification goes further by placing a hard lower bound of 10 seconds in o
 
 For the Authorization Code flow, Authorization servers
 
-1. shall support the authorization code grant (`response_type=code` &
-    `grant_type=authorization_code`) described in [@!RFC6749];
+1. shall require the value of response_type described in [@!RFC6749]to be code;
 1. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126];
 1. shall reject authorization requests sent without [@!RFC9126];
