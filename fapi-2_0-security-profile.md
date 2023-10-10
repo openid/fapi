@@ -202,8 +202,8 @@ In the following, a profile of the following technologies is defined:
   * Proof Key for Code Exchange by OAuth Public Clients (PKCE) [@!RFC7636]
   * OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access
     Tokens (MTLS) [@!RFC8705]
-  * OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
-    [@!I-D.ietf-oauth-dpop]
+  * OAuth 2.0 Demonstrating Proof of Possession (DPoP)
+    [@!RFC9449]
   * OAuth 2.0 Pushed Authorization Requests (PAR) [@!RFC9126]
   * OAuth 2.0 Authorization Server Metadata [@!RFC8414]
   * OAuth 2.0 Authorization Server Issuer Identification [@!RFC9207]
@@ -223,7 +223,7 @@ Authorization servers
  1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
     -  MTLS as described in [@!RFC8705], or
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop];
+    -  DPoP as described in [@!RFC9449];
  1. shall authenticate clients using one of the following methods:
      - MTLS as specified in Section 2 of [@!RFC8705], or
      - `private_key_jwt` as specified in Section 9 of [@!OIDC];
@@ -235,9 +235,9 @@ Authorization servers
  1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed;
- 1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!I-D.ietf-oauth-dpop]);
+ 1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
- 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!I-D.ietf-oauth-dpop]).
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
  
 **NOTE**: In order to facilitate interoperability the authorization server should also 
 accept its token endpoint URL or the URL of the endpoint at which the assertion was 
@@ -309,7 +309,7 @@ Clients
 
  1. shall support sender-constrained access tokens using one or both of the following methods:
     -  MTLS as described in [@!RFC8705], or
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop];
+    -  DPoP as described in [@!RFC9449];
  1. shall support client authentication using one or both of the following methods:
     - MTLS as specified in section 2 of [@!RFC8705], or
     - `private_key_jwt` as specified in section 9 of [@!OIDC];
@@ -325,7 +325,7 @@ Clients
  1. shall support refresh tokens and their rotation;
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
     the `mtls_endpoint_aliases` metadata defined in [@!RFC8705];
- 1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!I-D.ietf-oauth-dpop]);
+ 1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker; and
  1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match;
@@ -346,7 +346,7 @@ server to synchronize it's own clock when generating client assertions.
 
 Although Authorization Servers are required to support "Authorization
 Code Binding to DPoP Key" (as defined by Section 10.1 of
-[@!I-D.ietf-oauth-dpop]), clients are not required to use it.
+[@!RFC9449]), clients are not required to use it.
 
 
 #### Authorization Code Flow
@@ -378,7 +378,7 @@ Resource servers with the FAPI endpoints
    of [@!RFC6750];
 1. shall support and verify sender-constrained access tokens using one or both of the following methods:
     -  MTLS as described in [@!RFC8705], or
-    -  DPoP as described in [@!I-D.ietf-oauth-dpop].
+    -  DPoP as described in [@!RFC9449].
     
 
 ## Cryptography and Secrets
@@ -438,7 +438,7 @@ the attacker might be able to specify a different amount or destination account.
 Possible mitigations for this are:
 
 1. Resource servers uses short-lived DPoP nonces to reduce the time window where a request can be replayed
-2. Resource servers implement replay prevention using the `jti` header as explained in [@!I-D.ietf-oauth-dpop]
+2. Resource servers implement replay prevention using the `jti` header as explained in [@!RFC9449]
 3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
 4. Consider MTLS sender-constraining instead of DPoP
 
@@ -478,7 +478,7 @@ could be used in selecting which key to use to verify a message signature:
 ### Injection of stolen access tokens
 
 There are potential situations where the attacker may be able to inject stolen access
-tokens into a client to bypass [@!RFC8705] or [@!I-D.ietf-oauth-dpop]
+tokens into a client to bypass [@!RFC8705] or [@!RFC9449]
 sender-constraining of the access token, as described in "Cuckoo's Token Attack" in
 [@FAPI1SEC].
 

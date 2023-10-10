@@ -240,7 +240,7 @@ Clients sending signed resource requests act in the role of "signer" as defined 
 1. shall include the `created` parameter (the signature creation time) in the signature;
 1. shall include the `tag` parameter with a value of `fapi-2-request` in the signature;
 1. shall include the `Authorization` header in the signature;
-1. when DPoP is in use, shall include the `DPoP` header in the signature;
+1. when DPoP [@!RFC9449] is in use, shall include the `DPoP` header in the signature;
 1. when the message contains a request body, shall include the `content-digest` header as defined in 
     [@I-D.ietf-httpbis-digest-headers] in the request, shall include that header in the signature, and should use 
     content-encoding agnostic digest methods (such as sha-256).
