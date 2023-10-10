@@ -281,17 +281,18 @@ Resource servers responding with a signed resource response act in the role of "
 by [@!I-D.ietf-httpbis-message-signatures]. This signer
 
 1. shall create an HTTP Message Signature for the response as described in [@!I-D.ietf-httpbis-message-signatures];
-1. shall cryptographically link the response to the request by including the request signature, 
-request method, request target-uri, request signature input and (if applicable) the request content-digest in the response signature input. 
-This can be achieved by means of the `req` boolean flag defined in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures] 
-on the relevant fields of the request that caused the response;
+1. shall cryptographically link the response to the request by including the request method, request target-uri and 
+(if applicable) the request content-digest in the response signature input by means of the `req` boolean flag defined 
+in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures];
+1. if the request was signed, shall include the request signature and request signature input in the response 
+signature input by means of the `req` boolean flag defined in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures]; 
 1. shall include `@status` (the status code of the response) in the signature;
 1. shall include the `created` parameter (the signature creation time) in the signature;
 1. shall include the `tag` parameter with a value of `fapi-2-response` in the signature;
 1. when the response contains a response body, shall include the `content-digest` header as defined in [@!I-D.ietf-httpbis-digest-headers] 
 in the response, and shall include that header in the signature, and should use content-encoding agnostic digest methods (such as sha-256). 
 
-**NOTE:** In order to cryptographically link a response to a request, it is not sufficient to sign only the request signature value. Instead, the server has to sign all portions of the request relevant to generating the response by using the req feature of the HTTP message signature generation. This specification mandates a minimum coverage, but signers are required to sign anything else relevant to the API being protected, including headers and contents.
+**NOTE:** In order to cryptographically link a response to a signed request, it is not sufficient to sign only the request signature value. Instead, the server has to sign all portions of the request relevant to generating the response by using the req feature of the HTTP message signature generation. This specification mandates a minimum coverage, but signers are required to sign anything else relevant to the API being protected, including headers and contents.
  
  
 #### Clients
