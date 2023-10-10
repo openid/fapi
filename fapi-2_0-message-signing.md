@@ -225,12 +225,7 @@ Clients implementing FAPI2 introspection response signing
 
 ## HTTP Message Signing
 
-To support non-repudiation for NR5 and NR6, HTTP requests and responses
-can be signed.
-
-A future version of this profile expects to support HTTP Message Signing using the *HTTP Message Signatures* specification
-being developed by the IETF HTTP Working Group.
-
+To support non-repudiation for NR5 and NR6, HTTP requests, responses, or both can be signed.
 
 ### Requirements for signing and verifying resource requests
 
