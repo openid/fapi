@@ -351,9 +351,7 @@ This attack is mitigated by the use of OpenID Connect Hybrid Flow in which the h
 where the `iss` included in the response JWT. On receiving the authorization response, the client compares the `iss` value from the response with the 
 issuer URL of the IdP it sent the authorization request to (the rogue IdP). The client detects the conflicting issuer values and aborts the transaction. 
 
-### 8.3.4 (removed)
-
-### 8.3.5 Access token phishing
+### 8.3.4 Access token phishing
 Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 Advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
 
 For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the client's misconfigured token endpoint. The attacker then gains access to resources of the honest resource owner through the client.
@@ -844,3 +842,4 @@ which when decoded has the following body:
 # Appendix B Changes {-}
 * 2023-06-25
     * Applied changes needed to convert to pandoc
+    * #611 - 8.3.5 content moved to previously empty 8.3.4
