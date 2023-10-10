@@ -105,6 +105,10 @@ following standards are used in this profile:
   * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [@I-D.ietf-httpbis-digest-headers]
   for signing HTTP requests to and responses from Resource Servers.
 
+The primary goal of this specificaiton is to enable non-repudiation, however message signing also brings message
+integrity gurantees, that while not required to reeach the security goals laid out in the Attacker Model, 
+may enable some attacks to be detected earlier. 
+
 We understand that some ecosystems may only desire to implement 1, 2 or 3 of the above 4, it is therefore
 anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
 will be separate conformance testing options for each of the following:
