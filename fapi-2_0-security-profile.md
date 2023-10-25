@@ -73,7 +73,7 @@ OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model. This document specifies the requirements for:
 
  - Confidential Clients to securely obtain OAuth tokens from Authorization Servers;
- - Confidential Clients to securely use those tokens to access REST APIs at Resource Servers;
+ - Confidential Clients to securely use those tokens to access protected resources at Resource Servers;
  - Authorization Servers to securely issue OAuth tokens to confidential Clients;
  - Resource Servers to securely accept and verify OAuth tokens from confidential Clients.
 
