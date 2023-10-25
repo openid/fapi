@@ -239,9 +239,11 @@ Authorization servers
  1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
  
-**NOTE**: To facilitate interoperability, it is recommended that the authorization server also 
-accept its token endpoint URL or the URL of the endpoint at which the assertion was 
-received in the `aud` claim received in client authentication assertions, unless otherwise specified.
+**NOTE**: 
+To facilitate interoperability, [@!RFC9126] requires that for the PAR endpoint, the Authorization Server also 
+accepts its token endpoint URL or the URL of the endpoint at which the assertion was 
+received in the `aud` claim received in client authentication assertions. This specification recommends extending this practice to other authorization server endpoints as well.
+ 
 
 **NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
