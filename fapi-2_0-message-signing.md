@@ -106,7 +106,7 @@ following standards are used in this profile:
   for signing HTTP requests to and responses from Resource Servers.
 
 The primary goal of this specificaiton is to enable non-repudiation, however message signing also brings message
-integrity gurantees, that while not required to reeach the security goals laid out in the Attacker Model, 
+integrity guarantees, that while not required to reach the security goals laid out in the Attacker Model, 
 may enable some attacks to be detected earlier. 
 
 We understand that some ecosystems may only desire to implement 1, 2 or 3 of the above 4, it is therefore
