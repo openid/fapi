@@ -7,7 +7,7 @@ keyword = ["security", "oauth", "grant", "consent"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "oauth-v2-grant-management-02"
+value = "oauth-v2-grant-management-03"
 status = "standard"
 
 [[author]]
@@ -674,6 +674,11 @@ The technology described in this specification was made available from contribut
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -03
+
+   * editorial changes
+
 
    -02
    
