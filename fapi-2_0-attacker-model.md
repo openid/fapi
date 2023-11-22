@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Attacker Model"
+title = "FAPI 2.0 Attacker Model (Draft)"
 abbrev = "fapi-2_0-attacker-model"
 ipr = "none"
 workgroup = "fapi"

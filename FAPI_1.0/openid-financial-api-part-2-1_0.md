@@ -1,5 +1,5 @@
 ---
-title: FAPI security profile 1.0 - Part 2&colon; Advanced with incorporated errata 1
+title: FAPI security profile 1.0 - Part 2&colon; Advanced with incorporated errata 1 (Draft)
 date: 2023-06-25
 author: 
 - Nat Sakimura (NAT.Consulting)
