@@ -260,7 +260,7 @@ may implement it providing they meet the requirement in Clause 9.
 the Client Initiated Backchannel Authentication grant, etc.
 
 **NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
-This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopatability.
+This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
 
 
 #### Authorization Code Flow
