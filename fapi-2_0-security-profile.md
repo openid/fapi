@@ -277,7 +277,7 @@ This specification goes further by placing a hard lower bound of 10 seconds in o
 
 #### Authorization Code Flow
 
-For the Authorization Code flow, Authorization servers
+For flows that use the authorization endpoint, Authorization servers
 
 1. shall require the value of response_type described in [@!RFC6749]to be code;
 1. shall support client-authenticated pushed authorization requests
