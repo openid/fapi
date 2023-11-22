@@ -844,3 +844,10 @@ which when decoded has the following body:
 # Appendix B Changes {-}
 * 2023-06-25
     * Applied changes needed to convert to pandoc
+    * Changed the title to incorporate "errata"
+    * #600 - Changed Financial-grade API to FAPI
+    * #468 - Reference final versions of JAR, JARM, PAR
+    * #409 - Rename [MTLS] as [RFC8705]
+    * #405 - Use https for document references
+    * #527,624 - Added security consideration for Access Token Injection with ID Token Replay
+    * #613 - Remove empty subclauses 5.2.4 and 5.2.5

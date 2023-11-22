@@ -544,6 +544,14 @@ The following people contributed to this document:
 # Appendix A Changes {-}
 * -01
     * Reformatting to the pandoc markdown
-    * Changed Financial-grade API to FAPI
-    * Changed the title to incorporate "errata" 
+    * #600 - Changed Financial-grade API to FAPI
+    * Changed the title to incorporate "errata"
+    * #494 - 5.2.3-10 clarifies requirement for clients to verify the token endpoint's scope response if using 
+      non-integrity protected front-channel requests
+    * #428 - Recommends usage of [Part2] if authorization request encryption is desired and [JARM] for 
+      authorization response information leakage mitigation
+    * #405 - Use https for document references
+    * #601 - Removed subclause 8.1 title 
+    * #409 - Rename [MTLS] as [RFC8705]
+    * #458 - Clarifies that AS require response_type = code or code, id_token
 
