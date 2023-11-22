@@ -232,6 +232,9 @@ Authorization servers
  1. shall accept its issuer identifier value (as defined in [@RFC8414]) either as the
     `aud` claim (when a string) or as a member of the `aud` claim (when an array) received
     in client authentication assertions;
+ 1. should accept its token endpoint url or the url of the endpoint at which the 
+    assertion was received, either as the `aud` claim (when a string) or as a member 
+    of the `aud` claim (when an array) received in client authentication assertions;
  1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed;
@@ -240,10 +243,11 @@ Authorization servers
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
  
 **NOTE**: 
-To facilitate interoperability, [@!RFC9126] requires that for the PAR endpoint, the Authorization Server also 
-accepts its token endpoint URL or the URL of the endpoint at which the assertion was 
-received in the `aud` claim received in client authentication assertions. This specification recommends extending this practice to other authorization server endpoints as well.
- 
+To facilitate interoperability, this document requires that Authorization Servers
+accept their issuer value in the `aud` claim received in client authentication 
+assertions. It recommends that they also accept their token endpoint url or the url
+of the endpoint at which the assertion was received. This does not reduce the stricter
+requrement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint. 
 
 **NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
