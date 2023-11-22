@@ -334,8 +334,10 @@ In this attack, the client developer is socially engineered into believing that 
 to the URL that is controlled by the attacker. As a result, the client sends the `code` and the client secret to 
 the attacker, which the attacker can then replay. 
 
-When the FAPI Security Profile 1.0 client uses [RFC8705], the client's secret (the private key corresponding to its TLS certificate) is
-not exposed to the attacker, which therefore cannot authenticate towards the token endpoint of the authorization server. However, there is still the potential for a phished code be injected into a different flow involving an honest client.
+When the FAPI Security Profile 1.0 client uses [RFC8705], the client's secret (the private key corresponding 
+to its TLS certificate) is not exposed to the attacker, which therefore cannot authenticate towards the token 
+endpoint of the authorization server. However, there is still the potential for a phished code be injected into 
+a different flow involving an honest client.
 
 ### 8.3.3 Identity provider (IdP) mix-up attack
 In this attack, the client has registered multiple IdPs and one of them is a rogue IdP that returns the same `client_id` 
