@@ -335,6 +335,30 @@ confused with a regular client that is not supposed to call the introspection
 endpoint, and that the resource server has the necessary authorization to access
 the information associated with the access token.
 
+## Non-Repudiation limited to individual messages
+
+It is important to note that while this specification provides mechanisms for non-repudiation for 
+individual messages, it does not provide non-repudiation guarantees for a sequence of messages.
+
+## Non-Repudiation not provided for front channel Authorization Requests
+
+While only a small amount of information is present in a [@!FAPI2_Security_Profile_ID2] front channel 
+authorization request, it is important to note that non-repudiation is not provided for this message. 
+
+## Difficulty in linking a signed message to a real world identity
+
+This specification provides the technical means to sign messages, however proving that a specific signed response is
+linked to a specific real world end-user, or that a real world end-user initiated a specific request is outside of the
+scope of this document.
+
+## The value of JARM for non-repudiation
+
+The values signed in a JARM response may be of limited value for non-repudiation as the values are artifacts 
+of the OAuth flow (e.g. code and state) rather than real world values (e.g. account number and amount). However JARM
+is still useful in providing message integrity to the Authorization Response.
+
+
+
 # Privacy considerations
 
 In addition to the privacy considerations detailed in [@!FAPI2_Security_Profile_ID2] implementers should consider
