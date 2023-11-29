@@ -247,7 +247,7 @@ To facilitate interoperability, this document requires that Authorization Server
 accept their issuer value in the `aud` claim received in client authentication 
 assertions. It recommends that they also accept their token endpoint url or the url
 of the endpoint at which the assertion was received. This does not reduce the stricter
-requrement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint. 
+requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint. 
 
 **NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
