@@ -126,6 +126,13 @@ The OpenID FAPI Working Group is not currently aware of any mechanisms that woul
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
 
+Although it is possible to code Authorization Servers and Clients from first
+principles using this specification, implementers are encouraged to build on top
+of existing OpenID Connect and/or OAuth 2 implementations instead of embarking
+on a 'from scratch' implementation. See
+(#incomplete-or-incorrect-implementations-of-the-specifications) for additional
+considerations for ensuring that implementations are complete and correct.
+
 ### Profiling this specification
 
 This specification is a general purpose high security profile of
@@ -589,6 +596,24 @@ ensuring that the `redirect_uri` cannot be manipulated by the attacker.
 Implementers need to consider the confidentiality of the authorization
 response critical when designing their systems, in particular when this
 security profile is used in other contexts, e.g., mobile applications.
+
+### Incomplete or incorrect implementations of the specifications {#incomplete-or-incorrect-implementations-of-the-specifications}
+
+To achieve the full security and interoperability benefits, it is important that
+the implementation of this specification and the underlying OpenID Connect and
+OAuth specifications is both complete and correct.
+
+The OpenID Foundation provides tools that can be used to confirm that an
+implementation is correct:
+
+https://openid.net/certification/
+
+The OpenID Foundation maintains a list of certified implementations:
+
+https://openid.net/developers/certified/
+
+Deployments that use this specification should use certified implementations.
+
 
 # Privacy considerations
 
