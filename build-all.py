@@ -33,7 +33,6 @@ files_exclude = [
     './Financial_API_WD_003.md',
     './Financial_API_WD_004.md',
     './Financial_API_WD_005.md',
-    './Financial_API_WD_CIBA.md',
     './TR-Cross_browser_payment_initiation_attack.md',
     './fapi-grant-management.md',
     './FAPI_1.0/changes-between-id2-and-final.md',

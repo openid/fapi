@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Attacker Model"
+title = "FAPI 2.0 Attacker Model (Draft)"
 abbrev = "fapi-2_0-attacker-model"
 ipr = "none"
 workgroup = "fapi"
@@ -164,6 +164,14 @@ attacker model:
     browsers used by resource owners are considered not compromised. Other
     endpoints not controlled by an attacker behave according to the
     protocol.
+  * **Identity and Session Management:** End user's identity proofing,
+    authentication, identity and access management on a client or authorization
+    server are out of scope for this specification. It is assumed that clients
+    ensure that sessions of different users are properly protected from each
+    other and from attackers. Clients retrieving identity attributes using
+    OpenID Connect are required to check whether the identity attributes
+    returned fulfills their requirements.
+    
 
 # Attackers
 

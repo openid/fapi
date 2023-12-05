@@ -68,9 +68,14 @@ interpreted with their natural language meanings.
 
 # Scope
 
-This document specifies the requirements for confidential Clients to securely obtain
-OAuth tokens from Authorization Servers and securely use those tokens to access REST APIs at 
-Resource Servers. 
+This specification is a general purpose high security profile of
+OAuth 2.0 that has been proved by formal analysis to meet the stated
+attacker model. This document specifies the requirements for:
+
+ - Confidential Clients to securely obtain OAuth tokens from Authorization Servers;
+ - Confidential Clients to securely use those tokens to access protected resources at Resource Servers;
+ - Authorization Servers to securely issue OAuth tokens to confidential Clients;
+ - Resource Servers to securely accept and verify OAuth tokens from confidential Clients.
 
 # Normative references
 
@@ -120,6 +125,13 @@ part of this framework and may be used together with this profile include:
 The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow public clients 
 to be secured to the same degree and hence their use is not within the scope 
 of this specification.
+
+Although it is possible to code Authorization Servers and Clients from first
+principles using this specification, implementers are encouraged to build on top
+of existing OpenID Connect and/or OAuth 2 implementations instead of embarking
+on a 'from scratch' implementation. See
+(#incomplete-or-incorrect-implementations-of-the-specifications) for additional
+considerations for ensuring that implementations are complete and correct.
 
 ### Profiling this specification
 
@@ -232,6 +244,9 @@ Authorization servers
  1. shall accept its issuer identifier value (as defined in [@RFC8414]) either as the
     `aud` claim (when a string) or as a member of the `aud` claim (when an array) received
     in client authentication assertions;
+ 1. should accept its token endpoint url or the url of the endpoint at which the 
+    assertion was received, either as the `aud` claim (when a string) or as a member 
+    of the `aud` claim (when an array) received in client authentication assertions;
  1. shall not use refresh token rotation unless, in the case a response with a new 
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed;
@@ -239,9 +254,12 @@ Authorization servers
  1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
  
-**NOTE**: In order to facilitate interoperability the authorization server should also 
-accept its token endpoint URL or the URL of the endpoint at which the assertion was 
-received in the `aud` claim received in client authentication assertions.
+**NOTE**: 
+To facilitate interoperability, this document requires that Authorization Servers
+accept their issuer value in the `aud` claim received in client authentication 
+assertions. It recommends that they also accept their token endpoint url or the url
+of the endpoint at which the assertion was received. This does not reduce the stricter
+requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint. 
 
 **NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
@@ -396,6 +414,17 @@ Resource servers with the FAPI endpoints
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
+
+## MTLS Protection of all endpoints
+
+Some ecosystems are choosing to require clients accessing their endpoints to supply a TLS client certificate at
+endpoints that would not otherwise require a TLS client certificate (for example, the PAR endpoint when using
+`private_key_jwt` authentication).
+
+This is outside of the scope of both [@!RFC8705] and the FAPI standards, however in the interests of interoperability
+this document state that when using TLS as a transport level protection in this manner, authorization servers should
+expect clients to call the endpoints located in the root of the server metadata, and not those found in
+`mtls_endpoint_aliases`.
 
 
 ## Main Differences to FAPI 1.0
@@ -573,6 +602,24 @@ ensuring that the `redirect_uri` cannot be manipulated by the attacker.
 Implementers need to consider the confidentiality of the authorization
 response critical when designing their systems, in particular when this
 security profile is used in other contexts, e.g., mobile applications.
+
+### Incomplete or incorrect implementations of the specifications {#incomplete-or-incorrect-implementations-of-the-specifications}
+
+To achieve the full security and interoperability benefits, it is important that
+the implementation of this specification and the underlying OpenID Connect and
+OAuth specifications is both complete and correct.
+
+The OpenID Foundation provides tools that can be used to confirm that an
+implementation is correct:
+
+https://openid.net/certification/
+
+The OpenID Foundation maintains a list of certified implementations:
+
+https://openid.net/developers/certified/
+
+Deployments that use this specification should use certified implementations.
+
 
 # Privacy considerations
 
