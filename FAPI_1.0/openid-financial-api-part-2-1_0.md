@@ -131,7 +131,9 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 # 5. Advanced security profile
 
-## 5.1 Introduction
+## 5.1 Authorization Response Security
+
+### 5.1.1 Introduction
 
 The OIDF FAPI security profile specifies security requirements
 for high risk API resources protected by the OAuth 2.0 Authorization Framework that 
@@ -151,7 +153,7 @@ This profile does not support public clients.
 
 The following ways are specified to protect against modifications of authorization responses: Implementations can leverage OpenID Connect's Hybrid Flow that returns an ID Token in the authorization response or they can utilize the JWT Secured Authorization Response Mode for OAuth 2.0 ([JARM]) that returns and protects all authorization response parameters in a JWT.
 
-### 5.1.1 ID Token as Detached Signature
+### 5.1.2 ID Token as Detached Signature
 While the name ID Token (as used in the OpenID Connect Hybrid Flow) suggests that it is something that provides the identity of the resource owner (subject), it is not necessarily so. While it does identify the authorization server by including the issuer identifier, 
 it is perfectly fine to have an ephemeral subject identifier. In this case, the ID Token acts as a detached signature of the issuer to the authorization response and it was an explicit design decision of OpenID Connect Core to make the ID Token act as a detached signature.
 
@@ -168,7 +170,7 @@ in the `alg` header parameter of the ID Token's JOSE header. For instance,
 if the `alg` is `HS512`, hash the state value with SHA-512, then take the left-most 256 bits and base64url encode them.
 The `s_hash` value is a case sensitive string.
 
-### 5.1.2 JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+### 5.1.3 JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
 An authorization server may protect authorization responses to clients using the "JWT Secured Authorization Response Mode" [JARM].
 
@@ -849,4 +851,5 @@ which when decoded has the following body:
     * #405 - Use https for document references
     * #527,624 - Added security consideration for Access Token Injection with ID Token Replay
     * #613 - Remove empty subclauses 5.2.4 and 5.2.5
+    * #612 - Fixed hanging paragraph in 5.1 and renumbered subclauses in 5.1.x
     * #611 - 8.3.5 content moved to previously empty 8.3.4
