@@ -116,7 +116,8 @@ part of this framework and may be used together with this profile include:
 
 1. FAPI Message Signing is recommended when messages are required to be signed for the 
    purposes of non-repudiation.  
-1. FAPI CIBA is recommended when support is required for decoupled or cross device flows.
+1. FAPI Client Initiated Backchannel Authentication (CIBA) is recommended when support is 
+   required for decoupled or cross device flows.
 1. Grant Management is recommended for ecosystems that require interoperable grant management.
 1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar] is recommended when 
    the `scope` parameter is not expressive enough to convey the authorization that a client 
@@ -268,8 +269,10 @@ doesn't bring any security benefits for confidential clients, and can cause sign
 operational issues. However to allow for operational agility, Authorization Servers 
 may implement it providing they meet the requirement in Clause 9.
 
-**NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
-the Client Initiated Backchannel Authentication grant, etc.
+**NOTE**: Only the Authorization Code flow detailed below has been through a detailed security
+analysis and tested against the attacker model. However this document is structured to support
+other grants to be used with the general requirements above. For example the client credentials grant
+or the FAPI CIBA grant.
 
 **NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
 This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
