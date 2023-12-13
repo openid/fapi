@@ -1,10 +1,19 @@
 ---
 title: FAPI security profile 1.0 - Part 2&colon; Advanced with incorporated errata 1 (Draft)
-date: 2023-06-25
+date: 2023-12-12
 author: 
-- Nat Sakimura (NAT.Consulting)
-- John Bradley (Yubico)
-- Edmund Jay (Illumila)
+- name: Nat Sakimura
+  organization: Nat.Consulting
+  email: nat@natconsulting.org
+  uri: http://nat.sakimura.org/
+- name: John Bradley
+  organization: Yubico
+  email: ve7jtb@ve7jtb.com
+  uri: http://www.thread-safe.com/ 
+- name: Edmund Jay
+  organization: Illumila
+  email: ejay@mgi1.com
+  uri: http://illumila.la/
 description: 
   Profile of OAuth with high security options. 
 keywords:
