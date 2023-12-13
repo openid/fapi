@@ -162,7 +162,7 @@ servers
  1. shall only offer TLS protected endpoints and shall establish connections 
     to other servers using TLS;
  1. shall set up TLS connections using TLS version 1.2 or later;
- 2. when using TLS 1.2, shall follow the recommendations for Secure Use of Transport Layer Security in [@!RFC7525];
+ 2. when using TLS 1.2, shall follow the recommendations for Secure Use of Transport Layer Security in [@!BCP195];
  3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
     the issuance of rogue domain-validated TLS certificates; and
  4. shall perform a TLS server certificate check, as per [@!RFC6125].
@@ -203,7 +203,7 @@ requirements apply:
      have set such a policy and therefore protect all second-level
      domains below them.
   2. When using TLS 1.2, servers shall only use cipher suites allowed in
-     [@!RFC7525].
+     [@!BCP195].
  
 ## Profile
 
@@ -772,6 +772,15 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
+
+<reference anchor="BCP195" target="https://www.rfc-editor.org/info/bcp195">
+  <front>
+    <title>BCP195</title>
+    <author>
+      <organization>IETF</organization>
+    </author>
+  </front>
+</reference>
 
 # Notices
 
