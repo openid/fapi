@@ -10,6 +10,8 @@ import os
 import re
 import sys
 import subprocess
+from datetime import date
+
 
 dirs_exclude = [
     ".git",
@@ -36,10 +38,13 @@ files_exclude = [
     './TR-Cross_browser_payment_initiation_attack.md',
     './fapi-grant-management.md',
     './FAPI_1.0/changes-between-id2-and-final.md',
-    './FAPI_1.0/openid-financial-api-part-1-1_0.md',
-    './FAPI_1.0/openid-financial-api-part-2-1_0.md',
     './FAPI_2_0_Message_Signing.md',
     './FAPI_2_0_Security_Profile.md'
+]
+
+fapi1_files = [
+    './FAPI_1.0/openid-financial-api-part-1-1_0.md',
+    './FAPI_1.0/openid-financial-api-part-2-1_0.md'
 ]
 
 failed = []
@@ -50,23 +55,27 @@ def get_output_filename(fname):
     # get the output filename, i.e. do what https://github.com/oauthstuff/markdown2rfc/blob/master/make.sh#L18 does
     # and find the line like: value = "fapi-2_0-baseline-01"
     regex = r'^value[\W]*=[\W]*"(.*)"'
+    return get_output_filename_impl(fname, regex)
+
+def get_fapi1_output_filename(fname):
+    # get the fapi1 output filename, i.e. do what https://github.com/oauthstuff/markdown2rfc/blob/master/make.sh#L18 does
+    # and find the line like:  value: openid-financial-api-part-2-1_0-01
+    regex = r'^[\W]*value[\W]*:[\W]*(.*)$'
+    return get_output_filename_impl(fname, regex)
+
+def get_output_filename_impl(fname, regex):
     with open(fname, 'r') as f:
         for line in f:
             matches = re.search(regex, line)
             if matches:
                 return matches.group(1)
 
-def process_spec(fname):
-    currentdir = os.getcwd()
-    cmd = [ 'docker', 'run', '-v', currentdir+':/data', 'danielfett/markdown2rfc', fname ]
-    print("Running: " + ' '.join(cmd))
+def execute_command(cmd, fname, outputfname):
     retcode = subprocess.call(cmd)
     if retcode != 0:
         failed.append(fname)
         print("docker run returned failure for "+fname)
         return
-    outputfname = get_output_filename(fname)
-    outputfname += ".html"
     if not os.path.isfile(outputfname):
         print("expected output file of "+outputfname+" not found for "+fname)
         failed.append(fname)
@@ -82,6 +91,25 @@ def process_spec(fname):
     files_generated.append(newoutputfname)
     print()
 
+def process_spec(fname):
+    currentdir = os.getcwd()
+    cmd = [ 'docker', 'run', '-v', currentdir+':/data', 'danielfett/markdown2rfc', fname ]
+    print("Running: " + ' '.join(cmd))
+    outputfname = get_output_filename(fname)
+    outputfname += ".html"
+    execute_command(cmd, fname, outputfname)
+
+
+def process_fapi1_spec(fname):
+    outputfname = get_fapi1_output_filename(fname)
+    outputfname += ".html"
+    formatted_date = date.today().strftime('%B %d, %Y')
+    currentdir = os.getcwd()
+    cmd = [ './pandoc-3.1.9/bin/pandoc', '-V', 'current_date=' + formatted_date, '--toc', '--embed-resources', '-c',  './FAPI_1.0/templates/site.css', '--template=./FAPI_1.0/templates/draft-template.html', '-f', 'markdown', '-t', 'html',  '--section-divs', '--standalone', '--verbose', '-o', outputfname, fname ]
+    print("Running: " + ' '.join(cmd))
+    execute_command(cmd, fname, outputfname)
+
+
 def walk_tree():
     for root, dirs, files in os.walk("."):
         dirs[:] = [d for d in dirs if d not in dirs_exclude]
@@ -93,7 +121,10 @@ def walk_tree():
             fullfname = os.path.join(root, file)
             if fullfname in files_exclude:
                 continue
-            process_spec(fullfname)
+            if fullfname in fapi1_files:
+                process_fapi1_spec(fullfname)
+            else:
+                process_spec(fullfname)
 
 def generate_index():
     print("Creating index.html")

@@ -16,6 +16,10 @@ draft: true
 implementers-draft: false
 final: false
 ver: 01
+seriesInfo:
+  name: Internet-Draft
+  value: openid-financial-api-part-1-1_0-01
+  status: draft
 WG: FAPI
 abstract: FAPI 1.0 security profile - part 1&colon; Baseline is an OAuth profile that aims to provide specific implementation guidelines for security and interoperability. It provides moderately secure options.  
 ...
