@@ -231,7 +231,7 @@ Authorization servers
     the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall reject requests using the resource owner password credentials grant or
     the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC];
- 1. shall support confidential clients as defined in [@!RFC6749];
+ 1. shall only support confidential clients as defined in [@!RFC6749];
  1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
     -  MTLS as described in [@!RFC8705], or
