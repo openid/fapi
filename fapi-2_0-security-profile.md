@@ -253,6 +253,7 @@ Authorization servers
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
+ 1. to accommodate for clock offsets, shall accept JWTs with an `iat` or `nbf` time up to 10 seconds in the future, however should reject JWTs with an `iat` or `nbf` of 60 seconds or greater in the future.
  
 **NOTE**: 
 To facilitate interoperability, this document requires that Authorization Servers
@@ -270,6 +271,10 @@ may implement it providing they meet the requirement in Clause 9.
 
 **NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
 the Client Initiated Backchannel Authentication grant, etc.
+
+**NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
+This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
+
 
 #### Authorization Code Flow
 
