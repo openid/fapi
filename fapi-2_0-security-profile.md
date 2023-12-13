@@ -269,10 +269,10 @@ doesn't bring any security benefits for confidential clients, and can cause sign
 operational issues. However to allow for operational agility, Authorization Servers 
 may implement it providing they meet the requirement in Clause 9.
 
-**NOTE**: Only the Authorization Code flow detailed below has been through a detailed security
-analysis and tested against the attacker model. However this document is structured to support
-other grants to be used with the general requirements above. For example the client credentials grant
-or the FAPI CIBA grant.
+**NOTE**: This document is structured to support a variety of grants to be used with the general 
+requirements above. For example the client credentials grant or the FAPI CIBA grant. Implementers
+should note that as of the time of writing only the Authorization Code flow and CIBA flows have
+been through a detailed security analysis.
 
 **NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
 This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
