@@ -278,11 +278,11 @@ been through a detailed security analysis.
 This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
 
 
-#### Authorization Code Flow
+#### Authorization Endpoint Flows
 
-For flows that use the authorization endpoint, Authorization servers
+For flows that use the authorization endpoint, Authorization Servers
 
-1. shall require the value of response_type described in [@!RFC6749]to be code;
+1. shall require the value of `response_type` described in [@!RFC6749]to be `code`;
 1. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126];
 1. shall reject authorization requests sent without [@!RFC9126];
