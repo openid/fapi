@@ -44,12 +44,12 @@ $endfor$
   <td>Working Group:</td><td>$WG$</td></tr>
   <tr><td>Authors: </td>
 $for(author)$
-<td>$author$</td>
+<td>$author.name$<br/>($author.organization$)</td>
 $endfor$
 </tr>
-$if(date)$
+$if(current_date)$
 <tr>
-<td>Date:</td><td>$date$</td>
+<td>Date:</td><td>$current_date$</td>
 </tr>
 $endif$
 </table>
@@ -57,7 +57,7 @@ $if(title)$
 <header id="title-block-header">
 <h1 class="title">$title$
 $if(draft)$
-— draft-$ver$
+- $ver$
 $endif$
 </h1>
 $if(subtitle)$
@@ -185,6 +185,29 @@ and against implementers. The OpenID Foundation invites any interested party to
 or other proprietary rights that may cover technology
 that may be required to practice this specification.</p>
 </div>
+$if(author)$
+<div id="authors-addresses">
+    <h2 id="#name-authors-addresses">
+        Author's Addresses
+    </h2>
+    $for(author)$
+    <address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">$author.name$</span></div>
+        <div dir="auto" class="left"><span class="org">$author.organization$</span></div>
+        <div class="email">
+            <span>Email:</span>
+            <a href="mailto:$author.email$" class="email">$author.email$</a>
+        </div>
+        <div class="url">
+            <span>URI:</span>
+            <a href="$author.uri$" class="url">$author.uri$</a>
+        </div>
+    </address>
+    $endfor$
+
+</div>
+
+$endif$
 <script>const toc = document.getElementById("toc");
 toc.querySelector("h2").addEventListener("click", e => {
     toc.classList.toggle("active");
