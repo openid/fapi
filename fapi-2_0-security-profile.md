@@ -116,7 +116,8 @@ part of this framework and may be used together with this profile include:
 
 1. FAPI Message Signing is recommended when messages are required to be signed for the 
    purposes of non-repudiation.  
-1. FAPI CIBA is recommended when support is required for decoupled or cross device flows.
+1. FAPI Client Initiated Backchannel Authentication (CIBA) is recommended when support is 
+   required for decoupled or cross device flows.
 1. Grant Management is recommended for ecosystems that require interoperable grant management.
 1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar] is recommended when 
    the `scope` parameter is not expressive enough to convey the authorization that a client 
@@ -229,8 +230,7 @@ Authorization servers
 
  1. shall distribute discovery metadata (such as the authorization endpoint) via
     the metadata document as specified in [@!OIDD] and [@!RFC8414];
- 1. shall reject requests using the resource owner password credentials grant or
-    the implicit grant described in [@!RFC6749] or the hybrid flow as described in [@!OIDC];
+ 1. shall reject requests using the resource owner password credentials grant;
  1. shall only support confidential clients as defined in [@!RFC6749];
  1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
@@ -269,19 +269,20 @@ doesn't bring any security benefits for confidential clients, and can cause sign
 operational issues. However to allow for operational agility, Authorization Servers 
 may implement it providing they meet the requirement in Clause 9.
 
-**NOTE**: Other grants as appropriate may be supported, for example the client credentials grant, 
-the Client Initiated Backchannel Authentication grant, etc.
+**NOTE**: This document is structured to support a variety of grants to be used with the general 
+requirements above. For example the client credentials grant or the FAPI CIBA grant. Implementers
+should note that as of the time of writing only the Authorization Code flow and CIBA flows have
+been through a detailed security analysis.
 
 **NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
 This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
 
 
-#### Authorization Code Flow
+#### Authorization Endpoint Flows
 
-For the Authorization Code flow, Authorization servers
+For flows that use the authorization endpoint, Authorization Servers
 
-1. shall support the authorization code grant (`response_type=code` &
-    `grant_type=authorization_code`) described in [@!RFC6749];
+1. shall require the value of `response_type` described in [@!RFC6749]to be `code`;
 1. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126];
 1. shall reject authorization requests sent without [@!RFC9126];
