@@ -220,20 +220,18 @@ since these messages pass through the complex environment of the
 user's browser/app/OS with a larger attack surface. This demands for a
 more fine-grained analysis.
 
-**Note:** For the authorization endpoint, it is assumed that the attacker can
-only passively read messages, whereas for the token and resource endpoints, it
-is assumed that the attacker can also tamper with messages. Since messages to
-and from the authorization endpoint are sent through the user's browser and the
-attacker can redirect the user to arbitrary URLs anyway (see A1), the attacker
-can already redirect the user to faked/spoofed authorization request and
-response URLs. At the same time, while leakages from the authorization request
-or response are very common in practice, a fully compromised connection to the
-authorization endpoint is not. Most user authentication schemes would be broken
-in this setting, undermining the security completely. 
+**Note:** For the authorization and resource endpoints, it is assumed that the
+attacker can only passively read messages, whereas for the token endpoint, it is
+assumed that the attacker can also tamper with messages. The underlying
+assumption is that leakages from the authorization request or response are very
+common in practice and leakages of the resource request are possible, but a
+fully compromised connection to either endpoint is very unlikely. In particular
+for the authorization endpoint, a fully compromised connection would undermine
+the security of most authentication/authorization schemes, including OAuth.
 
-### A3a - Read Authorization Request
+### A3 - Read and Intercept Authorization Request
 
-The capabilities of the web attacker, but can also read the authorization
+The capabilities of the web attacker, but can also read and possibly intercept the authorization
 request sent in the front channel from a user's browser to the authorization
 server. This might happen on mobile operating systems (where apps can register
 for URLs), on all operating systems through the browser history, or due to
@@ -248,7 +246,7 @@ in "Browser Swapping Attacks" in the Security Considerations in the FAPI
 
 ## Attackers at the Token Endpoint
 
-### A5 - Read and Tamper with Token Requests and Responses
+### A4 - Read and Tamper with Token Requests and Responses
 
 This attacker makes the client use a token endpoint that is not the one of the
 honest AS. This attacker can read and tamper with messages sent to and from this
@@ -263,7 +261,7 @@ informative purposes only.
 
 ## Attackers at the Resource Server
 
-### A7 - Read Resource Requests
+### A5 - Read Resource Requests
 
 The capabilities of the web attacker, but this attacker can also read requests
 sent to the resource server after they have been processed by the resource server, for example because the attacker can read
@@ -349,7 +347,7 @@ valuable feedback and contributions that helped to evolve this document.
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
    <date day="28" month="Jul" year="2021"/>
   </front>

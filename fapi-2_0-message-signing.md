@@ -396,7 +396,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
    <date day="7" month="Dec" year="2022"/>
   </front>
@@ -406,7 +406,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
    <date day="7" month="Dec" year="2022"/>
   </front>
