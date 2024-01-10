@@ -45,7 +45,7 @@ the Security Profile are derived.
 
 Implementers and users of the Security Profile can derive from this document
 which threats have been taken into consideration by the Security Profile and
-which fall outside of what the Security Profile can provide.
+which fall outside of what the Security Profile provides.
 
 The ultimate aim is to provide systematic proofs of the security of the FAPI
 profiles similar to those in [@arXiv.1901.11520]. Formal proofs can rule out
@@ -290,7 +290,7 @@ model above, it is important to note the following limitations:
 
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
-protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
+protocol layers (e.g., TLS) can break the security of FAPI 2.0 compliant systems
 under certain conditions. The attacker model, however, takes some breaks in
 the end-to-end security provided by TLS into account by already including the
 respective attacker models (A3a/A5/A7). Similarly, many other attacks on
@@ -310,14 +310,14 @@ credentials being exposed through misconfigured databases or remote code
 execution attacks on authorization servers are neither prevented by nor
 accounted for in the attacker model. As another example, when a user is using a
 compromised browser and operating system, the security of the user is hard to
-uphold. Phishing-resistant credentials, for example, may help in this case, but
+uphold. Phishing-resistant credentials, for example, can help in this case, but
 are outside of the area defined by FAPI 2.0, as described next.
 
 ## Secrets
 
 The security assessment assumes that secrets are created such that attackers
 cannot guess them - e.g., nonces and secret keys. Weak random number generators,
-for example, may lead to secrets that are guessable by attackers and therefore
+for example, can lead to secrets that are guessable by attackers and therefore
 to vulnerabilities.
 
 ## System boundaries
@@ -330,10 +330,10 @@ the ecosystem, deployment, or implementation in which FAPI 2.0 is used.
 
 ## Implementation errors
 
-API security profiles can define how authentication and authorization is
-supposed to be implemented and a formal model can assess whether the profiles
+API security profiles define how authentication and authorization are
+supposed to be implemented and a formal model assesses whether the profiles
 are secure and consistent with respect to ideal implementations. Real-world
-implementations, of course, can deviate from the specified and formally analyzed
+implementations, of course, sometimes deviate from the specified and formally analyzed
 behavior and contain security vulnerabilties on various levels. While the FAPI
 2.0 profiles are designed to provide multiple layers of defense where feasible,
 implementations must use secure software development and deployment best
