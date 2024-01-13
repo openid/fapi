@@ -68,7 +68,7 @@ interpreted with their natural language meanings.
 
 # Scope
 
-This specification is a general purpose high security profile of
+This specification is a general-purpose high security profile of
 OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model. This document specifies the requirements for:
 
@@ -251,8 +251,8 @@ Authorization servers
      refresh token is not received and stored by the client, retrying the request (with 
      the previous refresh token) will succeed;
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
- 1. shall issue authorization codes with a maximum lifetime of 60 seconds; and
- 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]).
+ 1. shall issue authorization codes with a maximum lifetime of 60 seconds;
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
  1. to accommodate for clock offsets, shall accept JWTs with an `iat` or `nbf` time up to 10 seconds in the future, however should reject JWTs with an `iat` or `nbf` of 60 seconds or greater in the future.
  
 **NOTE**: 
@@ -265,8 +265,8 @@ requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR 
 **NOTE**: Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the Authorization Server issues a new refresh token to the client as part of the
 `refresh_token` grant. This specification discourages the use of this feature as it 
-doesn't bring any security benefits for confidential clients, and can cause significant 
-operational issues. However to allow for operational agility, Authorization Servers 
+does not bring any security benefits for confidential clients, and can cause significant 
+operational issues. However, to allow for operational agility, Authorization Servers 
 may implement it providing they meet the requirement in Clause 9.
 
 **NOTE**: This document is structured to support a variety of grants to be used with the general 
@@ -275,7 +275,7 @@ should note that as of the time of writing only the Authorization Code flow and 
 been through a detailed security analysis.
 
 **NOTE**: DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
-This specification goes further by placing a hard lower bound of 10 seconds in order to promote interopability.
+This specification goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
 
 
 #### Authorization Endpoint Flows
@@ -299,10 +299,10 @@ For flows that use the authorization endpoint, Authorization Servers
 1. shall not use the HTTP 307 status code when redirecting a request that contains 
      user credentials to avoid forwarding the credentials to a third party accidentally 
      (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
-1. should use the HTTP 303 status code when redirecting the user agent using status codes; and
-1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
-     of less than 600 seconds;
-1. should provide End-Users with all necessary information to make an
+2. should use the HTTP 303 status code when redirecting the user agent using status codes;
+3. shall issue pushed authorization requests `request_uri` with `expires_in` values 
+     of less than 600 seconds; and
+4. should provide End-Users with all necessary information to make an
    informed decision about whether to consent to the authorization
    request, including the identity of the client and the scope of the
    authorization.
@@ -311,7 +311,7 @@ For flows that use the authorization endpoint, Authorization Servers
  **NOTE**: If replay identification of the authorization code is not possible, it
 is desirable to set the validity period of the authorization code to one minute
 or a suitable short period of time. The validity period may act as a cache
-control indicator of when to clear the authorization code cache if one is used
+control indicator of when to clear the authorization code cache if one is used.
 
 **NOTE**: The `request_uri` `expires_in` time must be sufficient for
 the user's device to receive the link and the user to complete the
@@ -364,10 +364,9 @@ Clients
 This profile may be used by Confidential Clients on a user-controlled device where the system 
 clock may not be accurate, causing `private_key_jwt` client authentication to fail. 
 In such circumstances a Client should consider using the HTTP Date header returned from the 
-server to synchronize it's own clock when generating client assertions.
+server to synchronize its own clock when generating client assertions.
 
 **NOTE**:
-
 Although Authorization Servers are required to support "Authorization
 Code Binding to DPoP Key" (as defined by Section 10.1 of
 [@!RFC9449]), clients are not required to use it.
@@ -439,7 +438,7 @@ expect clients to call the endpoints located in the root of the server metadata,
 | :--------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
 | JAR                                                  | PAR                                                                     | integrity protection and compatibility improvements for authorization requests                                                          |
 | JARM                                                 | only code in response                                                   | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
-| BCM principles, defenses based on particular threats | attacker model, security goals, best practices from the OAuth Security BCP | clearer design guideline, suitability for formal analysis                                                                               |
+| BCM principles, defences based on particular threats | attacker model, security goals, best practices from the OAuth Security BCP | clearer design guideline, suitability for formal analysis                                                                               |
 | `s_hash`                                             | PKCE                                                                       | protection provided by `state` (in particular against CSRF) is now provided by PKCE; `state` integrity is partially protected by PAR    |
 | pre-registered redirect URIs                         | redirect URIs in PAR                                                    | pre-registration is not required with client authentication and PAR                                                                     |
 | response types `code id_token` or `code`             | response type `code`                                                    | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
@@ -453,13 +452,13 @@ expect clients to call the endpoints located in the root of the server metadata,
 
 ### Access token lifetimes
 
-The use of short lived access tokens (combined with refresh tokens) potentially reduces the time window for some attacks.
+The use of short-lived access tokens (combined with refresh tokens) potentially reduces the time window for some attacks.
 
 The use of refresh tokens also allows clients to rotate their sender-constraining keys without loss of grants, either because of compromise of the key or as part of good security hygiene. 
 
-If issuing long-lived grants (e.g. days/weeks), the use of short lived (e.g. minutes/hours) access tokens combined with refresh tokens should be considered.
+If issuing long-lived grants (e.g. days/weeks), the use of short-lived (e.g. minutes/hours) access tokens combined with refresh tokens should be considered.
 
-There is a performance and resiliency trade off, setting the access token life time too short can increase the load on and dependency on the authorization server.
+There is a performance and resiliency trade-off, setting the access token lifetime too short can increase the load on and dependency on the authorization server.
 
 ### DPoP Proof Replay
 
@@ -477,7 +476,7 @@ Possible mitigations for this are:
 3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
 4. Consider MTLS sender-constraining instead of DPoP
 
-These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7
+These mitigations may have potential complexity, performance or scalability trade-offs. Attacker type A7
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
 
 ### JWKS URIs
@@ -526,7 +525,7 @@ server. An attacker may obtain control of an authorization server by:
 3. compromising the client
 
 The attack may be easier if a centralized directory or other resource server discovery mechanism allows the attacker to
-cause the client to send the stolen access token received from the attacker controlled Authorization Server to an honest
+cause the client to send the stolen access token received from the attacker-controlled Authorization Server to an honest
 Resource Server.
 
 The pre-conditions for this attack do not apply to many ecosystems and require a powerful attacker. In situations
@@ -536,14 +535,14 @@ where the pre-conditions may be met, the possible mitigations include:
 2. Clients sending the issuer identifier the access token was obtained from to the resource server, and requiring
    resource servers to verify the issuer matches the authorization server that originally issued the token (though
    there is no standardized method for clients to send the issuer to the resource server)
-3. Reducing the time window for the attack by using short lived access tokens alongside refresh tokens
+3. Reducing the time window for the attack by using short-lived access tokens alongside refresh tokens
 
 ### Authorization Request Leaks lead to CSRF
 
 An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
 Authorization Server, receive an authorization code and redirect the honest user via a Cross-Site Request Forgery (CSRF) attack to 
 the honest client but with the attacker's authorization code. This results in the user accessing the 
-attackers resources, thus breaking session integrity.
+attacker's resources, thus breaking session integrity.
 
 It is important to note that all practically used redirect-based flows are
 susceptible to this attack, as redirection does not allow for a tight coupling
@@ -564,7 +563,7 @@ Possible mitigations for this are:
    in which the CSRF attack has to be performed.
 
 An attacker that has the option to block a user's request completely can
-circumvent the first and second defenses. In practice, however, attackers can
+circumvent the first and second defences. In practice, however, attackers can
 often read an authorization request (e.g., from a log file or via some other
 side-channel), but not block the request from being sent. If the victim's
 internet connection is slow, this might increase the attacker's chances.
