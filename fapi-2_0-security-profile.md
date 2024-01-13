@@ -343,8 +343,8 @@ Clients
      [@I-D.ietf-oauth-security-topics]);
  1. if using `private_key_jwt`, shall use the Authorization Server's
     issuer identifier value (as defined in [@RFC8414]) in the `aud`
-    claim sent in client authentication assertions, and the issuer
-    identifier value should be sent as a string not as an item in an
+    claim in client authentication assertions, and should send the issuer
+    identifier value as a string, not as an item in an
     array;
  1. shall support refresh tokens and their rotation;
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support 
