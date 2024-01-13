@@ -234,7 +234,7 @@ Authorization servers
  1. shall only support confidential clients as defined in [@!RFC6749];
  1. shall only issue sender-constrained access tokens;
  1. shall use one of the following methods for sender-constrained access tokens:
-    -  MTLS as described in [@!RFC8705], or
+    -  MTLS as described in [@!RFC8705],
     -  DPoP as described in [@!RFC9449];
  1. shall authenticate clients using one of the following methods:
      - MTLS as specified in Section 2 of [@!RFC8705], or
@@ -337,10 +337,10 @@ the token response, the authorization server shall support OpenID Connect
 Clients
 
  1. shall support sender-constrained access tokens using one or both of the following methods:
-    -  MTLS as described in [@!RFC8705], or
+    -  MTLS as described in [@!RFC8705],
     -  DPoP as described in [@!RFC9449];
  1. shall support client authentication using one or both of the following methods:
-    - MTLS as specified in section 2 of [@!RFC8705], or
+    - MTLS as specified in section 2 of [@!RFC8705],
     - `private_key_jwt` as specified in section 9 of [@!OIDC];
  1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750];
@@ -356,8 +356,8 @@ Clients
     the `mtls_endpoint_aliases` metadata defined in [@!RFC8705];
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
- 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker; and
- 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match;
+ 1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker;
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match; and
  1. shall initiate an authorization process only with the End-User's
     explicit or implicit consent and protect initiation of an
     authorization process against Cross-Site Request Forgery, thereby
@@ -384,7 +384,7 @@ For the Authorization Code flow, Clients
  1. shall use pushed authorization requests according to [@!RFC9126];
  1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method;
  1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent Mix-Up attacks; and
- 1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126])'.
+ 1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]).
 
 ### Requirements for Resource Servers
 
@@ -402,14 +402,15 @@ Resource servers with the FAPI endpoints
    access tokens;
 1. shall verify that the authorization represented by the access token is sufficient
    for the requested resource access and otherwise return errors as in Section 3.1
-   of [@!RFC6750];
+   of [@!RFC6750]; and
 1. shall support and verify sender-constrained access tokens using one or both of the following methods:
-    -  MTLS as described in [@!RFC8705], or
+    -  MTLS as described in [@!RFC8705],
     -  DPoP as described in [@!RFC9449].
 
 
 ## Cryptography and Secrets
 
+The following requirements apply to cryptographic operations and secrets:
 
  1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
 
@@ -475,10 +476,10 @@ the attacker might be able to specify a different amount or destination account.
 
 Possible mitigations for this are:
 
-1. Resource servers uses short-lived DPoP nonces to reduce the time window where a request can be replayed
-2. Resource servers implement replay prevention using the `jti` header as explained in [@!RFC9449]
-3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
-4. Consider MTLS sender-constraining instead of DPoP
+1. Resource servers use short-lived DPoP nonces to reduce the time window where a request can be replayed.
+2. Resource servers implement replay prevention using the `jti` header as explained in [@!RFC9449].
+3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing.
+4. Consider MTLS sender-constraining instead of DPoP.
 
 These mitigations may have potential complexity, performance or scalability trade-offs. Attacker type A7
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
@@ -524,9 +525,9 @@ A pre-condition for this attack is that the attacker has control of an authoriza
 server that is trusted by the client to issue access tokens for the target resource
 server. An attacker may obtain control of an authorization server by:
 
-1. Compromising the security of a different authorization server that the client trusts, or
-2. Acting as an authorization server and establishing a trust relationship with a client using social engineering, or by
-3. compromising the client
+1. compromising the security of a different authorization server that the client trusts;
+2. acting as an authorization server and establishing a trust relationship with a client using social engineering; or
+3. compromising the client.
 
 The attack may be easier if a centralized directory or other resource server discovery mechanism allows the attacker to
 cause the client to send the stolen access token received from the attacker-controlled Authorization Server to an honest
@@ -535,11 +536,11 @@ Resource Server.
 The pre-conditions for this attack do not apply to many ecosystems and require a powerful attacker. In situations
 where the pre-conditions may be met, the possible mitigations include:
 
-1. Clients using different DPoP keys or MTLS certificates at each authorization server
-2. Clients sending the issuer identifier the access token was obtained from to the resource server, and requiring
+1. clients using different DPoP keys or MTLS certificates at each authorization server;
+2. clients sending the issuer identifier the access token was obtained from to the resource server, and requiring
    resource servers to verify the issuer matches the authorization server that originally issued the token (though
-   there is no standardized method for clients to send the issuer to the resource server)
-3. Reducing the time window for the attack by using short-lived access tokens alongside refresh tokens
+   there is no standardized method for clients to send the issuer to the resource server);
+3. reducing the time window for the attack by using short-lived access tokens alongside refresh tokens.
 
 ### Authorization Request Leaks lead to CSRF
 
