@@ -119,7 +119,7 @@ part of this framework and may be used together with this profile include:
 1. FAPI Client Initiated Backchannel Authentication (CIBA) is recommended when support is 
    required for decoupled or cross device flows.
 1. Grant Management is recommended for ecosystems that require interoperable grant management.
-1. OAuth 2.0 Rich Authorization Requests (RAR) [@!I-D.ietf-oauth-rar] is recommended when 
+1. OAuth 2.0 Rich Authorization Requests (RAR) [@!RFC9396] is recommended when 
    the `scope` parameter is not expressive enough to convey the authorization that a client 
    wants to obtain.
 
