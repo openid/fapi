@@ -45,17 +45,14 @@ Implementers and users of the Security Profile can derive from this document
 which threats have been taken into consideration by the Security Profile and
 which fall outside of what the Security Profile can provide.
 
-The ultimate aim is to provide systematic proofs of the security of the FAPI
-profiles similar to those in [@arXiv.1901.11520]. Formal proofs can rule out
-large classes of attacks rooted in the logic of security protocols. Until such
-proofs are provided for the FAPI 2.0 Security Profile, the attacker model laid
-out herein informs the design decisions, but, as with most security protocols,
-there is no guarantee that all attacks for all types of attackers are excluded.
+A systematic definition of security requirements and an attacker model enable
+proofs of the security of the FAPI 2.0 Security Profile, similar to the proofs
+in [@arXiv.1901.11520] for FAPI 1.0, which this work draws from. Formal proofs
+can rule out large classes of attacks rooted in the logic of security protocols.
 
-The security requirements in this document are expressed in a form that lends
-itself well to a transfer into a formal representation required for an automated
-or manual analysis of the security of FAPI. This work draws from the attacker
-model and security goals formulated in [@arXiv.1901.11520].
+The formal analysis performed on this attacker model and the FAPI 2.0 Security
+Profile, described in (#formal_analysis), has helped to refine and improve
+this document and the FAPI 2.0 Security Profile.
 
 ## Warning
 
@@ -132,10 +129,9 @@ protocol like OAuth or OpenID Connect, however, yet unknown types of threats and
 variants of existing threats can emerge, as has been shown in the past. In order
 to not overlook any potential attacks, FAPI 2.0 therefore aims not to address
 concrete, narrow threats, but to exclude any attacks conceivable for the
-attacker types listed here. This will be supported by a formal analysis, as
-mentioned above.
+attacker types listed here. This is supported by a formal security analysis, see (#formal_analysis).
 
-This attacker model assumes that certain parts of the infrastructure are working
+This attacker model assumes that certain parts of the infrastructure and protocols are working
 correctly. Failures in these parts likely lead to attacks that are out of the
 scope of this attacker model. These areas need to be analyzed separately within
 the scope of an application of the FAPI 2.0 security profiles using threat
@@ -229,7 +225,7 @@ fully compromised connection to either endpoint is very unlikely. In particular
 for the authorization endpoint, a fully compromised connection would undermine
 the security of most authentication/authorization schemes, including OAuth.
 
-### A3 - Read and Intercept Authorization Request
+### A3 - Read and Intercept Authorization Request {#attacker_a3}
 
 The capabilities of the web attacker, but can also read and possibly intercept the authorization
 request sent in the front channel from a user's browser to the authorization
@@ -261,13 +257,16 @@ informative purposes only.
 
 ## Attackers at the Resource Server
 
-### A5 - Read Resource Requests
+### A5 - Read Resource Requests {#attacker_a5}
 
 The capabilities of the web attacker, but this attacker can also read requests
 sent to the resource server after they have been processed by the resource server, for example because the attacker can read
 TLS intercepting proxy logs on the RS's side.
 
-
+Note: An attacker that can read the responses from the resource server is not
+considered here, as such an attacker would directly contradict the authorization
+goal stated above. If it could tamper with the responses, it could additionally
+trivially break the session integrity goal.
 
 # Limitations
 
@@ -333,6 +332,31 @@ New technologies or changed behavior of components (e.g., browsers) can lead to
 new security vulnerabilities over time that might not have been known during the
 development of these specifications.
 
+# Formal Analysis {#formal_analysis}
+
+The FAPI 2.0 Security Profile is accompanied by a formal security analysis
+[@analysis.FAPI2] that provides a formal model of the FAPI 2.0 Security Profile
+and a proof of the security of the FAPI 2.0 Security Profile within this model.
+The formal model is based on the attacker model and security goals defined in
+this document.
+
+Note that the analysis is based on a prior version the attacker model that used
+a different numbering for the attackers. Some of the attacker models previously
+considered were in contradiction with the security goals and therefore removed.
+The mapping between the attacker model in this document and the one used in the
+analysis is as follows:
+
+| Analysis | This document                                              |
+| -------- | ---------------------------------------------------------- |
+| A1       | A1                                                         |
+| A1a      | A1a                                                        |
+| A2       | A2                                                         |
+| A3a      | A3a                                                        |
+| A3b      | removed — see note in (#attacker_a3)                       |
+| A5       | A4                                                         |
+| A7       | A5 — with reduced capabilities, see note in (#attacker_a5) |
+| A8       | removed — see note in (#attacker_a5)                       |
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group. 
@@ -388,6 +412,20 @@ valuable feedback and contributions that helped to evolve this document.
   </front>
   <seriesInfo name="arXiv" value="1901.11520"/>
 </reference>
+
+<!-- The following link should be updated if the publication happens in time for final. -->
+
+<reference anchor="analysis.FAPI2"
+           target="https://openid.net/wordpress-content/uploads/2022/12/Formal-Security-Analysis-of-FAPI-2.0_FINAL_2022-10.pdf">
+  <front>
+    <title>Formal Security Analysis of the OpenID FAPI 2.0: Accompanying a Standardization Process</title>
+    <author fullname="Pedram Hosseyni" surname="Hosseyni" initials="P."><organization/></author>
+    <author fullname="Ralf Küsters" surname="Küsters" initials="R."><organization/></author>
+    <author fullname="Tim Würtele" surname="Würtele" initials="T."><organization/></author>
+    <date day="1" month="October" year="2022"/>
+  </front>
+</reference>
+
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>
