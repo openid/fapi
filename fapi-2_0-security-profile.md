@@ -168,10 +168,10 @@ servers
     the issuance of rogue domain-validated TLS certificates; and
  4. shall perform a TLS server certificate check, as per [@!RFC6125].
 
-**NOTE**: Even if an endpoint uses only organization validated (OV) or extended 
-validation (EV) TLS certificates, rogue domain-validated certificates can be used 
-to impersonate the endpoint and conduct man-in-the-middle attacks. CAA records
-[@!RFC8659] can help to mitigate this risk.
+**NOTE**: Even if an endpoint uses only organization validated (OV) or extended
+validation (EV) TLS certificates, an attacker using rogue domain-validated
+certificates is able to impersonate the endpoint and conduct man-in-the-middle
+attacks. CAA records [@!RFC8659] can help to mitigate this risk.
 
 ### Requirements for endpoints not used by web browsers
 
@@ -434,19 +434,19 @@ expect clients to call the endpoints located in the root of the server metadata,
 
 ## Main Differences to FAPI 1.0
 
-| FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                | Reasons                                                                                                                                 |
-| :--------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| JAR                                                  | PAR                                                                     | integrity protection and compatibility improvements for authorization requests                                                          |
-| JARM                                                 | only code in response                                                   | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
+| FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                   | Reasons                                                                                                                                 |
+| :--------------------------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| JAR                                                  | PAR                                                                        | integrity protection and compatibility improvements for authorization requests                                                          |
+| JARM                                                 | only code in response                                                      | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
 | BCM principles, defences based on particular threats | attacker model, security goals, best practices from the OAuth Security BCP | clearer design guideline, suitability for formal analysis                                                                               |
 | `s_hash`                                             | PKCE                                                                       | protection provided by `state` (in particular against CSRF) is now provided by PKCE; `state` integrity is partially protected by PAR    |
-| pre-registered redirect URIs                         | redirect URIs in PAR                                                    | pre-registration is not required with client authentication and PAR                                                                     |
-| response types `code id_token` or `code`             | response type `code`                                                    | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
+| pre-registered redirect URIs                         | redirect URIs in PAR                                                       | pre-registration is not required with client authentication and PAR                                                                     |
+| response types `code id_token` or `code`             | response type `code`                                                       | no ID token in front-channel (privacy improvement); nonce/signature check can be skipped by clients, PKCE cannot (security improvement) |
 | ID Token as detached signature                       | PKCE                                                                       | ID token does not need to serve as a detached signature                                                                                 |
-| potentially encrypted ID Tokens in the front channel | No encryption and no ID Tokens in the front channel                                                 | ID Tokens only exchanged in back channel                                                                                                |
-| `nbf` & `exp` claims in request object               | `request_uri` has limited lifetime                                      | Prevents pre-generation of requests                                                                                                     |
-| `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                                                                       | Not relevant to the core of the security profile                                                                                        |
-| MTLS for sender-constrained access tokens            | MTLS or DPoP                                                            | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
+| potentially encrypted ID Tokens in the front channel | No encryption and no ID Tokens in the front channel                        | ID Tokens only exchanged in back channel                                                                                                |
+| `nbf` & `exp` claims in request object               | `request_uri` has limited lifetime                                         | Prevents pre-generation of requests                                                                                                     |
+| `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                     | Not relevant to the core of the security profile                                                                                        |
+| MTLS for sender-constrained access tokens            | MTLS or DPoP                                                               | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
 ## Security Considerations
 
