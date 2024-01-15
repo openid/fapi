@@ -229,7 +229,7 @@ learned the respective decryption keys.
 Note: Most attacks that are exclusive to this kind of attacker can be defended
 against by using transport layer protection like TLS.
 
-## Attacker at the authorization endpoint : A3a - read authorization request
+## Attacker at the authorization endpoint: A3a - read authorization request
 
 The capabilities of the web attacker, but can also read the authorization
 request sent in the front channel from a user's browser to the authorization
@@ -261,7 +261,7 @@ or response are very common in practice, a fully compromised connection to the
 authorization endpoint is not. Most user authentication schemes would be broken
 in this setting, undermining the security completely.
 
-## Attacker at the token endpoint : A5 - read and tamper with token requests and responses
+## Attacker at the token endpoint: A5 - read and tamper with token requests and responses
 
 This attacker makes the client use a token endpoint that is not the one of the
 honest AS. This attacker can read and tamper with messages sent to and from this
@@ -274,7 +274,7 @@ protected channel, i.e., through OAuth Metadata obtained from the honest AS,
 this attacker is not relevant in FAPI 2.0. The description here is kept for
 informative purposes only.
 
-## Attacker at the resource server : A7 - read resource requests
+## Attacker at the resource server: A7 - read resource requests
 
 The capabilities of the web attacker, but this attacker can also read requests
 sent to the resource server after they have been processed by the resource server, for example because the attacker can read
