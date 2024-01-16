@@ -105,7 +105,9 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 # Security Profile
 
-## Introduction
+## Overview
+
+### Introduction
 
 The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749], that aims to reach the security goals laid out in the Attacker 
@@ -207,6 +209,8 @@ requirements apply:
      [@!BCP195].
  
 ## Profile
+
+### General
 
 In the following, a profile of the following technologies is defined:
 
