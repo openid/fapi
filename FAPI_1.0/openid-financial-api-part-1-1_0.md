@@ -59,7 +59,8 @@ This document specifies the method for an application to:
 * use tokens to access REST APIs in a moderately secure manner.
 
 # 2. Normative references
-The following referenced documents are indispensable for the application of this document. For dated references, only the edition cited applied. For undated references, the latest edition of the referenced document (including any amendments) applies.
+The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
+
 
 [ISODIR2] - ISO/IEC Directives Part 2
 

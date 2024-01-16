@@ -60,7 +60,7 @@ This part of the document specifies the method of
 This document is applicable to higher risk use cases which includes commercial and investment banking and other similar industries.
 
 # 2. Normative references
-The following referenced documents are indispensable for the application of this document. For dated references, only the edition cited applied. For undated references, the latest edition of the referenced document (including any amendments) applies.
+The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
 [ISODIR2] - ISO/IEC Directives Part 2
 
