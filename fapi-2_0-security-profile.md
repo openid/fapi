@@ -317,10 +317,13 @@ control indicator of when to clear the authorization code cache if one is used
 the user's device to receive the link and the user to complete the
 process of opening the link. In many cases (poor network connection or
 where the user has to manually select the browser to be used) this can
-easily take over 30 seconds. In addition Authorization Servers who enforce one-time
-use of `request_uri` values should ensure the enforcement takes place at the point of
-authorization, not at the point of loading an authorization page. This is because the 
-user may have software, such as anti-virus software, that pre-loads links in the background.
+easily take over 30 seconds. 
+
+**NOTE**: It is recommended that Authorization Servers that enforce one-time 
+use of `request_uri` values ensure the enforcement takes place at 
+the point of authorization, not at the point of loading an authorization page. 
+This prevents user software that preloads urls from invalidating the 
+`request_uri`.
 
 #### Returning Authenticated User's Identifier
 
