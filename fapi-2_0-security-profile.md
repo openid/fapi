@@ -117,7 +117,7 @@ Model [@!attackermodel].
 This profile is the base of the FAPI 2.0 Framework. Other specifications that are
 part of this framework and may be used together with this profile include:
 
-1. FAPI Message Signing is recommended when messages are required to be signed for the
+1. FAPI Message Signing [@FAPIMessageSigning] is recommended when messages are required to be signed for the
    purposes of non-repudiation.
 1. FAPI Client Initiated Backchannel Authentication [@FAPICIBA] is recommended when support is
    required for decoupled or cross device flows.
@@ -489,7 +489,7 @@ Possible mitigations for this are:
 
 1. Resource servers use short-lived DPoP nonces to reduce the time window where a request can be replayed.
 2. Resource servers implement replay prevention using the `jti` header as explained in [@!RFC9449].
-3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing.
+3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing [@FAPIMessageSigning].
 4. Consider MTLS sender-constraining instead of DPoP.
 
 These mitigations may have potential complexity, performance or scalability trade-offs. Attacker type A5
@@ -712,6 +712,19 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
       <organization>Authlete</organization>
     </author>
    <date day="14" month="Nov" year="2022"/>
+  </front>
+</reference>
+
+<reference anchor="FAPIMessageSigning" target="https://openid.bitbucket.io/fapi/fapi-2_0-message-signing.html">
+  <front>
+    <title>FAPI 2.0 Message Signing</title>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+   <date day="17" month="January" year="2024"/>
   </front>
 </reference>
 
