@@ -121,7 +121,7 @@ part of this framework and may be used together with this profile include:
    purposes of non-repudiation.
 1. FAPI Client Initiated Backchannel Authentication (CIBA) is recommended when support is
    required for decoupled or cross device flows.
-1. Grant Management is recommended for ecosystems that require interoperable grant management.
+1. Grant Management [@GrantManagement] is recommended for ecosystems that require interoperable grant management.
 1. OAuth 2.0 Rich Authorization Requests (RAR) [@!RFC9396] is recommended when
    the `scope` parameter is not expressive enough to convey the authorization that a client
    wants to obtain.
@@ -712,6 +712,21 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
       <organization>Authlete</organization>
     </author>
    <date day="14" month="Nov" year="2022"/>
+  </front>
+</reference>
+
+<reference anchor="GrantManagement" target="https://openid.net/specs/oauth-v2-grant-management-ID1.html">
+  <front>
+    <title>Grant Management for OAuth 2.0</title>
+    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+      <organization>yes.com</organization>
+    </author>
+    <author initials="S." surname="Low" fullname="Stuart Low">
+      <organization>Biza.io</organization>
+    </author>
+    <author initials="D." surname="Postnikov" fullname="Dima Postnikov">
+    </author>
+   <date day="09" month="May" year="2023"/>
   </front>
 </reference>
 
