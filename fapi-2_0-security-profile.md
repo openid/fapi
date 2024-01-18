@@ -119,7 +119,7 @@ part of this framework and may be used together with this profile include:
 
 1. FAPI Message Signing is recommended when messages are required to be signed for the
    purposes of non-repudiation.
-1. FAPI Client Initiated Backchannel Authentication (CIBA) is recommended when support is
+1. FAPI Client Initiated Backchannel Authentication [@FAPICIBA] is recommended when support is
    required for decoupled or cross device flows.
 1. Grant Management [@GrantManagement] is recommended for ecosystems that require interoperable grant management.
 1. OAuth 2.0 Rich Authorization Requests (RAR) [@!RFC9396] is recommended when
@@ -727,6 +727,16 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <author initials="D." surname="Postnikov" fullname="Dima Postnikov">
     </author>
    <date day="09" month="May" year="2023"/>
+  </front>
+</reference>
+
+<reference anchor="FAPICIBA" target="https://openid.bitbucket.io/fapi/fapi-ciba.html">
+  <front>
+    <title>FAPI Client Initiated Backchannel Authentication Profile </title>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+   <date day="17" month="January" year="2024"/>
   </front>
 </reference>
 
