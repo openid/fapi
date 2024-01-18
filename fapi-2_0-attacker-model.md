@@ -21,7 +21,7 @@ organization="Authlete"
 
 %%%
 
-.# Abstract 
+.# Abstract
 
 OIDF FAPI 2.0 is an API security profile suitable for high-security
 applications based on the OAuth 2.0 Authorization Framework
@@ -29,21 +29,23 @@ applications based on the OAuth 2.0 Authorization Framework
 the decisions on security mechanisms employed by the FAPI security
 profiles.
 
+.# Foreword
 
+The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.
 
-{mainmatter}
+Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
 
-# Introduction
+.# Introduction
 
 Since OIDF FAPI 2.0 aims at providing an API protection profile for high-risk
 scenarios, clearly defined security requirements are indispensable. In this
 document, the security requirements are expressed through security goals and
 attacker models. From these requirements, the security mechanisms utilized in
-the Security Profile are derived. 
+the Security Profile are derived.
 
 Implementers and users of the Security Profile can derive from this document
 which threats have been taken into consideration by the Security Profile and
-which fall outside of what the Security Profile can provide.
+which fall outside of what the Security Profile provides.
 
 A systematic definition of security requirements and an attacker model enable
 proofs of the security of the FAPI 2.0 Security Profile, similar to the proofs
@@ -54,7 +56,7 @@ The formal analysis performed on this attacker model and the FAPI 2.0 Security
 Profile, described in (#formal_analysis), has helped to refine and improve
 this document and the FAPI 2.0 Security Profile.
 
-## Warning
+.# Warning
 
 This document is not an OIDF International Standard. It is distributed
 for review and comment. It is subject to change without notice and may
@@ -64,7 +66,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and
 to provide supporting documentation.
 
-## Notational Conventions
+.# Notational conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -72,12 +74,26 @@ this document are to be interpreted as described in ISO Directive Part 2
 occurrence of them shall be interpreted as keywords and are not to be
 interpreted with their natural language meanings.
 
+{mainmatter}
 
-# Security Goals
+# Scope
 
+This document describes the FAPI 2.0 profiles security goals, attacker model, attacker roles and capabilities, and limitations.
+
+# Normative references
+
+See section 9 for normative references.
+
+# Terms and definitions
+
+For the purpose of this document, the terms defined in [@!RFC6749], and [@!OIDC] apply.
+
+# Security goals
+
+## General (_Review title_)
 In the following, the security goals for the FAPI 2.0 Security Profile with
 regards to authorization and, when OpenID Connect is used, authentication, are
-defined. 
+defined.
 
 ## Authorization
 The FAPI 2.0 Security Profile aims to ensure that **no attacker can
@@ -98,7 +114,7 @@ This security goal therefore is fulfilled if no attacker can obtain and
 use an ID token identifying another user for login.
 
 
-## Session Integrity
+## Session integrity
 Session Integrity is concerned with attacks where a user is tricked
 into logging in under the attacker’s identity or inadvertently using
 the resources of the attacker instead of the user’s own resources.
@@ -113,7 +129,7 @@ In detail:
   * For authorization: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to use resources of the attacker.**
 
-# Attacker Model 
+# Attacker model
 
 This attacker model defines very broad capabilities for attackers. It is assumed
 that attackers will exploit these capabilities to come up with attacks on the
@@ -167,16 +183,17 @@ attacker model:
     other and from attackers. Clients retrieving identity attributes using
     OpenID Connect are required to check whether the identity attributes
     returned fulfills their requirements.
-    
+
 
 # Attackers
 
+## General (_Review title_)
 FAPI 2.0 profiles aim to ensure the security goals listed above for arbitrary
 combinations of the following attackers, potentially collaborating to reach a
 common goal:
 
 
-## A1 - Web Attacker
+## A1 — Web attacker
 
 Standard web attacker model. Can send and receive messages just like any other
 party controlling one or more endpoints on the internet. Can participate in
@@ -190,25 +207,38 @@ long as the contents are known to the attacker.
 Cannot intercept or block messages sent between other parties, and cannot break
 cryptography unless the attacker has learned the respective decryption keys.
 Deviating from the common web attacker model, A1 cannot play the role of a
-legitimate AS in the ecosystem (see A1a).
+legitimate authorization server in the ecosystem (see A1a).
 
-## A1a - Web Attacker (participating as AS)
+## A1a — Web Attacker (participating as authorization server)
 
-Like the web attacker A1, but can also participate as an AS in the ecosystem.
-Note that this AS can reuse/replay messages it has received from honest ASs and
-can send users to endpoints of honest ASs.
+Like the web attacker A1, but can also participate as an authorization server in the ecosystem.
+Note that this authorization server can reuse/replay messages it has received from honest authorization servers and
+can send users to endpoints of honest authorization servers.
 
-## A2 - Network attacker
+## A2 — Network attacker
 
 Controls the whole network (like a rogue WiFi access point or any other
 compromised network node). Can intercept, block, and tamper with messages
 intended for other people, but cannot break cryptography unless the attacker has
-learned the respective decryption keys. 
+learned the respective decryption keys.
 
 Note: Most attacks that are exclusive to this kind of attacker can be defended
 against by using transport layer protection like TLS.
 
-## Attackers at the Authorization Endpoint
+## Attacker at the authorization endpoint: A3a — read authorization request  {#attacker_a3}
+
+The capabilities of the web attacker, but can also read the authorization
+request sent in the front channel from a user's browser to the authorization
+server. This might happen on mobile operating systems (where apps can register
+for URLs), on all operating systems through the browser history, or due to
+Cross-Site Scripting on the authorization server. There have been cases where anti-virus software
+intercepts TLS connections and stores/analyzes URLs.
+
+**Note:** An attacker that can read the authorization response is not
+considered here, as, with current browser technology, such an attacker
+can undermine most security protocols. This is discussed
+in "Browser Swapping Attacks" in the Security Considerations in the FAPI
+2.0 Security Profile.
 
 **Note:** The attackers for the authorization request are more
 fine-grained than those for the token endpoint and resource endpoint,
@@ -223,61 +253,43 @@ assumption is that leakages from the authorization request or response are very
 common in practice and leakages of the resource request are possible, but a
 fully compromised connection to either endpoint is very unlikely. In particular
 for the authorization endpoint, a fully compromised connection would undermine
-the security of most authentication/authorization schemes, including OAuth.
+the security of most redirect-based authentication/authorization schemes, including OAuth.
 
-### A3 - Read and Intercept Authorization Request {#attacker_a3}
-
-The capabilities of the web attacker, but can also read and possibly intercept the authorization
-request sent in the front channel from a user's browser to the authorization
-server. This might happen on mobile operating systems (where apps can register
-for URLs), on all operating systems through the browser history, or due to
-Cross-Site Scripting on the AS. There have been cases where anti-virus software
-intercepts TLS connections and stores/analyzes URLs.
-
-Note: An attacker that can read the authorization response is not
-considered here, as, with current browser technology, such an attacker
-can undermine most security protocols. This is discussed
-in "Browser Swapping Attacks" in the Security Considerations in the FAPI
-2.0 Security Profile.
-
-## Attackers at the Token Endpoint
-
-### A4 - Read and Tamper with Token Requests and Responses
+## Attacker at the token endpoint: A4 — read and tamper with token requests and responses  {#attacker_a4}
 
 This attacker makes the client use a token endpoint that is not the one of the
-honest AS. This attacker can read and tamper with messages sent to and from this
-token endpoint that the client thinks as of an honest AS.
+honest authorization server. This attacker can read and tamper with messages sent to and from this
+token endpoint that the client thinks as of an honest authorization server.
 
 Important: This attacker is a model for misconfigured token endpoint URLs that
 were considered in FAPI 1.0. Since the FAPI 2.0 Security Profile mandates that
 the token endpoint address is obtained from an authoritative source and via a
-protected channel, i.e., through OAuth Metadata obtained from the honest AS,
+protected channel, i.e., through OAuth Metadata obtained from the honest authorization server,
 this attacker is not relevant in FAPI 2.0. The description here is kept for
 informative purposes only.
 
-## Attackers at the Resource Server
-
-### A5 - Read Resource Requests {#attacker_a5}
+## Attacker at the resource server: A5 — read resource requests  {#attacker_a5}
 
 The capabilities of the web attacker, but this attacker can also read requests
 sent to the resource server after they have been processed by the resource server, for example because the attacker can read
-TLS intercepting proxy logs on the RS's side.
+TLS intercepting proxy logs on the resource server's side.
 
-Note: An attacker that can read the responses from the resource server is not
+**Note:** An attacker that can read the responses from the resource server is not
 considered here, as such an attacker would directly contradict the authorization
 goal stated above. If it could tamper with the responses, it could additionally
 trivially break the session integrity goal.
 
 # Limitations
 
+## General (_Review title_)
 Beyond the limitations already described in the introduction to the attacker
 model above, it is important to note the following limitations:
 
-## Protocol Layers 
+## Protocol layers
 
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
-protocol layers (e.g., TLS) may break the security of FAPI 2.0 compliant systems
+protocol layers (e.g., TLS) can break the security of FAPI 2.0 compliant systems
 under certain conditions. The attacker model, however, takes some breaks in
 the end-to-end security provided by TLS into account by already including the
 respective attacker models (A3a/A5/A7). Similarly, many other attacks on
@@ -297,36 +309,36 @@ credentials being exposed through misconfigured databases or remote code
 execution attacks on authorization servers are neither prevented by nor
 accounted for in the attacker model. As another example, when a user is using a
 compromised browser and operating system, the security of the user is hard to
-uphold. Phishing-resistant credentials, for example, may help in this case, but
+uphold. Phishing-resistant credentials, for example, can help in this case, but
 are outside of the area defined by FAPI 2.0, as described next.
 
 ## Secrets
 
 The security assessment assumes that secrets are created such that attackers
 cannot guess them - e.g., nonces and secret keys. Weak random number generators,
-for example, may lead to secrets that are guessable by attackers and therefore
+for example, can lead to secrets that are guessable by attackers and therefore
 to vulnerabilities.
 
-## System Boundaries
+## System boundaries
 
 The FAPI 2.0 profiles focus on core aspects of the API security and do not
 prescribe, for example, end-user authentication mechanisms, firewall setups,
 software development practices, or security aspects of internal architectures.
 Anything outside of boundaries of FAPI 2.0 must be assessed in the context of
-the ecosystem, deployment, or implementation in which FAPI 2.0 is used. 
+the ecosystem, deployment, or implementation in which FAPI 2.0 is used.
 
-## Implementation Errors
+## Implementation errors
 
-API security profiles can define how authentication and authorization is
-supposed to be implemented and a formal model can assess whether the profiles
+API security profiles define how authentication and authorization are
+supposed to be implemented and a formal model assesses whether the profiles
 are secure and consistent with respect to ideal implementations. Real-world
-implementations, of course, can deviate from the specified and formally analyzed
+implementations, of course, sometimes deviate from the specified and formally analyzed
 behavior and contain security vulnerabilties on various levels. While the FAPI
 2.0 profiles are designed to provide multiple layers of defense where feasible,
 implementations must use secure software development and deployment best
 practices to ensure that vulnerabilities can be discovered and fixed.
 
-## Changes over Time
+## Changes over time
 
 New technologies or changed behavior of components (e.g., browsers) can lead to
 new security vulnerabilities over time that might not have been known during the
@@ -359,10 +371,10 @@ analysis is as follows:
 
 # Acknowledgements
 
-This document was developed by the OpenID FAPI Working Group. 
+This document was developed by the OpenID FAPI Working Group.
 
 We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
-Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their 
+Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their
 valuable feedback and contributions that helped to evolve this document.
 
 {backmatter}
