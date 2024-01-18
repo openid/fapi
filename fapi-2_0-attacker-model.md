@@ -369,6 +369,9 @@ analysis is as follows:
 | A7       | A5 — with reduced capabilities, see note in (#attacker_a5) |
 | A8       | removed — see note in (#attacker_a5)                       |
 
+As the updates to the attacker model were made to align with the formal
+analysis, the analysis results are still valid for the updated attacker model.
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group.
