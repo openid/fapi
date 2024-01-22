@@ -89,6 +89,22 @@ See Clause 9 for normative references.
 
 For the purpose of this document, the terms defined in [@!RFC6749], and [@!OIDC] apply.
 
+# Symbols and Abbreviated terms
+
+**API** – Application Programming Interface
+
+**CSRF** –  Cross-Site Request Forgery
+
+**DNS** – Domain Name System
+
+**JWKS** – JSON Web Key Sets
+
+**OIDF** – OpenID Foundation
+
+**TLS** – Transport Layer Security
+
+**URL** – Uniform Resource Locator
+
 # Security goals
 
 ## General (_Review title_)

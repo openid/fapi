@@ -102,17 +102,51 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 **API** – Application Programming Interface
 
-**CSRF** - Cross Site Request Forgery
+**CSRF** – Cross Site Request Forgery
 
-**FAPI** - Financial-grade API
+**DN** – Distinguished Name
 
 **HTTP** – Hyper Text Transfer Protocol
 
-**OIDF** - OpenID Foundation
+**HTTPS** – Hypertext Transfer Protocol Secure
+
+**JAR** – JWT-Secured Authorization Request
+
+**JARM** – JWT Secured Authorization Response Mode
+
+**JOSE** – Javascript Object Signing and Encryption
+
+**JSON** –  JavaScript Object Notation
+
+**JWE** – JSON Web Encryption
+
+**JWK** – JSON Web Key
+
+**JWKS** – JSON Web Key Sets
+
+**JWS** – JSON Web Signature
+
+**JWT** – JSON Web Token
+
+**MTLS** – Mutual Transport Layer Security
+
+**OIDF** – OpenID Foundation
+
+**PAR** – Pushed Authorization Requests
+
+**PII** – Personally Identifiable Information
+
+**PKCE** – Proof Key for Code Exchange
 
 **REST** – Representational State Transfer
 
+**RP** – Relying Party
+
 **TLS** – Transport Layer Security
+
+**URI** – Uniform Resource Identifier
+
+**URL** – Uniform Resource Locator
 
 # 5. Advanced security profile
 
@@ -203,7 +237,7 @@ In addition, the authorization server
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2-4):
     1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC8705], or
     2. `private_key_jwt` as specified in section 9 of [OIDC];
-1. shall require the aud claim in the request object to be, or to be an array containing, the OP's issuer identifier URL;
+1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
 1. shall not support public clients;
 1. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
 1. shall require [PAR] requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
@@ -246,7 +280,7 @@ In addition, the confidential client
 1. (moved 5.2.3.1);
 1. shall send all parameters inside the authorization request's signed request object;
 1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [PAR];
-1. shall send the `aud` claim in the request object as the OP's issuer identifier URL;
+1. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
@@ -339,7 +373,7 @@ where the `iss` included in the response JWT. On receiving the authorization res
 issuer URL of the IdP it sent the authorization request to (the rogue IdP). The client detects the conflicting issuer values and aborts the transaction. 
 
 ### 8.3.4 Access token phishing
-Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
+Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue authorization server or misconfigured token endpoint.
 
 For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the token endpoint (which is misconfigured in the client to point to an attacker-controlled URL). The attacker then gains access to resources of the honest resource owner through the client.
 
@@ -437,14 +471,14 @@ after the client has exchanged the authorization code for a token and sent an
 
 ## 8.9 JWKS URIs
 This profile requires both clients and authorization servers to verify payloads 
-with keys from the other party. The AS verifies request objects and `private_key_jwt` 
-assertions. The client verifies ID Tokens and authorization response JWTs. For AS's
+with keys from the other party. The authorization server verifies request objects and `private_key_jwt` 
+assertions. The client verifies ID Tokens and authorization response JWTs. For authorization servers,
 this profile strongly recommends the use of JWKS URI endpoints to distribute 
 public keys. For clients this profile recommends either the use of JWKS URI endpoints
 or the use of the `jwks` parameter in combination with [RFC7591] 
 and [RFC7592].
 
-The definition of the AS `jwks_uri` can be found in [RFC8414], while the definition
+The definition of the authorization server `jwks_uri` can be found in [RFC8414], while the definition
 of the client `jwks_uri` can be found in [RFC7591].
 
 In addition, this profile
@@ -492,22 +526,22 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 * (Inappropriate privacy notice) A privacy notice provided at a `policy_url` or by other means can be inappropriate. 
 * (Inadequate choice) Providing a consent screen without adequate choices does not form consent. 
-* (Misuse of data) An AS, RS or client can potentially use the data not according to the purpose that was agreed. 
+* (Misuse of data) An authorization server, resource server or client can potentially use the data not according to the purpose that was agreed. 
 * (Collection minimization violation) Clients asking for more data than it absolutely needs to fulfil the purpose is violating the collection minimization principle. 
 * (Unsolicited personal data from the resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
 * (Data minimization violation) Any process that is processing more data than it needs is violating the data minimization principle. 
-* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which client/RP. 
+* (RP tracking by authorization server/OpenID provider) Authorization server/OpenID provider identifying what data is being provided to which client/RP. 
 * (User tracking by RPs) Two or more RPs correlating access tokens or ID Tokens to track users. 
-* (RP misidentification by user at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
-the AS's authorization page. 
+* (RP misidentification by user at authorization server) User misunderstands who the RP is due to a confusing representation of the RP at 
+the authorization server's authorization page. 
 * (Mismatch between user’s understanding or what RP is displaying to a user and the actual authorization request). To enhance 
-the trust of the ecosystem, best practice is for the AS to make clear what is included in the authorisation request (for example, 
+the trust of the ecosystem, best practice is for the authorization server to make clear what is included in the authorisation request (for example, 
 what data will be released to the RP).
 * (Attacker observing personal data in authorization request) Authorization request might contain personal data. This can be observed by an attacker. 
 * (Attacker observing personal data in authorization endpoint response) In some frameworks, even state is deemed personal data. 
   This can be observed by an attacker through various means. 
-* (Data leak from AS) AS stores personal data. If AS is compromised, these data can leak or be modified. 
-* (Data leak from resource) Some resource servers (RS) store personal data. If a RS is compromised, these data can leak or be modified. 
+* (Data leak from authorization server) Authorization server stores personal data. If authorization server is compromised, these data can leak or be modified. 
+* (Data leak from resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
 * (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
 These can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 

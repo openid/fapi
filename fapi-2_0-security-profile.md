@@ -98,19 +98,55 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **API** – Application Programming Interface
 
+**BCM** – Basin, Cremers, Meier
+
+**BCP** – Best Current Practice
+
+**CAA** – Certificate Authority Authorization
+
+**CIBA** – Client Initiated Backchannel Authentication
+
+**CSRF** –  Cross-Site Request Forgery
+
+**DNS** – Domain Name System
+
+**DNSSEC** –  Domain Name System Security Extensions
+
 **HTTP** – Hyper Text Transfer Protocol
+
+**JAR** – JWT-Secured Authorization Request
+
+**JARM** – JWT Secured Authorization Response Mode
+
+**JWK** – JSON Web Key
+
+**JWKS** – JSON Web Key Sets
+
+**JWT** – JSON Web Token
+
+**JOSE** – Javascript Object Signing and Encryption
+
+**JSON** – JavaScript Object Notation
+
+**MTLS** – Mutual Transport Layer Security
+
+**OIDF** – OpenID Foundation
+
+**PAR** – Pushed Authorization Requests
+
+**PKCE** – Proof Key for Code Exchange
+
+**QR** – Quick Response
+
+**RSA** – Rivest-Shamir-Adleman
 
 **REST** – Representational State Transfer
 
 **TLS** – Transport Layer Security
 
-**DNS** - Domain Name System
+**URI** – Uniform Resource Identifier
 
-**DNSSEC** -  Domain Name System Security Extensions
-
-**CAA** - Certificate Authority Authorization
-
-**URI** - Uniform Resource Identifier
+**URL** – Uniform Resource Locator
 
 # Security profile
 

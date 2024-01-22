@@ -88,11 +88,27 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **HTTP** – Hyper Text Transfer Protocol
 
+**JAR** – JWT-Secured Authorization Request
+
+**JARM** – JWT Secured Authorization Response Mode
+
+**JWT** – JSON Web Token
+
+**JSON** – JavaScript Object Notation
+
+**OIDF** – OpenID Foundation
+
+**PAR** – Pushed Authorization Requests
+
+**PKCE** – Proof Key for Code Exchange
+
 **REST** – Representational State Transfer
 
 **TLS** – Transport Layer Security
 
-**URI** - Uniform Resource Identifier
+**URI** – Uniform Resource Identifier
+
+**URL** – Uniform Resource Locator
 
 # Message signing profile
 
@@ -161,7 +177,7 @@ Authorization servers implementing FAPI2 authorization request signing
 
  1. shall support, require use of, and verify signed request objects according to JAR
     [@!RFC9101] at the PAR endpoint [@!RFC9126];
- 2. shall require the aud claim in the request object to be, or to be an array containing, the OP's issuer identifier URL;
+ 2. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
  3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
  4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim.
 
@@ -171,7 +187,7 @@ Clients implementing FAPI2 authorization request signing
 
  1. shall send all authorization parameters to the PAR endpoint [@!RFC9126] in a JAR
     [@!RFC9101] signed requested object;
- 2. shall send the `aud` claim in the request object as the OP's issuer identifier URL;
+ 2. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
  3. shall send a `nbf` claim in the request object;
  4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes.
 
