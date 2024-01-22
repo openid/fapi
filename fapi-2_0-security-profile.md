@@ -84,7 +84,7 @@ See Section 8 for normative references.
 
 # Terms and definitions
 
-For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and ISO29100 apply.
+For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750], [@!RFC7636], [@!OIDC] and [@!ISO29100] apply.
 
 # Symbols and Abbreviated terms
 
@@ -650,7 +650,7 @@ OpenID Connect, the privacy considerations are not specific to this document and
 generally apply to OAuth or OpenID Connect. Implementers are advised to perform
 a thorough privacy impact assessment and manage identified risks appropriately.
 
-**NOTE 1:** Implementers can consult documents like [ISO29100] and [ISO29134] for this
+**NOTE 1:** Implementers can consult documents like [@!ISO29100] and [@ISO29134] for this
 purpose.
 
 Privacy threats to OAuth and OpenID Connect implementations include the following:
@@ -772,6 +772,25 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
 <title>ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents</title>
     <author fullname="ISO/IEC">
       <organization>ISO/IEC</organization>
+    </author>
+</front>
+</reference>
+
+
+<reference anchor="ISO29100" target="https://standards.iso.org/ittf/PubliclyAvailableStandards/index.html#:~:text=IEC%2029100%3A2011-,EN,-%2D%20FR">
+<front>
+<title>ISO/IEC 29100 Information technology – Security techniques – Privacy framework</title>
+    <author fullname="ISO/IEC">
+      <organization></organization>
+    </author>
+</front>
+</reference>
+
+<reference anchor="ISO29134" target="https://www.iso.org/standard/86012.html">
+<front>
+<title>ISO/IEC 29134 Information technology – Security techniques – Guidelines for privacy impact assessment</title>
+    <author fullname="ISO/IEC">
+      <organization></organization>
     </author>
 </front>
 </reference>
