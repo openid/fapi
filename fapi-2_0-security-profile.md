@@ -182,7 +182,7 @@ servers
 **NOTE 1**: Even if an endpoint uses only organization validated (OV) or extended
 validation (EV) TLS certificates, an attacker using rogue domain-validated
 certificates is able to impersonate the endpoint and conduct man-in-the-middle
-attacks. CAA records [@!RFC8659] can help to mitigate this risk.
+attacks. CAA records [@RFC8659] can help to mitigate this risk.
 
 ### Requirements for endpoints not used by web browsers
 
@@ -210,7 +210,7 @@ requirements apply:
 
   1. Servers shall use methods to ensure that connections cannot be
      downgraded using TLS Stripping attacks. A preloaded [@preload] HTTP
-     Strict Transport Security policy [@!RFC6797] can be used for this
+     Strict Transport Security policy [@RFC6797] can be used for this
      purpose. Some top-level domains, like `.bank` and `.insurance`,
      have set such a policy and therefore protect all second-level
      domains below them.
@@ -510,10 +510,10 @@ OpenID Connect. When these are used Clients and Authorization Servers need to ve
 payloads with keys from another party. For Authorization Servers this profile strongly
 recommends  the use of JWKS URI endpoints to distribute public keys. For Client's key
 management this profile recommends either the use of JWKS URI endpoints or the use of
-the `jwks` parameter in combination with [@!RFC7591] and [@!RFC7592].
+the `jwks` parameter in combination with [@RFC7591] and [@RFC7592].
 
 The definition of the Authorization Server `jwks_uri` can be found in [@!RFC8414],
-while the definition of the Client `jwks_uri` can be found in [@!RFC7591].
+while the definition of the Client `jwks_uri` can be found in [@RFC7591].
 
 In addition, this profile
 
