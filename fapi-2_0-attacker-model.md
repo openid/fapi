@@ -83,7 +83,7 @@ This document describes the FAPI 2.0 profiles security goals, attacker model, at
 # Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See section 9 for normative references.
+See Clause 9 for normative references.
 
 # Terms and definitions
 
@@ -116,7 +116,7 @@ use an ID token identifying another user for login.
 
 
 ## Session integrity
-Session Integrity is concerned with attacks where a user is tricked
+Session integrity is concerned with attacks where a user is tricked
 into logging in under the attacker’s identity or inadvertently using
 the resources of the attacker instead of the user’s own resources.
 Attacks in this field include CSRF attacks (traditionally defended
@@ -173,11 +173,11 @@ attacker model:
   * **JWKS:** Where applicable, key distribution mechanisms work as
     intended, i.e., encryption and signature verification keys of
     uncompromised parties are retrieved from the correct endpoints.
-  * **Browsers and Endpoints:** Devices and
+  * **Browsers and endpoints:** Devices and
     browsers used by resource owners are considered not compromised. Other
     endpoints not controlled by an attacker behave according to the
     protocol.
-  * **Identity and Session Management:** End user's identity proofing,
+  * **Identity and session management:** End user's identity proofing,
     authentication, identity and access management on a client or authorization
     server are out of scope for this specification. It is assumed that clients
     ensure that sessions of different users are properly protected from each
@@ -242,13 +242,13 @@ browser to the authorization server.
 
 This might happen on mobile operating systems (where apps can register for
 URLs), on all operating systems through the browser history, or due to
-Cross-Site Scripting on the authorization server. There have been cases where
+cross-site scripting on the authorization server. There have been cases where
 anti-virus software intercepts TLS connections and stores/analyzes URLs.
 
 **Note:** An attacker that can read the authorization response is not
 considered here, as, with current browser technology, such an attacker
 can undermine most security protocols. This is discussed
-in "Browser Swapping Attacks" in the Security Considerations in the FAPI
+in "Browser Swapping Attacks" in the security considerations in the FAPI
 2.0 Security Profile.
 
 **Note:** The attackers for the authorization request are more
@@ -276,7 +276,7 @@ honest authorization server.
 Important: This attacker is a model for misconfigured token endpoint URLs that
 were considered in FAPI 1.0. Since the FAPI 2.0 Security Profile mandates that
 the token endpoint address is obtained from an authoritative source and via a
-protected channel, i.e., through OAuth Metadata obtained from the honest authorization server,
+protected channel, i.e., through OAuth metadata obtained from the honest authorization server,
 this attacker is not relevant in FAPI 2.0. The description here is kept for
 informative purposes only.
 

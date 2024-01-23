@@ -58,7 +58,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 
-.# Notational Conventions
+.# Notational conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -70,13 +70,13 @@ interpreted with their natural language meanings.
 
 # Scope
 
-This document specifies the methods for Clients, Authorization Servers and Resource Servers to sign and verify messages.
+This document specifies the methods for clients, authorization servers and resource servers to sign and verify messages.
 
 # Normative references
 
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See section 8 for normative references.
+See Clause 8 for normative references.
 
 # Terms and definitions
 
@@ -94,7 +94,7 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **URI** - Uniform Resource Identifier
 
-# Message Signing Profile
+# Message signing profile
 
 OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Message Signing Profile aims to reach the security goals
@@ -113,19 +113,19 @@ following standards are used in this profile:
   * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM] for signing authorization responses 
   * OAuth 2.0 Token Introspection [@!RFC7662] with [@I-D.ietf-oauth-jwt-introspection-response] for signing introspection responses
   * HTTP Message Signatures [@I-D.ietf-httpbis-message-signatures] and Digest Fields [@I-D.ietf-httpbis-digest-headers]
-  for signing HTTP requests to and responses from Resource Servers.
+  for signing HTTP requests to and responses from resource servers.
 
 We understand that some ecosystems may only desire to implement 1, 2 or 3 of the above 4, it is therefore
 anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
 will be separate conformance testing options for each of the following:
 
- * Signed Authorization Requests
- * Signed Authorization Responses
- * Signed Introspection Responses
- * Signed HTTP Messages
+ * Signed authorization requests
+ * Signed authorization responses
+ * Signed introspection responses
+ * Signed HTTP messages
 
 
-## Non-Repudiation
+## Non-repudiation
 
 Beyond what is captured by the security goals and the attacker model in
 [@!attackermodel], parties could try to deny having sent a particular message,
@@ -141,73 +141,73 @@ response.
 
 The following messages are affected by this specification:
 
-  * NR1: Pushed Authorization Requests
-  * NR2: Authorization Requests (Front-Channel)
-  * NR3: Authorization Responses (Front-Channel)  
-  * NR4: Introspection Responses
-  * NR5: Resource Requests
-  * NR6: Resource Responses
+  * NR1: pushed authorization requests
+  * NR2: authorization requests (front-channel)
+  * NR3: authorization responses (front-channel)  
+  * NR4: introspection responses
+  * NR5: resource requests
+  * NR6: resource responses
 
-## Signing Authorization Requests
+## Signing authorization requests
 
-To support non-repudiation for NR1, Pushed Authorization Requests can be signed. 
-Because FAPI2 uses [@!RFC9126], NR2 is achieved by default when the Pushed Authorization request
+To support non-repudiation for NR1, pushed authorization requests can be signed. 
+Because FAPI2 uses [@!RFC9126], NR2 is achieved by default when the pushed authorization request
 is signed.
 
 
-### Requirements for Authorization Servers
+### Requirements for authorization servers
 
 Authorization servers implementing FAPI2 authorization request signing
 
  1. shall support, require use of, and verify signed request objects according to JAR
     [@!RFC9101] at the PAR endpoint [@!RFC9126];
- 2. shall require the aud claim in the request object to be, or to be an array containing, the OP's Issuer Identifier URL;
+ 2. shall require the aud claim in the request object to be, or to be an array containing, the OP's issuer identifier URL;
  3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
  4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim.
 
-### Requirements for Clients
+### Requirements for clients
 
 Clients implementing FAPI2 authorization request signing
 
  1. shall send all authorization parameters to the PAR endpoint [@!RFC9126] in a JAR
     [@!RFC9101] signed requested object;
- 2. shall send the `aud` claim in the request object as the OP's Issuer Identifier URL;
+ 2. shall send the `aud` claim in the request object as the OP's issuer identifier URL;
  3. shall send a `nbf` claim in the request object;
  4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes.
 
-### Client Metadata {#client-metadata}
+### Client metadata {#client-metadata}
 
 The Dynamic Client Registration Protocol [@RFC7591] defines an API
 for dynamically registering OAuth 2.0 client metadata with authorization servers.
 The metadata defined by [@RFC7591], and registered extensions to it,
 also imply a general data model for clients that is useful for authorization server implementations
-even when the Dynamic Client Registration Protocol isn't in play.
+even when the dynamic client registration protocol isn't in play.
 Such implementations will typically have some sort of user interface available for managing client configuration.
 
 The following client metadata parameter is introduced by this specification:
 
 * `response_modes`: 
-    * OPTIONAL. A JSON array of strings containing the list of Response Modes that
-      the Client may use. If omitted, the default is that the Client may use any of
-      the Response Modes supported by the Authorization Server.
+    * OPTIONAL. A JSON array of strings containing the list of response modes that
+      the client may use. If omitted, the default is that the client may use any of
+      the response modes supported by the authorization server.
  
-## Signing Authorization Responses
+## Signing authorization responses
 
-To support non-repudiation for NR3, Authorization Responses can be signed. 
+To support non-repudiation for NR3, authorization responses can be signed. 
 
-### Requirements for Authorization Servers
+### Requirements for authorization servers
 
 Authorization servers implementing FAPI2 authorization response signing
 
  1. shall support, require use of, and issue signed authorization responses via JWT Secured Authorization 
     Response Mode for OAuth 2.0 [@!JARM].
 
-**NOTE**: When using [@!JARM] an Authorization Server should only include the iss authorization response 
+**NOTE**: When using [@!JARM] an authorization server should only include the iss authorization response 
 parameter defined by [@!RFC9207] inside the JWT. This is because [@!RFC9207] defines `iss` 
-to be an authorization response parameter, and [@!JARM] section 4.1 requires all authorization 
+to be an authorization response parameter, and [@!JARM] Section 4.1 requires all authorization 
 response parameters to be inside the JWT.
 
-### Requirements for Clients
+### Requirements for clients
 
 Clients implementing FAPI2 authorization response signing
 
@@ -215,17 +215,17 @@ Clients implementing FAPI2 authorization response signing
  2. shall verify signed authorization responses according to [@!JARM].
 
 
-## Signing Introspection Responses
+## Signing introspection responses
 
-To support non-repudiation for NR4, Introspection Responses can be signed.
+To support non-repudiation for NR4, introspection responses can be signed.
 
-### Requirements for Authorization Servers
+### Requirements for authorization servers
 
 Authorization servers implementing FAPI2 introspection response signing
 
  1. shall sign introspection responses that are issued in JWT format according to [@!I-D.ietf-oauth-jwt-introspection-response]
  
-### Requirements for Clients
+### Requirements for clients
 
 Clients implementing FAPI2 introspection response signing
 
@@ -233,7 +233,7 @@ Clients implementing FAPI2 introspection response signing
  2. shall verify the signed token introspection responses.
 
 
-## HTTP Message Signing
+## HTTP message signing
 
 To support non-repudiation for NR5 and NR6, HTTP requests, responses, or both can be signed.
 
@@ -244,7 +244,7 @@ To support non-repudiation for NR5 and NR6, HTTP requests, responses, or both ca
 Clients sending signed resource requests act in the role of "signer" as defined by 
 [@I-D.ietf-httpbis-message-signatures]. This signer
 
-1. shall create an HTTP Message Signature as described in [@!I-D.ietf-httpbis-message-signatures];
+1. shall create an HTTP message signature as described in [@!I-D.ietf-httpbis-message-signatures];
 1. shall include `@method` (the method used in the HTTP request) in the signature;
 1. shall include `@target-uri` (the full request URI of the HTTP request) in the signature;
 1. shall include the `created` parameter (the signature creation time) in the signature;
@@ -255,14 +255,14 @@ Clients sending signed resource requests act in the role of "signer" as defined 
     [@I-D.ietf-httpbis-digest-headers] in the request, shall include that header in the signature, and should use 
     content-encoding agnostic digest methods (such as sha-256).
  
-#### Resource Servers 
+#### Resource servers 
 
 Resource servers receiving signed resource requests act in the role of "verifier" as 
 defined by [@!I-D.ietf-httpbis-message-signatures]. This verifier
 
 1. shall retrieve the valid public key for the client;
-1. shall verify the signature received from the Client as described in [@!I-D.ietf-httpbis-message-signatures];
-1. shall reject requests with missing or invalid signatures using HTTP Status Code 401;
+1. shall verify the signature received from the client as described in [@!I-D.ietf-httpbis-message-signatures];
+1. shall reject requests with missing or invalid signatures using HTTP status code 401;
 1. shall reject requests which don't have a tag parameter with the value of `fapi-2-request` in the signature;
 1. shall reject requests with signatures that are missing `@method`, `@target-uri`, or `Authorization` in the signature;
 1. shall reject requests with signatures that are missing the `created` parameter or have a `created` value 
@@ -271,21 +271,21 @@ defined by [@!I-D.ietf-httpbis-message-signatures]. This verifier
 1. when the request contains a request body, shall reject requests that are missing `content-digest` in the signature.
 
 
-**NOTE:** This specification doesn't specify the exact means by which a Resource Server can retrieve
-the key for the Client. The Resource Server can obtain an identifier for the Client either from a 
-mutual TLS cerficiate or from a JWT access token or from a token introspection response. With a Client
-identifier and the `keyid` in the `Signature-Input` field, the Resource Server can retrieve the key from 
+**NOTE:** This specification doesn't specify the exact means by which a resource server can retrieve
+the key for the client. The resource server can obtain an identifier for the client either from a 
+mutual TLS cerficiate or from a JWT access token or from a token introspection response. With a client
+identifier and the `keyid` in the `Signature-Input` field, the resource server can retrieve the key from 
 a trusted third party or by some other means.
  
  
 ### Requirements for signing and verifying resource responses
 
-#### Resource Servers 
+#### Resource servers 
 
 Resource servers responding with a signed resource response act in the role of "signer" as defined 
 by [@!I-D.ietf-httpbis-message-signatures]. This signer
 
-1. shall create an HTTP Message Signature for the response as described in [@!I-D.ietf-httpbis-message-signatures];
+1. shall create an HTTP message signature for the response as described in [@!I-D.ietf-httpbis-message-signatures];
 1. shall cryptographically link the response to the request by including the request method, request target-uri and 
 (if applicable) the request content-digest in the response signature input by means of the `req` boolean flag defined 
 in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures];
@@ -305,31 +305,31 @@ in the response, and shall include that header in the signature, and should use 
 Clients receiving signed resource responses act in the role of "verifier" as 
 defined by [@!I-D.ietf-httpbis-message-signatures]. This verifier
 
-1. shall retrieve the valid public key for the Resource Server;
+1. shall retrieve the valid public key for the resource server;
 1. shall accept and verify the signature in the response as described in [@!I-D.ietf-httpbis-message-signatures];
 1. shall verify that `@status` and `created` are included in the signature;
 1. if the response contains a body, shall verify that `content-digest` is in the signature; and
 1. shall verify that the signature contains the tag parameter with a value of `fapi-2-response`.
 
  
-**NOTE:** This specification doesn't specify the exact means by which a Client can retrieve
-the key for the Resource Server. Together with the identity of the Resource Server and the 
-`keyid` in the `Signature-Input` field, the Client can retrieve the key from a trusted third 
+**NOTE:** This specification doesn't specify the exact means by which a client can retrieve
+the key for the resource server. Together with the identity of the resource server and the 
+`keyid` in the `Signature-Input` field, the client can retrieve the key from a trusted third 
 party or by some other means. 
 
-**NOTE:** As noted in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures], the Client will need to 
+**NOTE:** As noted in Section 2.4 of [@!I-D.ietf-httpbis-message-signatures], the client will need to 
 keep data related to the request in order to verify the response signature.
 
 
-# Security Considerations
+# Security considerations
 
-## Authorization Response Encryption
+## Authorization response encryption
 
-In FAPI2, there is no confidential information in the Authorization Response, hence encryption of the Authorization Response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
+In FAPI2, there is no confidential information in the authorization response, hence encryption of the authorization response is not required for the purposes of security or confidentiality. In addition, to achieve greater interoperability, it is not recommended to use encryption in this case. 
 
 Usage of PKCE in FAPI 2 provides protection for code leakage described in Section 5.4 of [@!JARM].
 
-## Confusion between Resource Servers and Clients in Introspection Request
+## Confusion between resource servers and clients in introspection request
 
 In [@!I-D.ietf-oauth-jwt-introspection-response], the resource server accessing
 the introspection endpoint is seen in the role of a client towards the
@@ -338,19 +338,19 @@ client (that is not a resource server) could attempt to call the introspection
 endpoint directly, and thus gather information about an access token to which it
 is not supposed to have access. This may, for example, leak secrets including,
 if the access token was leaked or stolen, personal information about an
-End-User.
+end-user.
 
 The authorization server therefore must ensure that the resource server is not
 confused with a regular client that is not supposed to call the introspection
 endpoint, and that the resource server has the necessary authorization to access
 the information associated with the access token.
 
-## Non-Repudiation limited to individual messages
+## Non-repudiation limited to individual messages
 
 It is important to note that while this specification provides mechanisms for non-repudiation for 
 individual messages, it does not provide non-repudiation guarantees for a sequence of messages.
 
-## Non-Repudiation not provided for front channel Authorization Requests
+## Non-repudiation not provided for front channel authorization requests
 
 While only a small amount of information is present in a [@!FAPI2_Security_Profile_ID2] front channel 
 authorization request, it is important to note that non-repudiation is not provided for this message. 
@@ -365,7 +365,7 @@ scope of this document.
 
 The values signed in a JARM response may be of limited value for non-repudiation as the values are artifacts 
 of the OAuth flow (e.g. code and state) rather than real world values (e.g. account number and amount). However JARM
-is still useful in providing message integrity to the Authorization Response.
+is still useful in providing message integrity to the authorization response.
 
 
 
@@ -379,14 +379,14 @@ whether such messages need to be stored. If they are stored then adequate access
 put in place to protect that data. Such controls should follow data minimisation principles and ensure that 
 there are tamper-proof audit logs.
 
-# IANA Considerations
-## OAuth Dynamic Client Registration Metadata Registration
+# IANA considerations
+## OAuth dynamic client registration metadata registration
 
 This specification requests registration of the following client metadata
 definitions in the IANA "OAuth Dynamic Client Registration Metadata" registry
 established by [@RFC7591]:
 
-### Registry Contents
+### Registry contents
 
 * Client Metadata Name: `response_modes`
 * Client Metadata Description: Array of the response modes that the client may use

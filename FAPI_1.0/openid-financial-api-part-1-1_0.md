@@ -47,7 +47,7 @@ FAPI is a highly secured OAuth profile that aims to provide specific implementat
 
 This document is Part 1 of FAPI Security Profile 1.0. It specifies a baseline security profile of OAuth that is suitable for protecting APIs with a moderate inherent risk. Importantly, this profile does not provide non-repudiation (signing of authorization requests and responses) and sender-constrained access tokens. If such features or a higher level of security is desired, the use of [FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
-Although it is possible to code an OpenID Provider and Relying Party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 7.6 before embarking on a 'from scratch' implementation.
+Although it is possible to code an OpenID provider and relying party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 7.6 before embarking on a 'from scratch' implementation.
 
 
 # 1. Scope
@@ -140,7 +140,7 @@ The authorization server
 1. should support public clients; 
 1. shall provide a client secret that adheres to the requirements in Section 16.19 of [OIDC] if a symmetric key is used;
 1. shall authenticate the confidential client using one of the following methods:
-    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [RFC8705], or
+    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC8705], or
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall require and use a key of size 2048 bits or larger for RSA algorithms;
 1. shall require and use a key of size 160 bits or larger for elliptic curve algorithms;
@@ -148,7 +148,7 @@ The authorization server
 1. shall require redirect URIs to be pre-registered;
 1. shall require the `redirect_uri` in the authorization request;
 1. shall require the value of `redirect_uri` to exactly match one of the pre-registered redirect URIs;
-1. shall require user authentication to an appropriate Level of Assurance for the operations the client will be authorized to perform on behalf of the user;
+1. shall require user authentication to an appropriate level of assurance for the operations the client will be authorized to perform on behalf of the user;
 1. shall require explicit approval by the user to authorize the requested scope if it has not been previously authorized;
 1. shall reject an authorization code (Section 1.3.1 of [RFC6749]) if it has been previously used;
 1. shall return token responses that conform to Section 4.1.4 of [RFC6749]; 
@@ -219,7 +219,7 @@ If `openid` is not in the `scope` value, then the public client
 9. shall include the `state` parameter defined in Section 4.1.1 of [RFC6749];
 10. shall verify that the `scope` received in the token response is either an exact match,
 or contains a subset of the `scope` sent in the authorization request if the request was passed in the front channel and was not integrity protected; and
-11. shall only use Authorization Server metadata obtained from the metadata document published by the Authorization Server at its well known endpoint as defined in [OIDD] or [RFC8414].
+11. shall only use authorization server metadata obtained from the metadata document published by the authorization server at its well known endpoint as defined in [OIDD] or [RFC8414].
 
     **NOTE**: Adherence to [RFC7636] means that the token request includes `code_verifier` parameter in the request.
 
@@ -229,14 +229,14 @@ or contains a subset of the `scope` sent in the authorization request if the req
 In addition to the provisions for a public client, a confidential client
 
 1. shall support the following methods to authenticate against the token endpoint:
-    1. Mutual TLS for OAuth Client Authentication as specified in Section 2 of [RFC8705], and
+    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC8705], and
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall use RSA keys with a minimum 2048 bits if using RSA cryptography; 
-1. shall use elliptic curve keys with a minimum of 160 bits if using Elliptic Curve cryptography; and
+1. shall use elliptic curve keys with a minimum of 160 bits if using elliptic curve cryptography; and
 1. shall verify that its client secret has a minimum of 128 bits if using symmetric key cryptography.
 
 
-# 6. Accessing Protected Resources
+# 6. Accessing protected resources
 
 ## 6.1 Introduction
 
@@ -299,7 +299,7 @@ The recommendations for Secure Use of Transport Layer Security in [BCP195] shall
 1. TLS version 1.2 or later shall be used for all communications.
 1. A TLS server certificate check shall be performed, as per [RFC6125].
 
-Endpoints for the use by web browsers should use mechanisms to ensure that connections cannot be downgraded using TLS Stripping attacks. A preloaded HTTP Strict Transport Security policy (see [PRELOAD] and [RFC6797]) can be used for this purpose. Some top-level domains, like `.bank` and `.insurance`, have set such a policy and therefore protect all second-level domains below them.
+Endpoints for the use by web browsers should use mechanisms to ensure that connections cannot be downgraded using TLS stripping attacks. A preloaded HTTP Strict Transport Security policy (see [PRELOAD] and [RFC6797]) can be used for this purpose. Some top-level domains, like `.bank` and `.insurance`, have set such a policy and therefore protect all second-level domains below them.
 
 For a comprehensive protection against network attackers, all
 endpoints should additionally use DNSSEC to protect against DNS
@@ -370,17 +370,17 @@ the refresh token. Refer to Section 16.18 of [OIDC] for
 more discussion on the lifetimes of access tokens and 
 refresh tokens. 
 
-## 7.5 Native Apps
+## 7.5 Native apps
 
 When native apps are used as either public clients, dynamically registered confidential clients or user-agents receiving the authorization response for a server based confidential client, the recommendations for OAuth 2.0 for Native Apps in [BCP212] shall be followed, with the following additional requirements:
 
 When registering redirect URIs, authorization servers
 
-1. shall not support "Private-Use URI Scheme Redirection"; and
-1. shall not support "Loopback Interface Redirection".
+1. shall not support "private-use URI scheme redirection"; and
+1. shall not support "loopback interface redirection".
 
 These requirements mean that FAPI Security Profile 1.0 compliant implementations can only
-support native apps through the use of "Claimed https Scheme URI Redirection".
+support native apps through the use of "claimed HTTPS scheme URI redirection".
 
 **NOTE**: Nothing in this document seeks to disallow fixed urls in the
 form https://localhost:port-number/callback, as these are particularly
@@ -401,19 +401,19 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-## 7.7 Discovery & Multiple Brands
+## 7.7 Discovery & multiple brands
 
 Organizations who need to support multiple "brands" with individual authorization endpoints 
-from a single Authorization Server deployment shall use a separate `issuer` per brand.
+from a single authorization server deployment shall use a separate `issuer` per brand.
 This can be achieved either at the domain level (e.g. `https://brand-a.auth.example.com` 
 and  `https://brand-b.auth.example.com`) or with different paths (e.g. `https://auth.example.com/brand-a` and `https://auth.example.com/brand-b`)
 
-As stated in 5.2.2-22 Clients shall only use metadata values obtained via metadata documents
+As stated in 5.2.2-22 clients shall only use metadata values obtained via metadata documents
 as defined in [OIDD]. Communicating metadata through other means (e.g. via email) opens 
 up a social engineering attack vector.
 
-Note that the requirement to use [OIDD] is not a requirement to support Dynamic Client 
-Registration. 
+Note that the requirement to use [OIDD] is not a requirement to support dynamic client 
+registration. 
 
 # 8. Privacy considerations
 
@@ -431,28 +431,28 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 * (Inappropriate privacy notice) A privacy notice provided at a `policy_url` or by other means can be inappropriate. 
 * (Inadequate choice) Providing a consent screen without adequate choices does not form consent. 
-* (Misuse of data) An AS, RS or Client can potentially use the data not according to the purpose that was agreed. 
+* (Misuse of data) An AS, RS or client can potentially use the data not according to the purpose that was agreed. 
 * (Collection minimization violation) A client asking for more data than it absolutely needs to fulfil the purpose is violating the collection minimization principle. 
-* (Unsolicited personal data from the Resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
+* (Unsolicited personal data from the resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
 * (Data minimization violation) Any process that is processing more data than it needs is violating the data minimization principle. 
-* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which Client/RP. 
+* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which client/RP. 
 * (User tracking by RPs) Two or more RPs correlating access tokens or ID Tokens to track users. 
-* (RP misidentification by User at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
+* (RP misidentification by user at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
 the AS's authorization page. 
-* (Mismatch between User’s understanding or what RP is displaying to a user and the actual authorization request) To enhance 
+* (Mismatch between user’s understanding or what RP is displaying to a user and the actual authorization request) To enhance 
 the trust of the ecosystem, best practice is for the AS to make clear what is included in the authorization request (for example, 
 what data will be released to the RP).
 * (Attacker observing personal data in authorization request) Authorization request might contain personal data. This can be observed by an attacker. 
 * (Attacker observing personal data in authorization endpoint response) In some frameworks, even state is deemed personal data. 
   This can be observed by an attacker through various means. 
 * (Data leak from AS) AS stores personal data. If AS is compromised, these data can leak or be modified. 
-* (Data leak from Resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
-* (Data leak from Clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
+* (Data leak from resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
+* (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
 These threats can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
-For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
+For example, "attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
 using `request_uri` or by encrypting the request object. 
-Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or [JARM] response. 
+Similarly, "attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or [JARM] response. 
 
 # 9. Acknowledgement
 
