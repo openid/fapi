@@ -78,6 +78,7 @@ attacker model. This document specifies the requirements for:
  - Resource Servers to securely accept and verify OAuth tokens from confidential Clients.
 
 # Normative references
+The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
 See Section 8 for normative references.
 
