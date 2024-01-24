@@ -70,7 +70,7 @@ to provide supporting documentation.
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
-[@!ISODIR2]. These keywords are not used as dictionary terms such that any
+[@ISODIR2]. These keywords are not used as dictionary terms such that any
 occurrence of them shall be interpreted as keywords and are not to be
 interpreted with their natural language meanings.
 
@@ -444,9 +444,9 @@ valuable feedback and contributions that helped to evolve this document.
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>
-<title>ISO/IEC Directives Part 2 - </title>
-    <author fullname="International Organization for Standardization">
-      <organization></organization>
+<title>ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents</title>
+    <author fullname="ISO/IEC">
+      <organization>ISO/IEC</organization>
     </author>
 </front>
 </reference>
