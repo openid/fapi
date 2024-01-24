@@ -21,7 +21,7 @@ organization="Authlete"
 
 %%%
 
-.# Abstract 
+.# Abstract
 
 OIDF FAPI 2.0 is an API security profile suitable for high-security
 applications based on the OAuth 2.0 Authorization Framework
@@ -47,17 +47,14 @@ Implementers and users of the Security Profile can derive from this document
 which threats have been taken into consideration by the Security Profile and
 which fall outside of what the Security Profile provides.
 
-The ultimate aim is to provide systematic proofs of the security of the FAPI
-profiles similar to those in [@arXiv.1901.11520]. Formal proofs can rule out
-large classes of attacks rooted in the logic of security protocols. Until such
-proofs are provided for the FAPI 2.0 Security Profile, the attacker model laid
-out herein informs the design decisions, but, as with most security protocols,
-there is no guarantee that all attacks for all types of attackers are excluded.
+A systematic definition of security requirements and an attacker model enable
+proofs of the security of the FAPI 2.0 Security Profile, similar to the proofs
+in [@arXiv.1901.11520] for FAPI 1.0, which this work draws from. Formal proofs
+can rule out large classes of attacks rooted in the logic of security protocols.
 
-The security requirements in this document are expressed in a form that lends
-itself well to a transfer into a formal representation required for an automated
-or manual analysis of the security of FAPI. This work draws from the attacker
-model and security goals formulated in [@arXiv.1901.11520].
+The formal analysis performed on this attacker model and the FAPI 2.0 Security
+Profile, described in (#formal_analysis), has helped to refine and improve
+this document and the FAPI 2.0 Security Profile.
 
 .# Warning
 
@@ -96,7 +93,7 @@ For the purpose of this document, the terms defined in [@!RFC6749], and [@!OIDC]
 ## General (_Review title_)
 In the following, the security goals for the FAPI 2.0 Security Profile with
 regards to authorization and, when OpenID Connect is used, authentication, are
-defined. 
+defined.
 
 ## Authorization
 The FAPI 2.0 Security Profile aims to ensure that **no attacker can
@@ -132,7 +129,7 @@ In detail:
   * For authorization: The FAPI 2.0 Security Profile aims to ensure that
     **no attacker is able to force a user to use resources of the attacker.**
 
-# Attacker model 
+# Attacker model
 
 This attacker model defines very broad capabilities for attackers. It is assumed
 that attackers will exploit these capabilities to come up with attacks on the
@@ -148,10 +145,9 @@ protocol like OAuth or OpenID Connect, however, yet unknown types of threats and
 variants of existing threats can emerge, as has been shown in the past. In order
 to not overlook any potential attacks, FAPI 2.0 therefore aims not to address
 concrete, narrow threats, but to exclude any attacks conceivable for the
-attacker types listed here. This will be supported by a formal analysis, as
-mentioned above.
+attacker types listed here. This is supported by a formal security analysis, see (#formal_analysis).
 
-This attacker model assumes that certain parts of the infrastructure are working
+This attacker model assumes that certain parts of the infrastructure and protocols are working
 correctly. Failures in these parts likely lead to attacks that are out of the
 scope of this attacker model. These areas need to be analyzed separately within
 the scope of an application of the FAPI 2.0 security profiles using threat
@@ -187,7 +183,7 @@ attacker model:
     other and from attackers. Clients retrieving identity attributes using
     OpenID Connect are required to check whether the identity attributes
     returned fulfills their requirements.
-    
+
 
 # Attackers
 
@@ -197,7 +193,7 @@ combinations of the following attackers, potentially collaborating to reach a
 common goal:
 
 
-## A1 - Web attacker
+## A1 — Web attacker
 
 Standard web attacker model. Can send and receive messages just like any other
 party controlling one or more endpoints on the internet. Can participate in
@@ -211,34 +207,34 @@ long as the contents are known to the attacker.
 Cannot intercept or block messages sent between other parties, and cannot break
 cryptography unless the attacker has learned the respective decryption keys.
 Deviating from the common web attacker model, A1 cannot play the role of a
-legitimate AS in the ecosystem (see A1a).
+legitimate authorization server in the ecosystem (see A1a).
 
-## A1a - Web Attacker (participating as AS)
+## A1a — Web Attacker (participating as authorization server)
 
-Like the web attacker A1, but can also participate as an AS in the ecosystem.
-Note that this AS can reuse/replay messages it has received from honest ASs and
-can send users to endpoints of honest ASs.
+Like the web attacker A1, but can also participate as an authorization server in the ecosystem.
+Note that this authorization server can reuse/replay messages it has received from honest authorization servers and
+can send users to endpoints of honest authorization servers.
 
-## A2 - Network attacker
+## A2 — Network attacker
 
 Controls the whole network (like a rogue WiFi access point or any other
 compromised network node). Can intercept, block, and tamper with messages
 intended for other people, but cannot break cryptography unless the attacker has
-learned the respective decryption keys. 
+learned the respective decryption keys.
 
 Note: Most attacks that are exclusive to this kind of attacker can be defended
 against by using transport layer protection like TLS.
 
-## Attacker at the authorization endpoint: A3a - read authorization request
+## Attacker at the authorization endpoint: A3a — read authorization request  {#attacker_a3}
 
 The capabilities of the web attacker, but can also read the authorization
 request sent in the front channel from a user's browser to the authorization
 server. This might happen on mobile operating systems (where apps can register
 for URLs), on all operating systems through the browser history, or due to
-Cross-Site Scripting on the AS. There have been cases where anti-virus software
+Cross-Site Scripting on the authorization server. There have been cases where anti-virus software
 intercepts TLS connections and stores/analyzes URLs.
 
-Note: An attacker that can read the authorization response is not
+**Note:** An attacker that can read the authorization response is not
 considered here, as, with current browser technology, such an attacker
 can undermine most security protocols. This is discussed
 in "Browser Swapping Attacks" in the Security Considerations in the FAPI
@@ -250,35 +246,38 @@ since these messages pass through the complex environment of the
 user's browser/app/OS with a larger attack surface. This demands for a
 more fine-grained analysis.
 
-**Note:** For the authorization endpoint, it is assumed that the attacker can
-only passively read messages, whereas for the token and resource endpoints, it
-is assumed that the attacker can also tamper with messages. Since messages to
-and from the authorization endpoint are sent through the user's browser and the
-attacker can redirect the user to arbitrary URLs anyway (see A1), the attacker
-can already redirect the user to faked/spoofed authorization request and
-response URLs. At the same time, while leakages from the authorization request
-or response are very common in practice, a fully compromised connection to the
-authorization endpoint is not. Most user authentication schemes would be broken
-in this setting, undermining the security completely.
+**Note:** For the authorization and resource endpoints, it is assumed that the
+attacker can only passively read messages, whereas for the token endpoint, it is
+assumed that the attacker can also tamper with messages. The underlying
+assumption is that leakages from the authorization request or response are very
+common in practice and leakages of the resource request are possible, but a
+fully compromised connection to either endpoint is very unlikely. In particular
+for the authorization endpoint, a fully compromised connection would undermine
+the security of most redirect-based authentication/authorization schemes, including OAuth.
 
-## Attacker at the token endpoint: A5 - read and tamper with token requests and responses
+## Attacker at the token endpoint: A4 — read and tamper with token requests and responses  {#attacker_a4}
 
 This attacker makes the client use a token endpoint that is not the one of the
-honest AS. This attacker can read and tamper with messages sent to and from this
-token endpoint that the client thinks as of an honest AS.
+honest authorization server. This attacker can read and tamper with messages sent to and from this
+token endpoint that the client thinks as of an honest authorization server.
 
 Important: This attacker is a model for misconfigured token endpoint URLs that
 were considered in FAPI 1.0. Since the FAPI 2.0 Security Profile mandates that
 the token endpoint address is obtained from an authoritative source and via a
-protected channel, i.e., through OAuth Metadata obtained from the honest AS,
+protected channel, i.e., through OAuth Metadata obtained from the honest authorization server,
 this attacker is not relevant in FAPI 2.0. The description here is kept for
 informative purposes only.
 
-## Attacker at the resource server: A7 - read resource requests
+## Attacker at the resource server: A5 — read resource requests  {#attacker_a5}
 
 The capabilities of the web attacker, but this attacker can also read requests
 sent to the resource server after they have been processed by the resource server, for example because the attacker can read
-TLS intercepting proxy logs on the RS's side.
+TLS intercepting proxy logs on the resource server's side.
+
+**Note:** An attacker that can read the responses from the resource server is not
+considered here, as such an attacker would directly contradict the authorization
+goal stated above. If it could tamper with the responses, it could additionally
+trivially break the session integrity goal.
 
 # Limitations
 
@@ -286,7 +285,7 @@ TLS intercepting proxy logs on the RS's side.
 Beyond the limitations already described in the introduction to the attacker
 model above, it is important to note the following limitations:
 
-## Protocol layers 
+## Protocol layers
 
 FAPI 2.0 profiles only define the behavior of API authorization and
 authentication on certain protocol layers. As described above, attacks on lower
@@ -326,7 +325,7 @@ The FAPI 2.0 profiles focus on core aspects of the API security and do not
 prescribe, for example, end-user authentication mechanisms, firewall setups,
 software development practices, or security aspects of internal architectures.
 Anything outside of boundaries of FAPI 2.0 must be assessed in the context of
-the ecosystem, deployment, or implementation in which FAPI 2.0 is used. 
+the ecosystem, deployment, or implementation in which FAPI 2.0 is used.
 
 ## Implementation errors
 
@@ -345,12 +344,40 @@ New technologies or changed behavior of components (e.g., browsers) can lead to
 new security vulnerabilities over time that might not have been known during the
 development of these specifications.
 
+# Formal Analysis {#formal_analysis}
+
+The FAPI 2.0 Security Profile is accompanied by a formal security analysis
+[@analysis.FAPI2] that provides a formal model of the FAPI 2.0 Security Profile
+and a proof of the security of the FAPI 2.0 Security Profile within this model.
+The formal model is based on the attacker model and security goals defined in
+this document.
+
+Note that the analysis is based on a prior version the attacker model that used
+a different numbering for the attackers. Some of the attacker models previously
+considered were in contradiction with the security goals and therefore removed.
+The mapping between the attacker model in this document and the one used in the
+analysis is as follows:
+
+| Analysis | This document                                              |
+| -------- | ---------------------------------------------------------- |
+| A1       | A1                                                         |
+| A1a      | A1a                                                        |
+| A2       | A2                                                         |
+| A3a      | A3a                                                        |
+| A3b      | removed — see note in (#attacker_a3)                       |
+| A5       | A4                                                         |
+| A7       | A5 — with reduced capabilities, see note in (#attacker_a5) |
+| A8       | removed — see note in (#attacker_a5)                       |
+
+As the updates to the attacker model were made to align with the formal
+analysis, the analysis results are still valid for the updated attacker model.
+
 # Acknowledgements
 
-This document was developed by the OpenID FAPI Working Group. 
+This document was developed by the OpenID FAPI Working Group.
 
 We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
-Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their 
+Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their
 valuable feedback and contributions that helped to evolve this document.
 
 {backmatter}
@@ -359,7 +386,7 @@ valuable feedback and contributions that helped to evolve this document.
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
    <date day="28" month="Jul" year="2021"/>
   </front>
@@ -400,6 +427,20 @@ valuable feedback and contributions that helped to evolve this document.
   </front>
   <seriesInfo name="arXiv" value="1901.11520"/>
 </reference>
+
+<!-- The following link should be updated if the publication happens in time for final. -->
+
+<reference anchor="analysis.FAPI2"
+           target="https://openid.net/wordpress-content/uploads/2022/12/Formal-Security-Analysis-of-FAPI-2.0_FINAL_2022-10.pdf">
+  <front>
+    <title>Formal Security Analysis of the OpenID FAPI 2.0: Accompanying a Standardization Process</title>
+    <author fullname="Pedram Hosseyni" surname="Hosseyni" initials="P."><organization/></author>
+    <author fullname="Ralf Küsters" surname="Küsters" initials="R."><organization/></author>
+    <author fullname="Tim Würtele" surname="Würtele" initials="T."><organization/></author>
+    <date day="1" month="October" year="2022"/>
+  </front>
+</reference>
+
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>

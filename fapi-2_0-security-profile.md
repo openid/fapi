@@ -79,7 +79,7 @@ attacker model. This document specifies the requirements for:
 
 # Normative references
 
-See section 8 for normative references.
+See Section 8 for normative references.
 
 # Terms and definitions
 
@@ -239,7 +239,7 @@ Authorization servers
  1. shall authenticate clients using one of the following methods:
      - MTLS as specified in Section 2 of [@!RFC8705], or
      - `private_key_jwt` as specified in Section 9 of [@!OIDC];
- 1. shall not expose open redirectors (see section 4.10 of
+ 1. shall not expose open redirectors (see Section 4.10 of
      [@I-D.ietf-oauth-security-topics]);
  1. shall accept its issuer identifier value (as defined in [@RFC8414]) either as the
     `aud` claim (when a string) or as a member of the `aud` claim (when an array) received
@@ -282,7 +282,7 @@ This specification goes further by placing a hard lower bound of 10 seconds in o
 
 For flows that use the authorization endpoint, Authorization Servers
 
-1. shall require the value of `response_type` described in [@!RFC6749]to be `code`;
+1. shall require the value of `response_type` described in [@!RFC6749] to be `code`;
 1. shall support client-authenticated pushed authorization requests
     according to [@!RFC9126];
 1. shall reject authorization requests sent without [@!RFC9126];
@@ -298,7 +298,7 @@ For flows that use the authorization endpoint, Authorization Servers
      been previously used;
 1. shall not use the HTTP 307 status code when redirecting a request that contains 
      user credentials to avoid forwarding the credentials to a third party accidentally 
-     (see section 4.11 of [I-D.ietf-oauth-security-topics]); 
+     (see Section 4.11 of [I-D.ietf-oauth-security-topics]); 
 1. should use the HTTP 303 status code when redirecting the user agent using status codes; and
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values 
      of less than 600 seconds;
@@ -335,8 +335,8 @@ Clients
     -  MTLS as described in [@!RFC8705], or
     -  DPoP as described in [@!RFC9449];
  1. shall support client authentication using one or both of the following methods:
-    - MTLS as specified in section 2 of [@!RFC8705], or
-    - `private_key_jwt` as specified in section 9 of [@!OIDC];
+    - MTLS as specified in Section 2 of [@!RFC8705], or
+    - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750];
  1. shall not expose open redirectors (see Section 4.10 of
@@ -428,7 +428,7 @@ endpoints that would not otherwise require a TLS client certificate (for example
 `private_key_jwt` authentication).
 
 This is outside of the scope of both [@!RFC8705] and the FAPI standards, however in the interests of interoperability
-this document state that when using TLS as a transport level protection in this manner, authorization servers should
+this document states that when using TLS as a transport level protection in this manner, authorization servers should
 expect clients to call the endpoints located in the root of the server metadata, and not those found in
 `mtls_endpoint_aliases`.
 
@@ -463,7 +463,7 @@ There is a performance and resiliency trade off, setting the access token life t
 
 ### DPoP Proof Replay
 
-An attacker of type A7 (see [@attackermodel]) may be able to obtain DPoP proofs
+An attacker of type A5 (see [@attackermodel]) may be able to obtain DPoP proofs
 that they can then replay.
 
 This may also allow reuse of the DPoP proof with an altered request, as DPoP does
@@ -477,7 +477,7 @@ Possible mitigations for this are:
 3. Replay of an altered request can be prevented by using signed resource requests as per FAPI Message Signing
 4. Consider MTLS sender-constraining instead of DPoP
 
-These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A7
+These mitigations may have potential complexity, performance or scalability tradeoffs. Attacker type A5
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
 
 ### JWKS URIs
@@ -540,7 +540,7 @@ where the pre-conditions may be met, the possible mitigations include:
 
 ### Authorization Request Leaks lead to CSRF
 
-An attacker of type A3a (see [@attackermodel]) can intercept an authorization request, log in at the 
+An attacker of type A3 (see [@attackermodel]) can intercept an authorization request, log in at the
 Authorization Server, receive an authorization code and redirect the honest user via a Cross-Site Request Forgery (CSRF) attack to 
 the honest client but with the attacker's authorization code. This results in the user accessing the 
 attackers resources, thus breaking session integrity.
@@ -694,7 +694,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
    <date day="14" month="Nov" year="2022"/>
   </front>
