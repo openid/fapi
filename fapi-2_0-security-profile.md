@@ -26,6 +26,14 @@ organization="Moneyhub Financial Technology"
     [author.address]
     email = "dave@tonge.org"
 
+[[author]]
+initials="J."
+surname="Heenan"
+fullname="Joseph Heenan"
+organization="Authlete"
+    [author.address]
+    email = "joseph@authlete.com"
+
 
 %%%
 
@@ -699,7 +707,7 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 This specification was developed by the OpenID FAPI Working Group.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Joseph Heenan, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
 
 
 

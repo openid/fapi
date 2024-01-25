@@ -26,6 +26,14 @@ organization="Authlete"
     [author.address]
     email = "mail@danielfett.de"
 
+[[author]]
+initials="J."
+surname="Heenan"
+fullname="Joseph Heenan"
+organization="Authlete"
+    [author.address]
+    email = "joseph@authlete.com"
+
 %%%
 
 .# Foreword
@@ -389,7 +397,7 @@ established by [@RFC7591]:
 
 This specification was developed by the OpenID FAPI Working Group. 
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postnikov, Joseph Heenan, Brian Campbell, Ralph Bragg, Justin Richer and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postnikov, Brian Campbell, Ralph Bragg, Justin Richer and Lukasz Jaromin for their valuable feedback and contributions that helped to evolve this specification.
 
 
 {backmatter}
