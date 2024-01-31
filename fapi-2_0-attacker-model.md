@@ -196,44 +196,54 @@ common goal:
 
 ## A1 — Web attacker
 
-Standard web attacker model. Can send and receive messages just like any other
-party controlling one or more endpoints on the internet. Can participate in
-protocols flows as a normal user. Can use arbitrary tools (e.g., browser
-developer tools, custom software, local interception proxies) on their own
-endpoints to tamper with messages and assemble new messages. Can send links to
-honest users that are then visited by these users. This means that the web
-attacker has the ability to cause arbitrary requests from users' browsers, as
-long as the contents are known to the attacker.
+This is the standard web attacker model.
+The attacker:
 
-Cannot intercept or block messages sent between other parties, and cannot break
-cryptography unless the attacker has learned the respective decryption keys.
-Deviating from the common web attacker model, A1 cannot play the role of a
-legitimate authorization server in the ecosystem (see A1a).
+ - can send and receive messages just like any other party controlling one or
+   more endpoints on the internet,
+ - can participate in protocols flows as a normal user,
+ - can use arbitrary tools (e.g., browser developer tools, custom software,
+   local interception proxies) on their own endpoints to tamper with messages
+   and assemble new messages,
+ - can send links to honest users that are then visited by these users.
+
+This means that the web attacker has the ability to cause arbitrary requests
+from users' browsers, as long as the contents are known to the attacker.
+
+The attacker cannot intercept or block messages sent between other parties, and
+cannot break cryptography unless the attacker has learned the respective
+decryption keys. Deviating from the common web attacker model, A1 cannot play
+the role of a legitimate authorization server in the ecosystem (see A1a).
 
 ## A1a — Web Attacker (participating as authorization server)
 
-Like the web attacker A1, but can also participate as an authorization server in the ecosystem.
-Note that this authorization server can reuse/replay messages it has received from honest authorization servers and
-can send users to endpoints of honest authorization servers.
+This is a variant of the web attacker A1, but this attacker can also participate
+as an authorization server in the ecosystem.
+
+Note that this authorization server can reuse/replay messages it has received
+from honest authorization servers and can send users to endpoints of honest
+authorization servers.
 
 ## A2 — Network attacker
 
-Controls the whole network (like a rogue WiFi access point or any other
-compromised network node). Can intercept, block, and tamper with messages
-intended for other people, but cannot break cryptography unless the attacker has
-learned the respective decryption keys.
+This attacker controls the whole network (like a rogue WiFi access point or any
+other compromised network node). This attacker can intercept, block, and tamper
+with messages intended for other people, but cannot break cryptography unless
+the attacker has learned the respective decryption keys.
 
 Note: Most attacks that are exclusive to this kind of attacker can be defended
 against by using transport layer protection like TLS.
 
 ## Attacker at the authorization endpoint: A3a — read authorization request  {#attacker_a3}
 
-The capabilities of the web attacker, but can also read the authorization
-request sent in the front channel from a user's browser to the authorization
-server. This might happen on mobile operating systems (where apps can register
-for URLs), on all operating systems through the browser history, or due to
-Cross-Site Scripting on the authorization server. There have been cases where anti-virus software
-intercepts TLS connections and stores/analyzes URLs.
+This attacker is assumed to have the capabilities of the web attacker, but it
+can also read the authorization request sent in the front channel from a user's
+browser to the authorization server.
+
+This might happen on mobile operating systems (where apps can register for
+URLs), on all operating systems through the browser history, or due to
+Cross-Site Scripting on the authorization server. There have been cases where
+anti-virus software intercepts TLS connections and stores/analyzes URLs.
 
 **Note:** An attacker that can read the authorization response is not
 considered here, as, with current browser technology, such an attacker
@@ -259,8 +269,9 @@ the security of most redirect-based authentication/authorization schemes, includ
 ## Attacker at the token endpoint: A4 — read and tamper with token requests and responses  {#attacker_a4}
 
 This attacker makes the client use a token endpoint that is not the one of the
-honest authorization server. This attacker can read and tamper with messages sent to and from this
-token endpoint that the client thinks as of an honest authorization server.
+honest authorization server. This attacker therefore can read and tamper with
+messages sent to and from this token endpoint that the client thinks as of an
+honest authorization server.
 
 Important: This attacker is a model for misconfigured token endpoint URLs that
 were considered in FAPI 1.0. Since the FAPI 2.0 Security Profile mandates that
@@ -271,9 +282,10 @@ informative purposes only.
 
 ## Attacker at the resource server: A5 — read resource requests  {#attacker_a5}
 
-The capabilities of the web attacker, but this attacker can also read requests
-sent to the resource server after they have been processed by the resource server, for example because the attacker can read
-TLS intercepting proxy logs on the resource server's side.
+This attacker has the capabilities of the web attacker, but it can also read
+requests sent to the resource server after they have been processed by the
+resource server, for example because the attacker can read TLS intercepting
+proxy logs on the resource server's side.
 
 **Note:** An attacker that can read the responses from the resource server is not
 considered here, as such an attacker would directly contradict the authorization
