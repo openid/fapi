@@ -62,45 +62,21 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
+[Part1] FAPI Security Profile 1.0 - Part 1: Baseline
+
+[Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
+
 [RFC6749] - The OAuth 2.0 Authorization Framework
 
 [RFC6749]: https://tools.ietf.org/html/rfc6749
-
-[RFC6750] - The OAuth 2.0 Authorization Framework: Bearer Token Usage
-
-[RFC6750]: https://tools.ietf.org/html/rfc6750
 
 [RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
 
 [RFC7636]: https://tools.ietf.org/html/rfc7636
 
-[RFC6819] - OAuth 2.0 Threat Model and Security Considerations
-
-[RFC6819]: https://tools.ietf.org/html/rfc6819
-
-[RFC7519] - JSON Web Token (JWT)
-
-[RFC7519]:https://tools.ietf.org/html/rfc7519
-
-[RFC7591] - OAuth 2.0 Dynamic Client Registration Protocol
-
-[RFC7591]:https://tools.ietf.org/html/rfc7591
-
-[RFC7592] - OAuth 2.0 Dynamic Client Registration Management Protocol
-
-[RFC7592]:https://tools.ietf.org/html/rfc7592
-
-[BCP195] - Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-
-[BCP195]: https://tools.ietf.org/html/bcp195
-
 [OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
-
-[OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
-
-[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
 [RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
@@ -384,7 +360,7 @@ Although [RFC6749] mandates the use of TLS, the TLS is terminated in the browser
 
 The use of a `request` object or `request_uri` in the authorization request will prevent tampering with the request parameters. 
 
-The IdP confusion attack reported in [SoK: Single Sign-On Security – An Evaluation of OpenID Connect](https://www.nds.rub.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf) is an example of this kind of attack.
+The IdP confusion attack reported in [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] is an example of this kind of attack.
 
 ### 8.4.3 Authorization response parameter injection attack
 This attack occurs when the victim and attacker use the same relying party client. The attacker is somehow able to
@@ -575,39 +551,54 @@ The following people contributed to this document:
 
 # 11. Bibliography
 
-* [Part1] FAPI Security Profile 1.0 - Part 1: Baseline
-
-[Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
-
 * [ISODIR2] - ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents
+
 [ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
+
+* [ISODIR2] ISO/IEC Directives Part 2
+
+[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
+
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
 [ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
-* [ISO29184] ISO/IEC 29184 Information technology — Online privacy notices and consent
-* [RFC6749] The OAuth 2.0 Authorization Framework
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
-* [RFC7636] Proof Key for Code Exchange by OAuth Public Clients
+
+[RFC6750]: https://tools.ietf.org/html/rfc6750
+
 * [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+
+[RFC6819]: https://tools.ietf.org/html/rfc6819 
+
 * [RFC7519] JSON Web Token (JWT)
+
+[RFC7519]:https://tools.ietf.org/html/rfc7519
+
 * [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
+
+[RFC7591]:https://tools.ietf.org/html/rfc7591 
+
 * [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
+
+[RFC7592]:https://tools.ietf.org/html/rfc7592 
+
 * [RFC8414] OAuth 2.0 Authorization Server Metadata
 
 [RFC8414]: https://tools.ietf.org/html/rfc8414
 
-* [OIDC] OpenID Connect Core 1.0 incorporating errata set 1
 * [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
-* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-* [RFC8705] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
-* [JARM] JWT Secured Authorization Response Mode for OAuth 2.0
-* [PAR] OAuth 2.0 Pushed Authorization Requests
-* [JAR] OAuth 2.0 JWT Secured Authorization Request
-* [SoK] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
 
-[SoK]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
+
+* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+
+[BCP195]: https://tools.ietf.org/html/bcp195
+
+* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
+
+[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
 
 * [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
 

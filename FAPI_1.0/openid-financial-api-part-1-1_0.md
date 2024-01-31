@@ -61,7 +61,6 @@ This document specifies the method for an application to:
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-
 [RFC4122] - A Universally Unique IDentifier (UUID) URN Namespace
 
 [RFC4122]: https://tools.ietf.org/html/rfc4122
@@ -69,10 +68,6 @@ The following documents are referred to in the text in such a way that some or a
 [RFC6749] - The OAuth 2.0 Authorization Framework
 
 [RFC6749]: https://tools.ietf.org/html/rfc6749
-
-[RFC6750] - The OAuth 2.0 Authorization Framework: Bearer Token Usage
-
-[RFC6750]: https://tools.ietf.org/html/rfc6750
 
 [RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
 
@@ -86,10 +81,6 @@ The following documents are referred to in the text in such a way that some or a
 
 [BCP212]: https://tools.ietf.org/html/bcp212
 
-[RFC6819] - OAuth 2.0 Threat Model and Security Considerations
-
-[RFC6819]: https://tools.ietf.org/html/rfc6819
-
 [BCP195] - Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 
 [BCP195]: https://tools.ietf.org/html/bcp195
@@ -98,17 +89,9 @@ The following documents are referred to in the text in such a way that some or a
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[X.1254] - Entity authentication assurance framework
-
-[X.1254]: https://www.itu.int/rec/T-REC-X.1254
-
 [RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
-
-[RFC8414] - OAuth 2.0 Authorization Server Metadata
-
-[RFC8414]: https://tools.ietf.org/html/rfc8414
 
 [OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
 
@@ -519,31 +502,30 @@ The following people contributed to this document:
 [ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
-* [RFC4122] A Universally Unique IDentifier (UUID) URN Namespace
-* [RFC6749] The OAuth 2.0 Authorization Framework
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+
+[RFC6750]: https://tools.ietf.org/html/rfc6750
+
 * [RFC6797] HTTP Strict Transport Security (HSTS)
 
 [RFC6797]: https://tools.ietf.org/html/rfc6797
 
-* [RFC7636] Proof Key for Code Exchange by OAuth Public Clients
 * [RFC7662] OAuth 2.0 Token Introspection
 
 [RFC7662]: https://tools.ietf.org/html/rfc7662
 
-* [RFC6125] Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
-* [BCP212] OAuth 2.0 for Native Apps
 * [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+
+[RFC6819]: https://tools.ietf.org/html/rfc6819
+
 * [RFC8414] OAuth 2.0 Authorization Server Metadata
+
+[RFC8414]: https://tools.ietf.org/html/rfc8414 
+
 * [RFC8659] DNS Certification Authority Authorization (CAA) Resource Record
 
 [RFC8659]: https://tools.ietf.org/html/rfc8659
 
-* [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
-* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-* [OIDC] OpenID Connect Core 1.0 incorporating errata set 1
-* [X.1254] Entity authentication assurance framework
-* [RFC8705] OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 * [PRELOAD] HSTS Preload List Submission
 
 [PRELOAD]: https://hstspreload.org/
