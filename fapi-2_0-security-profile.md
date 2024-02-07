@@ -434,7 +434,7 @@ The following requirements apply to cryptographic operations and secrets:
  1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
 
     1. adhere to [@!RFC8725];
-    2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` subtype) algorithms; and
+    2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` variant) algorithms; and
     3. not use or accept the `none` algorithm.
 
  2. RSA keys shall have a minimum length of 2048 bits.
@@ -443,6 +443,8 @@ The following requirements apply to cryptographic operations and secrets:
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
+
+Note: As of the time of writing there isn't a [registered](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) fully-specified algorithm describing "`EdDSA` using the `Ed25519` variant". If such algorithm is registered in the future, it is also allowed to be used for this profile.
 
 ## MTLS Protection of all endpoints
 
