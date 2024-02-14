@@ -64,7 +64,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 
-.# Notational Conventions
+.# Notational conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -80,15 +80,15 @@ This specification is a general-purpose high security profile of
 OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model. This document specifies the requirements for:
 
- - Confidential Clients to securely obtain OAuth tokens from Authorization Servers;
- - Confidential Clients to securely use those tokens to access protected resources at Resource Servers;
- - Authorization Servers to securely issue OAuth tokens to confidential Clients;
- - Resource Servers to securely accept and verify OAuth tokens from confidential Clients.
+ - Confidential clients to securely obtain OAuth tokens from authorization servers;
+ - Confidential clients to securely use those tokens to access protected resources at resource servers;
+ - Authorization servers to securely issue OAuth tokens to confidential clients;
+ - Resource servers to securely accept and verify OAuth tokens from confidential clients.
 
 # Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See Section 8 for normative references.
+See Clause 8 for normative references.
 
 # Terms and definitions
 
@@ -112,7 +112,7 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 
 **URI** - Uniform Resource Identifier
 
-# Security Profile
+# Security profile
 
 ## Overview
 
@@ -138,7 +138,7 @@ The OpenID FAPI Working Group is not currently aware of any mechanisms that woul
 to be secured to the same degree and hence their use is not within the scope
 of this specification.
 
-Although it is possible to code Authorization Servers and Clients from first
+Although it is possible to code authorization servers and clients from first
 principles using this specification, implementers are encouraged to build on top
 of existing OpenID Connect and/or OAuth 2 implementations instead of embarking
 on a 'from scratch' implementation. See
@@ -162,7 +162,7 @@ profile shall not remove or override mandatory behaviors, as doing
 so is likely to invalidate the formal security analysis and reduce
 security in potentially unpredictable ways.
 
-## Network Layer Protections
+## Network layer protections
 
 ### Requirements for all endpoints
 
@@ -209,7 +209,7 @@ For endpoints that are used by web browsers, the following additional
 requirements apply:
 
   1. Servers shall use methods to ensure that connections cannot be
-     downgraded using TLS Stripping attacks. A preloaded [@preload] HTTP
+     downgraded using TLS stripping attacks. A preloaded [@preload] HTTP
      Strict Transport Security policy [@RFC6797] can be used for this
      purpose. Some top-level domains, like `.bank` and `.insurance`,
      have set such a policy and therefore protect all second-level
@@ -235,9 +235,9 @@ In the following, a profile of the following technologies is defined:
   * OAuth 2.0 Authorization Server Issuer Identification [@!RFC9207]
   * OpenID Connect Core 1.0 incorporating errata set 1 [@!OIDC]
 
-### Requirements for Authorization Servers
+### Requirements for authorization servers
 
-#### General Requirements
+#### General requirements
 
 Authorization servers
 
@@ -269,7 +269,7 @@ Authorization servers
  1. to accommodate for clock offsets, shall accept JWTs with an `iat` or `nbf` time up to 10 seconds in the future, however should reject JWTs with an `iat` or `nbf` of 60 seconds or greater in the future.
 
 **NOTE 1**:
-To facilitate interoperability, this document requires that Authorization Servers
+To facilitate interoperability, this document requires that authorization servers
 accept their issuer value in the `aud` claim received in client authentication
 assertions. It recommends that they also accept their token endpoint url or the url
 of the endpoint at which the assertion was received. This does not reduce the stricter
@@ -277,16 +277,16 @@ requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR 
 
 **NOTE 2**:
 Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
-where the Authorization Server issues a new refresh token to the client as part of the
+where the authorization server issues a new refresh token to the client as part of the
 `refresh_token` grant. This specification discourages the use of this feature as it
 does not bring any security benefits for confidential clients, and can cause significant
-operational issues. However, to allow for operational agility, Authorization Servers
+operational issues. However, to allow for operational agility, authorization servers
 may implement it providing they meet the requirement in Clause 9.
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
 requirements above. For example the client credentials grant or the FAPI CIBA grant. Implementers
-should note that as of the time of writing only the Authorization Code flow and CIBA flows have
+should note that as of the time of writing only the authorization code flow and CIBA flows have
 been through a detailed security analysis.
 
 **NOTE 4**:
@@ -294,9 +294,9 @@ DPoP already suggests that JWTs are accepted in the reasonably near future (on t
 This specification goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
 
 
-#### Authorization Endpoint Flows
+#### Authorization endpoint flows
 
-For flows that use the authorization endpoint, Authorization Servers
+For flows that use the authorization endpoint, authorization servers
 
 1. shall require the value of `response_type` described in [@!RFC6749] to be `code`;
 1. shall support client-authenticated pushed authorization requests
@@ -308,7 +308,7 @@ For flows that use the authorization endpoint, Authorization Servers
 1. shall return an `iss` parameter in the authorization response according to [@!RFC9207];
 1. shall not transmit authorization responses over unencrypted network
      connections, and, to this end, shall not allow redirect URIs that use the
-     "http" scheme except for native clients that use Loopback Interface
+     "http" scheme except for native clients that use loopback interface
      Redirection as described in Section 7.3 of [@!RFC8252];
 1. shall reject an authorization code (Section 1.3.1 of [@!RFC6749]) if it has
      been previously used;
@@ -318,7 +318,7 @@ For flows that use the authorization endpoint, Authorization Servers
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values
      of less than 600 seconds; and
-1. should provide End-Users with all necessary information to make an
+1. should provide end-users with all necessary information to make an
    informed decision about whether to consent to the authorization
    request, including the identity of the client and the scope of the
    authorization.
@@ -337,21 +337,21 @@ process of opening the link. In many cases (poor network connection or
 where the user has to manually select the browser to be used) this can
 easily take over 30 seconds. 
 
-**NOTE**: It is recommended that Authorization Servers that enforce one-time 
+**NOTE 3**: It is recommended that authorization servers that enforce one-time 
 use of `request_uri` values ensure the enforcement takes place at 
 the point of authorization, not at the point of loading an authorization page. 
 This prevents user software that preloads urls from invalidating the 
 `request_uri`.
 
-#### Returning Authenticated User's Identifier
+#### Returning authenticated user's identifier
 
 If it is desired to provide the authenticated user's identifier to the client in
 the token response, the authorization server shall support OpenID Connect
 [@!OIDC].
 
-### Requirements for Clients
+### Requirements for clients
 
-#### General Requirements
+#### General requirements
 
 Clients
 
@@ -365,7 +365,7 @@ Clients
     Bearer Token Usage [@!RFC6750];
  1. shall not expose open redirectors (see Section 4.10 of
      [@I-D.ietf-oauth-security-topics]);
- 1. if using `private_key_jwt`, shall use the Authorization Server's
+ 1. if using `private_key_jwt`, shall use the authorization server's
     issuer identifier value (as defined in [@RFC8414]) in the `aud`
     claim in client authentication assertions, and should send the issuer
     identifier value as a string, not as an item in an
@@ -377,35 +377,35 @@ Clients
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker;
  1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match; and
- 1. shall initiate an authorization process only with the End-User's
+ 1. shall initiate an authorization process only with the end-user's
     explicit or implicit consent and protect initiation of an
-    authorization process against Cross-Site Request Forgery, thereby
-    enabling the End-User to be aware of the context in which a flow was
+    authorization process against cross-site request forgery, thereby
+    enabling the end-user to be aware of the context in which a flow was
     started.
 
 **NOTE 1**:
-This profile may be used by Confidential Clients on a user-controlled device where the system
+This profile may be used by confidential clients on a user-controlled device where the system
 clock may not be accurate, causing `private_key_jwt` client authentication to fail.
-In such circumstances a Client should consider using the HTTP Date header returned from the
+In such circumstances a client should consider using the HTTP date header returned from the
 server to synchronize its own clock when generating client assertions.
 
 **NOTE 2**:
-Although Authorization Servers are required to support "Authorization
+Although authorization servers are required to support "Authorization
 Code Binding to DPoP Key" (as defined by Section 10.1 of
 [@!RFC9449]), clients are not required to use it.
 
 
-#### Authorization Code Flow
+#### Authorization code flow
 
-For the Authorization Code flow, Clients
+For the authorization code flow, clients
 
  1. shall use the authorization code grant described in [@!RFC6749];
  1. shall use pushed authorization requests according to [@!RFC9126];
  1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method;
- 1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent Mix-Up attacks; and
+ 1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent mix-up attacks; and
  1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]).
 
-### Requirements for Resource Servers
+### Requirements for resource servers
 
 The FAPI 2.0 endpoints are OAuth 2.0 protected resource endpoints that return
 protected information for the resource owner associated with the submitted
@@ -427,11 +427,11 @@ Resource servers with the FAPI endpoints
     -  DPoP as described in [@!RFC9449].
 
 
-## Cryptography and Secrets
+## Cryptography and secrets
 
 The following requirements apply to cryptographic operations and secrets:
 
- 1. Authorization Servers, Clients, and Resource Servers when creating or processing JWTs shall
+ 1. Authorization servers, clients, and resource servers when creating or processing JWTs shall
 
     1. adhere to [@!RFC8725];
     2. use `PS256`, `ES256`, or `EdDSA` (using the `Ed25519` variant) algorithms; and
@@ -439,14 +439,14 @@ The following requirements apply to cryptographic operations and secrets:
 
  2. RSA keys shall have a minimum length of 2048 bits.
  3. Elliptic curve keys shall have a minimum length of 160 bits.
- 4. Credentials not intended for handling by End-Users (e.g., access tokens,
+ 4. Credentials not intended for handling by end-users (e.g., access tokens,
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
 
 Note: As of the time of writing there isn't a [registered](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) fully-specified algorithm describing "`EdDSA` using the `Ed25519` variant". If such algorithm is registered in the future, it is also allowed to be used for this profile.
 
-## MTLS Protection of all endpoints
+## MTLS protection of all endpoints
 
 Some ecosystems are choosing to require clients accessing their endpoints to supply a TLS client certificate at
 endpoints that would not otherwise require a TLS client certificate (for example, the PAR endpoint when using
@@ -458,7 +458,7 @@ expect clients to call the endpoints located in the root of the server metadata,
 `mtls_endpoint_aliases`.
 
 
-## Main Differences to FAPI 1.0
+## Main differences to FAPI 1.0
 
 | FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                   | Reasons                                                                                                                                 |
 | :--------------------------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
@@ -474,7 +474,7 @@ expect clients to call the endpoints located in the root of the server metadata,
 | `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                     | Not relevant to the core of the security profile                                                                                        |
 | MTLS for sender-constrained access tokens            | MTLS or DPoP                                                               | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
-## Security Considerations
+## Security considerations
 
 ### Access token lifetimes
 
@@ -486,7 +486,7 @@ If issuing long-lived grants (e.g. days/weeks), the use of short-lived (e.g. min
 
 There is a performance and resiliency trade-off, setting the access token lifetime too short can increase the load on and dependency on the authorization server.
 
-### DPoP Proof Replay
+### DPoP proof replay
 
 An attacker of type A5 (see [@attackermodel]) may be able to obtain DPoP proofs
 that they can then replay.
@@ -508,14 +508,14 @@ represents a powerful attacker and mitigations may not be necessary for many eco
 ### JWKS URIs
 
 This profile supports the use of `private_key_jwt` and in addition allows the use of
-OpenID Connect. When these are used Clients and Authorization Servers need to verify
-payloads with keys from another party. For Authorization Servers this profile strongly
-recommends  the use of JWKS URI endpoints to distribute public keys. For Client's key
+OpenID Connect. When these are used clients and authorization servers need to verify
+payloads with keys from another party. For authorization servers this profile strongly
+recommends  the use of JWKS URI endpoints to distribute public keys. For client's key
 management this profile recommends either the use of JWKS URI endpoints or the use of
 the `jwks` parameter in combination with [@RFC7591] and [@RFC7592].
 
-The definition of the Authorization Server `jwks_uri` can be found in [@!RFC8414],
-while the definition of the Client `jwks_uri` can be found in [@RFC7591].
+The definition of the authorization server `jwks_uri` can be found in [@!RFC8414],
+while the definition of the client `jwks_uri` can be found in [@RFC7591].
 
 In addition, this profile
 
@@ -523,7 +523,7 @@ In addition, this profile
 1. recommends that JOSE headers for `x5u` and `jku` should not be used; and
 1. recommends that the JWK set does not contain multiple keys with the same `kid`.
 
-### Duplicate Key Identifiers
+### Duplicate key identifiers
 
 JWK sets should not contain multiple keys with the same `kid`. However, to increase
 interoperability when there are multiple keys with the same `kid`,  the verifier shall
@@ -551,8 +551,8 @@ server. An attacker may obtain control of an authorization server by:
 3. compromising the client.
 
 The attack may be easier if a centralized directory or other resource server discovery mechanism allows the attacker to
-cause the client to send the stolen access token received from the attacker-controlled Authorization Server to an honest
-Resource Server.
+cause the client to send the stolen access token received from the attacker-controlled authorization server to an honest
+resource server.
 
 The pre-conditions for this attack do not apply to many ecosystems and require a powerful attacker. In situations
 where the pre-conditions may be met, the possible mitigations include:
@@ -563,10 +563,10 @@ where the pre-conditions may be met, the possible mitigations include:
    there is no standardized method for clients to send the issuer to the resource server);
 3. reducing the time window for the attack by using short-lived access tokens alongside refresh tokens.
 
-### Authorization Request Leaks lead to CSRF
+### Authorization request leaks lead to CSRF
 
 An attacker of type A3 (see [@attackermodel]) can intercept an authorization request, log in at the
-Authorization Server, receive an authorization code and redirect the honest user via a Cross-Site Request Forgery (CSRF) attack to
+authorization server, receive an authorization code and redirect the honest user via a cross-site request forgery (CSRF) attack to
 the honest client but with the attacker's authorization code. This results in the user accessing the
 attacker's resources, thus breaking session integrity.
 
@@ -579,10 +579,10 @@ authorization requests and perform a CSRF attack in a short time window.
 
 Possible mitigations for this are:
 
-1. Requiring the Authorization Server to only accept a `request_uri` once. This
+1. Requiring the authorization server to only accept a `request_uri` once. This
    will prevent attacks where the attacker was able to read the authorization
    request, but not use the `request_uri` before the honest user does so.
-2. Requiring the Client to only make one authorization code grant call for each
+2. Requiring the client to only make one authorization code grant call for each
    authorization endpoint call. This will prevent attacks where the attacker was
    unable to send the authorization response before the honest user does so.
 3. Reducing the lifetime of the authorization code - this will reduce the window
@@ -594,7 +594,7 @@ often read an authorization request (e.g., from a log file or via some other
 side-channel), but not block the request from being sent. If the victim's
 internet connection is slow, this might increase the attacker's chances.
 
-### Browser-Swapping Attacks
+### Browser-swapping attacks
 
 An attacker that has access to the authorization response sent through a
 victim's browser can perform a browser-swapping attack as follows:

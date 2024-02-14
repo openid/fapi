@@ -30,7 +30,7 @@ Final drafts adopted by the Workgroup through consensus are circulated publicly 
 
 The FAPI Working Group produces security profiles based on the OAuth 2.0 Authorization Framework and related specifications suitable for protecting APIs in high-value scenarios.
 
-This document is a profile of the OpenID Connect Client Initiated Backchannel Authentication Flow [@!CIBA]. The CIBA spec allows a Client that gains knowledge of an identifier for the user to obtain tokens from the Authorization Server. The user consent is given at the user's Authentication Device mediated by the authorization server. This document profiles the CIBA specification to bring it in line with FAPI Security Profiles and provides security recommendations for its use with APIs that require high levels of security.
+This document is a profile of the OpenID Connect Client Initiated Backchannel Authentication Flow [@!CIBA]. The CIBA spec allows a client that gains knowledge of an identifier for the user to obtain tokens from the authorization server. The user consent is given at the user's authentication device mediated by the authorization server. This document profiles the CIBA specification to bring it in line with FAPI Security Profiles and provides security recommendations for its use with APIs that require high levels of security.
 
 This profile may be used with either:
 
@@ -47,7 +47,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 
-.# Notational Conventions
+.# Notational conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -68,7 +68,7 @@ This document specifies the method for an application to:
 
 For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636, OpenID Connect Core and OpenID Connect Client Initiated Backchannel Authentication Core apply.
 
-# Symbols and Abbreviated terms
+# Symbols and abbreviated terms
 
 **API** – Application Programming Interface
 
@@ -82,7 +82,7 @@ For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636
 
 **TLS** – Transport Layer Security
 
-# Client Initiated Backchannel Authentication Security Profile
+# Client initiated backchannel authentication security profile
 
 The standard OAuth method for the client to send the resource owner to the authorization server is to use an HTTP redirect. FAPI specification support this interaction model and are suitable for use cases where the resource owner is interacting with the client on a device they control that has a web browser. There are however many use-cases for initiating payments where the resource owner is not interacting with the client in such a manner. For example, the resource owner may want to authorize a payment at a "point of sale" terminal at a shop or fuel station.
 
@@ -90,38 +90,38 @@ The Client Initiated Backchannel Authentication Flow [@!CIBA] specifies an alter
 
 The following sections specify a profile of CIBA that is suited for high-value transactions and sensitive (personal and other) data.
 
-## Client Initiated Backchannel Authentication Security Provisions
+## Client initiated backchannel authentication security provisions
 
 When this profile is used with the FAPI 1.0 specifications then it should be read in conjunction with OpenID Connect Client Initiated Backchannel Authentication Core [@!CIBA] and with parts 1 [@!FAPI1.1] and 2 [@!FAPI1.2] of the FAPI 1.0 Specifications.
 
 When this profile is used with the FAPI 2.0 specifications then it should be read in conjunction with OpenID Connect Client Initiated Backchannel Authentication Core [@!CIBA] and the FAPI 2.0 Security Profile [@!FAPI2].
 
-### Authorization Server
+### Authorization server
 
-When this profile is used with the FAPI 1.0 specifications, the Authorization Server
+When this profile is used with the FAPI 1.0 specifications, the authorization server
 shall support the provisions specified in clause 5.2.2 of [@!FAPI1.1] and [@!FAPI1.2].
 
-When this profile is used with the FAPI 2.0 specifications, the Authorization Server
-shall support the general requirements for Authorization Servers listed in clause
+When this profile is used with the FAPI 2.0 specifications, the authorization server
+shall support the general requirements for authorization servers listed in clause
 5.3.1.1 of [@!FAPI2].
 
-In addition the Authorization server
+In addition the authorization server
 
-1. shall only support Confidential Clients for Client Initiated Backchannel Authentication flows;
+1. shall only support confidential clients for client initiated backchannel authentication flows;
 1. shall ensure unique authorization context exists in the authentication request or require a binding_message in the authentication request;
 1. shall not support CIBA push mode;
 1. shall support CIBA poll mode;
 1. may support CIBA ping mode;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata; and
-1. may require clients to provide a `request_context` claim as defined in section 4.3 of this profile.
+1. may require clients to provide a `request_context` claim as defined in Section 4.3 of this profile.
 
-When this profile is used with the FAPI 1.0 specifications, the Authorization Server
+When this profile is used with the FAPI 1.0 specifications, the authorization server
 
-1. shall support unsigned and signed Backchannel Authentication Endpoint requests as described in [@!CIBA] 7.1.1; and
-1. shall require the Signed Authentication Request to contain `nbf` and `exp` claims that limit the lifetime of the request to no more than 60 minutes.
+1. shall support unsigned and signed backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1; and
+1. shall require the signed authentication request to contain `nbf` and `exp` claims that limit the lifetime of the request to no more than 60 minutes.
 
-**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the Client to the AS, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
+**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the AS, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
 
 **NOTE:** The binding message is required to protect the user by binding the session on the consumption device with the session on the authentication device. An example use case is when a user is paying at POS terminal. The user will enter their user identifier to start the [@!CIBA] flow, the terminal will then display a code, the user will receive a notification on their phone (the authentication device) to ask them to authenticate and authorize the transaction, as part of the authorization process the user will be shown a code and will be asked to check that it is the same as the one shown on the terminal.
 
@@ -129,31 +129,31 @@ When this profile is used with the FAPI 1.0 specifications, the Authorization Se
 
 **NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider https://tools.ietf.org/html/draft-ietf-secevent-subject-identifiers for a standards based method of communicating user identifiers.
 
-### Confidential Client
+### Confidential client
 
-When this profile is used with the FAPI 1.0 specifications, a Confidential Client shall
+When this profile is used with the FAPI 1.0 specifications, a confidential client shall
 support the provisions specified in clause 5.2.4 of [@!FAPI1.1] and [@!FAPI1.2].
 
-When this profile is used with the FAPI 2.0 specifications, a Confidential Client shall
-support the general requirements for Clients listed in clause 5.3.2.1 of [@!FAPI2].
+When this profile is used with the FAPI 2.0 specifications, a confidential client shall
+support the general requirements for clients listed in clause 5.3.2.1 of [@!FAPI2].
 
-In addition, the Confidential Client
+In addition, the confidential client
 
 1. shall ensure sufficient authorization context exists in authorization request or shall include a binding_message in the authentication request; and
 
-When this profile is used with the FAPI 1.0 specifications, the Confidential Client
+When this profile is used with the FAPI 1.0 specifications, the confidential client
 
-1. should only send Signed Authentication Requests as defined in [@!CIBA] 7.1.1 to the Backchannel Authentication Endpoint.
+1. should only send signed authentication requests as defined in [@!CIBA] 7.1.1 to the backchannel authentication endpoint.
 
 ##NOTE:## When used with FAPI 2.0, both signed and unsigned requests are supported.
 
 ### Extensions to CIBA authentication request
 
-This profile defines the following extensions to the authentication request defined in [@!CIBA] section 7.1.
+This profile defines the following extensions to the authentication request defined in [@!CIBA] Section 7.1.
 
 1. `request_context`: OPTIONAL. a JSON object (the contents of which are not defined by this specification) containing information to inform fraud and threat decisions. For example, an ecosystem may require relying parties to provide geolocation for the consumption device.
 
-## Accessing Protected Resources
+## Accessing protected resources
 
 The benefit of the CIBA specification is that once tokens are issued they can be used
 in the same manner as tokens issued via authorization code flows.
@@ -164,30 +164,30 @@ protected resources detailed in [@!FAPI1.1] and [@!FAPI1.2] apply fully.
 When this profile is used with the FAPI 2.0 specifications, the provisions for accessing
 protected resources detailed in [@!FAPI2] apply fully.
 
-### Client Provisions
+### Client provisions
 
 In situations where the client does not control the consumption device, the client
 
 1. shall not send `x-fapi-customer-ip-address` or `x-fapi-auth-date` headers; and
 1. should send metadata about the consumption device, for example geolocation and device type.
 
-## Registration and Discovery Metadata
+## Registration and discovery metadata
 
-This specification adds additional metadata parameters for OAuth Authorization Server
-Metadata as defined in [RFC8414] and Dynamic Client Registration Metadata as defined
+This specification adds additional metadata parameters for OAuth authorization server
+metadata as defined in [RFC8414] and dynamic client registration metadata as defined
 in [RFC7591].
 
-OAuth Authorization Server Metadata:
+OAuth authorization server metadata:
 
 1. `backchannel_endpoint_login_hint_token_types_supported`: OPTIONAL. JSON array of strings
    that the AS can use to advertise which types of `login_hint_token` it supports. The values
    in this parameter are likely to be ecosystem specific.
 
-Dynamic Client Registration Metadata:
+Dynamic client registration metadata:
 
-1. `backchannel_endpoint_login_hint_token_types`: OPTIONAL. JSON array of strings that the Client can use to register the type of `login_hint_token` that it will use.
+1. `backchannel_endpoint_login_hint_token_types`: OPTIONAL. JSON array of strings that the client can use to register the type of `login_hint_token` that it will use.
 
-# Security Considerations
+# Security considerations
 
 ## Introduction
 
@@ -209,8 +209,8 @@ devices, causing distress and potentially enabling fraud.
 For this reason this profile highly recommends `login_hint` to have the properties of a
 nonce with the expectation being that it will be generated from an authorization server
 owned client authentication device. Given the high levels of friction that this may impose
-it's anticipated that Authorization Servers may have to accept an `id_token_hint` as an
-alternative mechanism for Client Subject identification.
+it's anticipated that authorization servers may have to accept an `id_token_hint` as an
+alternative mechanism for client subject identification.
 
 If a client wishes to store the `id_token` returned from an authorization server for later
 use as an `id_token_hint`, care must be taken to ensure that the customer identification
@@ -224,19 +224,19 @@ this issue, it may be appropriate to require the use of `user_code` in certain d
 
 ## Reliance on user to confirm binding messages
 
-Depending on the hint used to identify the user and the Client's user authentication
+Depending on the hint used to identify the user and the client's user authentication
 processes, it may be possible for a fraudster to start a malicious [@!CIBA] flow at the
 same time as a genuine flow, with both flows using the genuine user’s identifier. If
 the scope of access requested is similar then the only way to ensure that a user is
 authorizing the correct transaction is for the user to compare the binding messages
-on the Authentication and Consumption devices.
+on the authentication and consumption devices.
 
 If this risk is deemed unacceptable then implementers should either consider alternative
-mechanisms of verifying the binding message (e.g. conveying it to the Authentication
-device via a QR code), or use ephemeral user identifiers generated on the Authentication
+mechanisms of verifying the binding message (e.g. conveying it to the authentication
+device via a QR code), or use ephemeral user identifiers generated on the authentication
 device.
 
-## Loss of fraud markers to Authorization Server
+## Loss of fraud markers to authorization server
 
 In a redirect-based flow, the authorization server can collect useful fraud markers from
 the user-agent. In a [@!CIBA] flow the separation of consumption and authentication devices
@@ -262,16 +262,16 @@ Deployments that use this specification should use a certified implementation.
 
 ## JWS/JWE Algorithm considerations
 
-When this profile is used with the FAPI 1.0 specifications, Authorization Servers and Clients
-shall follow the guidance around JWT signing and encryption Algorithms in [@!FAPI1.2] 8.6 and
+When this profile is used with the FAPI 1.0 specifications, authorization servers and clients
+shall follow the guidance around JWT signing and encryption algorithms in [@!FAPI1.2] 8.6 and
 8.6.1.
 
-When this profile is used with the FAPI 2.0 specifications, Authorization Servers and Clients
-shall follow the guidance around Cryptography and Secrets in [@!FAPI2] 5.4.
+When this profile is used with the FAPI 2.0 specifications, authorization servers and clients
+shall follow the guidance around cryptography and secrets in [@!FAPI2] 5.4.
 
-## Authentication Device security
+## Authentication device security
 
-This profile and the underlying specifications do not specify how the Authorization Server
+This profile and the underlying specifications do not specify how the authorization server
 should initiate and perform user authentication and authorization of consent on the
 authentication device.
 
@@ -329,7 +329,7 @@ For JWE, both clients and authorization servers
 
 1. shall not use the `RSA1_5` algorithm.
 
-# Privacy Considerations
+# Privacy considerations
 
 There are no additional privacy considerations beyond those in [@!CIBA] 15.
 
@@ -353,7 +353,7 @@ The following people contributed heavily towards this document:
 
 # IANA Considerations
 
-## OAuth Authorization Server Metadata Registration
+## OAuth authorization server metadata registration
 
 This specification adds the following values to the IANA "OAuth Authorization Server Metadata" registry
 established by [RFC8414]:
@@ -363,7 +363,7 @@ established by [RFC8414]:
 - Change Controller: OpenID Foundation Financial-Grade API Working Group - openid-specs-fapi@lists.openid.net
 - Specification Document(s): Section 7 of [[this specification]]
 
-## OAuth Dynamic Client Registration Metadata Registration
+## OAuth dynamic client registration metadata registration
 
 This specification requests registration of the following client metadata definitions in the
 IANA "OAuth Dynamic Client Registration Metadata" registry established by [RFC7591]:
@@ -392,7 +392,7 @@ All examples use private_key_jwt client authentication with the following key:
 }
 ```
 
-## Signed Authentication Request with private_key_jwt client authentication
+## Signed authentication request with private_key_jwt client authentication
 
 This example includes various optional fields, some of which may not be applicable to some deployments. Line wraps within values are for display purposes only.
 

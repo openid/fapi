@@ -47,7 +47,7 @@ FAPI is a highly secured OAuth profile that aims to provide specific implementat
 
 This document is Part 2 of FAPI Security Profile 1.0 that specifies an advanced security profile of OAuth that is suitable to be used for protecting APIs with high inherent risk. Examples include APIs that give access to highly sensitive data or that can be used to trigger financial transactions (e.g., payment initiation). This document specifies the controls against attacks such as: authorization request tampering, authorization response tampering including code injection, state injection, and token request phishing. Additional details are available in the security considerations section.
 
-Although it is possible to code an OpenID Provider and Relying Party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 8.7 before embarking on a 'from scratch' implementation.
+Although it is possible to code an OpenID provider and relying party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 8.7 before embarking on a 'from scratch' implementation.
 
 # 1. Scope
 
@@ -98,7 +98,7 @@ The following documents are referred to in the text in such a way that some or a
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
 
 
-# 4. Symbols and Abbreviated terms
+# 4. Symbols and abbreviated terms
 
 **API** – Application Programming Interface
 
@@ -116,7 +116,7 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 # 5. Advanced security profile
 
-## 5.1 Authorization Response Security
+## 5.1 Authorization response security
 
 ### 5.1.1 Introduction
 
@@ -136,10 +136,10 @@ This profile describes security provisions for the server and client that are ap
 
 This profile does not support public clients.
 
-The following ways are specified to protect against modifications of authorization responses: Implementations can leverage OpenID Connect's Hybrid Flow that returns an ID Token in the authorization response or they can utilize the JWT Secured Authorization Response Mode for OAuth 2.0 ([JARM]) that returns and protects all authorization response parameters in a JWT.
+The following ways are specified to protect against modifications of authorization responses: Implementations can leverage OpenID Connect's hybrid fow that returns an ID Token in the authorization response or they can utilize the JWT Secured Authorization Response Mode for OAuth 2.0 ([JARM]) that returns and protects all authorization response parameters in a JWT.
 
-### 5.1.2 ID Token as Detached Signature
-While the name ID Token (as used in the OpenID Connect Hybrid Flow) suggests that it is something that provides the identity of the resource owner (subject), it is not necessarily so. While it does identify the authorization server by including the issuer identifier, 
+### 5.1.2 ID Token as detached signature
+While the name ID Token (as used in the OpenID Connect hybrid flow) suggests that it is something that provides the identity of the resource owner (subject), it is not necessarily so. While it does identify the authorization server by including the issuer identifier, 
 it is perfectly fine to have an ephemeral subject identifier. In this case, the ID Token acts as a detached signature of the issuer to the authorization response and it was an explicit design decision of OpenID Connect Core to make the ID Token act as a detached signature.
 
 This document leverages this fact and protects the authorization response by including the hash of all of the unprotected response parameters, e.g. `code` and `state`, in the ID Token. 
@@ -155,7 +155,7 @@ in the `alg` header parameter of the ID Token's JOSE header. For instance,
 if the `alg` is `HS512`, hash the state value with SHA-512, then take the left-most 256 bits and base64url encode them.
 The `s_hash` value is a case sensitive string.
 
-### 5.1.3 JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+### 5.1.3 JWT secured authorization response mode for OAuth 2.0 (JARM)
 
 An authorization server may protect authorization responses to clients using the "JWT Secured Authorization Response Mode" [JARM].
 
@@ -163,7 +163,7 @@ An authorization server may protect authorization responses to clients using the
 
 This specification facilitates use of [JARM] in conjunction with the response type `code`.
 
-**NOTE:** [JARM] can be used to protect OpenID Connect authentication responses. In this case, the OpenID RP would use response type `code`, response mode `jwt` and scope `openid`. This means [JARM] protects the authentication response (instead of the ID Token) and the ID Token containing End-User Claims is obtained from the token endpoint. This facilitates privacy since no End-User Claims are sent through the front channel. It also provides decoupling of
+**NOTE:** [JARM] can be used to protect OpenID Connect authentication responses. In this case, the OpenID RP would use response type `code`, response mode `jwt` and scope `openid`. This means [JARM] protects the authentication response (instead of the ID Token) and the ID Token containing end-user claims is obtained from the token endpoint. This facilitates privacy since no end-user claims are sent through the front channel. It also provides decoupling of
 message protection and identity providing since a client (or RP) can basically use [JARM] to protect all 
 authorization responses and turn on OpenID if needed (e.g. to log the user in).
 
@@ -203,7 +203,7 @@ In addition, the authorization server
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2-4):
     1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC8705], or
     2. `private_key_jwt` as specified in section 9 of [OIDC];
-1. shall require the aud claim in the request object to be, or to be an array containing, the OP's Issuer Identifier URL;
+1. shall require the aud claim in the request object to be, or to be an array containing, the OP's issuer identifier URL;
 1. shall not support public clients;
 1. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
 1. shall require [PAR] requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
@@ -220,7 +220,7 @@ In addition, if the `response_type` value `code id_token` is used, the authoriza
 1. shall support signed ID Tokens;
 1. should support signed and encrypted ID Tokens;
 1. shall return ID Token as a detached signature to the authorization response;
-1. shall include state hash, `s_hash`, in the ID Token to protect the `state` value if the client supplied a value for `state`. `s_hash` may be omitted from the ID Token returned from the Token Endpoint when `s_hash` is present in the ID Token returned from the Authorization Endpoint; and
+1. shall include state hash, `s_hash`, in the ID Token to protect the `state` value if the client supplied a value for `state`. `s_hash` may be omitted from the ID Token returned from the token endpoint when `s_hash` is present in the ID Token returned from the authorization endpoint; and
 1. should not return sensitive PII in the ID Token in the authorization response, but if it needs to, then it should encrypt the ID Token.
 
 **NOTE:** The authorization server may return more claims in the ID Token from the token endpoint than in the one from the authorization response
@@ -239,14 +239,14 @@ In addition, the confidential client
 
 1. shall support [RFC8705] as mechanism for sender-constrained access tokens;
 1. shall include the `request` or `request_uri` parameter as defined in Section 6 of [OIDC] in the authentication request;
-1. shall ensure the Authorization Server has authenticated the user to an appropriate Level of Assurance for the client's intended purpose;
+1. shall ensure the authorization server has authenticated the user to an appropriate level of assurance for the client's intended purpose;
 1. (moved to 5.2.3.1);
 1. (withdrawn);
 1. (withdrawn);
 1. (moved 5.2.3.1);
 1. shall send all parameters inside the authorization request's signed request object;
 1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [PAR];
-1. shall send the `aud` claim in the request object as the OP's Issuer Identifier URL;
+1. shall send the `aud` claim in the request object as the OP's issuer identifier URL;
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
@@ -334,16 +334,16 @@ then the authentication may be skipped and a code is generated and returned to t
 Since the client was interacting with the rogue IdP, the code is sent to the rogue IdP's token endpoint. 
 At the point, the attacker has a valid code that can be exchanged for an access token at the honest IdP. See [OAUTHSEC] for a detailed description of the attack.
 
-This attack is mitigated by the use of OpenID Connect Hybrid Flow in which the honest IdP's issuer identifier is included as the value of `iss` or [JARM] 
+This attack is mitigated by the use of OpenID Connect hybrid flow in which the honest IdP's issuer identifier is included as the value of `iss` or [JARM] 
 where the `iss` included in the response JWT. On receiving the authorization response, the client compares the `iss` value from the response with the 
 issuer URL of the IdP it sent the authorization request to (the rogue IdP). The client detects the conflicting issuer values and aborts the transaction. 
 
 ### 8.3.4 Access token phishing
-Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 Advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
+Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue AS or misconfigured token endpoint.
 
 For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the token endpoint (which is misconfigured in the client to point to an attacker-controlled URL). The attacker then gains access to resources of the honest resource owner through the client.
 
-Misconfigured endpoints are mitigated by using metadata in the Authorization Server's published metadata document as defined in [OIDD] or [RFC8414].
+Misconfigured endpoints are mitigated by using metadata in the authorization server's published metadata document as defined in [OIDD] or [RFC8414].
 
 ID Token replay can be mitigated by requiring the `at_hash` in the token endpoint's ID Token response to verify the validity of the access token.
 
@@ -367,7 +367,7 @@ This attack occurs when the victim and attacker use the same relying party clien
 capture the authorization code and state from the victim's authorization response and uses them in his own
 authorization response. 
 
-This can be mitigated by using OpenID Connect Hybrid Flow where the `c_hash`, `at_hash`,
+This can be mitigated by using OpenID Connect hybrid flow where the `c_hash`, `at_hash`,
 and `s_hash` can be used to verify the validity of the authorization code, access token,
 and state parameters. It can also be mitigated using [JARM] by verifying the integrity of the authorization response JWT.
 
@@ -415,7 +415,7 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-## 8.8 Session Fixation 
+## 8.8 Session fixation 
 An attacker could prepare an authorization request URL and trick a victim 
 into authorizing access to the requested resources, e.g. by sending the URL 
 via e-Mail or utilizing it on a fake site. 
@@ -432,20 +432,20 @@ any action is executed using the access token issued by the authorization
 process. 
 
 For example, payments shall not be executed in the authorization process but 
-after the Client has exchanged the authorization code for a token and sent an 
+after the client has exchanged the authorization code for a token and sent an 
 "execute payment" request with the access token to a protected endpoint. 
 
 ## 8.9 JWKS URIs
-This profile requires both Clients and Authorization Servers to verify payloads 
+This profile requires both clients and authorization servers to verify payloads 
 with keys from the other party. The AS verifies request objects and `private_key_jwt` 
-assertions. The Client verifies ID Tokens and authorization response JWTs. For AS's
+assertions. The client verifies ID Tokens and authorization response JWTs. For AS's
 this profile strongly recommends the use of JWKS URI endpoints to distribute 
-public keys. For Clients this profile recommends either the use of JWKS URI endpoints
+public keys. For clients this profile recommends either the use of JWKS URI endpoints
 or the use of the `jwks` parameter in combination with [RFC7591] 
 and [RFC7592].
 
 The definition of the AS `jwks_uri` can be found in [RFC8414], while the definition
-of the Client `jwks_uri` can be found in [RFC7591].
+of the client `jwks_uri` can be found in [RFC7591].
 
 In addition, this profile
 
@@ -457,13 +457,13 @@ In addition, this profile
 
 The use of [RFC8705] for client authentication and sender constraining access tokens brings
 significant security benefits over the use of shared secrets. However in some deployments
-the certificates used for [RFC8705] are issued by a Certificate Authority at an organization
+the certificates used for [RFC8705] are issued by a certificate authority at an organization
 level rather than a client level. In such situations it may be common for an organization 
 with multiple clients to use the same certificates (or certificates with the same DN) 
 across clients. Implementers should be aware that such sharing means that a compromise 
 of any one client, would result in a compromise of all clients sharing the same key.
 
-## 8.11 Duplicate Key Identifiers
+## 8.11 Duplicate key identifiers
 JWK sets should not contain multiple keys with the same `kid`. However, to increase 
 interoperability when there are multiple keys with the same `kid`,  the verifier shall 
 consider other JWK attributes, such as `kty`, `use`, `alg`, etc., when selecting the
@@ -492,23 +492,23 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 * (Inappropriate privacy notice) A privacy notice provided at a `policy_url` or by other means can be inappropriate. 
 * (Inadequate choice) Providing a consent screen without adequate choices does not form consent. 
-* (Misuse of data) An AS, RS or Client can potentially use the data not according to the purpose that was agreed. 
+* (Misuse of data) An AS, RS or client can potentially use the data not according to the purpose that was agreed. 
 * (Collection minimization violation) Clients asking for more data than it absolutely needs to fulfil the purpose is violating the collection minimization principle. 
-* (Unsolicited personal data from the Resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
+* (Unsolicited personal data from the resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
 * (Data minimization violation) Any process that is processing more data than it needs is violating the data minimization principle. 
-* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which Client/RP. 
+* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which client/RP. 
 * (User tracking by RPs) Two or more RPs correlating access tokens or ID Tokens to track users. 
-* (RP misidentification by User at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
+* (RP misidentification by user at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
 the AS's authorization page. 
-* (Mismatch between User’s understanding or what RP is displaying to a user and the actual authorization request). To enhance 
+* (Mismatch between user’s understanding or what RP is displaying to a user and the actual authorization request). To enhance 
 the trust of the ecosystem, best practice is for the AS to make clear what is included in the authorisation request (for example, 
 what data will be released to the RP).
 * (Attacker observing personal data in authorization request) Authorization request might contain personal data. This can be observed by an attacker. 
 * (Attacker observing personal data in authorization endpoint response) In some frameworks, even state is deemed personal data. 
   This can be observed by an attacker through various means. 
 * (Data leak from AS) AS stores personal data. If AS is compromised, these data can leak or be modified. 
-* (Data leak from Resource) Some resource servers (RS) store personal data. If a RS is compromised, these data can leak or be modified. 
-* (Data leak from Clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
+* (Data leak from resource) Some resource servers (RS) store personal data. If a RS is compromised, these data can leak or be modified. 
+* (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
 These can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
 For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
@@ -608,12 +608,12 @@ The following people contributed to this document:
 
 [OAUTHSEC]: https://arxiv.org/abs/1601.01229
 
-# 12. IANA Considerations
-## 12.1 Additions to JWT Claims Registry
+# 12. IANA considerations
+## 12.1 Additions to JWT claims registry
 This specification adds the following values to the "JSON Web Token Claims" registry 
 established by [RFC7519].
 
-### 12.1.1. Registry Contents
+### 12.1.1. Registry contents
 
 * Claim name: s_hash
 * Claim Description: State hash value
