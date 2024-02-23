@@ -281,7 +281,7 @@ where the authorization server issues a new refresh token to the client as part 
 `refresh_token` grant. This specification discourages the use of this feature as it
 does not bring any security benefits for confidential clients, and can cause significant
 operational issues. However, to allow for operational agility, authorization servers
-may implement it providing they meet the requirement in Clause 9.
+may implement it providing they meet the requirement in Clause 10.
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
