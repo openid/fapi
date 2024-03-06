@@ -218,7 +218,7 @@ servers
 **NOTE 1**: Even if an endpoint uses only organization validated (OV) or extended
 validation (EV) TLS certificates, an attacker using rogue domain-validated
 certificates is able to impersonate the endpoint and conduct man-in-the-middle
-attacks. CAA records [@RFC8659] can help to mitigate this risk.
+attacks. CAA records [@RFC8659] help to mitigate this risk.
 
 ### Requirements for endpoints not used by web browsers
 
