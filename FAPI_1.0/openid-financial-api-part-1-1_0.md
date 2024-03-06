@@ -108,12 +108,24 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 # 4. Abbreviated terms
 --------- --- ----------------------------------
 **API**    –  Application Programming Interface
+**CAA**    –  Certificate Authority Authorization
+**CORS**   –  Cross-Origin Resource Sharing
 **CSRF**   –  Cross Site Request Forgery
+**DNSSEC** –  Domain Name System Security Extensions
 **FAPI**   –  FAPI
 **HTTP**   –  Hyper Text Transfer Protocol
+**IP**     –  Internet Protocol
+**JARM**   –  JWT Secured Authorization Response Mode
+**JSON**   –  JavaScript Object Notation
+**JWT**    –  JSON Web Token
 **OIDF**   –  OpenID Foundation
+**RP**     –  Relying Party
+**RSA**    –  Rivest–Shamir–Adleman
 **REST**   –  Representational State Transfer
 **TLS**    –  Transport Layer Security
+**URI**    –  Uniform Resource Identifier
+**UTF**   –   Unicode Transformation Format
+**UUID**   –  Universally Unique IDentifier
 --------- --- ----------------------------------
 
 # 5. Baseline security profile
@@ -431,21 +443,21 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 * (Inappropriate privacy notice) A privacy notice provided at a `policy_url` or by other means can be inappropriate. 
 * (Inadequate choice) Providing a consent screen without adequate choices does not form consent. 
-* (Misuse of data) An AS, RS or client can potentially use the data not according to the purpose that was agreed. 
+* (Misuse of data) An authorization server, resource server or client can potentially use the data not according to the purpose that was agreed. 
 * (Collection minimization violation) A client asking for more data than it absolutely needs to fulfil the purpose is violating the collection minimization principle. 
 * (Unsolicited personal data from the resource) Some bad resource server implementations may return more data than was requested. If the data is personal data, then this would be a  violation of privacy principles. 
 * (Data minimization violation) Any process that is processing more data than it needs is violating the data minimization principle. 
-* (RP tracking by AS/OP) AS/OP identifying what data is being provided to which client/RP. 
+* (RP tracking by authorization server/OpenID provider) Authorization server/OpenID provider identifying what data is being provided to which client/RP. 
 * (User tracking by RPs) Two or more RPs correlating access tokens or ID Tokens to track users. 
-* (RP misidentification by user at AS) User misunderstands who the RP is due to a confusing representation of the RP at 
-the AS's authorization page. 
+* (RP misidentification by user at authorization server) User misunderstands who the RP is due to a confusing representation of the RP at 
+the authorization server's authorization page. 
 * (Mismatch between user’s understanding or what RP is displaying to a user and the actual authorization request) To enhance 
-the trust of the ecosystem, best practice is for the AS to make clear what is included in the authorization request (for example, 
+the trust of the ecosystem, best practice is for the authorization server to make clear what is included in the authorization request (for example, 
 what data will be released to the RP).
 * (Attacker observing personal data in authorization request) Authorization request might contain personal data. This can be observed by an attacker. 
 * (Attacker observing personal data in authorization endpoint response) In some frameworks, even state is deemed personal data. 
   This can be observed by an attacker through various means. 
-* (Data leak from AS) AS stores personal data. If AS is compromised, these data can leak or be modified. 
+* (Data leak from authorization server) Authorization server stores personal data. If authorization server is compromised, these data can leak or be modified. 
 * (Data leak from resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
 * (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
@@ -547,5 +559,5 @@ The following people contributed to this document:
     * #405 - Use https for document references
     * #601 - Removed subclause 8.1 title 
     * #409 - Rename [MTLS] as [RFC8705]
-    * #458 - Clarifies that AS require response_type = code or code, id_token
+    * #458 - Clarifies that authorization server require response_type = code or code, id_token
 

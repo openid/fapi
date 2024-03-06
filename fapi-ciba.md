@@ -72,11 +72,27 @@ For the purpose of this standard, the terms defined in RFC6749, RFC6750, RFC7636
 
 **API** – Application Programming Interface
 
-**FAPI** - FAPI Security profile
+**CCTV** – Closed Circuit Television
+
+**CIBA** – Client Initiated Backchannel Authentication
 
 **HTTP** – Hyper Text Transfer Protocol
 
-**OIDF** - OpenID Foundation
+**HTTPS** – Hypertext Transfer Protocol Secure
+
+**JSON** – JavaScript Object Notation
+
+**JWE** – JSON Web Encryption
+
+**JWS** – JSON Web Signature
+
+**JWT** – JSON Web Token
+
+**OIDF** – OpenID Foundation
+
+**QR** – Quick Response
+
+**POS** – Point-of-Sale
 
 **REST** – Representational State Transfer
 
@@ -121,7 +137,7 @@ When this profile is used with the FAPI 1.0 specifications, the authorization se
 1. shall support unsigned and signed backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1; and
 1. shall require the signed authentication request to contain `nbf` and `exp` claims that limit the lifetime of the request to no more than 60 minutes.
 
-**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the AS, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
+**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the authorization server, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
 
 **NOTE:** The binding message is required to protect the user by binding the session on the consumption device with the session on the authentication device. An example use case is when a user is paying at POS terminal. The user will enter their user identifier to start the [@!CIBA] flow, the terminal will then display a code, the user will receive a notification on their phone (the authentication device) to ask them to authenticate and authorize the transaction, as part of the authorization process the user will be shown a code and will be asked to check that it is the same as the one shown on the terminal.
 
@@ -180,7 +196,7 @@ in [RFC7591].
 OAuth authorization server metadata:
 
 1. `backchannel_endpoint_login_hint_token_types_supported`: OPTIONAL. JSON array of strings
-   that the AS can use to advertise which types of `login_hint_token` it supports. The values
+   that the authorization server can use to advertise which types of `login_hint_token` it supports. The values
    in this parameter are likely to be ecosystem specific.
 
 Dynamic client registration metadata:
