@@ -88,7 +88,7 @@ attacker model. This document specifies the requirements for:
 # Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See Clause 8 for normative references.
+See Clause 9 for normative references.
 
 # Terms and definitions
 
@@ -517,9 +517,9 @@ expect clients to call the endpoints located in the root of the server metadata,
 | `x-fapi-*` headers                                   | Moved to Implementation and Deployment Advice document                     | Not relevant to the core of the security profile                                                                                        |
 | MTLS for sender-constrained access tokens            | MTLS or DPoP                                                               | Due to the lack of the tight integration with the TLS layer, DPoP can be easier to deploy in some scenarios                             |
 
-## Security considerations
+# Security considerations
 
-### Access token lifetimes
+## Access token lifetimes
 
 The use of short-lived access tokens (combined with refresh tokens) potentially reduces the time window for some attacks.
 
@@ -529,7 +529,7 @@ If issuing long-lived grants (e.g. days/weeks), the use of short-lived (e.g. min
 
 There is a performance and resiliency trade-off, setting the access token lifetime too short can increase the load on and dependency on the authorization server.
 
-### DPoP proof replay
+## DPoP proof replay
 
 An attacker of type A5 (see [@attackermodel]) may be able to obtain DPoP proofs
 that they can then replay.
@@ -548,7 +548,7 @@ Possible mitigations for this are:
 These mitigations may have potential complexity, performance or scalability trade-offs. Attacker type A5
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
 
-### JWKS URIs
+## JWKS URIs
 
 This profile supports the use of `private_key_jwt` and in addition allows the use of
 OpenID Connect. When these are used clients and authorization servers need to verify
@@ -566,7 +566,7 @@ In addition, this profile
 1. recommends that JOSE headers for `x5u` and `jku` should not be used; and
 1. recommends that the JWK set does not contain multiple keys with the same `kid`.
 
-### Duplicate key identifiers
+## Duplicate key identifiers
 
 JWK sets should not contain multiple keys with the same `kid`. However, to increase
 interoperability when there are multiple keys with the same `kid`,  the verifier shall
@@ -578,7 +578,7 @@ could be used in selecting which key to use to verify a message signature:
 2. if a single key is found, use that key;
 3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
 
-### Injection of stolen access tokens
+## Injection of stolen access tokens
 
 There are potential situations where the attacker may be able to inject stolen access
 tokens into a client to bypass [@!RFC8705] or [@!RFC9449]
@@ -606,7 +606,7 @@ where the pre-conditions may be met, the possible mitigations include:
    there is no standardized method for clients to send the issuer to the resource server);
 3. reducing the time window for the attack by using short-lived access tokens alongside refresh tokens.
 
-### Authorization request leaks lead to CSRF
+## Authorization request leaks lead to CSRF
 
 An attacker of type A3 (see [@attackermodel]) can intercept an authorization request, log in at the
 authorization server, receive an authorization code and redirect the honest user via a cross-site request forgery (CSRF) attack to
@@ -637,7 +637,7 @@ often read an authorization request (e.g., from a log file or via some other
 side-channel), but not block the request from being sent. If the victim's
 internet connection is slow, this might increase the attacker's chances.
 
-### Browser-swapping attacks
+## Browser-swapping attacks
 
 An attacker that has access to the authorization response sent through a
 victim's browser can perform a browser-swapping attack as follows:
@@ -677,7 +677,7 @@ Implementers need to consider the confidentiality of the authorization
 response critical when designing their systems, in particular when this
 security profile is used in other contexts, e.g., mobile applications.
 
-### Incomplete or incorrect implementations of the specifications {#incomplete-or-incorrect-implementations-of-the-specifications}
+## Incomplete or incorrect implementations of the specifications {#incomplete-or-incorrect-implementations-of-the-specifications}
 
 To achieve the full security and interoperability benefits, it is important that
 the implementation of this specification and the underlying OpenID Connect and
