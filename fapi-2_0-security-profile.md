@@ -353,12 +353,15 @@ For flows that use the authorization endpoint, authorization servers
      (see Section 4.11 of [I-D.ietf-oauth-security-topics]);
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values
-     of less than 600 seconds; and
+     of less than 600 seconds; 
 1. should provide end-users with all necessary information to make an
    informed decision about whether to consent to the authorization
    request, including the identity of the client and the scope of the
-   authorization.
-
+   authorization;
+1. shall support state parameter values up to 512 characters in length, may reject state values longer
+   than 512 characters; and
+1. if supporting [@!OIDC], shall support nonce parameter values up to 64 characters in length,
+   may reject nonce values longer than 64 characters.
 
 **NOTE 1**:
 If replay identification of the authorization code is not possible, it
@@ -438,8 +441,12 @@ For the authorization code flow, clients
  1. shall use the authorization code grant described in [@!RFC6749];
  1. shall use pushed authorization requests according to [@!RFC9126];
  1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method;
- 1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent mix-up attacks; and
- 1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]).
+ 1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent mix-up attacks;
+ 1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]);
+ 1. should not use state parameter values longer than 512 characters; and
+ 1. if using [@!OIDC], should not use nonce parameter values longer than 64 characters.
+
+**NOTE 1:** The recommended restrictions on state and nonce parameter values length are to aid interopability.
 
 ### Requirements for resource servers
 
