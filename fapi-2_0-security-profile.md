@@ -189,28 +189,28 @@ Implementers may use this document in conjunction with other documents such as t
 
 The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow public clients
 to be secured to the same degree and hence their use is not within the scope
-of this specification.
+of this document.
 
 Although it is possible to code authorization servers and clients from first
-principles using this specification, implementers are encouraged to build on top
+principles using this document, implementers are encouraged to build on top
 of existing OpenID Connect and/or OAuth 2 implementations instead of embarking
 on a 'from scratch' implementation. See
 (#incomplete-or-incorrect-implementations-of-the-specifications) for additional
 considerations for ensuring that implementations are complete and correct.
 
-### Profiling this specification
+### Profiling this document
 
-This specification is a general purpose high security profile of
+This document is a general purpose high security profile of
 OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model.
 
-This specification, and the underlying specifications, leave a number
+This document, and the underlying specifications, leave a number
 of choices open to implementors, deployers and/or ecosystems. With
 knowledge of the exact use cases, further reducing the number of
 choices may further improve security, or make implementation or
 interoperability easier.
 
-However, for a profile to be compliant with this specification, the
+However, for a profile to be compliant with this document, the
 profile shall not remove or override mandatory behaviors, as doing
 so is likely to invalidate the formal security analysis and reduce
 security in potentially unpredictable ways.
@@ -329,7 +329,7 @@ requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR 
 **NOTE 2**:
 Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
 where the authorization server issues a new refresh token to the client as part of the
-`refresh_token` grant. This specification discourages the use of this feature as it
+`refresh_token` grant. This document discourages the use of this feature as it
 does not bring any security benefits for confidential clients, and can cause significant
 operational issues. However, to allow for operational agility, authorization servers
 may implement it providing they meet the requirement in Clause 10.
@@ -342,7 +342,7 @@ been through a detailed security analysis.
 
 **NOTE 4**:
 DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
-This specification goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
+This document goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
 
 
 #### Authorization endpoint flows
@@ -696,7 +696,7 @@ security profile is used in other contexts, e.g., mobile applications.
 ## Incomplete or incorrect implementations of the specifications {#incomplete-or-incorrect-implementations-of-the-specifications}
 
 To achieve the full security and interoperability benefits, it is important that
-the implementation of this specification and the underlying OpenID Connect and
+the implementation of this document and the underlying OpenID Connect and
 OAuth specifications is both complete and correct.
 
 The OpenID Foundation provides tools that can be used to confirm that an
@@ -708,13 +708,13 @@ The OpenID Foundation maintains a list of certified implementations:
 
 https://openid.net/developers/certified/
 
-Deployments that use this specification should use certified implementations.
+Deployments that use this document should use certified implementations.
 
 
 # Privacy considerations
 
 There are many factors to be considered in terms of privacy when implementing
-this specification. Since this specification is a profile of OAuth 2.0 and
+this document. Since this document is a profile of OAuth 2.0 and
 OpenID Connect, the privacy considerations are not specific to this document and
 generally apply to OAuth or OpenID Connect. Implementers are advised to perform
 a thorough privacy impact assessment and manage identified risks appropriately.
@@ -766,9 +766,9 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 
 # Acknowledgements
 
-This specification was developed by the OpenID FAPI Working Group.
+This document was developed by the OpenID FAPI Working Group.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this specification.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this document.
 
 
 
