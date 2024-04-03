@@ -47,8 +47,25 @@ Final drafts adopted by the Workgroup through consensus are circulated publicly 
 .# Introduction
 
 The FAPI 2.0 Security Profile is an API security profile based on the
-OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications suitable for
-protecting APIs in high-value scenarios. While the security profile was
+OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications 
+that aims to reach the security goals laid out in the Attacker
+Model [@!attackermodel] so that it is suitable for
+protecting APIs in high-value scenarios
+
+The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:
+
+* FAPI 2.0 Attacker model
+* FAPI 2.0 Security profile
+* FAPI 2.0 Message signing
+* FAPI Client Initiated Backchannel Authentication
+
+Among them, this document specifies the process for a client to obtain sender-constrained tokens from the authorization server 
+and use them securely against the resource servers, forming the basis of the framework. 
+
+The security property is formally analysed under the aforementioned attacker model. 
+For the security assumptions, please refer the attacker model. 
+
+While the security profile was
 initially developed with a focus on financial applications, it is designed to be
 universally applicable for protecting APIs exposing high-value and sensitive
 (personal and other) data, for example, in e-health and e-government
@@ -76,7 +93,7 @@ interpreted with their natural language meanings.
 
 # Scope
 
-This specification is a general-purpose high security profile of
+This document provides a general-purpose high security profile of
 OAuth 2.0 that has been proved by formal analysis to meet the stated
 attacker model. This document specifies the requirements for:
 
@@ -158,8 +175,8 @@ The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 
 Framework [@!RFC6749], that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel].
 
-This profile is the base of the FAPI 2.0 Framework. Other specifications that are
-part of this framework and may be used together with this profile include:
+This document is the base of the FAPI 2.0 Framework. 
+Implementers may use this document in conjunction with other documents such as the following: 
 
 1. FAPI Message Signing [@FAPIMessageSigning] is recommended when messages are required to be signed for the
    purposes of non-repudiation.
