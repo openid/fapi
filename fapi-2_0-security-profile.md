@@ -219,9 +219,7 @@ security in potentially unpredictable ways.
 
 ### Requirements for all endpoints
 
-All TLS connections between web browsers, clients, authorization
-servers, and resource servers shall be protected against network
-attackers. To this end, clients, authorization servers, and resource
+To protect against network attacks, clients, authorization servers, and resource
 servers
 
  1. shall only offer TLS protected endpoints and shall establish connections
@@ -249,7 +247,7 @@ browsers, the following requirements apply:
 
 #### TLS 1.2 permitted cipher suites {#tls-12-ciphers}
 
-For TLS 1.2, only the following cipher suites shall be used:
+Server-to-server communication endpoints using TLS 1.2 shall only use the following cipher suites:
 
   * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
   * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
@@ -542,7 +540,7 @@ The use of short-lived access tokens (combined with refresh tokens) potentially 
 
 The use of refresh tokens also allows clients to rotate their sender-constraining keys without loss of grants, either because of compromise of the key or as part of good security hygiene.
 
-If issuing long-lived grants (e.g. days/weeks), the use of short-lived (e.g. minutes/hours) access tokens combined with refresh tokens should be considered.
+If issuing long-lived grants (e.g. days/weeks), consider using short-lived (e.g. minutes/hours) access tokens combined with refresh tokens.
 
 There is a performance and resiliency trade-off, setting the access token lifetime too short can increase the load on and dependency on the authorization server.
 
@@ -577,11 +575,11 @@ the `jwks` parameter in combination with [@RFC7591] and [@RFC7592].
 The definition of the authorization server `jwks_uri` can be found in [@!RFC8414],
 while the definition of the client `jwks_uri` can be found in [@RFC7591].
 
-In addition, this profile
+In addition, any server providing a `jwks_uri` endpoint
 
-1. requires that `jwks_uri` endpoints shall be served over TLS;
-1. recommends that JOSE headers for `x5u` and `jku` should not be used; and
-1. recommends that the JWK set does not contain multiple keys with the same `kid`.
+1. shall only serve the `jwks_uri` endpoint over TLS;
+1. should not use the JOSE headers for `x5u` and `jku`; and
+1. should not serve a JWK set with multiple keys with the same `kid`.
 
 ## Duplicate key identifiers
 
