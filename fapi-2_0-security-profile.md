@@ -456,6 +456,7 @@ For the authorization code flow, clients
  1. shall use the authorization code grant described in [@!RFC6749];
  1. shall use pushed authorization requests according to [@!RFC9126];
  1. shall use PKCE [@!RFC7636] with `S256` as the code challenge method;
+ 1. shall generate the PKCE challenge specifically for each authorization request and securely bind the challenge to the client and the user agent in which the flow was started;
  1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent mix-up attacks;
  1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]);
  1. should not use state parameter values longer than 512 characters; and
