@@ -497,7 +497,7 @@ The following requirements apply to cryptographic operations and secrets:
     3. not use or accept the `none` algorithm.
 
  2. RSA keys shall have a minimum length of 2048 bits.
- 3. Elliptic curve keys shall have a minimum length of 160 bits.
+ 3. Elliptic curve keys shall have a minimum length of 224 bits.
  4. Credentials not intended for handling by end-users (e.g., access tokens,
     refresh tokens, authorization codes, etc.) shall be created with at least
     128 bits of entropy such that an attacker correctly guessing the value is
