@@ -253,6 +253,15 @@ Server-to-server communication endpoints using TLS 1.2 shall only use the follow
   * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
   * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
   * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
+  
+#### MTLS ecosystems
+
+Some ecosystems may implement MTLS as an additional security control at a transport layer for all server-to-server endpoints requiring sensitive data being transmitted. The following have to be considered:
+
+  * MTLS ecosystems may implement MTLS to govern access to the ecosystem independently from MTLS being used for client authentication or token binding.
+  * MTLS ecosystems should provide the trust list of the certificate authorities to ease integration, security and interoperability concenrs. 
+  * Authorization server implementations may utilize `mtls_endpoint_aliases` authorization server metadata as described in Section 5 of [@!RFC8705] to provide a discovery mechanism for endpoints that might have both MTLS and non-MTLS endpoints to be able to support different use cases and ecosystems in the same implementation.
+  * Client implementations shall use client metadata `use_mtls_endpoint_aliases` (as defined in Section 8 of this document), if present, for endpoint communications.
 
 ### Requirements for endpoints used by web browsers
 
@@ -505,18 +514,6 @@ The following requirements apply to cryptographic operations and secrets:
 
 Note: As of the time of writing there isn't a [registered](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) fully-specified algorithm describing "`EdDSA` using the `Ed25519` variant". If such algorithm is registered in the future, it is also allowed to be used for this profile.
 
-## MTLS protection of all endpoints
-
-Some ecosystems are choosing to require clients accessing their endpoints to supply a TLS client certificate at
-endpoints that would not otherwise require a TLS client certificate (for example, the PAR endpoint when using
-`private_key_jwt` authentication).
-
-This is outside of the scope of both [@!RFC8705] and the FAPI standards, however in the interests of interoperability
-this document states that when using TLS as a transport level protection in this manner, authorization servers should
-expect clients to call the endpoints located in the root of the server metadata, and not those found in
-`mtls_endpoint_aliases`.
-
-
 ## Main differences to FAPI 1.0
 
 | FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                   | Reasons                                                                                                                                 |
@@ -763,6 +760,28 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
   * **Data leak from clients**:  Some clients store personal data. If the client
     becomes compromised, this data can leak or be modified.
 
+# Discovery metadata
+
+## Client Metadata
+
+The following client metadata is defined by this specifcation.
+
+### use_mtls_endpoint_aliases
+
+**Metadata Name**: `use_mtls_endpoint_aliases`
+**Metadata Description**: Boolean value used to indicate the client's intention to use mutual TLS in preference to the non-MTLS endpoints. If omitted, the default value is false.
+
+# IANA Considerations
+
+## Dynamic Client Registration Metadata Registration
+
+Per this specification, the following client metadata definition has been requested to be registered in the IANA "OAuth Dynamic Client Registration Metadata" registry [IANA.OAuth.Parameters] established by [@!RFC7591]:
+
+**Metadata Name**: `use_mtls_endpoint_aliases`
+**Metadata Description**: Indicates the requirement for a client to use mutual TLS endpoint aliases defined by the AS where present.
+**Change Controller**: OIDF FAPI WG
+**Specification Document(s)**: Section 7 of FAPI 2 security profile
+
 
 # Acknowledgements
 
@@ -929,9 +948,28 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
+<reference anchor="RFC7591" target="https://datatracker.ietf.org/doc/html/rfc7591">
+  <front>
+    <title>OAuth 2.0 Dynamic Client Registration Protocol</title>
+    <author>
+      <organization>IETF</organization>
+    </author>
+  </front>
+</reference>
+
+<reference anchor="IANA.OAuth.Parameters" target="https://www.iana.org/assignments/oauth-parameters">
+  <front>
+    <title>OAuth Parameters</title>
+    <author>
+      <organization>IETF</organization>
+    </author>
+  </front>
+</reference>
+
+
 # Notices
 
-Copyright (c) 2022 The OpenID Foundation.
+Copyright (c) 2024 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
