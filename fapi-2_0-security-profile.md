@@ -769,6 +769,7 @@ The following client metadata is defined by this specifcation.
 ### use_mtls_endpoint_aliases
 
 **Metadata Name**: `use_mtls_endpoint_aliases`
+
 **Metadata Description**: Boolean value used to indicate the client's intention to use mutual TLS in preference to the non-MTLS endpoints. If omitted, the default value is false.
 
 # IANA Considerations
@@ -778,8 +779,11 @@ The following client metadata is defined by this specifcation.
 Per this specification, the following client metadata definition has been requested to be registered in the IANA "OAuth Dynamic Client Registration Metadata" registry [IANA.OAuth.Parameters] established by [@!RFC7591]:
 
 **Metadata Name**: `use_mtls_endpoint_aliases`
+
 **Metadata Description**: Indicates the requirement for a client to use mutual TLS endpoint aliases defined by the AS where present.
+
 **Change Controller**: OIDF FAPI WG
+
 **Specification Document(s)**: Section 7 of FAPI 2 security profile
 
 
