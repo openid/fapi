@@ -381,9 +381,7 @@ For flows that use the authorization endpoint, authorization servers
 1. should provide end-users with all necessary information to make an
    informed decision about whether to consent to the authorization
    request, including the identity of the client and the scope of the
-   authorization;
-1. shall support state parameter values up to 512 characters in length, may reject state values longer
-   than 512 characters; and
+   authorization; and
 1. if supporting [@!OIDC], shall support nonce parameter values up to 64 characters in length,
    may reject nonce values longer than 64 characters.
 
@@ -405,6 +403,11 @@ use of `request_uri` values ensure the enforcement takes place at
 the point of authorization, not at the point of loading an authorization page. 
 This prevents user software that preloads urls from invalidating the 
 `request_uri`.
+
+**NOTE 4**: In this document the state parameter is not used for CSRF protection, 
+but may be used to by the client for application state. In circumstances where 
+clients encode application state in a JWT the length of the state parameter 
+value could be in excess of 1000 characters.
 
 #### Returning authenticated user's identifier
 
@@ -468,10 +471,9 @@ For the authorization code flow, clients
  1. shall generate the PKCE challenge specifically for each authorization request and securely bind the challenge to the client and the user agent in which the flow was started;
  1. shall check the `iss` parameter in the authorization response according to [@!RFC9207] to prevent mix-up attacks;
  1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]);
- 1. should not use state parameter values longer than 512 characters; and
  1. if using [@!OIDC], should not use nonce parameter values longer than 64 characters.
 
-**NOTE 1:** The recommended restrictions on state and nonce parameter values length are to aid interopability.
+**NOTE 1:** The recommended restrictions on the nonce parameter value length is to aid interopability. 
 
 ### Requirements for resource servers
 
