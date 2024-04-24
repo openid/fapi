@@ -213,6 +213,11 @@ higher security needs to reduce or eliminate these attack vectors. There are
 however further security considerations that should be taken into account when 
 implementing this specification.
 
+It is strongly recommended to use OAuth 2 redirect based flows secured by [@!FAPI1.1], 
+[@!FAPI1.2] or [@!FAPI2] for the same device use cases because decoupled flows suffer from session 
+binding limitations that are not present in redirect flows. This specification 
+is designed to cater for cross device and user not present scenarios. 
+
 ## Authentication sessions started without a users knowledge or consent
 
 As this specification allows the client to initiate an authentication request it is
@@ -547,7 +552,7 @@ which contains the JWT payload:
 
 # Notices
 
-Copyright (c) 2023 The OpenID Foundation.
+Copyright (c) 2024 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
