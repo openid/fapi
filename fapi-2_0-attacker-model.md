@@ -107,7 +107,6 @@ For the purpose of this document, the terms defined in [@!RFC6749], and [@!OIDC]
 
 # Security goals
 
-## General (_Review title_)
 In the following, the security goals for the FAPI 2.0 Security Profile with
 regards to authorization and, when OpenID Connect is used, authentication, are
 defined.
@@ -204,7 +203,6 @@ attacker model:
 
 # Attackers
 
-## General (_Review title_)
 FAPI 2.0 profiles aim to ensure the security goals listed above for arbitrary
 combinations of the following attackers, potentially collaborating to reach a
 common goal:
@@ -310,7 +308,6 @@ trivially break the session integrity goal.
 
 # Limitations
 
-## General (_Review title_)
 Beyond the limitations already described in the introduction to the attacker
 model above, it is important to note the following limitations:
 
