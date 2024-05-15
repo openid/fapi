@@ -330,9 +330,9 @@ may implement it providing they meet the requirement in Clause 10.
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
-requirements above. For example the client credentials grant or the FAPI CIBA grant. Implementers
-should note that as of the time of writing only the authorization code flow and CIBA flows have
-been through a detailed security analysis.
+requirements above. For example the client credentials grant or the FAPI CIBA grant [@FAPICIBA]. 
+Implementers should note that as of the time of writing only the authorization code flow and CIBA 
+flows have been through a detailed security analysis.
 
 **NOTE 4**:
 Clock skew is a cause of many interoperability issues. Even a few hundred milliseconds of clock 
@@ -829,22 +829,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
-<reference anchor="GrantManagement" target="https://openid.net/specs/oauth-v2-grant-management-ID1.html">
-  <front>
-    <title>Grant Management for OAuth 2.0</title>
-    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-      <organization>yes.com</organization>
-    </author>
-    <author initials="S." surname="Low" fullname="Stuart Low">
-      <organization>Biza.io</organization>
-    </author>
-    <author initials="D." surname="Postnikov" fullname="Dima Postnikov">
-    </author>
-   <date day="09" month="May" year="2023"/>
-  </front>
-</reference>
-
-<reference anchor="FAPICIBA" target="https://openid.net/specs/openid-financial-api-ciba-ID1.html">
+<reference anchor="FAPICIBA" target="https://openid.bitbucket.io/fapi/fapi-ciba.html">
   <front>
     <title>FAPI Client Initiated Backchannel Authentication Profile </title>
     <author initials="D." surname="Tonge" fullname="Dave Tonge">
