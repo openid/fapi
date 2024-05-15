@@ -83,7 +83,7 @@ This document describes the FAPI 2.0 profiles security goals, attacker model, at
 # Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See Clause 9 for normative references.
+See Section 11 for normative references.
 
 # Terms and definitions
 
