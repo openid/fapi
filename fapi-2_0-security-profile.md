@@ -320,9 +320,9 @@ Authorization servers
  1. should accept its token endpoint url or the url of the endpoint at which the
     assertion was received, either as the `aud` claim (when a string) or as a member
     of the `aud` claim (when an array) received in client authentication assertions;
- 1. shall not use refresh token rotation unless, in the case a response with a new
-     refresh token is not received and stored by the client, retrying the request (with
-     the previous refresh token) will succeed;
+ 1. shall not use refresh token rotation unless it is ensured that, if a network error 
+    or similar issue causes the client to not receive or store the new refresh token, 
+    resubmitting the token request with the previous refresh token will succeed;
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
