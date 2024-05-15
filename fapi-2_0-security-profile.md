@@ -786,7 +786,7 @@ Per this specification, the following client metadata definition has been reques
 
 **Change Controller**: OIDF FAPI WG
 
-**Specification Document(s)**: Section 7 of FAPI 2 security profile
+**Specification Document(s)**: Section 8 of the FAPI 2.0 Security Profile
 
 
 # Acknowledgements
