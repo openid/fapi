@@ -52,23 +52,18 @@ that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel] so that it is suitable for
 protecting APIs in high-value scenarios
 
-The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:
+This document specifies the process for a client to obtain sender-constrained 
+tokens from an authorization server and use them securely with resource servers.
 
-* FAPI 2.0 Attacker model
-* FAPI 2.0 Security profile
-* FAPI 2.0 Message signing
-* FAPI Client Initiated Backchannel Authentication
-
-Among them, this document specifies the process for a client to obtain sender-constrained tokens from the authorization server
-and use them securely against the resource servers, forming the basis of the framework.
+The OpenID Foundation FAPI Working Group publishes additional documents that build on this 
+profile as part of the FAPI 2.0 framework.
 
 The security property is formally analysed under the aforementioned attacker model.
 For the security assumptions, please refer the attacker model.
 
-While the security profile was
-initially developed with a focus on financial applications, it is designed to be
-universally applicable for protecting APIs exposing high-value and sensitive
-(personal and other) data, for example, in e-health and e-government
+While the security profile was initially developed with a focus on financial applications, 
+it is designed to be universally applicable for protecting APIs exposing high-value 
+and sensitive (personal and other) data, for example, in e-health and e-government
 applications.
 
 .# Warning
@@ -172,28 +167,17 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 ### Introduction
 
 The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 Authorization
-Framework [@!RFC6749], that aims to reach the security goals laid out in the Attacker
-Model [@!attackermodel].
+Framework [@!RFC6749], that aims:
+ - to reach the security goals laid out in the Attacker Model [@!attackermodel]; and
+ - to implement the recommendations in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
 
-This document is the base of the FAPI 2.0 Framework.
-Implementers may use this document in conjunction with other documents such as the following:
-
-1. FAPI Message Signing [@FAPIMessageSigning] is recommended when messages are required to be signed for the
-   purposes of non-repudiation.
-1. FAPI Client Initiated Backchannel Authentication [@FAPICIBA] is recommended when support is
-   required for decoupled or cross device flows.
-1. Grant Management [@GrantManagement] is recommended for ecosystems that require interoperable grant management.
-1. OAuth 2.0 Rich Authorization Requests (RAR) [@RFC9396] is recommended when
-   the `scope` parameter is not expressive enough to convey the authorization that a client
-   wants to obtain.
-
-The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow public clients
-to be secured to the same degree and hence their use is not within the scope
+The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow 
+public clients to be secured to the same degree and hence their use is not within the scope
 of this document.
 
 Although it is possible to code authorization servers and clients from first
 principles using this document, implementers are encouraged to build on top
-of existing OpenID Connect and/or OAuth 2 implementations instead of embarking
+of existing OpenID Connect and/or OAuth 2.0 implementations instead of embarking
 on a 'from scratch' implementation. See
 (#incomplete-or-incorrect-implementations-of-the-specifications) for additional
 considerations for ensuring that implementations are complete and correct.
@@ -416,6 +400,10 @@ This prevents user software that preloads urls from invalidating the
 but may be used to by the client for application state. In circumstances where
 clients encode application state in a JWT the length of the state parameter
 value could be in excess of 1000 characters.
+
+**NOTE 5**: The use of OAuth 2.0 Rich Authorization Requests (RAR) [@RFC9396] 
+is recommended when the `scope` parameter is not expressive enough to convey 
+the authorization that a client may want to obtain.
 
 #### Returning authenticated user's identifier
 
