@@ -428,7 +428,7 @@ Clients
     - MTLS as specified in Section 2 of [@!RFC8705],
     - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
-    Bearer Token Usage [@!RFC6750];
+    Bearer Token Usage [@!RFC6750] or Section 7.1 of DPoP [@!RFC9449];
  1. shall not expose open redirectors (see Section 4.10 of
      [@I-D.ietf-oauth-security-topics]);
  1. if using `private_key_jwt`, shall use the authorization server's
@@ -484,7 +484,7 @@ access token.
 Resource servers with the FAPI endpoints
 
 1. shall accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
-   Bearer Token Usage [@!RFC6750];
+   Bearer Token Usage [@!RFC6750] or Section 7.1 of DPoP [@!RFC9449];
 1. shall not accept access tokens in the query parameters stated in Section 2.3
    of OAuth 2.0 Bearer Token Usage [@!RFC6750];
 1. shall verify the validity, integrity, expiration and revocation status of
