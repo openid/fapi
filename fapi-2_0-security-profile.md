@@ -374,7 +374,7 @@ For flows that use the authorization endpoint, authorization servers
      been previously used;
 1. shall not use the HTTP 307 status code when redirecting a request that contains
      user credentials to avoid forwarding the credentials to a third party accidentally
-     (see Section 4.11 of [I-D.ietf-oauth-security-topics]);
+     (see Section 4.11 of [@I-D.ietf-oauth-security-topics]);
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values
      of less than 600 seconds; 
