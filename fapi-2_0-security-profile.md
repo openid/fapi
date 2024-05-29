@@ -64,7 +64,9 @@ For the security assumptions, please refer the attacker model.
 While the security profile was initially developed with a focus on financial applications, 
 it is designed to be universally applicable for protecting APIs exposing high-value 
 and sensitive (personal and other) data, for example, in e-health and e-government
-applications.
+applications. It formalizes many of the best practices described in OAuth 2.0 Security 
+Best Current Practice [@!OAuthSecTopics].
+
 
 .# Warning
 
@@ -969,6 +971,14 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <title>CORS Protocol</title>
     <author>
       <organization>WHATWG</organization>
+    </author>
+  </front>
+</reference>
+<reference anchor="OAuthSecTopics" target="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics">
+  <front>
+    <title>OAuth 2.0 Security Best Current Practice</title>
+    <author>
+      <organization>IETF</organization>
     </author>
   </front>
 </reference>
