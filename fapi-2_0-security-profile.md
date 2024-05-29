@@ -327,8 +327,8 @@ Authorization servers
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
  1. to accommodate clock offsets, shall accept JWTs with an `iat` or `nbf` time up to 10 seconds in 
- the future, may accept those with an `iat` or `nbf` time between 10 and 60 seconds in the future, 
- but should reject those with an `iat` or `nbf` time 60 seconds or more in the future.
+ the future but shall reject JWTs with an `iat` or `nbf` time 60 seconds or more in the future. See Note 4 for 
+ further details and rationale.
 
 **NOTE 1**:
 To facilitate interoperability, this document requires that authorization servers
@@ -352,8 +352,14 @@ should note that as of the time of writing only the authorization code flow and 
 been through a detailed security analysis.
 
 **NOTE 4**:
-DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
-This document goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
+Clock skew is a cause of many interopability issues. Even a few hundred milliseconds of clock skew can cause
+JWTs to be rejected for being "issued in the future". The DPoP specification [@!RFC9449] suggests that JWTs 
+are accepted in the reasonably near future (on the order of seconds or minutes). This document goes further 
+by requiring authroization servers to accept JWTs issued 10 seconds in the future. 10 seconds was chosen
+as a value that does not affect security while greatly increasing interopability. Implementers are free to accept
+JWTs further in the future up to a maximum of 60 seconds. Some ecosystems have found that the value of 30 seconds 
+is needed to fully elimiate clock skew issues. To prevent implementations switching off `iat` and `nbf` checks 
+completely this document imposes a maximum time in the future of 60 seconds.
 
 
 #### Authorization endpoint flows
