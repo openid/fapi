@@ -257,7 +257,8 @@ Server-to-server communication endpoints using TLS 1.2 shall only use the follow
 #### MTLS ecosystems
 
 Some ecosystems may implement MTLS as an additional security control at the transport layer 
-for all server-to-server endpoints requiring sensitive data being transmitted. For example `private_key_jwt` assertions or DPoP proofs may be sent over mutual TLS connections. To faciliate interopability:
+for all server-to-server endpoints requiring sensitive data being transmitted. For example, `private_key_jwt` 
+can be used for client authentication in conjunction with MTLS connectivity. To faciliate interopability:
 
   * MTLS ecosystems should provide the trust list of the certificate authorities;
   * authorization server implementations may utilize `mtls_endpoint_aliases` authorization server metadata as described in Section 5 of [@!RFC8705] to provide a discovery mechanism for endpoints that might have both MTLS and non-MTLS endpoints;
