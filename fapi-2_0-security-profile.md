@@ -809,7 +809,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
-<reference anchor="FAPIMessageSigning" target="https://openid.bitbucket.io/fapi/fapi-2_0-message-signing.html">
+<reference anchor="FAPIMessageSigning" target="https://openid.net/specs/fapi-2_0-message-signing-ID1.html">
   <front>
     <title>FAPI 2.0 Message Signing</title>
     <author initials="D." surname="Tonge" fullname="Dave Tonge">
@@ -837,7 +837,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
-<reference anchor="FAPICIBA" target="https://openid.bitbucket.io/fapi/fapi-ciba.html">
+<reference anchor="FAPICIBA" target="https://openid.net/specs/openid-financial-api-ciba-ID1.html">
   <front>
     <title>FAPI Client Initiated Backchannel Authentication Profile </title>
     <author initials="D." surname="Tonge" fullname="Dave Tonge">
