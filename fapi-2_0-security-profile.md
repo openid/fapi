@@ -322,7 +322,7 @@ Authorization servers
     of the `aud` claim (when an array) received in client authentication assertions;
  1. shall not use refresh token rotation unless it is ensured that, if a network error 
     or similar issue causes the client to not receive or store the new refresh token, 
-    resubmitting the token request with the previous refresh token will succeed;
+    resubmitting the token request with the previous refresh token will succeed (see Note 2 for further details);
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
@@ -340,8 +340,11 @@ Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749
 where the authorization server issues a new refresh token to the client as part of the
 `refresh_token` grant. This document discourages the use of this feature as it
 does not bring any security benefits for confidential clients, and can cause significant
-operational issues. However, to allow for operational agility, authorization servers
-may implement it providing they meet the requirement in Clause 10.
+operational issues. For example a network error may prevent a client from receiving a new 
+refresh token, if the authorisation server prevents the client from retrying the token request 
+with the previous refresh token then an end-user may have to be sent through an authorization 
+flow. Despite these operational issues, authorization servers may implement refresh token 
+rotation providing they meet the requirement in 5.3.2.1.10. 
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
