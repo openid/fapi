@@ -714,6 +714,16 @@ https://openid.net/developers/certified/
 
 Deployments that use this document should use certified implementations.
 
+## Client Impersonating Resource Owner
+
+Section 4.15 of [@I-D.ietf-oauth-security-topics] describes an attack where a malicious
+client tricks a resource server into granting access to a victim’s resources. This attack
+becomes feasible when an authorization server issues access tokens with similar privileges
+to both clients and end-users, and a malicious client can manipulate its client_id at the
+authorization server.
+
+For this resason, authorization servers should not allow clients to influence their client_id 
+or any claim that could cause confusion with a genuine resource owner.
 
 # Privacy considerations
 
