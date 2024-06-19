@@ -47,7 +47,7 @@ Final drafts adopted by the Workgroup through consensus are circulated publicly 
 .# Introduction
 
 The FAPI 2.0 Security Profile is an API security profile based on the
-OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications 
+OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications
 that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel] so that it is suitable for
 protecting APIs in high-value scenarios
@@ -59,11 +59,11 @@ The FAPI 2.0 Framework is comprised of several documents. At the time of writing
 * FAPI 2.0 Message signing
 * FAPI Client Initiated Backchannel Authentication
 
-Among them, this document specifies the process for a client to obtain sender-constrained tokens from the authorization server 
-and use them securely against the resource servers, forming the basis of the framework. 
+Among them, this document specifies the process for a client to obtain sender-constrained tokens from the authorization server
+and use them securely against the resource servers, forming the basis of the framework.
 
-The security property is formally analysed under the aforementioned attacker model. 
-For the security assumptions, please refer the attacker model. 
+The security property is formally analysed under the aforementioned attacker model.
+For the security assumptions, please refer the attacker model.
 
 While the security profile was
 initially developed with a focus on financial applications, it is designed to be
@@ -175,8 +175,8 @@ The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 
 Framework [@!RFC6749], that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel].
 
-This document is the base of the FAPI 2.0 Framework. 
-Implementers may use this document in conjunction with other documents such as the following: 
+This document is the base of the FAPI 2.0 Framework.
+Implementers may use this document in conjunction with other documents such as the following:
 
 1. FAPI Message Signing [@FAPIMessageSigning] is recommended when messages are required to be signed for the
    purposes of non-repudiation.
@@ -249,7 +249,7 @@ browsers, the following requirements apply:
 
 Some ecosystems may implement MTLS as an additional security control at the transport layer 
 for all server-to-server endpoints requiring sensitive data being transmitted. For example, `private_key_jwt` 
-can be used for client authentication in conjunction with MTLS connectivity. To faciliate interopability:
+can be used for client authentication in conjunction with MTLS connectivity. To facilitate interoperability:
 
   * MTLS ecosystems should provide the trust list of the certificate authorities;
   * authorization server implementations may utilize `mtls_endpoint_aliases` authorization server metadata as described in Section 5 of [@!RFC8705] to provide a discovery mechanism for endpoints that might have both MTLS and non-MTLS endpoints;
@@ -308,7 +308,7 @@ Authorization servers
  1. shall authenticate clients using one of the following methods:
      - MTLS as specified in Section 2 of [@!RFC8705], or
      - `private_key_jwt` as specified in Section 9 of [@!OIDC];
- 1. shall not expose open redirectors (see Section 4.10 of
+ 1. shall not expose open redirectors (see Section 4.11 of
      [@I-D.ietf-oauth-security-topics]);
  1. shall accept its issuer identifier value (as defined in [@RFC8414]) either as the
     `aud` claim (when a string) or as a member of the `aud` claim (when an array) received
@@ -379,10 +379,10 @@ For flows that use the authorization endpoint, authorization servers
      been previously used;
 1. shall not use the HTTP 307 status code when redirecting a request that contains
      user credentials to avoid forwarding the credentials to a third party accidentally
-     (see Section 4.11 of [@I-D.ietf-oauth-security-topics]);
+     (see Section 4.12 of [@I-D.ietf-oauth-security-topics]);
 1. should use the HTTP 303 status code when redirecting the user agent using status codes;
 1. shall issue pushed authorization requests `request_uri` with `expires_in` values
-     of less than 600 seconds; 
+     of less than 600 seconds;
 1. should provide end-users with all necessary information to make an
    informed decision about whether to consent to the authorization
    request, including the identity of the client and the scope of the
@@ -401,17 +401,17 @@ The `request_uri` `expires_in` time must be sufficient for
 the user's device to receive the link and the user to complete the
 process of opening the link. In many cases (poor network connection or
 where the user has to manually select the browser to be used) this can
-easily take over 30 seconds. 
+easily take over 30 seconds.
 
-**NOTE 3**: It is recommended that authorization servers that enforce one-time 
-use of `request_uri` values ensure the enforcement takes place at 
-the point of authorization, not at the point of loading an authorization page. 
-This prevents user software that preloads urls from invalidating the 
+**NOTE 3**: It is recommended that authorization servers that enforce one-time
+use of `request_uri` values ensure the enforcement takes place at
+the point of authorization, not at the point of loading an authorization page.
+This prevents user software that preloads urls from invalidating the
 `request_uri`.
 
-**NOTE 4**: In this document the state parameter is not used for CSRF protection, 
-but may be used to by the client for application state. In circumstances where 
-clients encode application state in a JWT the length of the state parameter 
+**NOTE 4**: In this document the state parameter is not used for CSRF protection,
+but may be used to by the client for application state. In circumstances where
+clients encode application state in a JWT the length of the state parameter
 value could be in excess of 1000 characters.
 
 #### Returning authenticated user's identifier
@@ -434,7 +434,7 @@ Clients
     - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
     Bearer Token Usage [@!RFC6750] or Section 7.1 of DPoP [@!RFC9449];
- 1. shall not expose open redirectors (see Section 4.10 of
+ 1. shall not expose open redirectors (see Section 4.11 of
      [@I-D.ietf-oauth-security-topics]);
  1. if using `private_key_jwt`, shall use the authorization server's
     issuer identifier value (as defined in [@RFC8414]) in the `aud`
@@ -478,7 +478,7 @@ For the authorization code flow, clients
  1. shall only send `client_id` and `request_uri` request parameters to the authorization endpoint (all other authorization request parameters are sent in the pushed authorization request according to [@!RFC9126]);
  1. if using [@!OIDC], should not use nonce parameter values longer than 64 characters.
 
-**NOTE 1:** The recommended restrictions on the nonce parameter value length is to aid interopability. 
+**NOTE 1:** The recommended restrictions on the nonce parameter value length is to aid interoperability.
 
 ### Requirements for resource servers
 
