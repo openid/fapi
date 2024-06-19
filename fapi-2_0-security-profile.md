@@ -240,19 +240,10 @@ attacks. CAA records [@RFC8659] help to mitigate this risk.
 For server-to-server communication endpoints that are not used by web
 browsers, the following requirements apply:
 
- 1. When using TLS 1.2, servers shall only permit the cipher suites listed in (#tls-12-ciphers).
- 2. When using TLS 1.2, clients should only permit the cipher suites listed in (#tls-12-ciphers).
- 3. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites,
- key lengths of at least 2048 bits are required.
+ 1. When using TLS 1.2, servers shall only permit the cipher suites recommended in [@!BCP195];
+ 2. When using TLS 1.2, clients should only permit the cipher suites recommended in [@!BCP195].
 
-#### TLS 1.2 permitted cipher suites {#tls-12-ciphers}
 
-Server-to-server communication endpoints using TLS 1.2 shall only use the following cipher suites:
-
-  * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
-  * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
-  * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
-  * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
   
 #### MTLS ecosystems
 
@@ -277,6 +268,10 @@ requirements apply:
      domains below them.
   2. When using TLS 1.2, servers shall only use cipher suites allowed in
      [@!BCP195].
+
+**NOTE 1**: When using TLS1.2 endpoints used by web browsers can use any cipher 
+suite allowed in [@!BCP195], whereas endpoints not used by web browsers can only 
+use cipher suites recommended by [@!BCP195].
 
 ## Profile
 
