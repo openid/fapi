@@ -322,7 +322,9 @@ Authorization servers
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
- 1. to accommodate for clock offsets, shall accept JWTs with an `iat` or `nbf` time up to 10 seconds in the future, however should reject JWTs with an `iat` or `nbf` of 60 seconds or greater in the future.
+ 1. to accommodate clock offsets, shall accept JWTs with an `iat` or `nbf` timestamp between 0 
+    and 10 seconds in the future but shall reject JWTs with an `iat` or `nbf` timestamp greater than
+    60 seconds in the future. See Note 4 for further details and rationale.
 
 **NOTE 1**:
 To facilitate interoperability, this document requires that authorization servers
@@ -346,8 +348,15 @@ should note that as of the time of writing only the authorization code flow and 
 been through a detailed security analysis.
 
 **NOTE 4**:
-DPoP already suggests that JWTs are accepted in the reasonably near future (on the order of seconds or minutes).
-This document goes further by placing a hard lower bound of 10 seconds in order to promote interoperability.
+Clock skew is a cause of many interoperability issues. Even a few hundred milliseconds of clock 
+skew can cause JWTs to be rejected for being "issued in the future". The DPoP specification 
+[@!RFC9449] suggests that JWTs  are accepted in the reasonably near future (on the order of seconds 
+or minutes). This document goes further by requiring authorization servers to accept JWTs that
+have timepstamps up to 10 seconds in the future. 10 seconds was chosen as a value that does not 
+affect security while greatly increasing interoperability. Implementers are free to accept JWTs
+with a timestamp of up to 60 seconds in the future. Some ecosystems have found that the value of 30 seconds 
+is needed to fully eliminate clock skew issues. To prevent implementations switching off 
+`iat` and `nbf` checks completely this document imposes a maximum timestamp in the future of 60 seconds.
 
 
 #### Authorization endpoint flows
