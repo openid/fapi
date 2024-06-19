@@ -449,12 +449,14 @@ Clients
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker;
- 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match; and
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match;
  1. shall initiate an authorization process only with the end-user's
     explicit or implicit consent and protect initiation of an
     authorization process against cross-site request forgery, thereby
     enabling the end-user to be aware of the context in which a flow was
-    started.
+    started; and
+ 1. should request access tokens with the least privileges necessary for the specific application 
+    or use case.
 
 **NOTE 1**:
 This profile may be used by confidential clients on a user-controlled device where the system
