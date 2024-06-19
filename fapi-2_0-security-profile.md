@@ -321,10 +321,12 @@ Authorization servers
      the previous refresh token) will succeed;
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
- 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]);
  1. to accommodate clock offsets, shall accept JWTs with an `iat` or `nbf` timestamp between 0 
     and 10 seconds in the future but shall reject JWTs with an `iat` or `nbf` timestamp greater than
-    60 seconds in the future. See Note 4 for further details and rationale.
+    60 seconds in the future. See Note 4 for further details and rationale; and 
+ 1. should restrict the privileges associated with an access token to the minimum required for 
+    the particular application or use case.
 
 **NOTE 1**:
 To facilitate interoperability, this document requires that authorization servers
