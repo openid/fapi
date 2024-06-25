@@ -338,7 +338,10 @@ requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR 
 The use of refresh token rotation not only provides no security benefits when used with
 sender-constrained access tokens but also causes user experience degradation whenever
 the client fails to store or receive the new refresh token and has no option to retry.
-This specification discourages the use of this feature.
+This specification discourages the use of this feature. However, as its use may be required
+from time to time for operational agility, this specification allows it, provided that
+authorization servers offer clients the time-limited option to retry with the old refresh
+token in case of failure.
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
