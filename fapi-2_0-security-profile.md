@@ -316,9 +316,10 @@ Authorization servers
  1. should accept its token endpoint url or the url of the endpoint at which the
     assertion was received, either as the `aud` claim (when a string) or as a member
     of the `aud` claim (when an array) received in client authentication assertions;
- 1. shall not use refresh token rotation unless, in the case a response with a new
-     refresh token is not received and stored by the client, retrying the request (with
-     the previous refresh token) will succeed;
+ 1. shall not use refresh token rotation as specified in section 6 of [@!RFC6749],
+    except in extraordinary cases where it is required for legitimate reasons.
+    In such cases it shall not immediately revoke the old refresh token to allow
+    client to retry on failure (see Note 2 below);
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
@@ -334,12 +335,10 @@ of the endpoint at which the assertion was received. This does not reduce the st
 requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint.
 
 **NOTE 2**:
-Refresh token rotation is an optional feature defined in Section 6 of [@!RFC6749]
-where the authorization server issues a new refresh token to the client as part of the
-`refresh_token` grant. This document discourages the use of this feature as it
-does not bring any security benefits for confidential clients, and can cause significant
-operational issues. However, to allow for operational agility, authorization servers
-may implement it providing they meet the requirement in Clause 10.
+The use of refresh token rotation not only provides no security benefits when used with
+sender-constrained access tokens but also causes user experience degradation whenever
+the client fails to store or receive the new refresh token and has no option to retry.
+This specification discourages the use of this feature.
 
 **NOTE 3**:
 This document is structured to support a variety of grants to be used with the general
