@@ -455,7 +455,7 @@ Clients
     authorization process against cross-site request forgery, thereby
     enabling the end-user to be aware of the context in which a flow was
     started; and
- 1. should request access tokens with the least privileges necessary for the specific application 
+ 1. should request authorization with the least privileges necessary for the specific application 
     or use case.
 
 **NOTE 1**:
