@@ -266,7 +266,7 @@ requirements apply:
      domains below them.
   2. When using TLS 1.2, servers shall only use cipher suites allowed in
      [@!BCP195].
-  3. Servers shall not support CORS for the authorization endpoint, as 
+  3. Servers shall not support CORS [@!CORS.Protocol] for the authorization endpoint, as 
      clients must perform an HTTP redirect rather than access this endpoint 
      directly. 
 
@@ -974,6 +974,15 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <title>OAuth Parameters</title>
     <author>
       <organization>IETF</organization>
+    </author>
+  </front>
+</reference>
+
+<reference anchor="CORS.Protocol" target="fetch.spec.whatwg.org/#http-cors-protocol">
+  <front>
+    <title>CORS Protocol</title>
+    <author>
+      <organization>WHATWG</organization>
     </author>
   </front>
 </reference>
