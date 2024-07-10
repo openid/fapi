@@ -321,10 +321,12 @@ Authorization servers
      the previous refresh token) will succeed;
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
- 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]); and
+ 1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]);
  1. to accommodate clock offsets, shall accept JWTs with an `iat` or `nbf` timestamp between 0 
     and 10 seconds in the future but shall reject JWTs with an `iat` or `nbf` timestamp greater than
-    60 seconds in the future. See Note 4 for further details and rationale.
+    60 seconds in the future. See Note 4 for further details and rationale; and 
+ 1. should restrict the privileges associated with an access token to the minimum required for 
+    the particular application or use case.
 
 **NOTE 1**:
 To facilitate interoperability, this document requires that authorization servers
@@ -447,12 +449,14 @@ Clients
  1. if using DPoP, shall support the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall only use authorization server metadata (such as the authorization endpoint) retrieved from the metadata document as specified in [@!OIDD] and [@!RFC8414];
  1. shall ensure that the issuer URL used as the basis for retrieving the authorization server metadata is obtained from an authoritative source and using a secure channel, such that it cannot be modified by an attacker;
- 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match; and
+ 1. shall ensure that this issuer URL and the `issuer` value in the obtained metadata match;
  1. shall initiate an authorization process only with the end-user's
     explicit or implicit consent and protect initiation of an
     authorization process against cross-site request forgery, thereby
     enabling the end-user to be aware of the context in which a flow was
-    started.
+    started; and
+ 1. should request authorization with the least privileges necessary for the specific application 
+    or use case.
 
 **NOTE 1**:
 This profile may be used by confidential clients on a user-controlled device where the system
