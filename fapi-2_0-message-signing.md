@@ -179,7 +179,8 @@ Authorization servers implementing FAPI2 authorization request signing
     [@!RFC9101] at the PAR endpoint [@!RFC9126];
  2. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
  3. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
- 4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim.
+ 4. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
+ 5. shall accept request objects with `typ` header parameter with a value `oauth-authz-req+jwt`.
 
 ### Requirements for clients
 
@@ -189,7 +190,8 @@ Clients implementing FAPI2 authorization request signing
     [@!RFC9101] signed requested object;
  2. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
  3. shall send a `nbf` claim in the request object;
- 4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes.
+ 4. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
+ 5. should send a `typ` header parameter with a value `oauth-authz-req+jwt`.
 
 ### Client metadata {#client-metadata}
 
