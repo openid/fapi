@@ -714,6 +714,15 @@ https://openid.net/developers/certified/
 
 Deployments that use this document should use certified implementations.
 
+## Client Impersonating Resource Owner
+
+Section 4.15 of [@I-D.ietf-oauth-security-topics] describes an attack where a malicious client is able to 
+influence its client_id such that it could be mistaken for an end-user subject identifier. This attack 
+also requires that an authorization server issues access tokens with similar privileges to both clients 
+and end-users.
+
+For this reason, authorization servers should not allow clients to influence their client_id in a way 
+that it can be mistaken for an end-user subject identifier.
 
 # Privacy considerations
 
