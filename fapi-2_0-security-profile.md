@@ -242,8 +242,6 @@ browsers, the following requirements apply:
 
  1. When using TLS 1.2, servers shall only permit the cipher suites recommended in [@!BCP195];
  2. When using TLS 1.2, clients should only permit the cipher suites recommended in [@!BCP195].
-
-
   
 #### MTLS ecosystems
 
@@ -268,6 +266,9 @@ requirements apply:
      domains below them.
   2. When using TLS 1.2, servers shall only use cipher suites allowed in
      [@!BCP195].
+  3. Servers shall not support CORS [@!CORS.Protocol] for the authorization endpoint, as 
+     clients must perform an HTTP redirect rather than access this endpoint 
+     directly. 
 
 **NOTE 1**: When using TLS1.2 endpoints used by web browsers can use any cipher 
 suite allowed in [@!BCP195], whereas endpoints not used by web browsers can only 
@@ -986,6 +987,15 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <title>OAuth Parameters</title>
     <author>
       <organization>IETF</organization>
+    </author>
+  </front>
+</reference>
+
+<reference anchor="CORS.Protocol" target="fetch.spec.whatwg.org/#http-cors-protocol">
+  <front>
+    <title>CORS Protocol</title>
+    <author>
+      <organization>WHATWG</organization>
     </author>
   </front>
 </reference>
