@@ -225,7 +225,7 @@ servers
  1. shall only offer TLS protected endpoints and shall establish connections
     to other servers using TLS;
  1. shall set up TLS connections using TLS version 1.2 or later;
- 2. when using TLS 1.2, shall follow the recommendations for Secure Use of Transport Layer Security in [@!BCP195];
+ 2. shall follow the recommendations for Secure Use of Transport Layer Security in [@!BCP195];
  3. should use DNSSEC to protect against DNS spoofing attacks that can lead to
     the issuance of rogue domain-validated TLS certificates; and
  4. shall perform a TLS server certificate check, as per [@!RFC6125].
