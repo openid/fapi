@@ -146,6 +146,8 @@ As a profile of the OAuth 2.0 Authorization Framework, this document mandates th
 
 ### 5.2.2 Authorization server
 
+#### 5.2.2.0 Authorization server provisions
+
 The authorization server
 
 1. shall support confidential clients;
@@ -420,7 +422,7 @@ from a single authorization server deployment shall use a separate `issuer` per 
 This can be achieved either at the domain level (e.g. `https://brand-a.auth.example.com` 
 and  `https://brand-b.auth.example.com`) or with different paths (e.g. `https://auth.example.com/brand-a` and `https://auth.example.com/brand-b`)
 
-As stated in 5.2.2-22 clients shall only use metadata values obtained via metadata documents
+As stated in 5.2.2.0-22 clients shall only use metadata values obtained via metadata documents
 as defined in [OIDD]. Communicating metadata through other means (e.g. via email) opens 
 up a social engineering attack vector.
 
