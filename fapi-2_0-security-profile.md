@@ -50,7 +50,7 @@ The FAPI 2.0 Security Profile is an API security profile based on the
 OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications
 that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel] so that it is suitable for
-protecting APIs in high-value scenarios. It also implements the recommendations 
+protecting APIs in high-value scenarios. It also follows the recommendations 
 in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
 
 This document specifies the process for a client to obtain sender-constrained 
@@ -171,7 +171,7 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749], that aims:
  - to reach the security goals laid out in the Attacker Model [@!attackermodel]; and
- - to implement the recommendations in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
+ - to follow the recommendations in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
 
 The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow 
 public clients to be secured to the same degree and hence their use is not within the scope
