@@ -87,9 +87,19 @@ interpreted with their natural language meanings.
 
 # Implementation Advice
 
-OIDF FAPI is an API security profile based on the OAuth 2.0 Authorization
-Framework [@!RFC6749]. This Baseline Profile aims to reach the security goals
-laid out in the Attacker Model [@!attackermodel].
+## FAPI 2.0 Framework
+
+The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:
+
+* FAPI 2.0 Attacker model;
+* FAPI 2.0 Security profile;
+* FAPI 2.0 Message signing - for non repudiation of messages;
+* FAPI Client Initiated Backchannel Authentication - for decoupled or cross device flows;
+* Grant Management for OAuth 2.0 - for ecosystems that require interoperable grant management;
+* OAuth 2.0 Rich Authorization Requests  - for conveying complex authorizations.
+
+The foundation of the framework is the attacker model and security profile. All the other 
+specifications build on the security profile.
 
 ## HTTP Headers
 
