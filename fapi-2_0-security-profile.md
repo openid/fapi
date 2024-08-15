@@ -345,7 +345,7 @@ Clock skew is a cause of many interoperability issues. Even a few hundred millis
 skew can cause JWTs to be rejected for being "issued in the future". The DPoP specification 
 [@!RFC9449] suggests that JWTs  are accepted in the reasonably near future (on the order of seconds 
 or minutes). This document goes further by requiring authorization servers to accept JWTs that
-have timepstamps up to 10 seconds in the future. 10 seconds was chosen as a value that does not 
+have timestamps up to 10 seconds in the future. 10 seconds was chosen as a value that does not 
 affect security while greatly increasing interoperability. Implementers are free to accept JWTs
 with a timestamp of up to 60 seconds in the future. Some ecosystems have found that the value of 30 seconds 
 is needed to fully eliminate clock skew issues. To prevent implementations switching off 
