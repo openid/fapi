@@ -59,7 +59,7 @@ tokens from an authorization server and use them securely with resource servers.
 The OpenID Foundation FAPI Working Group publishes additional documents that build on this 
 profile as part of the FAPI 2.0 framework.
 
-The security property is formally analysed under the aforementioned attacker model.
+The security property is formally analysed [@FAPI2SEC] under the aforementioned attacker model.
 For the security assumptions, please refer the attacker model.
 
 While the security profile was initially developed with a focus on financial applications, 
@@ -338,7 +338,7 @@ outside the scope of this specification.
 This document is structured to support a variety of grants to be used with the general
 requirements above. For example the client credentials grant or the FAPI CIBA grant [@FAPICIBA]. 
 Implementers should note that as of the time of writing only the authorization code flow and CIBA 
-flows have been through a detailed security analysis.
+flows have been through a detailed security analysis [@FAPI2SEC].
 
 **NOTE 4**:
 Clock skew is a cause of many interoperability issues. Even a few hundred milliseconds of clock 
@@ -941,6 +941,22 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
       <organization>University of Stuttgart, Germany</organization>
     </author>
     <date day="31" month="Jan" year="2019"/>
+  </front>
+</reference>
+
+<reference anchor="FAPI2SEC" target="https://openid.net/wordpress-content/uploads/2022/12/Formal-Security-Analysis-of-FAPI-2.0_FINAL_2022-10.pdf">
+  <front>
+    <title>Formal Security Analysis of the OpenID Financial-grade API 2.0</title>    
+    <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="R." surname="Kuesters" fullname="Ralf Kuesters">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="T." surname="Würtele" fullname="Tim Würtele">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <date day="01" month="Dec" year="2022"/>
   </front>
 </reference>
 
