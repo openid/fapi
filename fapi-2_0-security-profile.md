@@ -503,6 +503,8 @@ Resource servers with the FAPI endpoints
 
 ## Cryptography and secrets
 
+### General requirements
+
 The following requirements apply to cryptographic operations and secrets:
 
  1. Authorization servers, clients, and resource servers when creating or processing JWTs shall
@@ -519,6 +521,36 @@ The following requirements apply to cryptographic operations and secrets:
     computationally infeasible. Cf. Section 10.10 of [@!RFC6749].
 
 Note: As of the time of writing there isn't a [registered](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) fully-specified algorithm describing "`EdDSA` using the `Ed25519` variant". If such algorithm is registered in the future, it is also allowed to be used for this profile.
+
+### JSON Web Key Sets
+
+This profile supports the use of `private_key_jwt` and in addition allows the use of
+OpenID Connect. When these are used clients and authorization servers need to verify
+payloads with keys from another party. For authorization servers this profile strongly
+recommends  the use of JWKS URI endpoints to distribute public keys. For client's key
+management this profile recommends either the use of JWKS URI endpoints or the use of
+the `jwks` parameter in combination with [@RFC7591] and [@RFC7592].
+
+The definition of the authorization server `jwks_uri` can be found in [@!RFC8414],
+while the definition of the client `jwks_uri` can be found in [@RFC7591].
+
+In addition, any server providing a `jwks_uri` endpoint
+
+1. shall only serve the `jwks_uri` endpoint over TLS;
+1. should not use the JOSE headers for `x5u` and `jku`; and
+1. should not serve a JWK set with multiple keys with the same `kid`.
+
+### Handling Duplicate Key Identifiers
+
+JWK sets should not contain multiple keys with the same `kid`. However, to increase
+interoperability when there are multiple keys with the same `kid`,  the verifier shall
+consider other JWK attributes, such as `kty`, `use`, `alg`, etc., when selecting the
+verification key for the particular JWS message. For example, the following algorithm
+could be used in selecting which key to use to verify a message signature:
+
+1. find keys with a `kid` that matches the `kid` in the JOSE header;
+2. if a single key is found, use that key;
+3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
 
 ## Main differences to FAPI 1.0
 
@@ -566,36 +598,6 @@ Possible mitigations for this are:
 
 These mitigations may have potential complexity, performance or scalability trade-offs. Attacker type A5
 represents a powerful attacker and mitigations may not be necessary for many ecosystems.
-
-## JWKS URIs
-
-This profile supports the use of `private_key_jwt` and in addition allows the use of
-OpenID Connect. When these are used clients and authorization servers need to verify
-payloads with keys from another party. For authorization servers this profile strongly
-recommends  the use of JWKS URI endpoints to distribute public keys. For client's key
-management this profile recommends either the use of JWKS URI endpoints or the use of
-the `jwks` parameter in combination with [@RFC7591] and [@RFC7592].
-
-The definition of the authorization server `jwks_uri` can be found in [@!RFC8414],
-while the definition of the client `jwks_uri` can be found in [@RFC7591].
-
-In addition, any server providing a `jwks_uri` endpoint
-
-1. shall only serve the `jwks_uri` endpoint over TLS;
-1. should not use the JOSE headers for `x5u` and `jku`; and
-1. should not serve a JWK set with multiple keys with the same `kid`.
-
-## Duplicate key identifiers
-
-JWK sets should not contain multiple keys with the same `kid`. However, to increase
-interoperability when there are multiple keys with the same `kid`,  the verifier shall
-consider other JWK attributes, such as `kty`, `use`, `alg`, etc., when selecting the
-verification key for the particular JWS message. For example, the following algorithm
-could be used in selecting which key to use to verify a message signature:
-
-1. find keys with a `kid` that matches the `kid` in the JOSE header;
-2. if a single key is found, use that key;
-3. if multiple keys are found, then the verifier should iterate through the keys until a key is found that has a matching `alg`, `use`, `kty`, or `crv` that corresponds to the message being verified.
 
 ## Injection of stolen access tokens
 
