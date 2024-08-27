@@ -956,7 +956,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <author initials="T." surname="Würtele" fullname="Tim Würtele">
       <organization>University of Stuttgart, Germany</organization>
     </author>
-    <date day="01" month="Dec" year="2022"/>
+    <date day="08" month="Jul" year="2024"/>
   </front>
 </reference>
 
