@@ -213,9 +213,10 @@ As a profile of the OAuth 2.0 Authorization Framework, this document mandates th
 
 ### 5.2.2 Authorization server
 
-The authorization server shall support the provisions specified in clause 5.2.2 of 
+#### 5.2.2.0 Authorization server provisions
+The authorization server shall support the provisions specified in clause 5.2.2.0 of 
 [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], with the exception
-that Section 5.2.2-7 (enforcement of [RFC7636]) is not required.
+that Section 5.2.2.0-7 (enforcement of [RFC7636]) is not required.
 
 In addition, the authorization server
 
@@ -234,7 +235,7 @@ In addition, the authorization server
 1. may support the pushed authorization request endpoint as described in [PAR];
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
-1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2-4):
+1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2.0-4):
     1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC8705], or
     2. `private_key_jwt` as specified in section 9 of [OIDC];
 1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
@@ -659,6 +660,8 @@ established by [RFC7519].
 
 
 # Appendix A. Examples
+
+## A.0 JWK for examples
 
 The following are non-normative examples of various objects compliant with this specification, with line wraps within values for display purposes only.
 
