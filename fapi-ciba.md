@@ -324,17 +324,12 @@ completed. For most deployments this is not a significant issue.
 As confidential information is being exchanged, all interactions shall be encrypted
 with TLS (HTTPS).
 
-The recommendations for Secure Use of Transport Layer Security in [BCP195] shall be followed,
+The recommendations for Secure Use of Transport Layer Security in [@!BCP195] shall be followed,
 with the following additional requirements:
 
 1. TLS version 1.2 or later shall be used for all communications.
 1. A TLS server certificate check shall be performed, as per [RFC6125].
-1. For TLS versions below 1.3, only the following 4 cipher suites shall be permitted:
-   - `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
-   - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
-   - `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
-   - `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
-1. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, key lengths of at least 2048 bits are required.
+1. Only the cipher suites recommended in [@!BCP195] shall be permitted.
 
 ## Algorithm considerations
 
@@ -548,6 +543,15 @@ which contains the JWT payload:
     </author>
           <date day="25" month="February" year="2014" />
     </front>
+</reference>
+
+<reference anchor="BCP195" target="https://www.rfc-editor.org/info/bcp195">
+  <front>
+    <title>BCP195</title>
+    <author>
+      <organization>IETF</organization>
+    </author>
+  </front>
 </reference>
 
 # Notices
