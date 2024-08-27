@@ -944,7 +944,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
-<reference anchor="FAPI2SEC" target="https://openid.net/wordpress-content/uploads/2022/12/Formal-Security-Analysis-of-FAPI-2.0_FINAL_2022-10.pdf">
+<reference anchor="FAPI2SEC" target="https://doi.ieeecomputersociety.org/10.1109/CSF61375.2024.00002">
   <front>
     <title>Formal Security Analysis of the OpenID Financial-grade API 2.0</title>    
     <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
