@@ -415,14 +415,9 @@ As confidential information is being exchanged, all interactions shall be encryp
 
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
-1. For TLS versions below 1.3, only the following 4 cipher suites shall be permitted:
-    * `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`
-    * `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
-    * `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`
-    * `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
+1. Only the cipher suites recommended in [BCP195] shall be permitted.
 1. For the `authorization_endpoint`, the authorization server MAY allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
    **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
-1. When using the `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256` or `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384` cipher suites, key lengths of at least 2048 bits are required.
 
 ## 8.6 Algorithm considerations
 
