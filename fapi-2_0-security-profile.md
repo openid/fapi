@@ -262,8 +262,7 @@ use cipher suites recommended by [@!BCP195].
 
 **NOTE 2**: New versions of [@!BCP195] will be published by the IETF periodically. 
 At a minimum, implementors are expected to become compliant with newly issued 
-versions of BCP195 within 12 months. Ideally, compliance should be achieved 
-sooner depending on the nature of the change.
+versions of BCP195 within 12 months, or sooner.
 
 ## Profile
 
