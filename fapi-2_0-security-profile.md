@@ -260,6 +260,10 @@ requirements apply:
 suite allowed in [@!BCP195], whereas endpoints not used by web browsers can only 
 use cipher suites recommended by [@!BCP195].
 
+**NOTE 2**: New versions of [@!BCP195] will be published by the IETF periodically. 
+At a minimum, implementors are expected to become compliant with newly issued 
+versions of BCP195 within 12 months, or sooner.
+
 ## Profile
 
 ### General
