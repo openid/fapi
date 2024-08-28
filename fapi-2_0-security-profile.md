@@ -733,14 +733,8 @@ This can be achieved by:
 1. Key rotation: automated regular key rotation is recommended, as it reduces the time window in which a compromised key can be used.
 jwks_uri endpoints allows parties to rotate their keys without the need for manual, error-prone coordination.
 
-2. Key scope: single use keys are recommended. For example, it is not recomended to use the same key for signing and encryption. See
+2. Key scope: single purpose keys are recommended. For example, it is not recomended to use the same key for signing and encryption. See
 Section 5.2 of [@NIST.SP.800-57pt1r5] for further guidance.
-
-3. Stateful credentials: It is recommended that credentials such as access tokens and refresh tokens are stateful, i.e., they can 
-be instantly revoked and prevented from being used again. While there may be performance benefits from stateless tokens, they mean 
-that a key compromise can result in an attacker being able to forge such tokens. When multiple credentials are issued as part of the 
-same authorization, it is recommended that their relationship be explicitly established and recorded. This way, if one credential 
-in a linked set is compromised, all related credentials can be revoked.
 
 # Privacy considerations
 
