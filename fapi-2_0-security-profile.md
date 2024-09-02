@@ -746,7 +746,7 @@ improving performance by removing the need for server-side database lookups and 
 storage. Additionally, they can be parsed and validated by resource servers directly, without further authorization 
 server involvement. This enhances scalability and flexibility, particularly in scenarios where the authorization 
 server and resource server are not co-located or managed by the same entity (as discussed in the introduction 
-to [@!RFC9608]).
+to [@?RFC9068]).
 
 4. Credential linking: When multiple credentials are issued as part of the same authorization, it is recommended 
 that their relationship be explicitly established and recorded. This way, if one credential in a linked set is 
