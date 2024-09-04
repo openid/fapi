@@ -729,6 +729,17 @@ and end-users.
 For this reason, authorization servers should not allow clients to influence their client_id in a way 
 that it can be mistaken for an end-user subject identifier.
 
+## Key Compromise
+
+In the event that a cryptographic key is compromised, it is important to limit the impact of such an event.
+This can be achieved by:
+
+1. Key rotation: automated regular key rotation is recommended, as it reduces the time window in which a compromised key can be used.
+jwks_uri endpoints allows parties to rotate their keys without the need for manual, error-prone coordination.
+
+2. Key scope: single purpose keys are recommended. For example, it is not recomended to use the same key for signing and encryption. See
+Section 5.2 of [@NIST.SP.800-57pt1r5] for further guidance.
+
 # Privacy considerations
 
 There are many factors to be considered in terms of privacy when implementing
@@ -1006,6 +1017,19 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
     <author>
       <organization>IETF</organization>
     </author>
+  </front>
+</reference>
+
+<reference anchor="NIST.SP.800-57pt1r5" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf">
+  <front>
+    <title>NIST Special Publication 800-57 Part 1 Revision 5</title>
+     <author fullname="Elaine Barker">
+      <organization></organization>
+    </author>
+     <author fullname="Allen Roginsky ">
+      <organization></organization>
+    </author>
+   <date day="01" month="May" year="2020"/>
   </front>
 </reference>
 
