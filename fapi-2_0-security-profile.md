@@ -839,7 +839,7 @@ Per this specification, the following client metadata definition has been reques
 
 This document was developed by the OpenID FAPI Working Group.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their valuable feedback and contributions that helped to evolve this document.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters, Tim Würtele, Edmund Jay and Aaron Parecki for their valuable feedback and contributions that helped to evolve this document.
 
 
 
