@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-security-profile-03"
+value = "fapi-2_0-security-profile-04"
 status = "standard"
 
 [[author]]
@@ -743,9 +743,8 @@ Section 5.2 of [@NIST.SP.800-57pt1r5] for further guidance.
 3. Stateful credentials: It is recommended that implementers consider the trade-offs between stateful and stateless 
 credentials, such as access tokens. In the event of a key compromise, the use of stateless tokens signed by the 
 compromised key could enable an attacker to forge tokens. This risk can be mitigated if all tokens are stateful, 
-meaning there is a mechanism to validate each token's active status through a central authority or database.
-
-However, stateless tokens offer significant advantages. They carry all necessary information within themselves, 
+meaning there is a mechanism to validate each token's active status through a central authority or database. However, 
+stateless tokens offer significant advantages. They carry all necessary information within themselves, 
 improving performance by removing the need for server-side database lookups and eliminating central session data 
 storage. Additionally, they can be parsed and validated by resource servers directly, without further authorization 
 server involvement. This enhances scalability and flexibility, particularly in scenarios where the authorization 
