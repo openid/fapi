@@ -163,6 +163,7 @@ The following messages are affected by this specification:
   * NR4: introspection responses
   * NR5: resource requests
   * NR6: resource responses
+  * NR7: ID tokens
 
 ## Signing authorization requests
 
@@ -250,6 +251,22 @@ Clients implementing FAPI2 introspection response signing
  1. shall request signed token introspection responses according to [@!I-D.ietf-oauth-jwt-introspection-response]; and
  2. shall verify the signed token introspection responses.
 
+## Signing ID tokens
+
+To support non-repudiation for NR7, signed ID tokens can be used.
+
+### Requirements for authorization servers
+
+No additional requiresments. 
+
+Note: Authorization servers implementing FAPI2 are already required to sign ID tokens as specified in [@!FAPI2_Security_Profile_ID2].
+ 
+### Requirements for clients
+
+Clients implementing FAPI2 ID token signing
+
+ 2. shall verify the signature of the signed ID token received.
+ 
 
 ## HTTP message signing
 
