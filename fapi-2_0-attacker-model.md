@@ -401,6 +401,11 @@ analysis is as follows:
 As the updates to the attacker model were made to align with the formal
 analysis, the analysis results are still valid for the updated attacker model.
 
+# Security Considerations
+
+There are no specific security considerations in this document. We expect it to be 
+read in conjunction with the [@?securityprofile] which has specific security considerations.
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group.
