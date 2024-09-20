@@ -263,9 +263,9 @@ Note: Authorization servers implementing FAPI2 are already required to sign ID t
  
 ### Requirements for clients
 
-Clients implementing FAPI2 ID token signing
+Clients requesting and receiving ID tokens
 
- 2. shall verify the signature of the signed ID token received.
+1. shall verify the signature of the signed ID token received.
  
 
 ## HTTP message signing
