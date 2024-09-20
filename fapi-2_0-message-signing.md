@@ -253,13 +253,13 @@ Clients implementing FAPI2 introspection response signing
 
 ## Signing ID tokens
 
-To support non-repudiation for NR7, signed ID tokens can be used.
+To support non-repudiation for NR7, signed ID tokens are used.
 
 ### Requirements for authorization servers
 
-No additional requiresments. 
+No additional requirements. 
 
-Note: Authorization servers implementing FAPI2 are already required to sign ID tokens as specified in [@!FAPI2_Security_Profile_ID2].
+Note: Authorization servers implementing FAPI2 are already required to sign ID tokens as specified in section 5.4.1 in the [@!FAPI2_Security_Profile_ID2].
  
 ### Requirements for clients
 
