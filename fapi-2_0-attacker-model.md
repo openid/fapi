@@ -1,13 +1,13 @@
 %%%
-title = "FAPI 2.0 Attacker Model (Draft)"
-abbrev = "fapi-2_0-attacker-model"
+title = "FAPI 2.0 Attacker Model – Draft 04"
+abbrev = "fapi-attacker-model-2"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-attacker-model-04"
+value = "fapi-attacker-model-2_0-04"
 status = "standard"
 
 [[author]]
@@ -310,7 +310,7 @@ trivially break the session integrity goal.
 
 # Limitations
 
-## General (_Review title_)
+## General
 Beyond the limitations already described in the introduction to the attacker
 model above, it is important to note the following limitations:
 
@@ -401,19 +401,6 @@ analysis is as follows:
 As the updates to the attacker model were made to align with the formal
 analysis, the analysis results are still valid for the updated attacker model.
 
-# Security Considerations
-
-There are no specific security considerations in this document. We expect it to be 
-read in conjunction with the [@?securityprofile] which has specific security considerations.
-
-# Acknowledgements
-
-This document was developed by the OpenID FAPI Working Group.
-
-We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
-Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their
-valuable feedback and contributions that helped to evolve this document.
-
 {backmatter}
 
 <reference anchor="securityprofile" target="https://openid.net/specs/fapi-2_0-security.html">
@@ -422,7 +409,13 @@ valuable feedback and contributions that helped to evolve this document.
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>Authlete</organization>
     </author>
-   <date day="28" month="Jul" year="2021"/>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub</organization>
+    </author>
+    <author initials="j." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="18" month="Sep" year="2024"/>
   </front>
 </reference>
 
@@ -485,10 +478,87 @@ valuable feedback and contributions that helped to evolve this document.
 </front>
 </reference>
 
+
+# Acknowledgements
+
+This document was developed by the OpenID FAPI Working Group.
+
+We would like to thank Dave Tonge, Nat Sakimura, Brian Campbell, Torsten
+Lodderstedt, Joseph Heenan, Pedram Hosseyni, Ralf Küsters and Tim Würtele for their
+valuable feedback and contributions that helped to evolve this document.
+
 # Notices
 
-Copyright (c) 2022 The OpenID Foundation.
+Copyright (c) 2024 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+# Document History
+
+[[ To be removed from the final specification ]]
+
+-04
+
+ * editorial changes ready for publication
+ * update draft version numbers
+
+-03
+
+ * editorial - remove stray remove title text
+ * wrong word, wrong number
+ * Fixes #653 - Update abbreviated terms
+ * Addresses #672 - inconsistent capitalization
+ * Fix sentence fragments, fix Issue #657
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * Add sentence to address Joseph's concerns
+ * Merge branch 'master' into danielfett/editorial-from-tim
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Edit subclause whitespace
+ * Add explanation for changed numbers, add reference to formal analysis
+ * Apply ISO keywords to Attacker Model
+ * Align Attacker Model with ISO document structure and format
+ * Renumber attackers, fix editorial stuff
+ * Add note on identity and session management
+ * fixes #604 - Add Draft to spec titles
+ * Update affiliation to Authlete, add Dave as editor on the Security Profile, list Dave first for the Message Signing document
+ * Editorial fixes, working group in acknowledgements
+ * increment version numbers
+
+-02
+
+ * update acknowledgements for FAPI 2
+ * Address editoral issues
+
+-01
+
+ * Reword to Fix Issue #508
+ * Change attacker model to reflect formal model
+ * One more fix for the attacker model
+ * use gender-neutral language
+ * Fix attacker model description once more
+ * Fix attacker model description
+ * Change attacker model to reflect formal model
+ * Reduced attacker model
+ * Improve description of attacker model
+ * Improve attacker model description after introduction of metadata
+ * Attempt to explain attacker model better
+ * Change name of Advanced Profile to Message Signing
+ * Remove duplicate copyright notices
+ * Correct workgroup in fapi2 baseline/attack model docs
+ * Fix references
+ * FAPI 2.0 version number increase
+
+-00
+
+ * Add initial acknowledgements
+ * changed IPR notice for FAPI 2 baseline and attacker model
+ * fixed reference
+ * Editorial fix in attacker model
+ * Further fixes for the attacker model, provided by Miles Stötzner
+ * Address attacker model Issue #339, Issue #338, Issue #387
+ * Improve attacker model description
+ * First versions of FAPI 2.0 drafts.

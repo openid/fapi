@@ -1,13 +1,13 @@
 %%%
-title = "FAPI 2.0 Security Profile — draft"
-abbrev = "fapi-2-security-profile"
+title = "FAPI 2.0 Security Profile — Draft 04"
+abbrev = "fapi-security-profile-2"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-security-profile-04"
+value = "fapi-security-profile-2_0-04"
 status = "standard"
 
 [[author]]
@@ -36,6 +36,12 @@ organization="Authlete"
 
 
 %%%
+
+.# Abstract
+
+OIDF FAPI 2.0 is an API security profile suitable for high-security
+applications based on the OAuth 2.0 Authorization Framework
+[@!RFC6749].
 
 .# Foreword
 
@@ -834,13 +840,6 @@ Per this specification, the following client metadata definition has been reques
 **Specification Document(s)**: Section 8 of the FAPI 2.0 Security Profile
 
 
-# Acknowledgements
-
-This document was developed by the OpenID FAPI Working Group.
-
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters, Tim Würtele, Edmund Jay and Aaron Parecki for their valuable feedback and contributions that helped to evolve this document.
-
-
 
 {backmatter}
 
@@ -939,7 +938,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
 </reference>
 
 
-<reference anchor="ISO29100" target="https://standards.iso.org/ittf/PubliclyAvailableStandards/index.html#:~:text=IEC%2029100%3A2011-,EN,-%2D%20FR">
+<reference anchor="ISO29100" target="https://www.iso.org/standard/85938.html">
 <front>
 <title>ISO/IEC 29100 Information technology – Security techniques – Privacy framework</title>
     <author fullname="ISO/IEC">
@@ -1018,7 +1017,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
   </front>
 </reference>
 
-<reference anchor="CORS.Protocol" target="fetch.spec.whatwg.org/#http-cors-protocol">
+<reference anchor="CORS.Protocol" target="https://fetch.spec.whatwg.org/#http-cors-protocol">
   <front>
     <title>CORS Protocol</title>
     <author>
@@ -1049,6 +1048,13 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low
 </reference>
 
 
+# Acknowledgements
+
+This document was developed by the OpenID FAPI Working Group.
+
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Lukasz Jaromin, Pedram Hosseyni, Ralf Küsters, Tim Würtele, Edmund Jay and Aaron Parecki for their valuable feedback and contributions that helped to evolve this document.
+
+
 # Notices
 
 Copyright (c) 2024 The OpenID Foundation.
@@ -1056,3 +1062,134 @@ Copyright (c) 2024 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+# Document History
+
+-04
+
+ * update draft version numbers
+ * editorial changes for publication
+
+-03
+
+ * Add more contributors
+ * address key compromise issue
+ * correct reference to RFC9068
+ * add wording about stateful credentials 
+ * Add a note alerting readers to the fact bcp195 changes 
+ * update date of fapi2 security analysis 
+ * add reference to fapi2 security analysis
+ * remove grant management and other non final specs
+ * Refresh token rotation clarification 
+ * initial attempt at CORS wording
+ * access token privilege restriction 
+ * client impersonation
+ * add CORS reference
+ * initial attempt at CORS wording
+ * make client guidance wider than access tokens for least privilege clause
+ * access token privilege restriction
+ * Update Security BCP references
+ * editorial: attempt to improve readability for clock skew clause
+ * Remove expicit reference to ciphers
+ * editorial content for the MTLS ecosystem section
+ * don't preclude DPoP unintentionally
+ * fix markdown syntax on one ietf-oauth-security-topics ref
+ * fix section, title, etc
+ * reworking the text around length of the state parameter
+ * First draft for MTLS ecosystems
+ * change this specification to this document - for ISO
+ * increase EC key length requirement
+ * add requirment for PKCE challenge
+ * improve wording to remove shall be
+ * make security considerations top level
+ * add wording for state and nonce
+ * Update clause reference in Note2, should refer to clause 10 instead of clause 9.
+ * remove keyword can from note
+ * Update clause reference in Note2, should refer to clause 10 instead of clause 9.
+ * Update abbreviated terms
+ * Make clearer why we don't need encrypted id tokens
+ * fix spacing
+ * remove keyword can from note
+ * Make clearer why we don't need encrypted id tokens  
+ * allow future Ed25519 algorithm
+ * Addresses #647 - Following documents are not normatively required
+ * Add Joseph to the FAPI2 SP & MS authors list
+ * Fixes #661 - Move RAR to Bibliography
+ * Fixes #661 - add FAPIMessageSigning to references
+ * Fixes #661 - add FAPICIBA to references
+ * Fixes #661 - add GM to references
+ * Fixes #649 - ISO29100 and ISO29134 is not in the reference
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Fixes #643 - Subclause 5.3 has a hanging paragraph
+ * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * add text around enforcement of one-time use of require_uri
+ * Fix capitalization
+  * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Fixes #643 - Subclause 5.3 has a hanging paragraph 
+ * Use consistent (ISO) list style and Fix Issue #668 (Capitalise compromising in 6.6.5), Fix Issue #667 (Fix spelling mistake in 5.6.2. (1))
+ * Fix #644 (Notes need to be numbered)
+ * Fix Issue #650 (5.3.2.1 bullet 5 missing a word or a comma?)
+ * Fix Issue #654 (Replace [I-D.ietf-oauth-rar] with rfc9396)
+ * Fix Issue #521 (NOTE in 5.2.1 has 'can')
+ * Fix Issue #669 (Fix various spelling and grammatical mistakes)
+ * Renumber attackers, fix editorial stuff
+ * add text around enforcement of one-time use of require_uri
+ * improve wording around which grant and response types are supported
+ * editorial: make shall only consistent
+ * add text about clock skew
+ * Change references to RFC7525 to BCP195
+ * editorial: make shall only consistent
+ * make note around audience param clearer
+ * Add text on conformance testing
+ * add text about clock skew
+ * move MTLS Protection of all endpoints to SP
+ * adjust wording based on PR
+ * adjust scope to make clear its not just clientS
+ * Update DPoP references in FAPI 2 SP
+ * fapi-2_0-security-profile.md edited online with Bitbucket
+ * FAPI2: Change private_key_jwt aud requirements
+ * request parameters via front channel clarification
+ * Editorial fixes, working group in acknowledgements
+ * Proposal to fix Issue #551
+ * FAPI2SP: Fix some typos
+ * increment version numbers
+
+-02
+
+ * update acknowledgements for FAPI 2
+ * Update filenames
+ * Fix some typos in Security Considerations
+ * Fix typo in DPoP Proof Replay Security Considerations
+ 
+-01
+
+ * bump tls 1.2 cipher heading
+ * update tls 1.2 cipher suites' section
+ * use gender-neutral language
+ * FAPI2SP: Add text about further profiling
+ * Addressing issue #531 - Adding normative references clause in FAPI_2_0_Security_Profile.md
+ * Reduced attacker model
+ * FAPI2SP: Correct request_uri lifetime value in comparison table
+ * FAPI2SP: Rework lower limit on request_uri expires_in
+ * Update as per discussion on this week's call.
+ * Add mentions of Authorization Code Binding to DPoP key
+ * FAPI2SP: Add clause about access token lifetime
+ * FAPI2SP: Limit authorization code lifetime
+ * Proposal for ensuring security of issuer
+ * Add security consideration for CSRF attack
+ * Addressing issue #531 - Adding normative references clause in FAPI_2_0_Security_Profile.md
+ * Improve comparison table
+ * FAPI2SP: Add security consideration for cuckoo's token attack
+ * FAPI2SP: Document DPoP proof leaks
+ * Privacy considerations based on FAPI 1
+ * FAPI2SP: Add requirement for RP to use discovery
+ * Privacy considerations based on FAPI 1
+ * Fix heading typo
+ * Editorial: change AS to Authorization Server
+ * Pull in key management clauses
+ * Add text to deal with private_key_jwt clock skew
+ * Add text to deal with private_key_jwt clock skew
+ * Clarification around sender-constrained access token
+ * Change name of FAPI security profile markdown file
+
