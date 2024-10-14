@@ -445,9 +445,8 @@ Clients
      [@I-D.ietf-oauth-security-topics]);
  1. if using `private_key_jwt`, shall use the authorization server's
     issuer identifier value (as defined in [@RFC8414]) in the `aud`
-    claim in client authentication assertions, and should send the issuer
-    identifier value as a string, not as an item in an
-    array;
+    claim in client authentication assertions. The issuer identifier value 
+    shall be sent as a string not as an item in an array.
  1. shall support refresh tokens and their rotation;
  1. if using MTLS client authentication or MTLS sender-constrained access tokens, shall support
     the `mtls_endpoint_aliases` metadata defined in [@!RFC8705];
@@ -564,7 +563,7 @@ could be used in selecting which key to use to verify a message signature:
 
 ## Main differences to FAPI 1.0
 
-| FAPI 1.0 Read/Write                                  | FAPI 2.0                                                                   | Reasons                                                                                                                                 |
+| FAPI 1.0 - Part 2: Advanced                          | FAPI 2.0                                                                   | Reasons                                                                                                                                 |
 | :--------------------------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
 | JAR                                                  | PAR                                                                        | integrity protection and compatibility improvements for authorization requests                                                          |
 | JARM                                                 | only code in response                                                      | the authorization response is reduced to only contain the authorization code, obsoleting the need for integrity protection              |
