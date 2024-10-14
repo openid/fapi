@@ -412,7 +412,7 @@ analysis, the analysis results are still valid for the updated attacker model.
     <author initials="D." surname="Tonge" fullname="Dave Tonge">
       <organization>Moneyhub</organization>
     </author>
-    <author initials="j." surname="Heenan" fullname="Joseph Heenan">
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
       <organization>Authlete</organization>
     </author>
    <date day="18" month="Sep" year="2024"/>
