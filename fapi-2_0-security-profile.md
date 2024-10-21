@@ -307,8 +307,8 @@ Authorization servers
      - `private_key_jwt` as specified in Section 9 of [@!OIDC];
  1. shall not expose open redirectors (see Section 4.11 of
      [@I-D.ietf-oauth-security-topics]);
- 1. shall only accept its issuer identifier value (as defined in [@RFC8414]) as the
-    `aud` claim (when a string) received in client authentication assertions;
+ 1. shall only accept its issuer identifier value (as defined in [@RFC8414]) as a string in the
+    `aud` claim received in client authentication assertions;
  1. shall not use refresh token rotation except in extraordinary circumstances (see Note 2 below);
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
