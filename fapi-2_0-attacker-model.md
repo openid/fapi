@@ -401,6 +401,10 @@ analysis is as follows:
 As the updates to the attacker model were made to align with the formal
 analysis, the analysis results are still valid for the updated attacker model.
 
+# Security Considerations
+
+This entire document consists of security considerations.
+
 {backmatter}
 
 <reference anchor="securityprofile" target="https://openid.net/specs/fapi-2_0-security.html">
