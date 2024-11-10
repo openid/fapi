@@ -320,13 +320,6 @@ Authorization servers
     the particular application or use case.
 
 **NOTE 1**:
-To facilitate interoperability, this document requires that authorization servers
-accept their issuer value in the `aud` claim received in client authentication
-assertions. It recommends that they also accept their token endpoint url or the url
-of the endpoint at which the assertion was received. This does not reduce the stricter
-requirement in [@!RFC9126] that requires all 3 values to be accepted at the PAR endpoint.
-
-**NOTE 2**:
 The use of refresh token rotation does not provide security benefits when used with 
 confidential clients and sender-constrained access tokens. This specification prohibits 
 the use of refresh token rotation for security reasons as it causes user experience 
@@ -340,13 +333,13 @@ token in case of failure. Implementers need to consider a secure mechanism for c
 to recover from a loss of a new refresh token on issue. The details of this mechanism are 
 outside the scope of this specification.
 
-**NOTE 3**:
+**NOTE 2**:
 This document is structured to support a variety of grants to be used with the general
 requirements above. For example the client credentials grant or the FAPI CIBA grant [@FAPICIBA]. 
 Implementers should note that as of the time of writing only the authorization code flow and CIBA 
 flows have been through a detailed security analysis [@FAPI2SEC].
 
-**NOTE 4**:
+**NOTE 3**:
 Clock skew is a cause of many interoperability issues. Even a few hundred milliseconds of clock 
 skew can cause JWTs to be rejected for being "issued in the future". The DPoP specification 
 [@!RFC9449] suggests that JWTs  are accepted in the reasonably near future (on the order of seconds 
