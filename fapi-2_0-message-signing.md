@@ -426,7 +426,7 @@ established by [@RFC7591]:
 * Client Metadata Name: `response_modes`
 * Client Metadata Description: Array of the response modes that the client may use
 * Change Controller: IESG
-* Specification Document(s): (#client-metadata) of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of this specification
 
 # Acknowledgements
 

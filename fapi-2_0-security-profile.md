@@ -833,7 +833,7 @@ established by [@RFC7591]:
 * Client Metadata Name: `use_mtls_endpoint_aliases`
 * Client Metadata Description: Boolean value indicating the requirement for a client to use mutual-TLS endpoint aliases [@RFC8705] declared by the authorization server in its metadata even beyond the Mutual-TLS Client Authentication and Certificate-Bound Access Tokens use cases.
 * Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
-* Specification Document(s): (#client-metadata) of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of this specification
 
 
 # Acknowledgements
