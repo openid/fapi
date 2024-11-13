@@ -331,17 +331,17 @@ This specification requests registration of the following client metadata defini
 ### Registry Contents
 
 * Client Metadata Name: `authorization_signed_response_alg`
-* Client Metadata Description: String value indicating the client's desired introspection response signing algorithm.
+* Client Metadata Description: String value indicating the client's desired authorization response signing algorithm.
 * Change Controller: IESG
-* Specification Document(s): (#client-metadata) of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of this specification
 * Client Metadata Name: `authorization_encrypted_response_alg`
-* Client Metadata Description: String value specifying the desired introspection response encryption algorithm (alg value).
+* Client Metadata Description: String value specifying the desired authorization response encryption algorithm (alg value).
 * Change Controller: IESG
-* Specification Document(s): (#client-metadata) of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of this specification
 * Client Metadata Name: `authorization_encrypted_response_enc`
-* Client Metadata Description: String value specifying the desired introspection response encryption algorithm (enc value).
+* Client Metadata Description: String value specifying the desired authorization response encryption algorithm (enc value).
 * Change Controller: IESG
-* Specification Document(s): (#client-metadata) of [[ this specification ]]
+* Specification Document(s): (#client-metadata) of this specification
 
 ## OAuth Authorization Server Metadata Registration
 This specification requests registration of the following value in the IANA "OAuth Authorization Server Metadata" registry established by [@RFC8414].
@@ -349,17 +349,17 @@ This specification requests registration of the following value in the IANA "OAu
 ### Registry Contents
 
 * Metadata Name: `authorization_signing_alg_values_supported`
-* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response signing.
+* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for authorization response signing.
 * Change Controller: IESG
-* Specification Document(s): (#as-metadata) of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of this specification
 * Metadata Name: `authorization_encryption_alg_values_supported`
-* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response encryption (alg value).
+* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for authorization response encryption (alg value).
 * Change Controller: IESG
-* Specification Document(s): (#as-metadata) of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of this specification
 * Metadata Name: `authorization_encryption_enc_values_supported`
-* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for introspection response encryption (enc value).
+* Metadata Description: JSON array containing a list of algorithms supported by the authorization server for authorization response encryption (enc value).
 * Change Controller: IESG
-* Specification Document(s): (#as-metadata) of [[ this specification ]]
+* Specification Document(s): (#as-metadata) of this specification
 
 {backmatter}
 
