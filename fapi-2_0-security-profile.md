@@ -239,7 +239,7 @@ can be used for client authentication in conjunction with MTLS connectivity. To 
   * authorization server implementations may utilize `mtls_endpoint_aliases` authorization server metadata as described in Section 5 of [@!RFC8705] to provide a discovery mechanism for endpoints that might have both MTLS and non-MTLS endpoints;
   * client implementations shall use client metadata `use_mtls_endpoint_aliases` (see (#client-metadata)), if present, for endpoint communications.
 
-##### Client metadata {#client-metadata}
+##### Client Metadata {#client-metadata}
 
 The Dynamic Client Registration Protocol [@RFC7591] defines an API
 for dynamically registering OAuth 2.0 client metadata with authorization servers.
@@ -821,14 +821,14 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
   * **Data leak from clients**:  Some clients store personal data. If the client
     becomes compromised, this data can leak or be modified.
 
-# IANA considerations
-## OAuth dynamic client registration metadata registration
+# IANA Considerations
+## OAuth Dynamic Client Registration Metadata registration
 
 This specification requests registration of the following client metadata
 definitions in the IANA "OAuth Dynamic Client Registration Metadata" registry
 established by [@RFC7591]:
 
-### Registry contents
+### Registry Contents
 
 * Client Metadata Name: `use_mtls_endpoint_aliases`
 * Client Metadata Description: Boolean value indicating the requirement for a client to use mutual-TLS endpoint aliases [@RFC8705] declared by the authorization server in its metadata even beyond the Mutual-TLS Client Authentication and Certificate-Bound Access Tokens use cases.
