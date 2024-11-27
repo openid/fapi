@@ -108,7 +108,7 @@ attacker model. This document specifies the requirements for:
 # Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-See Section 11 for normative references.
+See Section 10 for normative references.
 
 # Terms and definitions
 
@@ -243,7 +243,21 @@ can be used for client authentication in conjunction with MTLS connectivity. To 
 
   * MTLS ecosystems should provide the trust list of the certificate authorities;
   * authorization server implementations may utilize `mtls_endpoint_aliases` authorization server metadata as described in Section 5 of [@!RFC8705] to provide a discovery mechanism for endpoints that might have both MTLS and non-MTLS endpoints;
-  * client implementations shall use client metadata `use_mtls_endpoint_aliases` (as defined in Section 8 of this document), if present, for endpoint communications.
+  * client implementations shall use client metadata `use_mtls_endpoint_aliases` (see (#client-metadata)), if present, for endpoint communications.
+
+##### Client Metadata {#client-metadata}
+
+The Dynamic Client Registration Protocol [@RFC7591] defines an API
+for dynamically registering OAuth 2.0 client metadata with authorization servers.
+The metadata defined by [@RFC7591], and registered extensions to it,
+also imply a general data model for clients that is useful for authorization server implementations
+even when the dynamic client registration protocol isn't in play.
+Such implementations will typically have some sort of user interface available for managing client configuration.
+
+The following client metadata parameter is introduced by this specification:
+
+* `use_mtls_endpoint_aliases`: 
+    * OPTIONAL. Boolean value indicating the requirement for a client to use mutual-TLS endpoint aliases [@RFC8705] declared by the authorization server in its metadata even beyond the Mutual-TLS Client Authentication and Certificate-Bound Access Tokens use cases. If omitted, the default value is false.
 
 ### Requirements for endpoints used by web browsers
 
@@ -812,31 +826,19 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
   * **Data leak from clients**:  Some clients store personal data. If the client
     becomes compromised, this data can leak or be modified.
 
-# Discovery metadata
-
-## Client Metadata
-
-The following client metadata is defined by this specifcation.
-
-### use_mtls_endpoint_aliases
-
-**Metadata Name**: `use_mtls_endpoint_aliases`
-
-**Metadata Description**: Boolean value used to indicate the client's intention to use mutual TLS in preference to the non-MTLS endpoints. If omitted, the default value is false.
-
 # IANA Considerations
+## OAuth Dynamic Client Registration Metadata registration
 
-## Dynamic Client Registration Metadata Registration
+This specification requests registration of the following client metadata
+definitions in the IANA "OAuth Dynamic Client Registration Metadata" registry
+established by [@RFC7591]:
 
-Per this specification, the following client metadata definition has been requested to be registered in the IANA "OAuth Dynamic Client Registration Metadata" registry [IANA.OAuth.Parameters] established by [@!RFC7591]:
+### Registry Contents
 
-**Metadata Name**: `use_mtls_endpoint_aliases`
-
-**Metadata Description**: Indicates the requirement for a client to use mutual TLS endpoint aliases defined by the AS where present.
-
-**Change Controller**: OIDF FAPI WG
-
-**Specification Document(s)**: Section 8 of the FAPI 2.0 Security Profile
+* Client Metadata Name: `use_mtls_endpoint_aliases`
+* Client Metadata Description: Boolean value indicating the requirement for a client to use mutual-TLS endpoint aliases [@RFC8705] declared by the authorization server in its metadata even beyond the Mutual-TLS Client Authentication and Certificate-Bound Access Tokens use cases.
+* Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
+* Specification Document(s): (#client-metadata) of this specification
 
 
 
