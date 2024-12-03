@@ -1059,6 +1059,7 @@ The technology described in this specification was made available from contribut
 
  * update draft version numbers
  * editorial changes for publication
+ * clarification on audience requirements for private_key_jwt assertions
 
 -03
 
