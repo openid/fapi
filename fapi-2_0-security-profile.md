@@ -323,13 +323,13 @@ Authorization servers
      [@I-D.ietf-oauth-security-topics]);
  1. shall only accept its issuer identifier value (as defined in [@RFC8414]) as a string in the
     `aud` claim received in client authentication assertions;
- 1. shall not use refresh token rotation except in extraordinary circumstances (see Note 2 below);
+ 1. shall not use refresh token rotation except in extraordinary circumstances (see Note 1 below);
  1. if using DPoP, may use the server provided nonce mechanism (as defined in Section 8 of [@!RFC9449]);
  1. shall issue authorization codes with a maximum lifetime of 60 seconds;
  1. if using DPoP, shall support "Authorization Code Binding to DPoP Key" (as required by Section 10.1 of [@!RFC9449]);
  1. to accommodate clock offsets, shall accept JWTs with an `iat` or `nbf` timestamp between 0 
     and 10 seconds in the future but shall reject JWTs with an `iat` or `nbf` timestamp greater than
-    60 seconds in the future. See Note 4 for further details and rationale; and 
+    60 seconds in the future. See Note 3 for further details and rationale; and
  1. should restrict the privileges associated with an access token to the minimum required for 
     the particular application or use case.
 
