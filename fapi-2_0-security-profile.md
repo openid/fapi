@@ -349,7 +349,7 @@ outside the scope of this specification.
 
 **NOTE 2**:
 This document is structured to support a variety of grants to be used with the general
-requirements above. For example the client credentials grant or the FAPI CIBA grant [@FAPICIBA]. 
+requirements above. For example the client credentials grant or the  IBA grant [@CIBA]. 
 Implementers should note that as of the time of writing only the authorization code flow and CIBA 
 flows have been through a detailed security analysis [@FAPI2SEC].
 
@@ -856,14 +856,27 @@ established by [@RFC7591]:
   </front>
 </reference>
 
-<reference anchor="FAPICIBA" target="https://openid.bitbucket.io/fapi/fapi-ciba.html">
-  <front>
-    <title>FAPI Client Initiated Backchannel Authentication Profile </title>
-    <author initials="D." surname="Tonge" fullname="Dave Tonge">
-      <organization>Moneyhub Financial Technology</organization>
-    </author>
-   <date day="17" month="January" year="2024"/>
-  </front>
+<reference anchor="CIBA" target="http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">
+    <front>
+        <title>OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0</title>
+        <author initials="G." surname="Fernandez Rodriguez" fullname="Gonzalo Fernandez Rodriguez">
+            <organization>Telefonica I+D</organization>
+        </author>
+        <author initials="F." surname="Walter" fullname="Florian Walter">
+            <organization>Deutsche Telekom AG</organization>
+        </author>
+        <author initials="A." surname="Nennker" fullname="Axel Nennker">
+            <organization>Deutsche Telekom AG</organization>
+        </author>
+        <author initials="D." surname="Tonge" fullname="Dave Tonge">
+            <organization>Moneyhub</organization>
+        </author>
+        <author initials="B." surname="Campbell" fullname="Brian Campbell">
+            <organization>Ping Identity</organization>
+        </author>
+        <date day="1" month="September" year="2021" />
+    </front>
+
 </reference>
 
 <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
