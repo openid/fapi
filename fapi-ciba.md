@@ -145,6 +145,9 @@ When this profile is used with the FAPI 1.0 specifications, the authorization se
 
 **NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider https://tools.ietf.org/html/draft-ietf-secevent-subject-identifiers for a standards based method of communicating user identifiers.
 
+**NOTE:** As per [@!CIBA], when JWT client assertion based authentication is employed, the authorization server MUST verify that it is the sole audience for the token. 
+The Audience value MUST be the authorization server's Issuer Identifier passed as a string, and not a single-element array.
+
 ### Confidential client
 
 When this profile is used with the FAPI 1.0 specifications, a confidential client shall
