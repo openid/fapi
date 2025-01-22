@@ -1,5 +1,5 @@
 ---
-title: FAPI security profile 1.0 - Part 2&colon; Advanced with incorporated errata 1 (Draft)
+title: FAPI security profile 1.0 - Part 2&colon; Advanced - draft 10 incorporating errata set 1
 date: 2023-12-12
 author: 
 - name: Nat Sakimura
@@ -27,7 +27,7 @@ final: false
 ver: 01
 seriesInfo:
   name: Internet-Draft
-  value: openid-financial-api-part-2-1_0-01
+  value: openid-financial-api-part-2-1_0-10
   status: draft
 WG: FAPI
 abstract: FAPI 1.0 security profile - part 2&colon; Baseline is an OAuth profile that aims to provide specific implementation guidelines for security and interoperability. It provides highly secure options.  
