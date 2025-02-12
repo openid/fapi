@@ -57,7 +57,7 @@ OAuth 2.0 Authorization Framework [@!RFC6749] and related specifications
 that aims to reach the security goals laid out in the Attacker
 Model [@!attackermodel] so that it is suitable for
 protecting APIs in high-value scenarios. It also follows the recommendations 
-in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
+in the OAuth Security BCP [@!RFC9700].
 
 This document specifies the process for a client to obtain sender-constrained 
 tokens from an authorization server and use them securely with resource servers.
@@ -177,7 +177,7 @@ For the purpose of this document, the terms defined in [@!RFC6749], [@!RFC6750],
 The FAPI 2.0 Security Profile is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749], that aims:
  - to reach the security goals laid out in the Attacker Model [@!attackermodel]; and
- - to follow the recommendations in the OAuth Security BCP [@I-D.ietf-oauth-security-topics].
+ - to follow the recommendations in the OAuth Security BCP [@!RFC9700].
 
 The OpenID FAPI Working Group is not currently aware of any mechanisms that would allow 
 public clients to be secured to the same degree and hence their use is not within the scope
@@ -349,7 +349,7 @@ outside the scope of this specification.
 
 **NOTE 2**:
 This document is structured to support a variety of grants to be used with the general
-requirements above. For example the client credentials grant or the  IBA grant [@CIBA]. 
+requirements above. For example the client credentials grant or the CIBA grant [@CIBA]. 
 Implementers should note that as of the time of writing only the authorization code flow and CIBA 
 flows have been through a detailed security analysis [@FAPI2SEC].
 
@@ -1028,14 +1028,6 @@ established by [@RFC7591]:
     </author>
   </front>
 </reference>
-<reference anchor="OAuthSecTopics" target="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics">
-  <front>
-    <title>OAuth 2.0 Security Best Current Practice</title>
-    <author>
-      <organization>IETF</organization>
-    </author>
-  </front>
-</reference>
 
 <reference anchor="NIST.SP.800-57pt1r5" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf">
   <front>
@@ -1055,7 +1047,7 @@ established by [@RFC7591]:
 
 This document was developed by the OpenID FAPI Working Group.
 
-We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Łukasz Jaromin, Pedram Hosseyni, Ralf Küsters, Tim Würtele, Edmund Jay and Aaron Parecki for their valuable feedback and contributions that helped to evolve this document.
+We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Stuart Low, Dima Postnikov, Torsten Lodderstedt, Travis Spencer, Brian Campbell, Ralph Bragg, Łukasz Jaromin, Pedram Hosseyni, Ralf Küsters, Tim Würtele, Edmund Jay, Aaron Parecki and Hideki Ikeda for their valuable feedback and contributions that helped to evolve this document.
 
 
 # Notices
@@ -1069,10 +1061,12 @@ The technology described in this specification was made available from contribut
 # Document History
 
 -04
-
+ 
  * update draft version numbers
  * editorial changes for publication
  * clarification on audience requirements for private_key_jwt assertions
+ * add more contributors
+ * adjust reference to RFC9700
 
 -03
 
