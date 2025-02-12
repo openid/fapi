@@ -127,7 +127,7 @@ following standards are used in this profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
   * JWT Secured Authorization Response Mode for OAuth 2.0 [@!JARM] for signing authorization responses 
-  * OAuth 2.0 Token Introspection [@!RFC7662] with [@I-D.ietf-oauth-jwt-introspection-response] for signing introspection responses
+  * OAuth 2.0 Token Introspection [@!RFC7662] with [@!RFC9701] for signing introspection responses
 
 We understand that some ecosystems may only desire to implement 1, 2 or 3 of the above, it is therefore
 anticipated that a piece of software will be able to conform to each of the methods separately, i.e. there
@@ -237,13 +237,13 @@ To support non-repudiation for NR4, introspection responses can be signed.
 
 Authorization servers implementing FAPI2 introspection response signing
 
- 1. shall sign introspection responses that are issued in JWT format according to [@!I-D.ietf-oauth-jwt-introspection-response]
+ 1. shall sign introspection responses that are issued in JWT format according to [@!RFC9701]
  
 ### Requirements for clients
 
 Clients implementing FAPI2 introspection response signing
 
- 1. shall request signed token introspection responses according to [@!I-D.ietf-oauth-jwt-introspection-response]; and
+ 1. shall request signed token introspection responses according to [@!RFC9701]; and
  2. shall verify the signed token introspection responses.
 
 ## Signing ID tokens
@@ -272,7 +272,7 @@ Usage of PKCE in FAPI 2 provides protection for code leakage described in Sectio
 
 ## Confusion between resource servers and clients in introspection request
 
-In [@!I-D.ietf-oauth-jwt-introspection-response], the resource server accessing
+In [@!RFC9701], the resource server accessing
 the introspection endpoint is seen in the role of a client towards the
 authorization server that is providing the introspection endpoint. A malicious
 client (that is not a resource server) could attempt to call the introspection
@@ -434,7 +434,7 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
 
 # Notices
 
-Copyright (c) 2023 The OpenID Foundation.
+Copyright (c) 2025 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
