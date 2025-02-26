@@ -218,6 +218,9 @@ It is strongly recommended to use OAuth 2 redirect based flows secured by [@!FAP
 binding limitations that are not present in redirect flows. This specification 
 is designed to cater for cross device and user not present scenarios. 
 
+It is strongly recommended that implementers refer to [@!XDBCP] for the best current practice 
+around securing cross device flows.
+
 ## Authentication sessions started without a users knowledge or consent
 
 As this specification allows the client to initiate an authentication request it is
@@ -542,6 +545,22 @@ which contains the JWT payload:
       <organization>yes.com</organization>
     </author>
           <date day="25" month="February" year="2014" />
+    </front>
+</reference>
+
+<reference anchor="XDBCP" target="https://www.ietf.org/archive/id/draft-ietf-oauth-cross-device-security-09.html">
+    <front>
+        <title>Cross-Device Flows: Security Best Current Practice</title>        
+        <author initials="D." surname="Fett" fullname="Daniel Fett">
+          <organization>Authlete</organization>
+        </author>
+        <author initials="P." surname="Kasselman" fullname="Pieter Kasselman">
+          <organization>SPIRL</organization>
+        </author>
+        <author initials="F." surname="Skokan" fullname="Filip Skokan">
+          <organization>Okta</organization>
+        </author>
+          <date day="06" month="January" year="2025" />
     </front>
 </reference>
 
