@@ -1,5 +1,5 @@
 %%%
-title = "FAPI 2.0 Message Signing (Draft)"
+title = "FAPI 2.0 Message Signing — Draft 01"
 abbrev = "fapi-2-message-signing"
 ipr = "none"
 workgroup = "fapi"
@@ -7,7 +7,7 @@ keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-message-signing-01"
+value = "fapi-2_0-message-signing-1_0-01"
 status = "standard"
 
 [[author]]
@@ -35,6 +35,10 @@ organization="Authlete"
     email = "joseph@authlete.com"
 
 %%%
+
+.# Abstract
+
+The FAPI 2.0 Message Signing Profile is part of the FAPI 2.0 family of specifications, providing interoperable support for non-repudiation across OAuth 2.0 based requests and responses. This specification defines methods for clients, authorization servers and resource servers to sign and verify messages, ensuring message integrity and non-repudiation in high-security scenarios.
 
 .# Foreword
 
@@ -439,3 +443,57 @@ Copyright (c) 2025 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+# Document History
+
+-01
+
+Updated RFC9701 reference
+Initiated work on creating separate HTTP signing spec
+Removed [[ this specification ]] brackets
+Corrected numbering and reworded requirements
+Made minor clarifications and corrected typos
+Implemented ID token signing
+Updated references to RFCs for HTTP signatures
+Fixed issues in request objects
+Fixed #653: Updated abbreviated terms
+Addressed #672: Inconsistent capitalization
+Added Joseph to the FAPI2 SP & MS authors list
+Fixed #649: ISO29100 and ISO29134 references not included
+Added authors to the FAPI2 SP & MS authors list
+Fixed first paragraph of Normative reference in ISODIR2
+Renumbered attackers and fixed editorial issues
+Added security considerations about non-repudiation limitations
+Moved MTLS protection of all endpoints to SP
+Updated DPoP references in FAPI 2 SP
+Updated HTTP signing introduction text
+Clarified that requests and responses can be signed independently
+Incorporated feedback from Brian
+Attempted to clarify request-response binding
+Updated affiliation to Authlete, added Dave as editor on the Security Profile, listed Dave first for the Message Signing document
+FAPI2MS: Changed 'above 3' to 'above 4'
+Required use of JARM and JAR, defined response modes in client metadata
+Added copyright notice to FAPI-MS
+Added draft to FAPI2 message signing
+Initiated work on privacy for message signing
+FAPI2MS: Removed unused references
+Deferred HTTP signing to next implementer's draft
+Made editorial fixes, acknowledged working group
+FAPI2MS: Updated security profile/attacker model links
+Added intro and reworked initial section for message signing
+Used ticks to prevent "privatekeyjwt" issue
+Updated JARM reference in message signing
+FAPI2MS: Created acknowledgements section
+FAPI2MS: Made security considerations a top-level section
+FAPI2MS: Made security profile a real reference
+Revised sections about testing
+Removed Dave from acknowledgements as he's now an author
+Made normative references real
+Updated filenames
+
+-00
+
+Improvements to HTTP signature wording
+Improved description of attacker model
+FAPI2MsgSign: Fixed various links to the httpbis drafts
+Changed name of Advanced Profile to Message Signing
