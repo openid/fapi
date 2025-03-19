@@ -1,13 +1,13 @@
 %%%
-title = "FAPI 2.0 Message Signing (Draft)"
-abbrev = "fapi-2-message-signing"
+title = "FAPI 2.0 Message Signing - Draft 02"
+abbrev = "fapi-message-signing-2"
 ipr = "none"
 workgroup = "fapi"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-2_0-message-signing-01"
+value = "fapi-security-profile-2_0-02"
 status = "standard"
 
 [[author]]
@@ -47,6 +47,8 @@ Final drafts adopted by the Workgroup through consensus are circulated publicly 
 
 OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Message Signing Profile is part of the FAPI 2.0 family of specifications with a focus on providing interoperable support for non-repudiation across OAuth 2.0 based requests and responses. 
+
+It has been formally analysed [@FAPI2MSANALYSIS] for it's security and non-repudiation properties.
 
 .# Warning
 
@@ -116,13 +118,13 @@ OIDF FAPI 2.0 is an API security profile based on the OAuth 2.0 Authorization
 Framework [@!RFC6749]. This Message Signing Profile aims to reach the security goals
 laid out in the Attacker Model [@!attackermodel] plus the non-repudiation goals listed below.
 
-All provisions of the [@!FAPI2_Security_Profile_ID2] apply to the Message Signing Profile
+All provisions of the [@!FAPI2_Security_Profile] apply to the Message Signing Profile
 as well, with the extensions described in the following.
 
 
 ## Profile
 
-In addition to the technologies used in the [@!FAPI2_Security_Profile_ID2], the
+In addition to the technologies used in the [@!FAPI2_Security_Profile], the
 following standards are used in this profile:
 
   * OAuth 2.0 JWT Secured Authorization Request (JAR) [@!RFC9101] for signing authorization requests
@@ -254,7 +256,7 @@ To support non-repudiation for NR5, signed ID tokens are used.
 
 No additional requirements. 
 
-Note: Authorization servers implementing FAPI2 are already required to sign ID tokens as specified in section 5.4.1 in the [@!FAPI2_Security_Profile_ID2].
+Note: Authorization servers implementing FAPI2 are already required to sign ID tokens as specified in section 5.4.1 in the [@!FAPI2_Security_Profile].
  
 ### Requirements for clients
 
@@ -293,7 +295,7 @@ individual messages, it does not provide non-repudiation guarantees for a sequen
 
 ## Non-repudiation not provided for front channel authorization requests
 
-While only a small amount of information is present in a [@!FAPI2_Security_Profile_ID2] front channel 
+While only a small amount of information is present in a [@!FAPI2_Security_Profile] front channel 
 authorization request, it is important to note that non-repudiation is not provided for this message. 
 
 ## Difficulty in linking a signed message to a real world identity
@@ -312,7 +314,7 @@ is still useful in providing message integrity to the authorization response.
 
 # Privacy considerations
 
-In addition to the privacy considerations detailed in [@!FAPI2_Security_Profile_ID2] implementers should consider
+In addition to the privacy considerations detailed in [@!FAPI2_Security_Profile] implementers should consider
 the privacy implications of storing messages for the purpose of non-repudiation. 
 
 Such messages may well contain personally identifiable information and implementers should evaluate 
@@ -343,29 +345,35 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
 
 {backmatter}
 
-<reference anchor="FAPI2_Security_Profile_ID2" target="https://openid.net/specs/fapi-2_0-security-profile-ID2.html">
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0.html">
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>Authlete</organization>
     </author>
-   <date day="18" month="Sep" year="2024"/>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology Ltd.</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
   </front>
 </reference>
 
-<reference anchor="attackermodel" target="https://openid.net/specs/fapi-2_0-attacker-model-ID2.html">
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-attacker-model-2_0.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
       <organization>Authlete</organization>
     </author>
-   <date day="7" month="Dec" year="2022"/>
+   <date day="22" month="FEb" year="2025"/>
   </front>
 </reference>
 
 <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
-    <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
+    <title>OpenID Connect Core 1.0 incorporating errata set 2</title>
     <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
       <organization>NRI</organization>
     </author>
@@ -396,6 +404,23 @@ We would like to thank Takahiko Kawasaki, Filip Skokan, Nat Sakimura, Dima Postn
     </author>
    <date day="9" month="Nov" year="2022"/>
   </front>
+</reference>
+
+<reference anchor="FAPI2MSANALYSIS" target="http://dx.doi.org/10.18419/opus-13698">
+  <front>
+    <title>Formal security analysis of the OpenID FAPI 2.0 Security Profile with 
+    FAPI 2.0 Message Signing, FAPI-CIBA, Dynamic Client Registration and Management </title>    
+    <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="R." surname="Kuesters" fullname="Ralf Kuesters">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="T." surname="Würtele" fullname="Tim Würtele">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <date day="04" month="Oct" year="2024"/>
+  </front>  
 </reference>
 
 <reference anchor="NIST.SP.800-133" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-133.pdf">
@@ -439,3 +464,76 @@ Copyright (c) 2025 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+# Document History
+
+[[ To be removed from the final specification ]]
+
+-02
+ * Update references to final versions of fapi2 security profile and message signing
+ * editorial changes to get ready for final vote
+
+-01
+
+ * Update RFC9701 reference
+ * fix merge issue
+ * initial work on creating separate http signing spec
+ * get rid of [[ this specification ]] brackets
+ * numbering corrected and reworded the requirement
+ * Minor clarifications and typos
+ * ID token signing
+ * update refs to RFCs for http signatures
+ * typ in request objects
+ * Fixes #653 - Update abbreviated terms
+ * Addresses #672 - inconsistent capitalization
+ * Add Joseph to the FAPI2 SP & MS authors list
+ * Fixes #649 - ISO29100 and ISO29134 is not in the reference
+ * Add myself to the FAPI2 SP & MS authors list
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * Fixes #645 - Author name of Normative reference ISODIR2 is wrong
+ * Fixes #648 - The first paragraph of the Normative reference shall be as provided in ISODIR2
+ * Renumber attackers, fix editorial stuff
+ * add security considerations around non repudiation limitations
+ * move MTLS Protection of all endpoints to SP
+ * Update DPoP references in FAPI 2 SP
+ * Update http signing intro text
+ * make clear that requests and responses can be signed independently
+ * Incorporate Brian's feedback
+ * Merged master into danielfett/fix-617
+ * attempt at clarifying request-response binding
+ * Fix typo
+ * Proposal to fix Issue #617
+ * Update affiliation to Authlete, add Dave as editor on the Security Profile, list Dave first for the Message Signing document
+ * FAPI2MS: Change 'above 3' to 'above 4'
+ * fapi2ms: require use of jarm, require use of jar, define response modes client metadata
+ * Add copyright notice to fapi-ms
+ * add draft to fapi2 message signing
+ * initial work on privacy for message signing
+ * FAPI2MS: Removed unused references
+ * FAPI2MS: Defer http signing to next implementer's draft
+ * Editorial fixes, working group in acknowledgements
+ * FAPI2MS: security profile/attacker model links updated
+ * add intro and rework initial section for message signing
+ * use ticks so it doesn't end up as privatekeyjwt - fapi-2_0-message-signing.md edited online with Bitbucket
+ * Update JARM ref in message signing
+ * FAPI2MS: Create acknowledgements section
+ * FAPI2MS: Make security considerations a top level section
+ * FAPI2MS: Make [security profile] a real reference
+ * FAPI2MS: Reword section about testing
+ * FAPI2MS: Reword section about testing
+ * FAPI2MS: Make [security profile] a real reference
+ * Remove Dave from acknowledgements as he's an author
+ * Update JARM ref in message signing
+ * FAPI2MS: Make security considerations a top level section
+ * FAPI2MS: Create acknowledgements section
+ * FAPI2MS: Make normative references normative
+ * use ticks so it doesn't end up as privatekeyjwt - fapi-2_0-message-signing.md edited online with Bitbucket
+ * Update filenames
+
+ -00
+
+ * improvements to http sig wording
+ * Improve description of attacker model
+ * FAPI2MsgSign: Fix various links to the httpbis drafts
+ * Change name of Advanced Profile to Message Signing
