@@ -124,10 +124,33 @@ is present or not.
 
 todo: agree header name and contents
 
+## Access Token Size Considerations
 
+As key size grows and more claims are added to access tokens, it’s possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
 
+Note: While OAuth 2.0 [@RFC6749] leaves token size decisions to the authorization server, implementers should be aware that many standard web servers reject headers larger than 8KB by default.
 
-                                                     |
+### Security and Performance
+
+Large access tokens can impact both security and performance:
+
+1. Large tokens increase the risk of header-based DDOS attacks
+2. Larger tokens increase network latency and resource consumption
+3. Authorization servers should practice data minimization and only include necessary claims
+
+## Troubleshooting Common Issues
+
+### Connection Issues
+
+#### Large Access Tokens
+
+When access tokens are too large, implementers may encounter the following symptoms:
+
+1. HTTP 431 (Request Header Fields Too Large) responses from web servers
+2. Connection resets or timeouts when making requests with large tokens
+3. Inconsistent behavior where some requests succeed and others fail
+4. Log entries showing truncated or malformed Authorization headers
+
 ## Acknowledgements
 
 todo...
