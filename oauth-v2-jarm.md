@@ -1,5 +1,5 @@
 %%%
-title = "JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)"
+title = "JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) incorporating errata set 1"
 abbrev = "OAuth JARM"
 ipr = "none"
 workgroup = "FAPI"
@@ -7,14 +7,14 @@ keyword = ["security", "oauth2"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "oauth-v2-jarm-04"
+value = "oauth-v2-jarm-05"
 status = "standard"
 
 [[author]]
 initials="T."
 surname="Lodderstedt"
 fullname="Torsten Lodderstedt"
-organization="yes.com"
+organization="SPRIND"
     [author.address]
     email = "torsten@lodderstedt.net"
 
@@ -231,7 +231,7 @@ The client MUST process the JWT secured response as follows:
 1. The client checks the JWT's `exp` element to determine if the JWT is still valid. If the check fails, the client MUST abort processing and refuse the response. 
 1. The client MUST check the signature of the JWT according to [@!RFC7515] and the algorithm `none` (`"alg":"none"`) MUST NOT be accepted. If the check fails, the client MUST abort processing and refuse the response.
 
-The client will perform further checks, e.g. for CSRF detection, which are out of scope of this specification. Please see [@I-D.ietf-oauth-security-topics] for more security recommendations.
+The client will perform further checks, e.g. for CSRF detection, which are out of scope of this specification. Please see [@RFC9700] for more security recommendations.
 
 Note: The way the client obtains the keys for verifying the JWT's signature (step 5) is out of scope of this document. Established mechanism such as [@OIDD] or [@RFC8414] SHOULD be utilized.
 
@@ -283,7 +283,7 @@ Authorization servers SHOULD publish the supported response mode values utilizin
 
 # Security Considerations
 
-As JARM is used as a component in OAuth, many of the security considerations listed in OAuth 2.0 Security Best Current Practice [@I-D.ietf-oauth-security-topics] apply. In addition, for the mechanisms described in this document, the following security considerations apply.
+As JARM is used as a component in OAuth, many of the security considerations listed in OAuth 2.0 Security Best Current Practice [@RFC9700] apply. In addition, for the mechanisms described in this document, the following security considerations apply.
 
 ## DoS using specially crafted JWTs
 JWTs could be crafted to have an issuer that resolves to a JWK set URL with
@@ -302,7 +302,7 @@ protected, it is still conceivable that one or more of the messages are exchange
 message created for a different protocol run. The leakage and reuse of encrypted messages in
 (#code-leakage) is an example of such problems. To mitigate this problem, it is considered good
 practice to implement additional protection provided by PKCE [@RFC7636]
-as described in [@I-D.ietf-oauth-security-topics].
+as described in [@RFC9700].
 
 ## Mix-Up
 Mix-up is an attack on scenarios where an OAuth client interacts with
@@ -462,10 +462,10 @@ This specification requests registration of the following value in the IANA "OAu
 
 The following people contributed to this document:
 
-* Torsten Lodderstedt (YES), Editor
+* Torsten Lodderstedt (SPRIND), Editor
 * Brian Campbell (Ping Identity), Co-editor
 * Nat Sakimura (NAT Consulting LLC) -- Chair
-* Dave Tonge (Momentum Financial Technology) -- Chair
+* Dave Tonge (Moneyhub) -- Chair
 * Joseph Heenan (Authlete)
 * Ralph Bragg (Raidiam)
 * Vladimir Dzhuvinov (Connect2ID)
@@ -474,8 +474,100 @@ The following people contributed to this document:
 
 # Notices
 
-Copyright (c) 2022 The OpenID Foundation.
+Copyright (c) 2025 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+# Document History
+
+[[ To be removed from the final specification ]]
+
+-05
+
+* [JARM Errata] resolve jarm IANA registration review feedback
+* Update copyright notice
+* Update author and contributor associations
+* Update security topics reference to RFC9700
+
+-04
+
+ * jarm towards final
+
+-03
+
+ * rename JARM to oauth-v2-jarm.md per recommendation from OIDF Secretary (Michael B. Jones)
+ * Change the JARM document ID per recommendation from OIDF Secretary (Michael B. Jones)
+ * Move JARM Acknowledgements to an Appendix to fix Issue #518
+ * JARM - say that jwks_uri or jwks metadata can be used by clients to register their public encryption keys per issue #515
+ * JARM - Security Considerations adjustments per Nat from Issue #512
+ * JARM - Qualify the code response type subsection as an example and remove the token subsection
+ * JARM - Privacy Considerations
+ * JARM - try and improve formatting of the metadata fields per Issue #517
+ * JARM - five occurrences of "this draft" need to be changed to "this document" per Issue #514
+ * JARM - Security Considerations adjustments per Nat from Issue #51
+ * JARM - illustrate to illustrates
+ * JARM - Qualify the code response type subsection as an example and remove the token subsection
+ * JARM - try and say something that maybe doesn't need to be said without saying something wrong with a Privacy Considerations section per Issue #513
+ * JARM - say that jwks_uri or jwks metadata can be used by clients to register their public encryption keys per issue #515
+ * JARM - stronger language in client processing rules including explicitly prohibiting alg=none from issues #511 #516 #510
+ * JARM - try and improve formatting of the metadata fields per Issue #517
+ * JARM - five occurrences of "this draft" need to be changed to "this document" per Issue #514
+ * Move JARM Acknowledgements to an Appendix to fix Issue #518
+ * Attempt to finesse some text in JARM so as to not overstate its security properties
+ * JARM: fix broken references
+ * JARM: one example had weird and unnecessary indentation
+ * JARM: fix broken references
+ * get JARM fixed up wrt Issue #482
+
+02
+
+ * update Filip's affiliation
+ * fixes #329 - FAPI 1.0 Part 1 and Part 2 Title - removes "API" from title
+ * fixes #329 - FAPI 1.0 Part 1 and Part 2 Title
+ * fixed a couple of markdown headers missing a space after '#'
+ * Update intros to mention JARM
+ * Initial updates
+ * fixed typo and added Security BCP reference
+ * clarifications in response to issue #269
+ * JARM: update JWT examples so expires_in is a number, use ECDSA, a kid, and get rid of "typ": "JWT"
+ * resolves Issue #192 by rewording authorization_signed_response_alg client metadata parameter to more clearly suggest that the default is applied when doing the signing and not that the default needs to be applied and persisted with client config or registration
+ * added lifetime recommendation similar to RFC 6749 for authz codes
+ * JARM: add the iss, aud and exp claims in the authz error example (for issue #191)
+ * JARM: state that numeric authorization endpoint response parameter values are to be JSON numbers in the response JWT and change the example with expires_in to be a number (for issue #176)
+ * JARM: add the iss, aud and exp claims in the authz error example (for issue #191)
+ * added lifetime recommendation similar to RFC 6749 for authz codes
+ * JARM: jwt.query -> query.jwt per http://lists.openid.net/pipermail/openid-specs-fapi/2018-September/001108.html
+ * Apply new name to part 3
+ * missing word Financial_API_JWT_Secured_Authorization_Response_Mode.md edited online with Bitbucket
+ * little nits and clarifications Financial_API_JWT_Secured_Authorization_Response_Mode.md edited online with Bitbucket
+ * added text on error response handling
+ * access token value reverted Financial_API_JWT_Secured_Authorization_Response_Mode.md edited online with Bitbucket
+ * removed Tom Jones from, added Filip Skokan to Acknowledgement
+ * an editorial pass on Financial_API_JWT_Secured_Authorization_Response_Mode.md (edited online with Bitbucket)
+ * lonely comma
+ * - default response mode for OIDM
+ * - added Brian Campbell as Co-Editor - incorporated Brian's latest comments
+ * added acronym JARM
+ * incorporated Daniel's feedback
+ * cleaned up section 11
+ * use official JWA alg name RS256 for signing default algorithm
+ * - added text on extension parameters - added IANA Considerations/registration of new client registration and server metadata parameters - added text on publication of supported response mode values
+ * fixed copy and paste errors
+ * nits
+ * moved state into JWT reworked processing rules added form post support introduced additional response mode values to distinguish fragment, query and form post
+ * polished 7.5
+ * nits
+ * use registered JWA alg value for default signing algorithm
+ * added JWS reference
+ * fixed intendation of section header 4.3.2
+ * enhanced description of response parameter encoding
+ * incorporated Brian's comments
+ * extends draft with support for response type token issue #155
+
+ 01
+
+ * editorial nits, added aud check to processing rules
+ * completed first draft
+ * first version
