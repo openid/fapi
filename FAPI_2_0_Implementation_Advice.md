@@ -124,9 +124,36 @@ is present or not.
 
 todo: agree header name and contents
 
+## DPoP vs MTLS
+
+Sender constraining access tokens is an important security measure that provides significant protections against token theft and misuse. FAPI 2.0 allows implementers to use either DPoP or MTLS to achieve this goal. Both approaches meet the security requirements, but each has different characteristics that may make one more suitable than the other depending on your ecosystem. This section outlines considerations to guide your choice.
+
+### DPoP Considerations
+
+1. DPoP operates at the application layer rather than the transport layer;
+2. DPoP requires cryptographic operations for each request, which may have performance implications;
+3. DPoP introduces some protocol complexity, including HTTP request URL normalization and optionally server provided nonces;
+4. DPoP is the only viable option for browser-based clients (MTLS only works practically for server to server communication).
+
+### MTLS Considerations
+
+1. MTLS amortizes the cost of asymmetric cryptographic operations by performing them during the TLS handshake and reusing the connection;
+2. MTLS presents integration challenges at the transport layer, especially when operating at scale;
+3. MTLS implementations may encounter interoperability issues with certificate handling, including:
+   * Certificate aliases
+   * Self-signed certificates with JWKS
+   * IP/SAN negotiation
+   * DN matching for PKI;
+4. [RFC9440] provides additional guidance for MTLS implementations.
+
+### Selection Guidance
+
+MTLS makes more sense for closed ecosystems with existing PKI infrastrcture. All other implementations
+should consider selecting DPoP above MTLS due to the complexities of implementing the specification at the transport and application layers.
+
 ## Access Token Size Considerations
 
-As key size grows and more elements are added to access tokens, it’s possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
+As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
 
 Note: While OAuth 2.0 [@RFC6749] leaves token size decisions to the authorization server, implementers should be aware that many standard web servers reject headers larger than 8KB by default.
 
