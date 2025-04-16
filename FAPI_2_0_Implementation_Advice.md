@@ -126,7 +126,7 @@ todo: agree header name and contents
 
 ## Access Token Size Considerations
 
-As key size grows and more elements are added to access tokens, it’s possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
+As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
 
 Note: While OAuth 2.0 [@RFC6749] leaves token size decisions to the authorization server, implementers should be aware that many standard web servers reject headers larger than 8KB by default.
 
@@ -153,6 +153,20 @@ When access tokens are too large, implementers may encounter the following sympt
 2. Connection resets or timeouts when making requests with large tokens
 3. Inconsistent behavior where some requests succeed and others fail
 4. Log entries showing truncated or malformed Authorization headers
+
+## Authorization Server Handling of Suspicious Requests
+
+Many Authorization Server implementations employ Web Application Firewalls (WAFs) and security rules to protect against common attacks such as XSS. This section provides guidance on balancing legitimate security concerns with the need to accept randomly generated values in parameters like state and nonce.
+
+1. Authorization Servers may reject authorization requests that contain suspicious parameter values which could indicate malicious intent, such as potential XSS attack vectors
+
+2. While Authorization Servers should evaluate requests for potential security issues, they should not implement blanket restrictions that block certain characters (e.g., "<") entirely
+
+3. Authorization Servers should accept any random state/nonce values that comply with the underlying specifications
+
+4. When rejecting suspicious requests, Authorization Servers should return appropriate error responses as defined in OAuth 2.0 and related specifications
+
+NOTE: What constitutes a suspicious or malicious request may vary depending on the threat model of each Authorization Server implementation. This document intentionally avoids providing an exhaustive list of patterns to block, as such a list would quickly become outdated and might provide a false sense of security.
 
 ## Acknowledgements
 
