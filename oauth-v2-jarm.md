@@ -515,4 +515,3 @@ required to practice this specification.
 * Update copyright notice
 * Update author and contributor associations
 * Update security topics reference to RFC970
-* Add abstract
