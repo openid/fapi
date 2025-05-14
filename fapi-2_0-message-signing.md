@@ -38,8 +38,7 @@ organization="Authlete"
 
 .# Abstract
 
-OIDF FAPI 2.0 Message Signing is an API security profile that provides interoperable 
-support for non-repudiation across OAuth 2.0 [@!RFC6749] based requests and responses.
+OIDF FAPI 2.0 Message Signing is an API security profile for signing and verifying certain FAPI 2.0 Security Profile [@!FAPI2_Security_Profile] based requests and responses.
 
 .# Foreword
 
