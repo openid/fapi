@@ -31,10 +31,6 @@ organization="Ping Identity"
 
 {mainmatter}
 
-# Abstract
-
-This specification defines a JWT-based mode for encoding OAuth 2.0 authorization responses. It enables clients to receive authorization response parameters in a signed and optionally encrypted JWT format, providing enhanced security through message integrity, sender authentication, audience restriction, and protection from mix-up attacks.
-
 # Introduction
 
 This document defines a new JWT-based mode to encode OAuth authorization responses. Clients are enabled to request
