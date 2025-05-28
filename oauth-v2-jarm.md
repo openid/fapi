@@ -1,5 +1,5 @@
 %%%
-title = "JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) - Draft 05"
+title = "JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) - Draft 05 incorporating errata set 1"
 abbrev = "OAuth JARM"
 ipr = "none"
 workgroup = "FAPI"
