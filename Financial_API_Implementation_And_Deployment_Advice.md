@@ -171,7 +171,7 @@ In many cases, it is possible to ensure APIs are complete by having first-party 
 
 ## JARM Downgrade
 
-A client receiving a response non compliant with [@JARM], in response to an authorization request instructing a [@JARM] response, from an authorization server supporting [@JARM] (as indicated by its metadata attribute response_modes_supported), SHOULD reject the response.
+A client receiving a response non compliant with JARM, in response to an authorization request instructing a JARM response, from an authorization server supporting JARM (as indicated by its metadata attribute response_modes_supported), SHOULD reject the response.
 
 # Privacy Considerations
 
