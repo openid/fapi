@@ -470,7 +470,7 @@ The following people contributed to this document:
 * Ralph Bragg (Raidiam)
 * Vladimir Dzhuvinov (Connect2ID)
 * Michael Schwartz (Gluu)
-* Filip Skokan (Auth0|Okta)
+* Filip Skokan (Okta)
 
 # Notices
 
