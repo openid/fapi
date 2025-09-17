@@ -171,6 +171,8 @@ presence of an end user.
 necessary to detect patterns of misuse, such as clients marking all API calls as 
 user-present regardless of context.
 
+NOTE: This header is only useful in ecosystems where recourse exists against clients that falsify its value.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
