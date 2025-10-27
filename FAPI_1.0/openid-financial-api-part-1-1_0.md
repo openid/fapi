@@ -89,7 +89,7 @@ The following documents are referred to in the text in such a way that some or a
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705] - OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
