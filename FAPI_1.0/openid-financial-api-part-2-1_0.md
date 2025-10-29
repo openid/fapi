@@ -878,8 +878,8 @@ The following people contributed to this document:
 
 * [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
 
-[FAPISEC]: https://arxiv.org/abs/1901.11520
+[FAPISEC]: https://ieeexplore.ieee.org/document/8835218
 
 * [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
 
-[OAUTHSEC]: https://arxiv.org/abs/1601.01229
+[OAUTHSEC]: https://doi.org/10.1145/2976749.2978385
