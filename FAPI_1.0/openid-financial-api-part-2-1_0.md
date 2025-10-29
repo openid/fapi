@@ -634,11 +634,11 @@ The following people contributed to this document:
 
 * [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
 
-[FAPISEC]: https://arxiv.org/abs/1901.11520
+[FAPISEC]: https://ieeexplore.ieee.org/document/8835218
 
 * [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
 
-[OAUTHSEC]: https://arxiv.org/abs/1601.01229
+[OAUTHSEC]: https://dl.acm.org/doi/10.1145/2976749.2978385
 
 # 12. IANA considerations
 ## 12.1 Additions to JWT claims registry
