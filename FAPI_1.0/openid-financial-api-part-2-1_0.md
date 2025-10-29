@@ -508,8 +508,6 @@ could be used in selecting which key to use to verify a message signature:
 
 # 9. Privacy considerations
 
-## 9.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
@@ -542,7 +540,7 @@ what data will be released to the RP).
 * (Data leak from resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
 * (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
-These can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
+These can be mitigated by choosing appropriate options in OAuth or OpenID Connect, or by introducing some operational rules. 
 For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
 using `request_uri` or by encrypting the request object. 
 Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
