@@ -264,7 +264,7 @@ In addition, if the `response_type` value `code id_token` is used, the authoriza
 
 In addition, if the `response_type` value `code` is used in conjunction with the `response_mode` value `jwt`, the authorization server
 
-1. shall create JWT-secured authorization responses as specified in [JARM], Section 4.3.
+1. shall create JWT-secured authorization responses as specified in [JARM].
 
 ### 5.2.3 Confidential client
 
