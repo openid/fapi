@@ -74,11 +74,11 @@ The following documents are referred to in the text in such a way that some or a
 
 [RFC7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
+[OIDC] - OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705] - OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
@@ -93,6 +93,10 @@ The following documents are referred to in the text in such a way that some or a
 [JAR] - OAuth 2.0 JWT Secured Authorization Request
 
 [JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
+
+[ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
+
+[ISO29100]: https://www.iso.org/standard/85938.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
@@ -247,7 +251,9 @@ In addition, the authorization server
 
 **NOTE:** [PAR] does not present any additional security concerns that necessitated the requirement to use PKCE - the reason PKCE is not required in other cases is merely to be backwards compatible with earlier drafts of this standard.
 
-#### 5.2.2.1 ID Token as detached signature
+**EXAMPLE** 
+
+see Annex A for additional information. 
 
 In addition, if the `response_type` value `code id_token` is used, the authorization server
 
@@ -547,114 +553,19 @@ For example, "Attacker observing personal data in authorization request" can be 
 using `request_uri` or by encrypting the request object. 
 Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
 
-# 10. Acknowledgement
-
-The following people contributed to this document:
-
-* Nat Sakimura (NAT Consulting) -- Chair, Editor
-* Anoop Saxena (Intuit) -- Co-chair, FS-ISAC Liaison
-* Anthony Nadalin (Microsoft) -- Co-chair, SC 27 Liaison
-* Edmund Jay (Illumila) -- Co-editor
-* Dave Tonge (Moneyhub) -- Co-chair, UK Implementation Entity Liaison
-* Paul A. Grassi (NIST) -- X9 Liaison
-* Joseph Heenan (Authlete)
-* Sascha H. Preibisch (CA)
-* Henrik Biering (Peercraft)
-* Anton Taborszky (Deutsche Telecom)
-* John Bradley (Yubico)
-* Tom Jones (Independent) 
-* Axel Nennker (Deutsche Telekom)
-* Daniel Fett (yes.com)
-* Torsten Lodderstedt (yes.com)
-* Ralph Bragg (Raidiam)
-* Brian Campbell (Ping Identity) 
-* Dima Postnikov (Independent)
-* Stuart Low (Biza.io)
-* Takahiko Kawasaki (Authlete)
-* Vladimir Dzhuvinov (Connect2Id)
-* Chris Michael (Open Banking)
-* Freddi Gyara (Open Banking)
-* Rob Otto (Ping Identity)
-* Francis Pouatcha (adorsys)
-* Kosuke Koiwai (KDDI)
-* Bjorn Hjelm (Verizon)
-* Lukasz Jaromin (Cloudentity)
-* James Manger
-
-# 11. Bibliography
-
-* [ISODIR2] - ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents
-
-[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
-
-* [ISODIR2] ISO/IEC Directives Part 2
-
-[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
-
-* [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
-
-[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
-
-* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
-* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
-
-[RFC6750]: https://tools.ietf.org/html/rfc6750
-
-* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
-
-[RFC6819]: https://tools.ietf.org/html/rfc6819 
-
-* [RFC7519] JSON Web Token (JWT)
-
-[RFC7519]:https://tools.ietf.org/html/rfc7519
-
-* [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
-
-[RFC7591]:https://tools.ietf.org/html/rfc7591 
-
-* [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
-
-[RFC7592]:https://tools.ietf.org/html/rfc7592 
-
-* [RFC8414] OAuth 2.0 Authorization Server Metadata
-
-[RFC8414]: https://tools.ietf.org/html/rfc8414
-
-* [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
-
-[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
-
-* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-
-[BCP195]: https://tools.ietf.org/html/bcp195
-
-* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
-
-[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
-
-* [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
-
-[FAPISEC]: https://arxiv.org/abs/1901.11520
-
-* [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
-
-[OAUTHSEC]: https://arxiv.org/abs/1601.01229
-
-# 12. IANA considerations
-## 12.1 Additions to JWT claims registry
+# 10. IANA considerations
+## 10.1 Additions to JWT claims registry
 This specification adds the following values to the "JSON Web Token Claims" registry 
 established by [RFC7519].
 
-### 12.1.1. Registry contents
+### 10.1.1. Registry contents
 
 * Claim name: s_hash
 * Claim Description: State hash value
 * Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
-* Reference: Section 5 of [[ this specification ]]
+* Reference: Section 5 of [[ this document ]]
 
-
-
-# Appendix A. Examples
+# Annex A (informative) Examples 
 
 ## A.0 JWK for examples
 
@@ -876,7 +787,41 @@ which when decoded has the following body:
     }
 ```
 
-# Appendix B Changes {-}
+# Annex B (Informative) Acknowledgement {-}
+
+The following people contributed to this document:
+
+* Nat Sakimura (NAT Consulting) -- Chair, Editor
+* Anoop Saxena (Intuit) -- Co-chair, FS-ISAC Liaison
+* Anthony Nadalin (Microsoft) -- Co-chair, SC 27 Liaison
+* Edmund Jay (Illumila) -- Co-editor
+* Dave Tonge (Moneyhub) -- Co-chair, UK Implementation Entity Liaison
+* Paul A. Grassi (NIST) -- X9 Liaison
+* Joseph Heenan (Authlete)
+* Sascha H. Preibisch (CA)
+* Henrik Biering (Peercraft)
+* Anton Taborszky (Deutsche Telecom)
+* John Bradley (Yubico)
+* Tom Jones (Independent) 
+* Axel Nennker (Deutsche Telekom)
+* Daniel Fett (yes.com)
+* Torsten Lodderstedt (yes.com)
+* Ralph Bragg (Raidiam)
+* Brian Campbell (Ping Identity) 
+* Dima Postnikov (Independent)
+* Stuart Low (Biza.io)
+* Takahiko Kawasaki (Authlete)
+* Vladimir Dzhuvinov (Connect2Id)
+* Chris Michael (Open Banking)
+* Freddi Gyara (Open Banking)
+* Rob Otto (Ping Identity)
+* Francis Pouatcha (adorsys)
+* Kosuke Koiwai (KDDI)
+* Bjorn Hjelm (Verizon)
+* Lukasz Jaromin (Cloudentity)
+* James Manger
+
+# Annex C Changes {-}
 * 2023-06-25
     * Applied changes needed to convert to pandoc
     * Changed the title to incorporate "errata"
@@ -888,3 +833,53 @@ which when decoded has the following body:
     * #613 - Remove empty subclauses 5.2.4 and 5.2.5
     * #612 - Fixed hanging paragraph in 5.1 and renumbered subclauses in 5.1.x
     * #611 - 8.3.5 content moved to previously empty 8.3.4
+    
+# Bibliography
+
+* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+
+[ISO29134] https://www.iso.org/standard/86012.html
+
+* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+
+[RFC6750]: https://tools.ietf.org/html/rfc6750
+
+* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+
+[RFC6819]: https://tools.ietf.org/html/rfc6819 
+
+* [RFC7519] JSON Web Token (JWT)
+
+[RFC7519]:https://tools.ietf.org/html/rfc7519
+
+* [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
+
+[RFC7591]:https://tools.ietf.org/html/rfc7591 
+
+* [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
+
+[RFC7592]:https://tools.ietf.org/html/rfc7592 
+
+* [RFC8414] OAuth 2.0 Authorization Server Metadata
+
+[RFC8414]: https://tools.ietf.org/html/rfc8414
+
+* [OIDD] OpenID Connect Discovery 1.0
+
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
+
+* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+
+[BCP195]: https://tools.ietf.org/html/bcp195
+
+* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
+
+[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
+
+* [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
+
+[FAPISEC]: https://arxiv.org/abs/1901.11520
+
+* [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
+
+[OAUTHSEC]: https://arxiv.org/abs/1601.01229
