@@ -285,7 +285,7 @@ In addition, the confidential client
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
-1. shall send a `nbf` claim in the request object;
+1. shall send an `nbf` claim in the request object;
 1. shall use [RFC7636] with `S256` as the code challenge method if using [PAR]; and
 1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [JAR], if using [PAR].
 
