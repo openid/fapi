@@ -255,6 +255,8 @@ In addition, the authorization server
 
 see Annex A for additional information. 
 
+#### 5.2.2.1 ID Token as detached signature
+
 In addition, if the `response_type` value `code id_token` is used, the authorization server
 
 1. shall support [OIDC];
