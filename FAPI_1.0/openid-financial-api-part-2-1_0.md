@@ -88,7 +88,7 @@ The following documents are referred to in the text in such a way that some or a
 
 [RFC9126]  OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
+[RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
 [RFC9101]  OAuth 2.0 JWT Secured Authorization Request
 
@@ -293,9 +293,9 @@ In addition, the confidential client
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
-1. shall send a `nbf` claim in the request object;
-1. shall use [RFC7636] with `S256` as the code challenge method if using PAR; and
-1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [RFC9101](JAR), if using PAR as in [RFC9126].
+1. shall send an `nbf` claim in the request object;
+1. shall use [RFC7636] with `S256` as the code challenge method if using [PAR]; and
+1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [JAR], if using [PAR].
 
 #### 5.2.3.1 ID Token as detached signature
 
@@ -424,7 +424,7 @@ As confidential information is being exchanged, all interactions shall be encryp
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. Only the cipher suites recommended in [BCP195] shall be permitted.
-1. For the `authorization_endpoint`, the authorization server MAY allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
    **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
@@ -516,8 +516,6 @@ could be used in selecting which key to use to verify a message signature:
 
 # 9. Privacy considerations
 
-## 9.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
@@ -555,6 +553,7 @@ For example, "Attacker observing personal data in authorization request" can be 
 using `request_uri` or by encrypting the request object. 
 Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
 
+<<<<<<< HEAD
 # 10. IANA considerations
 ## 10.1 Additions to JWT claims registry
 This specification adds the following values to the "JSON Web Token Claims" registry 
