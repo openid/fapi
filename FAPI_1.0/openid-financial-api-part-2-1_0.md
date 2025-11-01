@@ -62,37 +62,37 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[Part1] FAPI Security Profile 1.0 - Part 1: Baseline
+[Part1]  FAPI Security Profile 1.0 - Part 1: Baseline
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
-[RFC6749] - The OAuth 2.0 Authorization Framework
+[RFC6749]  The OAuth 2.0 Authorization Framework
 
 [RFC6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
+[RFC7636]  Proof Key for Code Exchange by OAuth Public Clients
 
 [RFC7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
+[OIDC]  OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705]  OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
-[JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM]  JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
-[PAR] - OAuth 2.0 Pushed Authorization Requests
+[RFC9126]  OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
+[RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[JAR] - OAuth 2.0 JWT Secured Authorization Request
+[RFC9126]  OAuth 2.0 JWT Secured Authorization Request
 
-[JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
+[RFC9126]: https://www.rfc-editor.org/rfc/rfc9101.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
