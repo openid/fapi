@@ -416,7 +416,7 @@ As confidential information is being exchanged, all interactions shall be encryp
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. Only the cipher suites recommended in [BCP195] shall be permitted.
-1. For the `authorization_endpoint`, the authorization server MAY allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
    **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
