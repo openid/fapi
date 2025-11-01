@@ -508,8 +508,6 @@ could be used in selecting which key to use to verify a message signature:
 
 # 9. Privacy considerations
 
-## 9.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
