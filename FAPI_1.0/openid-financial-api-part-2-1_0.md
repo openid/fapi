@@ -840,7 +840,7 @@ The following people contributed to this document:
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 
-[ISO29134]; https://www.iso.org/standard/86012.html
+[ISO29134]: https://www.iso.org/standard/86012.html
 
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
