@@ -509,6 +509,7 @@ The following people contributed to this document:
 [Part2]: https://openid.net/specs/openid-financial-api-part-2-1_0.html
 
 * [ISODIR2] - ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents
+
 [ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
 
 * [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
@@ -516,6 +517,9 @@ The following people contributed to this document:
 [ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+
+[ISO29134] https://www.iso.org/standard/86012.html
+
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
 [RFC6750]: https://tools.ietf.org/html/rfc6750
