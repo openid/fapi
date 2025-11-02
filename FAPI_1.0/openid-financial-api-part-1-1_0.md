@@ -181,7 +181,7 @@ the generated token is computationally infeasible as per [RFC6749] Section 10.10
     **NOTE**: The use of refresh tokens instead of long-lived access tokens for both 
     public and confidential clients is recommended.
 
-    **NOTE**: The FAPI Security Profile 1.0 server may limit the scopes for the purpose of not implementing certain APIs.
+    **NOTE**: The FAPI Security Profile 1.0 authorization server may limit the scopes for the purpose of not implementing certain APIs.
 
     **NOTE**: Clients are expected to treat access tokens as opaque strings and replay them as is. Authorization servers can issue unstructured or structured access tokens (for example, a signed JWT).
 
