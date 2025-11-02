@@ -544,9 +544,13 @@ The following people contributed to this document:
 
 [PRELOAD]: https://hstspreload.org/
 
-* [JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+* [JARM] JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
+
+* [CORS] Cross-Origin Resource Sharing
+
+[CORS] https://www.w3.org/TR/2020/SPSD-cors-20200602/
 
 
 # Appendix A Changes {-}
