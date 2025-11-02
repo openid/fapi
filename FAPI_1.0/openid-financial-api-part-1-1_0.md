@@ -107,25 +107,25 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 # 4. Abbreviated terms
 --------- --- ----------------------------------
-**API**    –  Application Programming Interface
-**CAA**    –  Certificate Authority Authorization
-**CORS**   –  Cross-Origin Resource Sharing
-**CSRF**   –  Cross Site Request Forgery
-**DNSSEC** –  Domain Name System Security Extensions
-**FAPI**   –  FAPI
-**HTTP**   –  Hyper Text Transfer Protocol
-**IP**     –  Internet Protocol
-**JARM**   –  JWT Secured Authorization Response Mode
-**JSON**   –  JavaScript Object Notation
-**JWT**    –  JSON Web Token
-**OIDF**   –  OpenID Foundation
-**RP**     –  Relying Party
-**RSA**    –  Rivest–Shamir–Adleman
-**REST**   –  Representational State Transfer
-**TLS**    –  Transport Layer Security
-**URI**    –  Uniform Resource Identifier
-**UTF**   –   Unicode Transformation Format
-**UUID**   –  Universally Unique IDentifier
+**API**       application programming interface
+**CAA**       certificate authority authorization
+**CORS**      cross-origin resource sharing
+**CSRF**      cross site request forgery
+**DNSSEC**    domain name system security extensions
+**FAPI**      FAPI
+**HTTP**      hyper text transfer protocol
+**IP**        internet protocol
+**JARM**      JWT secured authorization response mode
+**JSON**      javaScript object notation
+**JWT**       JSON web token
+**OIDF**      OpenID foundation
+**RP**        relying party
+**RSA**       Rivest–Shamir–Adleman
+**REST**      representational state transfer
+**TLS**       transport layer security
+**URI**       uniform resource identifier
+**UTF**       unicode transformation format
+**UUID**      universally unique identifier
 --------- --- ----------------------------------
 
 # 5. Baseline security profile
