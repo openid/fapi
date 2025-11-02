@@ -502,7 +502,7 @@ The following people contributed to this document:
 * Lukasz Jaromin (Cloudentity)
 * James Manger
 
-# 10. Bibliography
+# Bibliography {-}
 
 * [Part2] FAPI Security Profile 1.0 - Part 2: Advanced
 
@@ -558,6 +558,11 @@ The following people contributed to this document:
 
 
 # Appendix A Changes {-}
+
+To be removed at the publication time. 
+
+* -02 
+    * Fixing the editorial issues pointed out by ISO. 
 * -01
     * Reformatting to the pandoc markdown
     * #600 - Changed Financial-grade API to FAPI
