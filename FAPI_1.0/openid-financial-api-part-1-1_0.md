@@ -102,7 +102,7 @@ The following documents are referred to in the text in such a way that some or a
 [RFC7231]: https://tools.ietf.org/html/rfc7231
 
 # 3. Terms and definitions
-For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] apply.
+For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OIDC] apply.
 
 
 # 4. Abbreviated terms
