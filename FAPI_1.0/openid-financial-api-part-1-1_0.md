@@ -39,11 +39,11 @@ FAPI 1.0 consists of the following parts:
 * FAPI Security Profile 1.0 - Part 1: Baseline
 * [FAPI Security Profile 1.0 - Part 2: Advanced][Part2]
 
-These parts are intended to be used with [RFC6749], [RFC6750], [RFC7636], and [OIDC].
+These parts are intended to be used with [RFC 6749], [RFC 6750], [RFC 7636], and [OIDC].
 
 # Introduction {-}
 
-FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impresonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require financial institutions to allow what appears to be an automated attack against their applications.
+FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC 6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impresonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require financial institutions to allow what appears to be an automated attack against their applications.
 
 This document is Part 1 of FAPI Security Profile 1.0. It specifies a baseline security profile of OAuth that is suitable for protecting APIs with a moderate inherent risk. Importantly, this profile does not provide non-repudiation (signing of authorization requests and responses) and sender-constrained access tokens. If such features or a higher level of security is desired, the use of [FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
@@ -61,48 +61,48 @@ This document specifies the method for an application to:
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[RFC4122] - A Universally Unique IDentifier (UUID) URN Namespace
+[RFC 4122] - A Universally Unique IDentifier (UUID) URN Namespace
 
-[RFC4122]: https://tools.ietf.org/html/rfc4122
+[RFC 4122]: https://tools.ietf.org/html/rfc4122
 
-[RFC6749] - The OAuth 2.0 Authorization Framework
+[RFC 6749] - The OAuth 2.0 Authorization Framework
 
-[RFC6749]: https://tools.ietf.org/html/rfc6749
+[RFC 6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
+[RFC 7636] - Proof Key for Code Exchange by OAuth Public Clients
 
-[RFC7636]: https://tools.ietf.org/html/rfc7636
+[RFC 7636]: https://tools.ietf.org/html/rfc7636
 
-[RFC6125] - Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
+[RFC 6125] - Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
 
-[RFC6125]: https://tools.ietf.org/html/rfc6125
+[RFC 6125]: https://tools.ietf.org/html/rfc6125
 
-[BCP212] - OAuth 2.0 for Native Apps
+[BCP 212] - OAuth 2.0 for Native Apps
 
-[BCP212]: https://tools.ietf.org/html/bcp212
+[BCP 212]: https://tools.ietf.org/html/bcp212
 
-[BCP195] - Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+[BCP 195] - Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 
-[BCP195]: https://tools.ietf.org/html/bcp195
+[BCP 195]: https://tools.ietf.org/html/bcp195
 
 [OIDC] - OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+[RFC 8705] - OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
-[RFC8705]: https://tools.ietf.org/html/rfc8705
+[RFC 8705]: https://tools.ietf.org/html/rfc8705
 
 [OIDD] -  OpenID Connect Discovery 1.0
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
-[RFC7231] - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
+[RFC 7231] - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
 
-[RFC7231]: https://tools.ietf.org/html/rfc7231
+[RFC 7231]: https://tools.ietf.org/html/rfc7231
 
 # 3. Terms and definitions
-For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OIDC] apply.
+For the purpose of this document, the terms defined in [RFC 6749], [RFC 6750], [RFC 7636], [OIDC] apply.
 
 
 # 4. Abbreviated terms
@@ -132,7 +132,7 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 ## 5.1 Introduction
 
-The OIDF FAPI security profile specifies security requirements for API resources protected by the OAuth 2.0 Authorization Framework that consists of [RFC6749], [RFC6750], [RFC7636], and other specifications.
+The OIDF FAPI security profile specifies security requirements for API resources protected by the OAuth 2.0 Authorization Framework that consists of [RFC 6749], [RFC 6750], [RFC 7636], and other specifications.
 
 FAPI Security Profile 1.0 - Part 1: Baseline and [Part 2: Advanced][Part2] specify different levels of security. The characteristics required of the tokens are different and the methods to obtain tokens are explained separately. This document specifies the baseline security provisions.
 
@@ -140,7 +140,7 @@ FAPI Security Profile 1.0 - Part 1: Baseline and [Part 2: Advanced][Part2] speci
 
 ### 5.2.1 Introduction
 
-Some APIs, such as ones that provide potentially sensitive information, require a greater level of protection than basic [RFC6749] requires. FAPI provides such greater protection.
+Some APIs, such as ones that provide potentially sensitive information, require a greater level of protection than basic [RFC 6749] requires. FAPI provides such greater protection.
 
 As a profile of the OAuth 2.0 Authorization Framework, this document mandates the following to the baseline profile of the FAPI Security Profile 1.0.
 
@@ -154,28 +154,28 @@ The authorization server
 1. should support public clients; 
 1. shall provide a client secret that adheres to the requirements in Section 16.19 of [OIDC] if a symmetric key is used;
 1. shall authenticate the confidential client using one of the following methods:
-    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC8705], or
+    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC 8705], or
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall require and use a key of size 2048 bits or larger for RSA algorithms;
 1. shall require and use a key of size 160 bits or larger for elliptic curve algorithms;
-1. shall require [RFC7636] with `S256` as the code challenge method;
+1. shall require [RFC 7636] with `S256` as the code challenge method;
 1. shall require redirect URIs to be pre-registered;
 1. shall require the `redirect_uri` in the authorization request;
 1. shall require the value of `redirect_uri` to exactly match one of the pre-registered redirect URIs;
 1. shall require user authentication to an appropriate level of assurance for the operations the client will be authorized to perform on behalf of the user;
 1. shall require explicit approval by the user to authorize the requested scope if it has not been previously authorized;
-1. shall reject an authorization code (Section 1.3.1 of [RFC6749]) if it has been previously used;
-1. shall return token responses that conform to Section 4.1.4 of [RFC6749]; 
+1. shall reject an authorization code (Section 1.3.1 of [RFC 6749]) if it has been previously used;
+1. shall return token responses that conform to Section 4.1.4 of [RFC 6749]; 
 1. shall return the list of granted scopes with the issued access token if the request was passed in the front channel and was not integrity protected;
 1. shall provide non-guessable access tokens, authorization codes, and refresh token 
 (where applicable), with sufficient entropy such that the probability of an attacker guessing 
-the generated token is computationally infeasible as per [RFC6749] Section 10.10;
+the generated token is computationally infeasible as per [RFC 6749] Section 10.10;
 1. should clearly identify the details of the grant to the user during authorization as in 16.18 of [OIDC]; 
 1. should provide a mechanism for the end-user to revoke access tokens and refresh tokens granted to a client as in 16.18 of [OIDC];
-1. shall return an `invalid_client` error as defined in 5.2 of [RFC6749] when mis-matched client identifiers were provided through the client authentication methods that permits sending the client identifier in more than one way;
+1. shall return an `invalid_client` error as defined in 5.2 of [RFC 6749] when mis-matched client identifiers were provided through the client authentication methods that permits sending the client identifier in more than one way;
 1. shall require redirect URIs to use the https scheme;
 1. should issue access tokens with a lifetime of under 10 minutes unless the tokens are sender-constrained; and
-1. shall support [OIDD], may support [RFC8414] and shall not distribute discovery metadata (such as the authorization endpoint) by any other means.
+1. shall support [OIDD], may support [RFC 8414] and shall not distribute discovery metadata (such as the authorization endpoint) by any other means.
 1. shall require the `response_type` values `code` or `code id_token`
 
     **NOTE**: The use of refresh tokens instead of long-lived access tokens for both 
@@ -210,14 +210,14 @@ If the client requests the openid scope, the authorization server
 
 If the client does not request the openid scope, the authorization server
 
-1. shall require the `state` parameter defined in Section 4.1.1 of [RFC6749].
+1. shall require the `state` parameter defined in Section 4.1.1 of [RFC 6749].
 
 ### 5.2.3 Public client
 
 A public client
 
-1. shall support [RFC7636];
-2. shall use `S256` as the code challenge method for the [RFC7636];
+1. shall support [RFC 7636];
+2. shall use `S256` as the code challenge method for the [RFC 7636];
 3. shall use separate and distinct redirect URI for each authorization server that it talks to;
 4. shall store the redirect URI value in the resource owner's user-agents (such as browser) session and compare it with the redirect URI that the authorization response was received at, where, if the URIs do not match, the client shall terminate the process with error;
 5. (withdrawn); and
@@ -230,12 +230,12 @@ Further, if it is desired to obtain a persistent identifier of the authenticated
 
 If `openid` is not in the `scope` value, then the public client
 
-9. shall include the `state` parameter defined in Section 4.1.1 of [RFC6749];
+9. shall include the `state` parameter defined in Section 4.1.1 of [RFC 6749];
 10. shall verify that the `scope` received in the token response is either an exact match,
 or contains a subset of the `scope` sent in the authorization request if the request was passed in the front channel and was not integrity protected; and
-11. shall only use authorization server metadata obtained from the metadata document published by the authorization server at its well known endpoint as defined in [OIDD] or [RFC8414].
+11. shall only use authorization server metadata obtained from the metadata document published by the authorization server at its well known endpoint as defined in [OIDD] or [RFC 8414].
 
-    **NOTE**: Adherence to [RFC7636] means that the token request includes `code_verifier` parameter in the request.
+    **NOTE**: Adherence to [RFC 7636] means that the token request includes `code_verifier` parameter in the request.
 
 
 ### 5.2.4 Confidential client
@@ -243,7 +243,7 @@ or contains a subset of the `scope` sent in the authorization request if the req
 In addition to the provisions for a public client, a confidential client
 
 1. shall support the following methods to authenticate against the token endpoint:
-    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC8705], and
+    1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC 8705], and
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
 1. shall use RSA keys with a minimum 2048 bits if using RSA cryptography; 
 1. shall use elliptic curve keys with a minimum of 160 bits if using elliptic curve cryptography; and
@@ -262,40 +262,40 @@ The FAPI endpoints are OAuth 2.0 protected resource endpoints that return protec
 
 The resource server with the FAPI endpoints
 
-1. shall support the use of the HTTP GET method as in Section 4.3.1 of [RFC7231];
-1. shall accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750];
-1. shall not accept access tokens in the query parameters stated in Section 2.3 of OAuth 2.0 Bearer Token Usage [RFC6750];
+1. shall support the use of the HTTP GET method as in Section 4.3.1 of [RFC 7231];
+1. shall accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC 6750];
+1. shall not accept access tokens in the query parameters stated in Section 2.3 of OAuth 2.0 Bearer Token Usage [RFC 6750];
 1. shall verify that the access token is neither expired nor revoked;
 1. shall verify that the scope associated with the access token authorizes access to the resource it is representing;
 1. shall identify the associated entity to the access token;
-1. shall only return the resource identified by the combination of the entity implicit in the access and the granted scope and otherwise return errors as in Section 3.1 of [RFC6750];
+1. shall only return the resource identified by the combination of the entity implicit in the access and the granted scope and otherwise return errors as in Section 3.1 of [RFC 6750];
 1. shall encode the response in UTF-8 if applicable; 
 1. shall send the `Content-type` HTTP header `Content-Type: application/json` if applicable;
-1. shall send the server date in HTTP Date header as in Section 7.1.1.2 of [RFC7231];
-1. shall set the response header `x-fapi-interaction-id` to the value received from the corresponding FAPI client request header or to an [RFC4122] UUID value if the request header was not provided to track the interaction, e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
+1. shall send the server date in HTTP Date header as in Section 7.1.1.2 of [RFC 7231];
+1. shall set the response header `x-fapi-interaction-id` to the value received from the corresponding FAPI client request header or to an [RFC 4122] UUID value if the request header was not provided to track the interaction, e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
 1. shall log the value of `x-fapi-interaction-id` in the log entry; and
 1. shall not reject requests with a `x-fapi-customer-ip-address` header containing a
 valid IPv4 or IPv6 address.
 
     **NOTE**: While this document does not specify the exact method to obtain the entity associated with the
-    access token and the granted scope, the protected resource can use OAuth Token Introspection [RFC7662].
+    access token and the granted scope, the protected resource can use OAuth Token Introspection [RFC 7662].
 
     Further, the resource server
 
 1. should support the use of Cross Origin Resource Sharing (CORS) [CORS] and or other methods as appropriate to enable JavaScript clients to access the endpoint if it decides to provide access to JavaScript clients.
 
-    **NOTE**: Providing access to JavaScript clients has other security implications. Before supporting those clients [RFC6819] should be consulted.
+    **NOTE**: Providing access to JavaScript clients has other security implications. Before supporting those clients [RFC 6819] should be consulted.
 
 ### 6.2.2 Client provisions
 
 The client supporting this document
 
-1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]; and 
+1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC 6750]; and 
 1. (withdrawn);
 
     Further, the client
 
-1. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
+1. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC 7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
 1. may send the customer’s IP address if this data is available in the `x-fapi-customer-ip-address` header, e.g., `x-fapi-customer-ip-address: 2001:DB8::1893:25c8:1946` or  `x-fapi-customer-ip-address: 198.51.100.119`; and
 1. may send the `x-fapi-interaction-id` request header, in which case the value shall be an 
 RFC4122 UUID to the server to help correlate log entries between client and server, 
@@ -311,9 +311,9 @@ As confidential information is being exchanged, all interactions shall be encryp
 The recommendations for Secure Use of Transport Layer Security in [BCP195] shall be followed, with the following additional requirements:
 
 1. TLS version 1.2 or later shall be used for all communications.
-1. A TLS server certificate check shall be performed, as per [RFC6125].
+1. A TLS server certificate check shall be performed, as per [RFC 6125].
 
-Endpoints for the use by web browsers should use mechanisms to ensure that connections cannot be downgraded using TLS stripping attacks. A preloaded HTTP Strict Transport Security policy (see [PRELOAD] and [RFC6797]) can be used for this purpose. Some top-level domains, like `.bank` and `.insurance`, have set such a policy and therefore protect all second-level domains below them.
+Endpoints for the use by web browsers should use mechanisms to ensure that connections cannot be downgraded using TLS stripping attacks. A preloaded HTTP Strict Transport Security policy (see [PRELOAD] and [RFC 6797]) can be used for this purpose. Some top-level domains, like `.bank` and `.insurance`, have set such a policy and therefore protect all second-level domains below them.
 
 For a comprehensive protection against network attackers, all
 endpoints should additionally use DNSSEC to protect against DNS
@@ -324,7 +324,7 @@ domain-validated TLS certificates.
 organization validated (OV) or extended validation (EV) TLS
 certificates, rogue domain-validated certificates can be used to
 impersonate the endpoints and conduct man-in-the-middle attacks.
-CAA records [RFC8659] can help to mitigate this risk.
+CAA records [RFC 8659] can help to mitigate this risk.
 
 ## 7.2 Message source authentication failure
 
@@ -439,7 +439,7 @@ are not specific to this document. Implementers are advised to
 perform a thorough privacy impact assessment and manage identified risks appropriately.
 
 **NOTE**: Implementers can consult documents like
-[ISO29100] and [ISO/IEC 29134] for this purpose. 
+[ISO/IEC 29100] and [ISO/IEC 29134] for this purpose. 
 
 Privacy threats to OAuth and OpenID Connect implementations include the following: 
 
@@ -512,37 +512,37 @@ The following people contributed to this document:
 
 [ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
 
-* [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
+* [ISO/IEC 29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
+[ISO/IEC 29100]: https://www.iso.org/standard/85938.html
 
 * [ISO/IEC 29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 
 [ISO/IEC 29134]: https://www.iso.org/standard/86012.html
 
-* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+* [RFC 6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
-[RFC6750]: https://tools.ietf.org/html/rfc6750
+[RFC 6750]: https://tools.ietf.org/html/rfc6750
 
-* [RFC6797] HTTP Strict Transport Security (HSTS)
+* [RFC 6797] HTTP Strict Transport Security (HSTS)
 
-[RFC6797]: https://tools.ietf.org/html/rfc6797
+[RFC 6797]: https://tools.ietf.org/html/rfc6797
 
-* [RFC7662] OAuth 2.0 Token Introspection
+* [RFC 7662] OAuth 2.0 Token Introspection
 
-[RFC7662]: https://tools.ietf.org/html/rfc7662
+[RFC 7662]: https://tools.ietf.org/html/rfc7662
 
-* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+* [RFC 6819] OAuth 2.0 Threat Model and Security Considerations
 
-[RFC6819]: https://tools.ietf.org/html/rfc6819
+[RFC 6819]: https://tools.ietf.org/html/rfc6819
 
-* [RFC8414] OAuth 2.0 Authorization Server Metadata
+* [RFC 8414] OAuth 2.0 Authorization Server Metadata
 
-[RFC8414]: https://tools.ietf.org/html/rfc8414 
+[RFC 8414]: https://tools.ietf.org/html/rfc8414 
 
-* [RFC8659] DNS Certification Authority Authorization (CAA) Resource Record
+* [RFC 8659] DNS Certification Authority Authorization (CAA) Resource Record
 
-[RFC8659]: https://tools.ietf.org/html/rfc8659
+[RFC 8659]: https://tools.ietf.org/html/rfc8659
 
 * [PRELOAD] HSTS Preload List Submission
 
@@ -554,7 +554,7 @@ The following people contributed to this document:
 
 * [CORS] Cross-Origin Resource Sharing
 
-[CORS] https://www.w3.org/TR/2020/SPSD-cors-20200602/
+[CORS]: https://www.w3.org/TR/2020/SPSD-cors-20200602/
 
 
 # Appendix A Changes {-}
@@ -573,6 +573,6 @@ To be removed at the publication time.
       authorization response information leakage mitigation
     * #405 - Use https for document references
     * #601 - Removed subclause 8.1 title 
-    * #409 - Rename [MTLS] as [RFC8705]
+    * #409 - Rename [MTLS] as [RFC 8705]
     * #458 - Clarifies that authorization server require response_type = code or code, id_token
 
