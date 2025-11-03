@@ -439,7 +439,7 @@ are not specific to this document. Implementers are advised to
 perform a thorough privacy impact assessment and manage identified risks appropriately.
 
 **NOTE**: Implementers can consult documents like
-[ISO29100] and [ISO29134] for this purpose. 
+[ISO29100] and [ISO/IEC 29134] for this purpose. 
 
 Privacy threats to OAuth and OpenID Connect implementations include the following: 
 
@@ -516,9 +516,9 @@ The following people contributed to this document:
 
 [ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
-* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+* [ISO/IEC 29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
 
-[ISO29134] https://www.iso.org/standard/86012.html
+[ISO/IEC 29134]: https://www.iso.org/standard/86012.html
 
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
