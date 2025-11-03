@@ -93,7 +93,7 @@ The following documents are referred to in the text in such a way that some or a
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
-[OIDD] -  OpenID Connect Discovery 1.0 incorporating errata set 1
+[OIDD] -  OpenID Connect Discovery 1.0
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
