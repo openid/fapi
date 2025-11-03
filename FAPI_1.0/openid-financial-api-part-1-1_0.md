@@ -85,7 +85,7 @@ The following documents are referred to in the text in such a way that some or a
 
 [BCP195]: https://tools.ietf.org/html/bcp195
 
-[OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
+[OIDC] - OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
