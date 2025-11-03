@@ -90,9 +90,9 @@ The following documents are referred to in the text in such a way that some or a
 
 [RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[RFC9126]  OAuth 2.0 JWT Secured Authorization Request
+[RFC9101]  OAuth 2.0 JWT Secured Authorization Request
 
-[RFC9126]: https://www.rfc-editor.org/rfc/rfc9101.html
+[RFC9101]: https://www.rfc-editor.org/rfc/rfc9101.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
