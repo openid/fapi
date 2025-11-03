@@ -62,37 +62,37 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[Part1] FAPI Security Profile 1.0 - Part 1: Baseline
+[Part1]  FAPI Security Profile 1.0 - Part 1: Baseline
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
-[RFC6749] - The OAuth 2.0 Authorization Framework
+[RFC6749]  The OAuth 2.0 Authorization Framework
 
 [RFC6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
+[RFC7636]  Proof Key for Code Exchange by OAuth Public Clients
 
 [RFC7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
+[OIDC]  OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705]  OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
-[JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM]  JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
-[PAR] - OAuth 2.0 Pushed Authorization Requests
+[RFC9126]  OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
+[RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[JAR] - OAuth 2.0 JWT Secured Authorization Request
+[RFC9101]  OAuth 2.0 JWT Secured Authorization Request
 
-[JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
+[RFC9101]: https://www.rfc-editor.org/rfc/rfc9101.html
 
 # 3. Terms and definitions
 For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
@@ -285,7 +285,7 @@ In addition, the confidential client
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
-1. shall send a `nbf` claim in the request object;
+1. shall send an `nbf` claim in the request object;
 1. shall use [RFC7636] with `S256` as the code challenge method if using [PAR]; and
 1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [JAR], if using [PAR].
 
@@ -400,7 +400,7 @@ The use of a `request` object or `request_uri` in the authorization request will
 The IdP confusion attack reported in [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] is an example of this kind of attack.
 
 ### 8.4.3 Authorization response parameter injection attack
-This attack occurs when the victim and attacker use the same relying party client. The attacker is somehow able to
+This attack occurs when the victim and attacker use the same RP client. The attacker is somehow able to
 capture the authorization code and state from the victim's authorization response and uses them in his own
 authorization response. 
 
@@ -416,7 +416,7 @@ As confidential information is being exchanged, all interactions shall be encryp
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. Only the cipher suites recommended in [BCP195] shall be permitted.
-1. For the `authorization_endpoint`, the authorization server MAY allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
    **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
@@ -508,8 +508,6 @@ could be used in selecting which key to use to verify a message signature:
 
 # 9. Privacy considerations
 
-## 9.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
@@ -596,6 +594,9 @@ The following people contributed to this document:
 [ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
 
 * [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+
+[ISO29134: (https://www.iso.org/obp/ui/#iso:std:iso-iec:29134:ed-2:v1:en
+
 * [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
 [RFC6750]: https://tools.ietf.org/html/rfc6750
