@@ -400,7 +400,7 @@ The use of a `request` object or `request_uri` in the authorization request will
 The IdP confusion attack reported in [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] is an example of this kind of attack.
 
 ### 8.4.3 Authorization response parameter injection attack
-This attack occurs when the victim and attacker use the same relying party client. The attacker is somehow able to
+This attack occurs when the victim and attacker use the same RP client. The attacker is somehow able to
 capture the authorization code and state from the victim's authorization response and uses them in his own
 authorization response. 
 
