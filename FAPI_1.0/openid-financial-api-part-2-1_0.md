@@ -236,7 +236,7 @@ In addition, the authorization server
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
 1. shall only use the parameters included in the signed request object passed via the `request` or `request_uri` parameter;
-1. may support the pushed authorization request endpoint as described in [PAR];
+1. may support the pushed authorization request endpoint as described in [RFC9126];
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2.0-4):
@@ -245,11 +245,11 @@ In addition, the authorization server
 1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
 1. shall not support public clients;
 1. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
-1. shall require [PAR] requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
+1. shall require PAR requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
 
 **NOTE:** MTLS is currently the only mechanism for sender-constrained access tokens that has been widely deployed. Future versions of this specification are likely to allow other mechanisms for sender-constrained access tokens.
 
-**NOTE:** [PAR] does not present any additional security concerns that necessitated the requirement to use PKCE - the reason PKCE is not required in other cases is merely to be backwards compatible with earlier drafts of this standard.
+**NOTE:** PAR does not present any additional security concerns that necessitated the requirement to use PKCE - the reason PKCE is not required in other cases is merely to be backwards compatible with earlier drafts of this standard.
 
 **EXAMPLE** 
 
@@ -288,7 +288,7 @@ In addition, the confidential client
 1. (withdrawn);
 1. (moved 5.2.3.1);
 1. shall send all parameters inside the authorization request's signed request object;
-1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [PAR];
+1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [RFC9126];
 1. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
