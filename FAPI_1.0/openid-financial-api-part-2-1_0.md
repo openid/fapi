@@ -104,54 +104,34 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 # 4. Symbols and abbreviated terms
 
-**API** – Application Programming Interface
+# 4. Symbols and abbreviated terms
 
-**CSRF** – Cross Site Request Forgery
-
-**DN** – Distinguished Name
-
-**HTTP** – Hyper Text Transfer Protocol
-
-**HTTPS** – Hypertext Transfer Protocol Secure
-
-**JAR** – JWT-Secured Authorization Request
-
-**JARM** – JWT Secured Authorization Response Mode
-
-**JOSE** – Javascript Object Signing and Encryption
-
-**JSON** –  JavaScript Object Notation
-
-**JWE** – JSON Web Encryption
-
-**JWK** – JSON Web Key
-
-**JWKS** – JSON Web Key Sets
-
-**JWS** – JSON Web Signature
-
-**JWT** – JSON Web Token
-
-**MTLS** – Mutual Transport Layer Security
-
-**OIDF** – OpenID Foundation
-
-**PAR** – Pushed Authorization Requests
-
-**PII** – Personally Identifiable Information
-
-**PKCE** – Proof Key for Code Exchange
-
-**REST** – Representational State Transfer
-
-**RP** – Relying Party
-
-**TLS** – Transport Layer Security
-
-**URI** – Uniform Resource Identifier
-
-**URL** – Uniform Resource Locator
-
+--------- --- ---------------------------------------------
+**API**       application programming interface
+**CSRF**      cross site request forgery
+**DN**        distinguished name
+**HTTP**      hyper text transfer protocol
+**HTTPS**     hypertext transfer protocol secure
+**JAR**       JWT-secured authorization request
+**JARM**      JWT secured authorization response mode
+**JOSE**      javascript object signing and encryption
+**JSON**      javascript object notation
+**JWE**       JSON web encryption
+**JWK**       JSON web key
+**JWKS**      JSON web key sets
+**JWS**       JSON web signature
+**JWT**       JSON web token
+**MTLS**      mutual transport layer security
+**OIDF**      OpenID foundation
+**PAR**       pushed authorization requests
+**PII**       personally identifiable information
+**PKCE**      proof key for code exchange
+**REST**      representational state transfer
+**RP**        relying party
+**TLS**       transport layer security
+**URI**       uniform resource identifier
+**URL**       uniform resource locator
+--------- --- ---------------------------------------------
 # 5. Advanced security profile
 
 ## 5.1 Authorization response security
