@@ -62,92 +62,76 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[Part1] FAPI Security Profile 1.0 - Part 1: Baseline
+[Part1]  FAPI Security Profile 1.0 - Part 1: Baseline
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
-[RFC6749] - The OAuth 2.0 Authorization Framework
+[RFC6749]  The OAuth 2.0 Authorization Framework
 
 [RFC6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC7636] - Proof Key for Code Exchange by OAuth Public Clients
+[RFC7636]  Proof Key for Code Exchange by OAuth Public Clients
 
 [RFC7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC] - OpenID Connect Core 1.0 incorporating errata set 1
+[OIDC]  OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705] - OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens
+[RFC8705]  OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
 [RFC8705]: https://tools.ietf.org/html/rfc8705
 
-[JARM] - JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM]  JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
-[PAR] - OAuth 2.0 Pushed Authorization Requests
+[RFC9126]  OAuth 2.0 Pushed Authorization Requests
 
-[PAR]: https://www.rfc-editor.org/rfc/rfc9126.html
+[RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[JAR] - OAuth 2.0 JWT Secured Authorization Request
+[RFC9101]  OAuth 2.0 JWT Secured Authorization Request
 
-[JAR]: https://www.rfc-editor.org/rfc/rfc9101.html
+[RFC9101]: https://www.rfc-editor.org/rfc/rfc9101.html
+
+[ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
+
+[ISO29100]: https://www.iso.org/standard/85938.html
 
 # 3. Terms and definitions
-For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OpenID Connect Core][OIDC] and [ISO29100] apply.
+For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OIDC] and [ISO29100] apply.
 
 
 # 4. Symbols and abbreviated terms
 
-**API** – Application Programming Interface
+# 4. Symbols and abbreviated terms
 
-**CSRF** – Cross Site Request Forgery
-
-**DN** – Distinguished Name
-
-**HTTP** – Hyper Text Transfer Protocol
-
-**HTTPS** – Hypertext Transfer Protocol Secure
-
-**JAR** – JWT-Secured Authorization Request
-
-**JARM** – JWT Secured Authorization Response Mode
-
-**JOSE** – Javascript Object Signing and Encryption
-
-**JSON** –  JavaScript Object Notation
-
-**JWE** – JSON Web Encryption
-
-**JWK** – JSON Web Key
-
-**JWKS** – JSON Web Key Sets
-
-**JWS** – JSON Web Signature
-
-**JWT** – JSON Web Token
-
-**MTLS** – Mutual Transport Layer Security
-
-**OIDF** – OpenID Foundation
-
-**PAR** – Pushed Authorization Requests
-
-**PII** – Personally Identifiable Information
-
-**PKCE** – Proof Key for Code Exchange
-
-**REST** – Representational State Transfer
-
-**RP** – Relying Party
-
-**TLS** – Transport Layer Security
-
-**URI** – Uniform Resource Identifier
-
-**URL** – Uniform Resource Locator
-
+--------- --- ---------------------------------------------
+**API**       application programming interface
+**CSRF**      cross site request forgery
+**DN**        distinguished name
+**HTTP**      hyper text transfer protocol
+**HTTPS**     hypertext transfer protocol secure
+**JAR**       JWT-secured authorization request
+**JARM**      JWT secured authorization response mode
+**JOSE**      javascript object signing and encryption
+**JSON**      javascript object notation
+**JWE**       JSON web encryption
+**JWK**       JSON web key
+**JWKS**      JSON web key sets
+**JWS**       JSON web signature
+**JWT**       JSON web token
+**MTLS**      mutual transport layer security
+**OIDF**      OpenID foundation
+**PAR**       pushed authorization requests
+**PII**       personally identifiable information
+**PKCE**      proof key for code exchange
+**REST**      representational state transfer
+**RP**        relying party
+**TLS**       transport layer security
+**URI**       uniform resource identifier
+**URL**       uniform resource locator
+--------- --- ---------------------------------------------
 # 5. Advanced security profile
 
 ## 5.1 Authorization response security
@@ -232,7 +216,7 @@ In addition, the authorization server
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
 1. shall only use the parameters included in the signed request object passed via the `request` or `request_uri` parameter;
-1. may support the pushed authorization request endpoint as described in [PAR];
+1. may support the pushed authorization request endpoint as described in [RFC9126];
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2.0-4):
@@ -241,11 +225,15 @@ In addition, the authorization server
 1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
 1. shall not support public clients;
 1. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
-1. shall require [PAR] requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
+1. shall require PAR requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
 
 **NOTE:** MTLS is currently the only mechanism for sender-constrained access tokens that has been widely deployed. Future versions of this specification are likely to allow other mechanisms for sender-constrained access tokens.
 
-**NOTE:** [PAR] does not present any additional security concerns that necessitated the requirement to use PKCE - the reason PKCE is not required in other cases is merely to be backwards compatible with earlier drafts of this standard.
+**NOTE:** PAR does not present any additional security concerns that necessitated the requirement to use PKCE - the reason PKCE is not required in other cases is merely to be backwards compatible with earlier drafts of this standard.
+
+**EXAMPLE** 
+
+see Annex A for additional information. 
 
 #### 5.2.2.1 ID Token as detached signature
 
@@ -280,12 +268,12 @@ In addition, the confidential client
 1. (withdrawn);
 1. (moved 5.2.3.1);
 1. shall send all parameters inside the authorization request's signed request object;
-1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [PAR];
+1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [RFC9126];
 1. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
-1. shall send a `nbf` claim in the request object;
+1. shall send an `nbf` claim in the request object;
 1. shall use [RFC7636] with `S256` as the code challenge method if using [PAR]; and
 1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [JAR], if using [PAR].
 
@@ -400,7 +388,7 @@ The use of a `request` object or `request_uri` in the authorization request will
 The IdP confusion attack reported in [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] is an example of this kind of attack.
 
 ### 8.4.3 Authorization response parameter injection attack
-This attack occurs when the victim and attacker use the same relying party client. The attacker is somehow able to
+This attack occurs when the victim and attacker use the same RP client. The attacker is somehow able to
 capture the authorization code and state from the victim's authorization response and uses them in his own
 authorization response. 
 
@@ -416,7 +404,7 @@ As confidential information is being exchanged, all interactions shall be encryp
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. Only the cipher suites recommended in [BCP195] shall be permitted.
-1. For the `authorization_endpoint`, the authorization server MAY allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
    **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
@@ -508,8 +496,6 @@ could be used in selecting which key to use to verify a message signature:
 
 # 9. Privacy considerations
 
-## 9.1 Introduction
-
 There are many factors to be considered in terms of privacy 
 when implementing this document. However, since this document 
 is a profile of OAuth and OpenID Connect, all of them 
@@ -542,119 +528,24 @@ what data will be released to the RP).
 * (Data leak from resource) Some resource servers store personal data. If a resource server is compromised, these data can leak or be modified. 
 * (Data leak from clients) Some clients store personal data. If the client is compromised, these data can leak or be modified. 
 
-These can be mitigated by choosing appropriate options in OAuth or OpenID, or by introducing some operational rules. 
+These can be mitigated by choosing appropriate options in OAuth or OpenID Connect, or by introducing some operational rules. 
 For example, "Attacker observing personal data in authorization request" can be mitigated by either using authorization request by reference 
 using `request_uri` or by encrypting the request object. 
 Similarly, "Attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or JARM response. 
 
-# 10. Acknowledgement
-
-The following people contributed to this document:
-
-* Nat Sakimura (NAT Consulting) -- Chair, Editor
-* Anoop Saxena (Intuit) -- Co-chair, FS-ISAC Liaison
-* Anthony Nadalin (Microsoft) -- Co-chair, SC 27 Liaison
-* Edmund Jay (Illumila) -- Co-editor
-* Dave Tonge (Moneyhub) -- Co-chair, UK Implementation Entity Liaison
-* Paul A. Grassi (NIST) -- X9 Liaison
-* Joseph Heenan (Authlete)
-* Sascha H. Preibisch (CA)
-* Henrik Biering (Peercraft)
-* Anton Taborszky (Deutsche Telecom)
-* John Bradley (Yubico)
-* Tom Jones (Independent) 
-* Axel Nennker (Deutsche Telekom)
-* Daniel Fett (yes.com)
-* Torsten Lodderstedt (yes.com)
-* Ralph Bragg (Raidiam)
-* Brian Campbell (Ping Identity) 
-* Dima Postnikov (Independent)
-* Stuart Low (Biza.io)
-* Takahiko Kawasaki (Authlete)
-* Vladimir Dzhuvinov (Connect2Id)
-* Chris Michael (Open Banking)
-* Freddi Gyara (Open Banking)
-* Rob Otto (Ping Identity)
-* Francis Pouatcha (adorsys)
-* Kosuke Koiwai (KDDI)
-* Bjorn Hjelm (Verizon)
-* Lukasz Jaromin (Cloudentity)
-* James Manger
-
-# 11. Bibliography
-
-* [ISODIR2] - ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents
-
-[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
-
-* [ISODIR2] ISO/IEC Directives Part 2
-
-[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
-
-* [ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
-
-[ISO29100]: https://standards.iso.org/ittf/PubliclyAvailableStandards/c045123_ISO_IEC_29100_2011.zip
-
-* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
-* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
-
-[RFC6750]: https://tools.ietf.org/html/rfc6750
-
-* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
-
-[RFC6819]: https://tools.ietf.org/html/rfc6819 
-
-* [RFC7519] JSON Web Token (JWT)
-
-[RFC7519]:https://tools.ietf.org/html/rfc7519
-
-* [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
-
-[RFC7591]:https://tools.ietf.org/html/rfc7591 
-
-* [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
-
-[RFC7592]:https://tools.ietf.org/html/rfc7592 
-
-* [RFC8414] OAuth 2.0 Authorization Server Metadata
-
-[RFC8414]: https://tools.ietf.org/html/rfc8414
-
-* [OIDD] OpenID Connect Discovery 1.0 incorporating errata set 1
-
-[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
-
-* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
-
-[BCP195]: https://tools.ietf.org/html/bcp195
-
-* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
-
-[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
-
-* [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
-
-[FAPISEC]: https://ieeexplore.ieee.org/document/8835218
-
-* [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
-
-[OAUTHSEC]: https://dl.acm.org/doi/10.1145/2976749.2978385
-
-# 12. IANA considerations
-## 12.1 Additions to JWT claims registry
+# 10. IANA considerations
+## 10.1 Additions to JWT claims registry
 This specification adds the following values to the "JSON Web Token Claims" registry 
 established by [RFC7519].
 
-### 12.1.1. Registry contents
+### 10.1.1. Registry contents
 
 * Claim name: s_hash
 * Claim Description: State hash value
 * Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
-* Reference: Section 5 of [[ this specification ]]
+* Reference: Section 5 of [[ this document ]]
 
-
-
-# Appendix A. Examples
+# Annex A (informative) Examples 
 
 ## A.0 JWK for examples
 
@@ -876,7 +767,41 @@ which when decoded has the following body:
     }
 ```
 
-# Appendix B Changes {-}
+# Annex B (Informative) Acknowledgement {-}
+
+The following people contributed to this document:
+
+* Nat Sakimura (NAT Consulting) -- Chair, Editor
+* Anoop Saxena (Intuit) -- Co-chair, FS-ISAC Liaison
+* Anthony Nadalin (Microsoft) -- Co-chair, SC 27 Liaison
+* Edmund Jay (Illumila) -- Co-editor
+* Dave Tonge (Moneyhub) -- Co-chair, UK Implementation Entity Liaison
+* Paul A. Grassi (NIST) -- X9 Liaison
+* Joseph Heenan (Authlete)
+* Sascha H. Preibisch (CA)
+* Henrik Biering (Peercraft)
+* Anton Taborszky (Deutsche Telecom)
+* John Bradley (Yubico)
+* Tom Jones (Independent) 
+* Axel Nennker (Deutsche Telekom)
+* Daniel Fett (yes.com)
+* Torsten Lodderstedt (yes.com)
+* Ralph Bragg (Raidiam)
+* Brian Campbell (Ping Identity) 
+* Dima Postnikov (Independent)
+* Stuart Low (Biza.io)
+* Takahiko Kawasaki (Authlete)
+* Vladimir Dzhuvinov (Connect2Id)
+* Chris Michael (Open Banking)
+* Freddi Gyara (Open Banking)
+* Rob Otto (Ping Identity)
+* Francis Pouatcha (adorsys)
+* Kosuke Koiwai (KDDI)
+* Bjorn Hjelm (Verizon)
+* Lukasz Jaromin (Cloudentity)
+* James Manger
+
+# Annex C Changes {-}
 * 2023-06-25
     * Applied changes needed to convert to pandoc
     * Changed the title to incorporate "errata"
@@ -888,3 +813,53 @@ which when decoded has the following body:
     * #613 - Remove empty subclauses 5.2.4 and 5.2.5
     * #612 - Fixed hanging paragraph in 5.1 and renumbered subclauses in 5.1.x
     * #611 - 8.3.5 content moved to previously empty 8.3.4
+    
+# Bibliography
+
+* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+
+[ISO29134]: https://www.iso.org/standard/86012.html
+
+* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+
+[RFC6750]: https://tools.ietf.org/html/rfc6750
+
+* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+
+[RFC6819]: https://tools.ietf.org/html/rfc6819 
+
+* [RFC7519] JSON Web Token (JWT)
+
+[RFC7519]:https://tools.ietf.org/html/rfc7519
+
+* [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
+
+[RFC7591]:https://tools.ietf.org/html/rfc7591 
+
+* [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
+
+[RFC7592]:https://tools.ietf.org/html/rfc7592 
+
+* [RFC8414] OAuth 2.0 Authorization Server Metadata
+
+[RFC8414]: https://tools.ietf.org/html/rfc8414
+
+* [OIDD] OpenID Connect Discovery 1.0
+
+[OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
+
+* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+
+[BCP195]: https://tools.ietf.org/html/bcp195
+
+* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
+
+[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
+
+* [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
+
+[FAPISEC]: https://ieeexplore.ieee.org/document/8835218
+
+* [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
+
+[OAUTHSEC]: https://doi.org/10.1145/2976749.2978385
