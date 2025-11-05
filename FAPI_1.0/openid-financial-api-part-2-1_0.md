@@ -854,7 +854,7 @@ The following people contributed to this document:
 
 * [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
 
-[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
+[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://ieeexplore.ieee.org/document/7961984
 
 * [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
 
