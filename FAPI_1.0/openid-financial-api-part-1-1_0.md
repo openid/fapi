@@ -468,7 +468,7 @@ For example, "attacker observing personal data in authorization request" can be 
 using `request_uri` or by encrypting the request object. 
 Similarly, "attacker observing personal data in authorization endpoint response" can be mitigated by encrypting the ID Token or [JARM] response. 
 
-# 9. Acknowledgement
+# Annex A (Informative) Acknowledgement {-}
 
 The following people contributed to this document:
 
@@ -501,6 +501,26 @@ The following people contributed to this document:
 * Bjorn Hjelm (Verizon)
 * Lukasz Jaromin (Cloudentity)
 * James Manger
+
+# Appendix B (Informative) Changes {-}
+
+To be removed at the publication time. 
+
+* -02 
+    * Fixing the editorial issues pointed out by ISO. 
+* -01
+    * Reformatting to the pandoc markdown
+    * #600 - Changed Financial-grade API to FAPI
+    * Changed the title to incorporate "errata"
+    * #494 - 5.2.3-10 clarifies requirement for clients to verify the token endpoint's scope response if using 
+      non-integrity protected front-channel requests
+    * #428 - Recommends usage of [Part2] if authorization request encryption is desired and [JARM] for 
+      authorization response information leakage mitigation
+    * #405 - Use https for document references
+    * #601 - Removed subclause 8.1 title 
+    * #409 - Rename [MTLS] as [RFC 8705]
+    * #458 - Clarifies that authorization server require response_type = code or code, id_token
+
 
 # Bibliography {-}
 
@@ -557,22 +577,4 @@ The following people contributed to this document:
 [CORS]: https://www.w3.org/TR/2020/SPSD-cors-20200602/
 
 
-# Appendix A Changes {-}
-
-To be removed at the publication time. 
-
-* -02 
-    * Fixing the editorial issues pointed out by ISO. 
-* -01
-    * Reformatting to the pandoc markdown
-    * #600 - Changed Financial-grade API to FAPI
-    * Changed the title to incorporate "errata"
-    * #494 - 5.2.3-10 clarifies requirement for clients to verify the token endpoint's scope response if using 
-      non-integrity protected front-channel requests
-    * #428 - Recommends usage of [Part2] if authorization request encryption is desired and [JARM] for 
-      authorization response information leakage mitigation
-    * #405 - Use https for document references
-    * #601 - Removed subclause 8.1 title 
-    * #409 - Rename [MTLS] as [RFC 8705]
-    * #458 - Clarifies that authorization server require response_type = code or code, id_token
 
