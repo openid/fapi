@@ -62,44 +62,44 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[Part1]  FAPI Security Profile 1.0 - Part 1: Baseline
+[Part1],  FAPI Security Profile 1.0 - Part 1: Baseline
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
-[RFC6749]  The OAuth 2.0 Authorization Framework
+[RFC 6749],  The OAuth 2.0 Authorization Framework
 
-[RFC6749]: https://tools.ietf.org/html/rfc6749
+[RFC 6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC7636]  Proof Key for Code Exchange by OAuth Public Clients
+[RFC 7636],  Proof Key for Code Exchange by OAuth Public Clients
 
-[RFC7636]: https://tools.ietf.org/html/rfc7636
+[RFC 7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC]  OpenID Connect Core 1.0
+[OIDC], OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC8705]  OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+[RFC 8705], OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
-[RFC8705]: https://tools.ietf.org/html/rfc8705
+[RFC 8705]: https://tools.ietf.org/html/rfc8705
 
-[JARM]  JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+[JARM], JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) incorporating errata set 1
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
-[RFC9126]  OAuth 2.0 Pushed Authorization Requests
+[RFC 9126],  OAuth 2.0 Pushed Authorization Requests
 
-[RFC9126]: https://www.rfc-editor.org/rfc/rfc9126.html
+[RFC 9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[RFC9101]  OAuth 2.0 JWT Secured Authorization Request
+[RFC 9101],  OAuth 2.0 JWT Secured Authorization Request
 
-[RFC9101]: https://www.rfc-editor.org/rfc/rfc9101.html
+[RFC 9101]: https://www.rfc-editor.org/rfc/rfc9101.html
 
-[ISO29100] ISO/IEC 29100 Information technology — Security techniques — Privacy framework
+[ISO/IEC 29100], ISO/IEC 29100 Information technology — Security techniques — Privacy framework
 
-[ISO29100]: https://www.iso.org/standard/85938.html
+[ISO/IEC 29100]: https://www.iso.org/standard/85938.html
 
 # 3. Terms and definitions
-For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RFC7636], [OIDC] and [ISO29100] apply.
+For the purpose of this document, the terms defined in [RFC 6749], [RFC 6750], [RFC 7636], [OIDC] and [ISO/IEC 29100] apply.
 
 
 # 4. Symbols and abbreviated terms
@@ -140,7 +140,7 @@ For the purpose of this document, the terms defined in [RFC6749], [RFC6750], [RF
 
 The OIDF FAPI security profile specifies security requirements
 for high risk API resources protected by the OAuth 2.0 Authorization Framework that 
-consists of [RFC6749], [RFC6750], [RFC7636], and other specifications.
+consists of [RFC 6749], [RFC 6750], [RFC 7636], and other specifications.
 
 There are different levels of risks associated with access to these APIs.
 For example, read and write access to a bank API has a higher financial risk than read-only access. As
@@ -149,8 +149,8 @@ APIs are also different.
 
 This profile describes security provisions for the server and client that are appropriate for highly secured APIs by defining the measures to mitigate:
 
-* attacks that leverage the weak binding of endpoints in [RFC6749] (e.g. malicious endpoint attacks, IdP mix-up attacks), and
-* attacks that modify authorization requests and responses unprotected in [RFC6749].
+* attacks that leverage the weak binding of endpoints in [RFC 6749] (e.g. malicious endpoint attacks, IdP mix-up attacks), and
+* attacks that modify authorization requests and responses unprotected in [RFC 6749].
 
 This profile does not support public clients.
 
@@ -200,7 +200,7 @@ As a profile of the OAuth 2.0 Authorization Framework, this document mandates th
 #### 5.2.2.0 Authorization server provisions
 The authorization server shall support the provisions specified in clause 5.2.2.0 of 
 [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], with the exception
-that Section 5.2.2.0-7 (enforcement of [RFC7636]) is not required.
+that Section 5.2.2.0-7 (enforcement of [RFC 7636]) is not required.
 
 In addition, the authorization server
 
@@ -211,12 +211,12 @@ In addition, the authorization server
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
 1. shall only issue sender-constrained access tokens;
-1. shall support [RFC8705] as mechanism for constraining the legitimate senders of access tokens;
+1. shall support [RFC 8705] as mechanism for constraining the legitimate senders of access tokens;
 1. (withdrawn);
 1. (moved to 5.2.2.1);
 1. (moved to 5.2.2.1);
 1. shall only use the parameters included in the signed request object passed via the `request` or `request_uri` parameter;
-1. may support the pushed authorization request endpoint as described in [RFC9126];
+1. may support the pushed authorization request endpoint as described in [RFC 9126];
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2.0-4):
@@ -225,7 +225,7 @@ In addition, the authorization server
 1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
 1. shall not support public clients;
 1. shall require the request object to contain an `nbf` claim that is no longer than 60 minutes in the past; and
-1. shall require PAR requests, if supported, to use PKCE ([RFC7636]) with `S256` as the code challenge method.
+1. shall require PAR requests, if supported, to use PKCE ([RFC 7636]) with `S256` as the code challenge method.
 
 **NOTE:** MTLS is currently the only mechanism for sender-constrained access tokens that has been widely deployed. Future versions of this specification are likely to allow other mechanisms for sender-constrained access tokens.
 
@@ -260,7 +260,7 @@ A confidential client shall support the provisions specified in clause 5.2.3 and
 
 In addition, the confidential client
 
-1. shall support [RFC8705] as mechanism for sender-constrained access tokens;
+1. shall support [RFC 8705] as mechanism for sender-constrained access tokens;
 1. shall include the `request` or `request_uri` parameter as defined in Section 6 of [OIDC] in the authentication request;
 1. shall ensure the authorization server has authenticated the user to an appropriate level of assurance for the client's intended purpose;
 1. (moved to 5.2.3.1);
@@ -274,7 +274,7 @@ In addition, the confidential client
 1. (moved to 5.2.3.1);
 1. (moved to 5.2.3.1);
 1. shall send an `nbf` claim in the request object;
-1. shall use [RFC7636] with `S256` as the code challenge method if using [PAR]; and
+1. shall use [RFC 7636] with `S256` as the code challenge method if using [PAR]; and
 1. shall additionally send a duplicate of the `client_id` parameter/value using the OAuth 2.0 request syntax to the authorization endpoint, as required by Section 5 of [JAR], if using [PAR].
 
 #### 5.2.3.1 ID Token as detached signature
@@ -307,7 +307,7 @@ The FAPI endpoints are OAuth 2.0 protected resource endpoints that return protec
 The protected resources supporting this document
 
 1. shall support the provisions specified in clause 6.2.1 [FAPI Security Profile 1.0 - Part 1: Baseline][Part1]; and
-1. shall adhere to the requirements in [RFC8705].
+1. shall adhere to the requirements in [RFC 8705].
 
 ### 6.2.2 Client provisions
 
@@ -318,25 +318,25 @@ The client supporting this document shall support the provisions specified in cl
 # 8. Security considerations
 
 ## 8.1 Introduction
-As a profile of the OAuth 2.0 Authorization Framework, this specification references the security considerations defined in Section 10 of [RFC6749], as well as [RFC6819] - OAuth 2.0 Threat Model and Security Considerations, which details various threats and mitigations. The security of OAuth 2.0 has been proven formally - under certain assumptions - in [OAUTHSEC]. A detailed security analysis of FAPI Security Profile 1.0 can be found in [FAPISEC].
+As a profile of the OAuth 2.0 Authorization Framework, this specification references the security considerations defined in Section 10 of [RFC 6749], as well as [RFC 6819] - OAuth 2.0 Threat Model and Security Considerations, which details various threats and mitigations. The security of OAuth 2.0 has been proven formally - under certain assumptions - in [OAUTHSEC]. A detailed security analysis of FAPI Security Profile 1.0 can be found in [FAPISEC].
 
 ## 8.2 Uncertainty of resource server handling of access tokens
 There is no way that the client can find out whether the resource access was granted for a bearer or sender-constrained access token.
 The two differ in the risk profile and the client may want to differentiate them.
 The protected resources that conform to this document differentiate them.
 The protected resources that conform to this document shall not accept a bearer access token.
-They shall only support sender-constrained access tokens via [RFC8705].
+They shall only support sender-constrained access tokens via [RFC 8705].
 
 ## 8.3 Attacks using weak binding of authorization server endpoints
 
 ### 8.3.1 Introduction
 
-In [RFC6749] and [RFC6750], the endpoints that the authorization server offers are not tightly bound together. 
+In [RFC 6749] and [RFC 6750], the endpoints that the authorization server offers are not tightly bound together. 
 There is no notion of authorization server identifier (issuer identifier) and it is not indicated in 
 the authorization response unless the client uses different redirection URI per authorization server. 
 While it is assumed in the OAuth model, it is not explicitly spelled out and thus many clients 
 use the same redirection URI for different authorization servers exposing an attack surface. 
-Several attacks have been identified and the threats are explained in detail in [RFC6819].
+Several attacks have been identified and the threats are explained in detail in [RFC 6819].
 
 ### 8.3.2 Client credential and authorization code phishing at token endpoint
 
@@ -344,7 +344,7 @@ In this attack, the client developer is socially engineered into believing that 
 to the URL that is controlled by the attacker. As a result, the client sends the `code` and the client secret to 
 the attacker, which the attacker can then replay. 
 
-When the FAPI Security Profile 1.0 client uses [RFC8705], the client's secret (the private key corresponding 
+When the FAPI Security Profile 1.0 client uses [RFC 8705], the client's secret (the private key corresponding 
 to its TLS certificate) is not exposed to the attacker, which therefore cannot authenticate towards the token 
 endpoint of the authorization server. However, there is still the potential for a phished code be injected into 
 a different flow involving an honest client.
@@ -368,20 +368,20 @@ Various mechanisms in this specification aim at preventing access token phishing
 
 For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the token endpoint (which is misconfigured in the client to point to an attacker-controlled URL). The attacker then gains access to resources of the honest resource owner through the client.
 
-Misconfigured endpoints are mitigated by using metadata in the authorization server's published metadata document as defined in [OIDD] or [RFC8414].
+Misconfigured endpoints are mitigated by using metadata in the authorization server's published metadata document as defined in [OIDD] or [RFC 8414].
 
 ID Token replay can be mitigated by requiring the `at_hash` in the token endpoint's ID Token response to verify the validity of the access token.
 
 ## 8.4 Attacks that modify authorization requests and responses
 
 ### 8.4.1 Introduction
-In [RFC6749] the authorization request and responses are not integrity protected. 
+In [RFC 6749] the authorization request and responses are not integrity protected. 
 Thus, an attacker can modify them. 
 
 ### 8.4.2 Authorization request parameter injection attack
 
-In [RFC6749], the authorization request is sent as a query parameter. 
-Although [RFC6749] mandates the use of TLS, the TLS is terminated in the browser and thus not protected within the browser; as a result an attacker can tamper the authorization request and insert any parameter values.
+In [RFC 6749], the authorization request is sent as a query parameter. 
+Although [RFC 6749] mandates the use of TLS, the TLS is terminated in the browser and thus not protected within the browser; as a result an attacker can tamper the authorization request and insert any parameter values.
 
 The use of a `request` object or `request_uri` in the authorization request will prevent tampering with the request parameters. 
 
@@ -403,9 +403,9 @@ As confidential information is being exchanged, all interactions shall be encryp
 
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
-1. Only the cipher suites recommended in [BCP195] shall be permitted.
+1. Only the cipher suites recommended in [BCP 195] shall be permitted.
 1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
-   **NOTE:** Permitted cipher suites are those that [BCP195] does not explicity say MUST NOT use.
+   **NOTE:** Permitted cipher suites are those that [BCP 195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
 
@@ -461,11 +461,11 @@ with keys from the other party. The authorization server verifies request object
 assertions. The client verifies ID Tokens and authorization response JWTs. For authorization servers,
 this profile strongly recommends the use of JWKS URI endpoints to distribute 
 public keys. For clients this profile recommends either the use of JWKS URI endpoints
-or the use of the `jwks` parameter in combination with [RFC7591] 
-and [RFC7592].
+or the use of the `jwks` parameter in combination with [RFC 7591] 
+and [RFC 7592].
 
-The definition of the authorization server `jwks_uri` can be found in [RFC8414], while the definition
-of the client `jwks_uri` can be found in [RFC7591].
+The definition of the authorization server `jwks_uri` can be found in [RFC 8414], while the definition
+of the client `jwks_uri` can be found in [RFC 7591].
 
 In addition, this profile
 
@@ -475,9 +475,9 @@ In addition, this profile
 
 ## 8.10 Multiple clients sharing the same key
 
-The use of [RFC8705] for client authentication and sender constraining access tokens brings
+The use of [RFC 8705] for client authentication and sender constraining access tokens brings
 significant security benefits over the use of shared secrets. However in some deployments
-the certificates used for [RFC8705] are issued by a certificate authority at an organization
+the certificates used for [RFC 8705] are issued by a certificate authority at an organization
 level rather than a client level. In such situations it may be common for an organization 
 with multiple clients to use the same certificates (or certificates with the same DN) 
 across clients. Implementers should be aware that such sharing means that a compromise 
@@ -504,7 +504,7 @@ not specific to this document. Implementers are advised to
 perform a thorough privacy impact assessment and manage identified risks appropriately. 
 
 **NOTE:** Implementers can consult documents like
-[ISO29100] and [ISO29134] for this purpose. 
+[ISO/IEC 29100] and [ISO/IEC 29134] for this purpose. 
 
 Privacy threats to OAuth and OpenID Connect implementations include the following: 
 
@@ -536,7 +536,7 @@ Similarly, "Attacker observing personal data in authorization endpoint response"
 # 10. IANA considerations
 ## 10.1 Additions to JWT claims registry
 This specification adds the following values to the "JSON Web Token Claims" registry 
-established by [RFC7519].
+established by [RFC 7519].
 
 ### 10.1.1. Registry contents
 
@@ -801,12 +801,7 @@ The following people contributed to this document:
 * Lukasz Jaromin (Cloudentity)
 * James Manger
 
-# Annex C (Informative) Changes {-}
-
-This section is to be removed from the publication. 
-
-* 2025-10
-    * Fixing numerous editorial mistakes pointed out by ISO. 
+# Annex C Changes {-}
 * 2023-06-25
     * Applied changes needed to convert to pandoc
     * Changed the title to incorporate "errata"
@@ -821,41 +816,41 @@ This section is to be removed from the publication.
     
 # Bibliography
 
-* [ISO29134] ISO/IEC 29134 Information technology — Security techniques — Guidelines for privacy impact assessment
+* [ISO/IEC 29134], Information technology — Security techniques — Guidelines for privacy impact assessment
 
-[ISO29134]: https://www.iso.org/standard/86012.html
+[ISO/IEC 29134]: https://www.iso.org/standard/86012.html
 
-* [RFC6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+* [RFC 6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
-[RFC6750]: https://tools.ietf.org/html/rfc6750
+[RFC 6750]: https://tools.ietf.org/html/rfc6750
 
-* [RFC6819] OAuth 2.0 Threat Model and Security Considerations
+* [RFC 6819] OAuth 2.0 Threat Model and Security Considerations
 
-[RFC6819]: https://tools.ietf.org/html/rfc6819 
+[RFC 6819]: https://tools.ietf.org/html/rfc6819 
 
-* [RFC7519] JSON Web Token (JWT)
+* [RFC 7519] JSON Web Token (JWT)
 
-[RFC7519]:https://tools.ietf.org/html/rfc7519
+[RFC 7519]:https://tools.ietf.org/html/rfc7519
 
-* [RFC7591] OAuth 2.0 Dynamic Client Registration Protocol
+* [RFC 7591] OAuth 2.0 Dynamic Client Registration Protocol
 
-[RFC7591]:https://tools.ietf.org/html/rfc7591 
+[RFC 7591]:https://tools.ietf.org/html/rfc7591 
 
-* [RFC7592] OAuth 2.0 Dynamic Client Registration Management Protocol
+* [RFC 7592] OAuth 2.0 Dynamic Client Registration Management Protocol
 
-[RFC7592]:https://tools.ietf.org/html/rfc7592 
+[RFC 7592]:https://tools.ietf.org/html/rfc7592 
 
-* [RFC8414] OAuth 2.0 Authorization Server Metadata
+* [RFC 8414] OAuth 2.0 Authorization Server Metadata
 
-[RFC8414]: https://tools.ietf.org/html/rfc8414
+[RFC 8414]: https://tools.ietf.org/html/rfc8414
 
 * [OIDD] OpenID Connect Discovery 1.0
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
 
-* [BCP195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+* [BCP 195] Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 
-[BCP195]: https://tools.ietf.org/html/bcp195
+[BCP 195]: https://tools.ietf.org/html/bcp195
 
 * [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
 
