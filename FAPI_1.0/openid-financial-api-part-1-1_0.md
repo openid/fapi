@@ -61,43 +61,43 @@ This document specifies the method for an application to:
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[RFC 4122] - A Universally Unique IDentifier (UUID) URN Namespace
+[RFC 4122], A Universally Unique IDentifier (UUID) URN Namespace
 
 [RFC 4122]: https://tools.ietf.org/html/rfc4122
 
-[RFC 6749] - The OAuth 2.0 Authorization Framework
+[RFC 6749], The OAuth 2.0 Authorization Framework
 
 [RFC 6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC 7636] - Proof Key for Code Exchange by OAuth Public Clients
+[RFC 7636], Proof Key for Code Exchange by OAuth Public Clients
 
 [RFC 7636]: https://tools.ietf.org/html/rfc7636
 
-[RFC 6125] - Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
+[RFC 6125], Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
 
 [RFC 6125]: https://tools.ietf.org/html/rfc6125
 
-[BCP 212] - OAuth 2.0 for Native Apps
+[BCP 212], OAuth 2.0 for Native Apps
 
 [BCP 212]: https://tools.ietf.org/html/bcp212
 
-[BCP 195] - Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
+[BCP 195], Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)
 
 [BCP 195]: https://tools.ietf.org/html/bcp195
 
-[OIDC] - OpenID Connect Core 1.0
+[OIDC], OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC 8705] - OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+[RFC 8705], OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
 
 [RFC 8705]: https://tools.ietf.org/html/rfc8705
 
-[OIDD] -  OpenID Connect Discovery 1.0
+[OIDD], OpenID Connect Discovery 1.0
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html
 
-[RFC 7231] - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
+[RFC 7231], Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
 
 [RFC 7231]: https://tools.ietf.org/html/rfc7231
 
@@ -298,7 +298,7 @@ The client supporting this document
 1. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC 7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
 1. may send the customer’s IP address if this data is available in the `x-fapi-customer-ip-address` header, e.g., `x-fapi-customer-ip-address: 2001:DB8::1893:25c8:1946` or  `x-fapi-customer-ip-address: 198.51.100.119`; and
 1. may send the `x-fapi-interaction-id` request header, in which case the value shall be an 
-RFC4122 UUID to the server to help correlate log entries between client and server, 
+[RFC 4122] UUID to the server to help correlate log entries between client and server, 
 e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`.
 
 
@@ -308,7 +308,7 @@ e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`.
 
 As confidential information is being exchanged, all interactions shall be encrypted with TLS (HTTPS).
 
-The recommendations for Secure Use of Transport Layer Security in [BCP195] shall be followed, with the following additional requirements:
+The recommendations for Secure Use of Transport Layer Security in [BCP 195] shall be followed, with the following additional requirements:
 
 1. TLS version 1.2 or later shall be used for all communications.
 1. A TLS server certificate check shall be performed, as per [RFC 6125].
