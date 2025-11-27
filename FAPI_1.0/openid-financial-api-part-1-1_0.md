@@ -4,7 +4,7 @@ date: 2025-11-05
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting
-  email: nat@natconsulting.org
+  email: nat@nat.consulting
   uri: http://nat.sakimura.org/
 - name: John Bradley
   organization: Yubico

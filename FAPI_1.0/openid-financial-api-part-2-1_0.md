@@ -4,7 +4,7 @@ date: 2025-11-05
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting
-  email: nat@natconsulting.org
+  email: nat@nat.consulting
   uri: http://nat.sakimura.org/
 - name: John Bradley
   organization: Yubico
@@ -252,7 +252,7 @@ In addition, if the `response_type` value `code id_token` is used, the authoriza
 
 In addition, if the `response_type` value `code` is used in conjunction with the `response_mode` value `jwt`, the authorization server
 
-1. shall create JWT-secured authorization responses as specified in [JARM], Section 4.3.
+1. shall create JWT-secured authorization responses as specified in [JARM], subclause 2.3. 
 
 ### 5.2.3 Confidential client
 
@@ -292,7 +292,7 @@ In addition, if the `response_type` value `code id_token` is used, the client
 
 In addition, if the `response_type` value `code` is used in conjunction with the `response_mode` value `jwt`, the client
 
-1. shall verify the authorization responses as specified in [JARM], Section 4.4.
+1. shall verify the authorization responses as specified in [JARM].
 
 # 6. Accessing protected resources (using tokens)
 
@@ -859,7 +859,7 @@ This section is to be removed from the publication.
 
 * [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
 
-[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://www.nds.ruhr-uni-bochum.de/media/ei/veroeffentlichungen/2017/01/30/oidc-security.pdf
+[SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://ieeexplore.ieee.org/document/7961984
 
 * [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
 
