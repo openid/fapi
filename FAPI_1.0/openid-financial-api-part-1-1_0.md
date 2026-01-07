@@ -386,7 +386,7 @@ refresh tokens.
 
 ## 7.5 Native apps
 
-When native apps are used as either public clients, dynamically registered confidential clients or user-agents receiving the authorization response for a server based confidential client, the recommendations for OAuth 2.0 for Native Apps in [BCP212] shall be followed, with the following additional requirements:
+When native apps are used as either public clients, dynamically registered confidential clients or user-agents receiving the authorization response for a server based confidential client, the recommendations for OAuth 2.0 for Native Apps in [BCP 212] shall be followed, with the following additional requirements:
 
 When registering redirect URIs, authorization servers
 
