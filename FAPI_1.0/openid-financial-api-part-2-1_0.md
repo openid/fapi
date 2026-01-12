@@ -39,11 +39,11 @@ FAPI 1.0 consists of the following parts:
 * [FAPI Security Profile 1.0 - Part 1: Baseline][Part1]
 * FAPI Security Profile 1.0 - Part 2: Advanced
 
-These parts are intended to be used with [RFC6749], [RFC6750], [RFC7636], and [OIDC].
+These parts are intended to be used with [RFC 6749], [RFC 6750], [RFC 7636], and [OIDC].
 
 # Introduction
 
-FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impersonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require institutions to allow what appears to be an automated attack against their applications.
+FAPI is a highly secured OAuth profile that aims to provide specific implementation guidelines for security and interoperability. The FAPI security profile can be applied to APIs in any market area that requires a higher level of security than provided by standard [OAuth][RFC 6749] or [OpenID Connect][OIDC]. Among other security enhancements, this specification provides a secure alternative to screen scraping. Screen scraping accesses user's data and functions by impersonating a user through password sharing. This brittle, inefficient, and insecure practice creates security vulnerabilities which require institutions to allow what appears to be an automated attack against their applications.
 
 This document is Part 2 of FAPI Security Profile 1.0 that specifies an advanced security profile of OAuth that is suitable to be used for protecting APIs with high inherent risk. Examples include APIs that give access to highly sensitive data or that can be used to trigger financial transactions (e.g., payment initiation). This document specifies the controls against attacks such as: authorization request tampering, authorization response tampering including code injection, state injection, and token request phishing. Additional details are available in the security considerations section.
 
@@ -220,7 +220,7 @@ In addition, the authorization server
 1. (withdrawn);
 1. shall require the request object to contain an `exp` claim that has a lifetime of no longer than 60 minutes after the `nbf` claim;
 1. shall authenticate the confidential client using one of the following methods (this overrides [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] clause 5.2.2.0-4):
-    1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC8705], or
+    1. `tls_client_auth` or `self_signed_tls_client_auth` as specified in section 2 of [RFC 8705], or
     2. `private_key_jwt` as specified in section 9 of [OIDC];
 1. shall require the aud claim in the request object to be, or to be an array containing, the authorization server's issuer identifier URL;
 1. shall not support public clients;
@@ -256,7 +256,7 @@ In addition, if the `response_type` value `code` is used in conjunction with the
 
 ### 5.2.3 Confidential client
 
-A confidential client shall support the provisions specified in clause 5.2.3 and 5.2.4 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], except for [RFC7636] support.
+A confidential client shall support the provisions specified in clause 5.2.3 and 5.2.4 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], except for [RFC 7636] support.
 
 In addition, the confidential client
 
@@ -268,7 +268,7 @@ In addition, the confidential client
 1. (withdrawn);
 1. (moved 5.2.3.1);
 1. shall send all parameters inside the authorization request's signed request object;
-1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [RFC9126];
+1. shall additionally send duplicates of the `response_type`, `client_id`, and `scope` parameters/values using the OAuth 2.0 request syntax as required by Section 6.1 of the OpenID Connect specification if not using [RFC 9126];
 1. shall send the `aud` claim in the request object as the authorization server's issuer identifier URL;
 1. shall send an `exp` claim in the request object that has a lifetime of no longer than 60 minutes;
 1. (moved to 5.2.3.1);
@@ -364,7 +364,7 @@ where the `iss` included in the response JWT. On receiving the authorization res
 issuer URL of the IdP it sent the authorization request to (the rogue IdP). The client detects the conflicting issuer values and aborts the transaction. 
 
 ### 8.3.4 Access token phishing
-Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 advanced clients use [RFC8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue authorization server or misconfigured token endpoint.
+Various mechanisms in this specification aim at preventing access token phishing, e.g., the requirement of exactly matching redirect URIs and the restriction on response types that do not return access tokens in the front channel. As a second layer of defense, FAPI Security Profile 1.0 advanced clients use [RFC 8705] meaning the access token is bound to the client's TLS certificate. Even if an access token is phished, it cannot be used by the attacker. An attacker could try to trick a client under his control to make use of the access token as described in [FAPISEC] ("Cuckoo's Token Attack" and "Access Token Injection with ID Token Replay"), but these attacks additionally require a rogue authorization server or misconfigured token endpoint.
 
 For the "Access Token Injection with ID Token Replay" attack, the attacker tricks a client under his control to start a normal authorization flow to obtain an authorization response with an ID Token. The ID Token is replayed along with a phished access token at the token endpoint (which is misconfigured in the client to point to an attacker-controlled URL). The attacker then gains access to resources of the honest resource owner through the client.
 
@@ -807,7 +807,7 @@ The following people contributed to this document:
     * Changed the title to incorporate "errata"
     * #600 - Changed Financial-grade API to FAPI
     * #468 - Reference final versions of JAR, JARM, PAR
-    * #409 - Rename [MTLS] as [RFC8705]
+    * #409 - Rename [MTLS] as [RFC 8705]
     * #405 - Use https for document references
     * #527,624 - Added security consideration for Access Token Injection with ID Token Replay
     * #613 - Remove empty subclauses 5.2.4 and 5.2.5
