@@ -131,25 +131,42 @@ Sender constraining access tokens is an important security measure that provides
 ### DPoP Considerations
 
 1. DPoP operates at the application layer rather than the transport layer;
-2. DPoP requires cryptographic operations for each request, which may have performance implications;
-3. DPoP introduces some protocol complexity, including HTTP request URL normalization and optionally server provided nonces;
-4. DPoP is the only viable option for browser-based clients (MTLS only works practically for server to server communication).
+2. DPoP only sender constrains part of the request (the HTTP method and URL), unlike MTLS which protects the entire request;
+3. DPoP requires cryptographic operations for each request, which may have performance implications;
+4. DPoP introduces protocol complexity, including HTTP request URL normalization and optionally server-provided nonces;
+5. DPoP library support is less mature than MTLS, and there is limited ecosystem deployment experience;
+6. DPoP is the only viable option for browser-based clients (MTLS only works practically for server-to-server communication).
 
 ### MTLS Considerations
 
-1. MTLS amortizes the cost of asymmetric cryptographic operations by performing them during the TLS handshake and reusing the connection;
-2. MTLS presents integration challenges at the transport layer, especially when operating at scale;
-3. MTLS implementations may encounter interoperability issues with certificate handling, including:
+1. MTLS performs both client authentication and sender constraining simultaneously, simplifying implementation for clients;
+2. MTLS sender constrains the entire request, not just specific elements;
+3. MTLS amortizes the cost of asymmetric cryptographic operations by performing them during the TLS handshake and reusing the connection;
+4. Self-signed certificates can be used for sender constraining; the binding to the access token is established at the token endpoint without needing to distribute certificates via JWKS;
+5. MTLS presents integration challenges at the transport layer, especially when operating at scale;
+6. MTLS implementations may encounter interoperability issues with certificate handling, including:
    * Certificate aliases
-   * Self-signed certificates with JWKS
    * IP/SAN negotiation
    * DN matching for PKI;
-4. [RFC9440] provides additional guidance for MTLS implementations.
+7. [RFC9440] provides additional guidance for MTLS implementations.
 
 ### Selection Guidance
 
-MTLS makes more sense for closed ecosystems with existing PKI infrastrcture. All other implementations
-should consider selecting DPoP above MTLS due to the complexities of implementing the specification at the transport and application layers.
+Both DPoP and MTLS are valid choices for sender constraining, and each has trade-offs.
+
+MTLS may be more suitable when:
+
+* Operating in closed ecosystems with existing PKI infrastructure;
+* Simplicity for client-side implementation is a priority;
+* Full request protection is desired;
+* Mature library support is required.
+
+DPoP may be more suitable when:
+
+* Browser-based clients need to be supported (MTLS only works practically for server-to-server communication);
+* Transport layer integration for mutual TLS is impractical.
+
+Implementers should not use both DPoP and MTLS simultaneously for sender constraining.
 
 ## Access Token Size Considerations
 
