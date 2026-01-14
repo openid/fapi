@@ -164,7 +164,11 @@ Many Authorization Server implementations employ Web Application Firewalls (WAFs
 
 3. Authorization Servers should accept any random state/nonce values that comply with the underlying specifications
 
-4. When rejecting suspicious requests, Authorization Servers should return appropriate error responses as defined in OAuth 2.0 and related specifications
+4. When rejecting suspicious requests, Authorization Servers should return or show appropriate error responses as defined in OAuth 2.0 and related specifications
+
+5. Clients should use URL-safe characters when generating values for `state` and `nonce` parameters
+
+6. If a client needs to include non-URL-safe characters in the `state` parameter, it should base64url encode the value, as Authorization Servers may reject values containing characters that resemble attack vectors
 
 NOTE: What constitutes a suspicious or malicious request may vary depending on the threat model of each Authorization Server implementation. This document intentionally avoids providing an exhaustive list of patterns to block, as such a list would quickly become outdated and might provide a false sense of security.
 
