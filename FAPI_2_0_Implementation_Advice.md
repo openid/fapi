@@ -117,16 +117,65 @@ RFC4122 UUID,  e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3
 1. the AS or RS shall set the response header `x-fapi-interaction-id` to the value received from the corresponding FAPI client request header or to a [RFC4122] UUID value if the request header was not provided to track the interaction, e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
 1. participants (whether Client, AS or RS) shall log the value of `x-fapi-interaction-id` in the log entry.
 
+NOTE: Clients may reuse the same `x-fapi-interaction-id` value across related requests within
+a single authorization code flow, including PAR requests, token requests, and immediate 
+API calls. This can help with tracing and troubleshooting related transactions. Due to the 
+nature of browser redirects, the authorization request itself typically cannot include HTTP 
+headers, so the `x-fapi-interaction-id` will not be present in those requests. Specific 
+guidance on when to reuse vs. generate new interaction IDs may be defined by individual 
+ecosystems.
+
+
 ### x-fapi-end-user-present
 
 Many ecosystems have different non-functional requirements depending on whether an end-user
-is present or not. 
+is present or not.  The `x-fapi-end-user-present` header indicates whether the request is 
+being made in the context of an interactive end-user session or as part of a 
+background/automated process. If an ecosystem adopts this header, the following clauses apply:
 
-todo: agree header name and contents
+1. Clients shall send the `x-fapi-end-user-present` header with a value of `true` when 
+the request is made with an end-user actively present in the session, and `false` when the 
+request is part of a background process, batch operation, or automated task without active 
+user participation.
+
+2. If the header is not present, servers should assume a default value of `false` 
+(i.e., no end-user is present).
+
+3. The header value shall be a boolean: either `true` or `false`, 
+e.g., `x-fapi-end-user-present: true`.
+
+#### Purpose and Benefits
+
+The primary benefit of the `x-fapi-end-user-present` header is to support 
+ecosystem-specific requirements for different traffic patterns:
+
+1. Many ecosystems implement different rate limits for end-user-present vs. background 
+operations. User-present operations may have higher per-second limits but lower daily 
+limits, while background operations might have the opposite pattern.
+
+2. During high load situations, servers may prioritize user-present requests to 
+maintain interactive performance while delaying background operations.
+
+#### Implementation Considerations
+
+1. This header is not a security mechanism. Authorization Servers must trust that 
+Clients are filling in this header correctly and cannot independently verify the 
+presence of an end user.
+
+2. This header replaces problematic approaches from previous specifications, such as:
+   - `x-fapi-customer-ip-address`: Potentially exposed PII and created privacy concerns
+   - `x-fapi-auth-date`: Frequently implemented incorrectly and requires date parsing
+   - Client headers pass-through: Inconsistently used and may expose PII
+
+3. Since Clients can set this value arbitrarily, ecosystem governance and monitoring are 
+necessary to detect patterns of misuse, such as clients marking all API calls as 
+user-present regardless of context.
+
+NOTE: This header is only useful in ecosystems where recourse exists against clients that falsify its value.
 
 ## Access Token Size Considerations
 
-As key size grows and more elements are added to access tokens, it’s possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
+As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
 
 Note: While OAuth 2.0 [@RFC6749] leaves token size decisions to the authorization server, implementers should be aware that many standard web servers reject headers larger than 8KB by default.
 
