@@ -187,6 +187,30 @@ Large access tokens can impact both security and performance:
 2. Larger tokens increase network latency and resource consumption
 3. Authorization servers should practice data minimization and only include necessary claims
 
+## Key Management
+
+Proper management of cryptographic keys is critical to the security of any FAPI 2.0 deployment. 
+The compromise of private keys used for client authentication, token signing, or message signing 
+can lead to severe security breaches, including unauthorized access to protected resources and 
+impersonation attacks.
+
+While detailed guidance on key management is out of scope for the FAPI specifications, 
+implementers should ensure they have robust policies and procedures in place covering:
+
+1. secure generation of cryptographic keys;
+2. secure storage and protection of private keys;
+3. key rotation and lifecycle management;
+4. procedures for responding to key compromise;
+5. access controls for key material;
+6. backup and recovery procedures.
+
+Implementers should refer to established guidance on cryptographic key management, such as 
+NIST Special Publication 800-57 [@NIST.SP.800-57pt1r5] and the OWASP Key Management Cheat Sheet 
+[@OWASP.KeyManagement].
+
+NOTE: Hardware Security Modules (HSMs) or similar secure key storage mechanisms are strongly 
+recommended for production deployments, particularly for high-value use cases.
+
 ## Troubleshooting Common Issues
 
 ### Connection Issues
@@ -225,6 +249,25 @@ todo...
 <title>ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents</title>
     <author fullname="ISO/IEC">
       <organization>ISO/IEC</organization>
+    </author>
+</front>
+</reference>
+
+<reference anchor="NIST.SP.800-57pt1r5" target="https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final">
+<front>
+<title>Recommendation for Key Management: Part 1 – General</title>
+    <author fullname="Elaine Barker">
+      <organization>NIST</organization>
+    </author>
+   <date month="May" year="2020"/>
+</front>
+</reference>
+
+<reference anchor="OWASP.KeyManagement" target="https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html">
+<front>
+<title>Key Management Cheat Sheet</title>
+    <author fullname="OWASP">
+      <organization>OWASP</organization>
     </author>
 </front>
 </reference>
