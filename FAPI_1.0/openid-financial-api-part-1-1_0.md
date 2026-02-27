@@ -1,6 +1,6 @@
 ---
 title: FAPI security profile 1.0 - Part 1&colon; Baseline - draft 11 incorporating errata set 1
-date: 2025-11-05
+date: 2026-02-27
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting
@@ -24,13 +24,12 @@ toc-title: Table of contents
 draft: true
 implementers-draft: false
 final: false
-ver: 01
+ver: 11
 seriesInfo:
   name: Internet-Draft
   value: openid-financial-api-part-1-1_0-11
   status: draft
 WG: FAPI
-abstract: FAPI 1.0 security profile - part 1&colon; Baseline is an OAuth profile that aims to provide specific implementation guidelines for security and interoperability. It provides moderately secure options.  
 ...
 
 
@@ -48,6 +47,10 @@ FAPI is a highly secured OAuth profile that aims to provide specific implementat
 This document is Part 1 of FAPI Security Profile 1.0. It specifies a baseline security profile of OAuth that is suitable for protecting APIs with a moderate inherent risk. Importantly, this profile does not provide non-repudiation (signing of authorization requests and responses) and sender-constrained access tokens. If such features or a higher level of security is desired, the use of [FAPI Security Profile 1.0 - Part 2: Advanced][Part2] is recommended.
 
 Although it is possible to code an OpenID provider and relying party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 7.6 before embarking on a 'from scratch' implementation.
+
+# Notational Conventions
+
+The keywords "shall", "shall not", "should", "should not", "may", and "can" in this document are to be interpreted as described in [ISO Directive Part 2][ISODIR2]. These keywords are not used as dictionary terms such that any occurrence of them shall be interpreted as keywords and are not to be interpreted with their natural language meanings.
 
 
 # 1. Scope
@@ -280,7 +283,7 @@ valid IPv4 or IPv6 address.
     **NOTE**: While this document does not specify the exact method to obtain the entity associated with the
     access token and the granted scope, the protected resource can use OAuth Token Introspection [RFC 7662].
 
-    Further, the resource server
+Further, the resource server
 
 1. should support the use of Cross Origin Resource Sharing (CORS) [CORS] and or other methods as appropriate to enable JavaScript clients to access the endpoint if it decides to provide access to JavaScript clients.
 
@@ -293,7 +296,7 @@ The client supporting this document
 1. shall send access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC 6750]; and 
 1. (withdrawn);
 
-    Further, the client
+Further, the client
 
 1. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC 7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
 1. may send the customer’s IP address if this data is available in the `x-fapi-customer-ip-address` header, e.g., `x-fapi-customer-ip-address: 2001:DB8::1893:25c8:1946` or  `x-fapi-customer-ip-address: 198.51.100.119`; and
@@ -407,11 +410,11 @@ To achieve the full security benefits, it is important the implementation of thi
 
 The OpenID Foundation provides tools that can be used to confirm that an implementation is correct:
 
-https://openid.net/certification/
+[https://openid.net/certification/](https://openid.net/certification/)
 
 The OpenID Foundation maintains a list of certified implementations:
 
-https://openid.net/developers/certified/
+[https://openid.net/developers/certified/](https://openid.net/developers/certified/)
 
 Deployments that use this specification should use a certified implementation.
 
@@ -506,9 +509,9 @@ The following people contributed to this document:
 
 To be removed at the publication time. 
 
-* -02 
+* 2026-02-27
     * Fixing the editorial issues pointed out by ISO. 
-* -01
+* 2023-06-25
     * Reformatting to the pandoc markdown
     * #600 - Changed Financial-grade API to FAPI
     * Changed the title to incorporate "errata"

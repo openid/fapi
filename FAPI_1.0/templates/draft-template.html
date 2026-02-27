@@ -42,23 +42,32 @@ $include-before$
 $endfor$
 <table><tr>
   <td>Working Group:</td><td>$WG$</td></tr>
-  <tr><td>Authors: </td>
+<tr><td>Authors:</td>
 $for(author)$
-<td>$author.name$<br/>($author.organization$)</td>
+  <td>
+    $if(author.name)$$author.name$$endif$
+    $if(author.organization)$ <br/><i>($author.organization$)</i>$endif$
+    <!-- 
+    $if(author.email)$ &lt;$author.email$&gt;$endif$
+    $if(author.uri)$ <a href="$author.uri$">$author.uri$</a>$endif$ 
+    -->
+  </td>
 $endfor$
 </tr>
-$if(current_date)$
+$if(date)$
 <tr>
-<td>Date:</td><td>$current_date$</td>
+<td>Date:</td><td>$date$</td>
 </tr>
 $endif$
 </table>
 $if(title)$
 <header id="title-block-header">
 <h1 class="title">$title$
+<!--
 $if(draft)$
-- $ver$
+— draft-$ver$
 $endif$
+-->
 </h1>
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>
@@ -109,14 +118,17 @@ Foreword
 <p>The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.</p>
 <p>Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.</p>
 </section>
-
+<!--
 <section class="note" id="section-note.4">
       <h2 id="name-notational-conventions">
 Notational Conventions
       </h2>
 <p id="section-note.4-1">The keywords "shall", "shall not", "should", "should not", "may", and "can" in
-this document are to be interpreted as described in ISO Directive, Part 2
-<span>[<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml" class="cite xref">ISODIR2</a>]</span>. These keywords are not used as dictionary terms such that any
+this document are to be interpreted as described in ISO Directive Part 2
+<span>[<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml" class="cite xref">ISODIR2</a>]</span>. 
+</p>
+
+These keywords are not used as dictionary terms such that any
 occurrence of them shall be interpreted as keywords and are not to be
 interpreted with their natural language meanings.
 They are all in lower case to rule out the dictionary meaning use of these words so that they can be translated easily.
@@ -150,6 +162,7 @@ Following is a summary of the keywords.
 </tbody>
 </table>
 </p>
+-->
 </section>
 $body$
 $for(include-after)$
@@ -160,54 +173,14 @@ $endfor$
       <h2 id="name-notices">
 Notices
       </h2>
-<p>Copyright (c) 2023 The OpenID Foundation.</p>
-<p>The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.</p>
-<p>The technology described in this specification was made available
-from contributions from various sources, including members of
-the OpenID Foundation and others.
-Although the OpenID Foundation has taken steps to help ensure that
-the technology is available for distribution, it takes no position
-regarding the validity or scope of any intellectual property or other
-rights that might be claimed to pertain to the implementation or use of
-the technology described in this specification or the extent to which
-any license under such rights might or might not be available; neither
-does it represent that it has made any independent effort to identify
-any such rights. The OpenID Foundation and the contributors to
-this specification make no (and hereby expressly disclaim any)
-warranties (express, implied, or otherwise), including implied
-warranties of merchantability, non-infringement, fitness for a particular
-purpose, or title, related to this specification, and the entire risk as
-to implementing this specification is assumed by the implementer.
-The OpenID Intellectual Property Rights policy requires contributors to offer
-a patent promise not to assert certain patent claims against other contributors
-and against implementers. The OpenID Foundation invites any interested party to
- bring to its attention any copyrights, patents, patent applications,
-or other proprietary rights that may cover technology
-that may be required to practice this specification.</p>
+<p>Copyright (c) 2026 The OpenID Foundation.</p>
+<p>
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft, Final Specification, or Final Specification Incorporating Errata Corrections solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts, Final Specifications, and Final Specification Incorporating Errata Corrections based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+</p>
+<p>
+The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy (found at openid.net) requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. OpenID invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+</p>
 </div>
-$if(author)$
-<div id="authors-addresses">
-    <h2 id="#name-authors-addresses">
-        Author's Addresses
-    </h2>
-    $for(author)$
-    <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">$author.name$</span></div>
-        <div dir="auto" class="left"><span class="org">$author.organization$</span></div>
-        <div class="email">
-            <span>Email:</span>
-            <a href="mailto:$author.email$" class="email">$author.email$</a>
-        </div>
-        <div class="url">
-            <span>URI:</span>
-            <a href="$author.uri$" class="url">$author.uri$</a>
-        </div>
-    </address>
-    $endfor$
-
-</div>
-
-$endif$
 <script>const toc = document.getElementById("toc");
 toc.querySelector("h2").addEventListener("click", e => {
     toc.classList.toggle("active");

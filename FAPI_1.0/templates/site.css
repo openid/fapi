@@ -2,14 +2,16 @@ html {
   color: #555;
   margin: auto;
   padding: 10px;
-  max-width: 76em;
+  /* max-width: 76em; */
 }
 
 /* fonts */
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
 
 :root {
-  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-sans: 'Arial', 'Helvetica', sans-serif;
+  --font-serif: 'Times', 'Times New Roman', serif;
+  --font-mono: 'Courier', 'Courier New', monospace;
+  --color-neutral-muted: #dddddd;
 }
 
 body {
@@ -35,6 +37,9 @@ a.toplink {
   float: right;
   margin-right: 0.5em;
 }
+
+
+dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
 
 .btn {
   font-family: Arial, Verdana, sans-serif;
@@ -67,11 +72,15 @@ a.toplink {
 @media (min-width: 600px) {
   .index ul {
     -moz-column-count: 2;
+    column-count: 2;
     -moz-column-gap: 20px;
+    column-gap: 20px;
   }
   .index ul ul {
     -moz-column-count: 1;
+    column-count: 2;
     -moz-column-gap: 0;
+    column-gap: 0;
   }
 }
 
@@ -160,20 +169,33 @@ nav.toc li {
 }
 /* alternative layout for wide screens */
 @media screen and (min-width: 1024px) {
-  body {
-    max-width: 724px;
-    margin: 42px auto;
-    padding-left: 1.5em;
-    padding-right: 29em;
+   :root {
+    /* TOC 幅：画面に追随しつつ上限下限を設定（1920pxでも破綻しにくい） */
+    --toc-w: clamp(24rem, 22vw, 30rem);
+    --toc-gap: 1.25rem; /* 本文とTOCの間のすき間 */
   }
+
+  body {
+    box-sizing: border-box;
+    max-width: 1300px;
+    width: 100%;
+    margin: 42px 42px;
+    padding-left: 3em;
+    padding-right: calc(var(--toc-w) + var(--toc-gap));
+  }
+
   #toc {
     position: fixed;
-    top: 42px;
-    right: 42px;
-    width: 25%;
+    top: 0;
+    right: 0;
+
+    width: var(--toc-w);
+    max-width: none;
+
     margin: 0;
-    padding: 0 1em;
-    z-index: 1;
+    padding: 2em;
+    height: 100%;
+    overflow: auto;
   }
   #toc h2 {
     border-top: none;
@@ -363,56 +385,13 @@ h5, h6 {
 }
 
 
-/* authors */
-address.vcard {
-  font-style: normal;
-  margin: 1em 0;
-}
-
-address.vcard .nameRole {
-  font-weight: 700;
-  margin-left: 0;
-}
-address.vcard .label {
-  font-family: var(--font-sans);
-  margin: 0.5em 0;
-}
-address.vcard .type {
-  display: none;
-}
-.alternative-contact {
-  margin: 1.5em 0 1em;
-}
-hr.addr {
-  border-top: 1px dashed;
-  margin: 0;
-  color: #ddd;
-  max-width: calc(100% - 16px);
-}
-
-/* Limit the width of the author address vcard, so names in right-to-left
- script don't end up on the other side of the page. */
-
-address.vcard {
-  max-width: 30em;
-  margin-right: auto;
-}
-
-/* For address alignment dependent on LTR or RTL scripts */
-address div.left {
-  text-align: left;
-}
-address div.right {
-  text-align: right;
-}
-
 code{
   white-space: pre-wrap;
   font-size: 1em;
   font-family: monospace;
   padding: .2em .4em;
   margin: 0;
-  font-size: 85%;
+  font-size: 100%;
   white-space: break-spaces;
   background-color: var(--color-neutral-muted);
   border-radius: 6px;
@@ -428,6 +407,82 @@ q { quotes: "窶�" "窶�" "窶�" "窶�"; }
 a {
   color: #22e;
   text-decoration: none;
+}
+/* --- Code blocks (Pandoc: div.sourceCode + plain <pre class="jwt">) --- */
+
+/* Pandoc fenced code blocks */
+div.sourceCode {
+  margin: 1em 0;
+}
+
+div.sourceCode > pre.sourceCode {
+  margin: 0;
+  padding: 0.5em 0.6em;
+  background: #dddddd;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+/* Do NOT let the global `code{...}` (inline code styling) affect block code */
+div.sourceCode > pre.sourceCode > code.sourceCode {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  white-space: pre;      /* 折返したいなら pre-wrap */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.45;
+}
+
+/* Kill per-line “ribbon” backgrounds if any highlighter/theme adds them */
+div.sourceCode > pre.sourceCode > code.sourceCode > span {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Pandoc line anchors (keep working, but visually quiet) */
+div.sourceCode a[href^="#cb"] {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Plain pre blocks you also want to look the same (e.g. <pre class="jwt"> ... ) */
+pre.jwt {
+  margin: 1em 0;
+  padding: 0.5em 0.6em;
+  background: #dddddd;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+/* Same: do not apply inline-code look inside pre.jwt */
+pre.jwt > code {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  white-space: pre;      /* 折返したいなら pre-wrap */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.45;
+}
+
+/* Pandoc line-anchor links: invisible but keep line anchors working */
+div.sourceCode a[href^="#cb"] {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reasonable monospace + wrapping policy (Pandoc does not linewrap by default as it uses pre) */
+div.sourceCode > pre.sourceCode > code.sourceCode {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.45;
+  white-space: pre;             /* to line wrap, change to pre-wrap  */
 }
 
 .card-header {
@@ -492,7 +547,7 @@ hr {
 blockquote {
   padding: 0 1.6em;
 		color: #666;
-		background-color: #eeeeee;
+		background-color: #ffffff;
 }
 footer {
   padding: 1em;

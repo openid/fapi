@@ -1,6 +1,6 @@
 ---
 title: FAPI security profile 1.0 - Part 2&colon; Advanced - draft 11 incorporating errata set 1
-date: 2025-11-05
+date: 2026-02-27
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting
@@ -24,13 +24,12 @@ toc-title: Table of contents
 draft: true
 implementers-draft: false
 final: false
-ver: 01
+ver: 11
 seriesInfo:
   name: Internet-Draft
   value: openid-financial-api-part-2-1_0-11
   status: draft
 WG: FAPI
-abstract: FAPI 1.0 security profile - part 2&colon; Baseline is an OAuth profile that aims to provide specific implementation guidelines for security and interoperability. It provides highly secure options.  
 ...
 
 
@@ -48,6 +47,10 @@ FAPI is a highly secured OAuth profile that aims to provide specific implementat
 This document is Part 2 of FAPI Security Profile 1.0 that specifies an advanced security profile of OAuth that is suitable to be used for protecting APIs with high inherent risk. Examples include APIs that give access to highly sensitive data or that can be used to trigger financial transactions (e.g., payment initiation). This document specifies the controls against attacks such as: authorization request tampering, authorization response tampering including code injection, state injection, and token request phishing. Additional details are available in the security considerations section.
 
 Although it is possible to code an OpenID provider and relying party from first principles using this specification, the main audience for this specification is parties who already have a certified implementation of OpenID Connect and want to achieve a higher level of security. Implementers are encouraged to understand the security considerations contained in Section 8.7 before embarking on a 'from scratch' implementation.
+
+# Notational Conventions
+
+The keywords "shall", "shall not", "should", "should not", "may", and "can" in this document are to be interpreted as described in [ISO Directive Part 2][ISODIR2]. These keywords are not used as dictionary terms such that any occurrence of them shall be interpreted as keywords and are not to be interpreted with their natural language meanings.
 
 # 1. Scope
 
@@ -69,6 +72,10 @@ The following documents are referred to in the text in such a way that some or a
 [RFC 6749],  The OAuth 2.0 Authorization Framework
 
 [RFC 6749]: https://tools.ietf.org/html/rfc6749
+
+[RFC 6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+
+[RFC 6750]: https://tools.ietf.org/html/rfc6750
 
 [RFC 7636],  Proof Key for Code Exchange by OAuth Public Clients
 
@@ -104,8 +111,6 @@ For the purpose of this document, the terms defined in [RFC 6749], [RFC 6750], [
 
 # 4. Symbols and abbreviated terms
 
-# 4. Symbols and abbreviated terms
-
 --------- --- ---------------------------------------------
 **API**       application programming interface
 **CSRF**      cross site request forgery
@@ -132,6 +137,7 @@ For the purpose of this document, the terms defined in [RFC 6749], [RFC 6750], [
 **URI**       uniform resource identifier
 **URL**       uniform resource locator
 --------- --- ---------------------------------------------
+
 # 5. Advanced security profile
 
 ## 5.1 Authorization response security
@@ -256,6 +262,8 @@ In addition, if the `response_type` value `code` is used in conjunction with the
 
 ### 5.2.3 Confidential client
 
+#### 5.2.3.0 General provisions
+
 A confidential client shall support the provisions specified in clause 5.2.3 and 5.2.4 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1], except for [RFC 7636] support.
 
 In addition, the confidential client
@@ -315,7 +323,7 @@ The protected resources supporting this document
 
 The client supporting this document shall support the provisions specified in clause 6.2.2 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1].
 
-# 7. (Withdrawn)
+# 7. (Withdrawn){#withdrawn-2}
 
 # 8. Security considerations
 
@@ -406,7 +414,8 @@ As confidential information is being exchanged, all interactions shall be encryp
 Section 7.1 of [FAPI Security Profile 1.0 - Part 1: Baseline][Part1] shall apply, with the following additional requirements:
 
 1. Only the cipher suites recommended in [BCP 195] shall be permitted.
-1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+1. For the `authorization_endpoint`, the authorization server may allow additional cipher suites that are permitted by the latest version of [BCP 195], if necessary to allow sufficient interoperability with users' web browsers or are required by local regulations.
+
    **NOTE:** Permitted cipher suites are those that [BCP 195] does not explicity say MUST NOT use.
 
 ## 8.6 Algorithm considerations
@@ -429,11 +438,11 @@ To achieve the full security benefits, it is important the implementation of thi
 
 The OpenID Foundation provides tools that can be used to confirm that an implementation is correct:
 
-https://openid.net/certification/
+[https://openid.net/certification/](https://openid.net/certification/)
 
 The OpenID Foundation maintains a list of certified implementations:
 
-https://openid.net/developers/certified/
+[https://openid.net/developers/certified/](https://openid.net/developers/certified/)
 
 Deployments that use this specification should use a certified implementation.
 
@@ -521,7 +530,7 @@ Privacy threats to OAuth and OpenID Connect implementations include the followin
 * (RP misidentification by user at authorization server) User misunderstands who the RP is due to a confusing representation of the RP at 
 the authorization server's authorization page. 
 * (Mismatch between user’s understanding or what RP is displaying to a user and the actual authorization request). To enhance 
-the trust of the ecosystem, best practice is for the authorization server to make clear what is included in the authorisation request (for example, 
+the trust of the ecosystem, best practice is for the authorization server to make clear what is included in the authorization request (for example, 
 what data will be released to the RP).
 * (Attacker observing personal data in authorization request) Authorization request might contain personal data. This can be observed by an attacker. 
 * (Attacker observing personal data in authorization endpoint response) In some frameworks, even state is deemed personal data. 
@@ -804,6 +813,9 @@ The following people contributed to this document:
 * James Manger
 
 # Annex C Changes {-}
+* 2026-02-27
+    * Apllied editorial changes per ISO comments. 
+    * Fixed formatting issues. 
 * 2023-06-25
     * Applied changes needed to convert to pandoc
     * Changed the title to incorporate "errata"
@@ -818,13 +830,13 @@ The following people contributed to this document:
     
 # Bibliography
 
+* [ISODIR2], ISO/IEC Directives Part 2
+
+[ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
+
 * [ISO/IEC 29134], Information technology — Security techniques — Guidelines for privacy impact assessment
 
 [ISO/IEC 29134]: https://www.iso.org/standard/86012.html
-
-* [RFC 6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
-
-[RFC 6750]: https://tools.ietf.org/html/rfc6750
 
 * [RFC 6819] OAuth 2.0 Threat Model and Security Considerations
 
