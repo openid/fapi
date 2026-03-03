@@ -173,6 +173,50 @@ user-present regardless of context.
 
 NOTE: This header is only useful in ecosystems where recourse exists against clients that falsify its value.
 
+## DPoP vs MTLS
+
+Sender constraining access tokens is an important security measure that provides significant protections against token theft and misuse. FAPI 2.0 allows implementers to use either DPoP or MTLS to achieve this goal. Both approaches meet the security requirements, but each has different characteristics that may make one more suitable than the other depending on your ecosystem. This section outlines considerations to guide your choice.
+
+### DPoP Considerations
+
+1. DPoP operates at the application layer rather than the transport layer;
+2. DPoP only sender constrains part of the request (the HTTP method and URL), unlike MTLS which protects the entire request;
+3. DPoP requires cryptographic operations for each request, which may have performance implications;
+4. DPoP introduces protocol complexity, including HTTP request URL normalization and optionally server-provided nonces;
+5. DPoP library support is less mature than MTLS, and there is limited ecosystem deployment experience;
+6. DPoP is the only viable option for browser-based clients (MTLS only works practically for server-to-server communication).
+
+### MTLS Considerations
+
+1. MTLS performs both client authentication and sender constraining simultaneously, simplifying implementation for clients;
+2. MTLS sender constrains the entire request, not just specific elements;
+3. MTLS amortizes the cost of asymmetric cryptographic operations by performing them during the TLS handshake and reusing the connection;
+4. Self-signed certificates can be used for sender constraining; the binding to the access token is established at the token endpoint without needing to distribute certificates via JWKS;
+5. MTLS presents integration challenges at the transport layer, especially when operating at scale;
+6. MTLS implementations may encounter interoperability issues with certificate handling, including:
+   * Certificate aliases
+   * IP/SAN negotiation
+   * DN matching for PKI;
+7. [RFC9440] provides additional guidance for MTLS implementations.
+
+### Selection Guidance
+
+Both DPoP and MTLS are valid choices for sender constraining, and each has trade-offs.
+
+MTLS may be more suitable when:
+
+* Operating in closed ecosystems with existing PKI infrastructure;
+* Simplicity for client-side implementation is a priority;
+* Full request protection is desired;
+* Mature library support is required.
+
+DPoP may be more suitable when:
+
+* Browser-based clients need to be supported (MTLS only works practically for server-to-server communication);
+* Transport layer integration for mutual TLS is impractical.
+
+Implementers should not use both DPoP and MTLS simultaneously for sender constraining.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
