@@ -225,7 +225,7 @@ browsers, the following requirements apply:
  1. When using TLS 1.2, servers shall only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
 Parameters" registry group {{!RFC8447}}{{!RFC9847}}.;
  2. When using TLS 1.2, clients should only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
-Parameters" registry group {{!RFC8447}}{{!RFC9847}}..
+Parameters" registry group {{!RFC8447}}{{!RFC9847}}.
   
 #### MTLS ecosystems
 
@@ -262,7 +262,7 @@ requirements apply:
      purpose. Some top-level domains, like `.bank` and `.insurance`,
      have set such a policy and therefore protect all second-level
      domains below them.
-  2. When using TLS 1.2, servers shall only use cipher suites allowed and not depricated in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
+  2. When using TLS 1.2, servers shall only use cipher suites allowed and not deprecated in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
 Parameters" registry group {{!RFC8447}}{{!RFC9847}}.
   3. Servers shall not support CORS [@!CORS.Protocol] for the authorization endpoint, as 
      clients must perform an HTTP redirect rather than access this endpoint 
@@ -274,7 +274,7 @@ use cipher suites recommended by [@!BCP195].
 
 **NOTE 2**: New versions of [@!BCP195] will be published by the IETF periodically
 and the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
-Parameters" registry group {{!RFC8447}}{{!RFC9847}} get updated by the IANA peridoically. 
+Parameters" registry group {{!RFC8447}}{{!RFC9847}} get updated by the IANA periodically. 
 At a minimum, implementors are expected to become compliant with newly issued 
 versions of BCP195 and the IANA registry within 12 months, or sooner.
 
