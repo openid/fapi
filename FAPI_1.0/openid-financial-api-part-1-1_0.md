@@ -233,7 +233,10 @@ Further, if it is desired to obtain a persistent identifier of the authenticated
 
 If `openid` is not in the `scope` value, then the public client
 
-9. shall include the `state` parameter defined in Section 4.1.1 of [RFC 6749];
+9. shall include the `state` parameter defined in Section 4.1.1 of [RFC 6749].
+
+Further, a client 
+
 10. shall verify that the `scope` received in the token response is either an exact match,
 or contains a subset of the `scope` sent in the authorization request if the request was passed in the front channel and was not integrity protected; and
 11. shall only use authorization server metadata obtained from the metadata document published by the authorization server at its well known endpoint as defined in [OIDD] or [RFC 8414].
