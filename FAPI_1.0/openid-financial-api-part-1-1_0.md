@@ -336,7 +336,7 @@ CAA records [RFC 8659] can help to mitigate this risk.
 
 Authorization request and response are not authenticated. 
 For higher risk scenarios, they should be authenticated.
-See [FAPI Security Profile 1.0 - Part 2: Advanced][Part2], which uses request objects to achieve the message source authentication. 
+See [FAPI Security Profile 1.0 - Part 2: Advanced][Part2], which uses request objects, and ID Token or [JARM] to achieve the message source authentication. 
 
 ## 7.3 Message integrity protection failure
 
