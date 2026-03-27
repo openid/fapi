@@ -88,6 +88,10 @@ The following documents are referred to in the text in such a way that some or a
 
 [BCP 195]: https://tools.ietf.org/html/bcp195
 
+[IANA TLSP], Transport Layer Security (TLS) Parameters
+
+[IANA TLSP]: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
+
 [OIDC], OpenID Connect Core 1.0
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
@@ -159,8 +163,8 @@ The authorization server
 1. shall authenticate the confidential client using one of the following methods:
     1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC 8705], or
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
-1. shall require and use a key of size 2048 bits or larger for RSA algorithms;
-1. shall require and use a key of size 160 bits or larger for elliptic curve algorithms;
+1. shall require and use the key length permitted by [BCP 195];
+1. shall not use algorithms deprecated in [IANA TLSP];
 1. shall require [RFC 7636] with `S256` as the code challenge method;
 1. shall require redirect URIs to be pre-registered;
 1. shall require the `redirect_uri` in the authorization request;
@@ -251,8 +255,8 @@ In addition to the provisions for a public client, a confidential client
 1. shall support the following methods to authenticate against the token endpoint:
     1. Mutual TLS for OAuth client authentication as specified in Section 2 of [RFC 8705], and
     2. `client_secret_jwt` or `private_key_jwt` as specified in Section 9 of [OIDC];
-1. shall use RSA keys with a minimum 2048 bits if using RSA cryptography; 
-1. shall use elliptic curve keys with a minimum of 160 bits if using elliptic curve cryptography; and
+1. shall require and use the key length permitted by [BCP 195]; 
+1. shall not use algorithms deprecated in [IANA TLSP]; and
 1. shall verify that its client secret has a minimum of 128 bits if using symmetric key cryptography.
 
 
