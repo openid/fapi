@@ -223,7 +223,7 @@ For server-to-server communication endpoints that are not used by web
 browsers, the following requirements apply:
 
  1. When using TLS 1.2, servers shall only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
-Parameters" registry group [@!BCP195].;
+Parameters" registry group [@!BCP195].
  2. When using TLS 1.2, clients should only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
 Parameters" registry group [@!BCP195].
   
