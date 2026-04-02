@@ -41,6 +41,71 @@ a.toplink {
 
 dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
 
+#identifiers {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  column-gap: 1.25rem;
+  row-gap: 0.25rem;
+  margin: 0 0 1.2rem 0;
+  padding: 0;
+}
+
+#identifiers dt,
+#identifiers dd {
+  margin: 0;
+  padding: 0;
+  float: none !important;
+  clear: none !important;
+  width: auto !important;
+}
+
+#identifiers dt {
+  grid-column: 1;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+#identifiers dd {
+  grid-column: 2;
+}
+
+/* authors row container */
+#identifiers dd.author {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 2.2rem;
+  margin-top: -0.05rem;
+}
+
+/* each author card */
+#identifiers dd.author > .author {
+  display: inline-flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  min-width: max-content;
+  margin: 0;
+  padding: 0;
+}
+
+/* author name */
+#identifiers .author-name {
+  display: block;
+  white-space: nowrap;
+  line-height: 1.2;
+  margin: 0 0 0.18rem 0;
+}
+
+/* organization line */
+#identifiers .org {
+  display: block;
+  white-space: nowrap;
+  font-style: italic;
+  line-height: 1.2;
+  margin: 0 0 0.6rem 0;
+}
+
 .btn {
   font-family: Arial, Verdana, sans-serif;
   background-color: #337ab7;

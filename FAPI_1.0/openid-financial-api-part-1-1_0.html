@@ -7,7 +7,7 @@
   <meta name="dcterms.date" content="2026-03-27" />
   <meta name="keywords" content="FAPI, Baseline security" />
   <meta name="description" content="Profile of OAuth with medium security options." />
-  <title>FAPI security profile 1.0 - Part 1: Baseline - draft 11 incorporating errata set 1</title>
+  <title>FAPI security profile 1.0 - Part 1: Baseline - Draft 11 incorporating errata set 1</title>
   <style>
 </style>
   <style type="text/css">html {
@@ -46,6 +46,63 @@ float: right;
 margin-right: 0.5em;
 }
 dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
+#identifiers {
+display: grid;
+grid-template-columns: 11rem 1fr;
+column-gap: 1.25rem;
+row-gap: 0.25rem;
+margin: 0 0 1.2rem 0;
+padding: 0;
+}
+#identifiers dt,
+#identifiers dd {
+margin: 0;
+padding: 0;
+float: none !important;
+clear: none !important;
+width: auto !important;
+}
+#identifiers dt {
+grid-column: 1;
+font-weight: 400;
+white-space: nowrap;
+}
+#identifiers dd {
+grid-column: 2;
+}
+
+#identifiers dd.author {
+display: flex !important;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+gap: 0 2.2rem;
+margin-top: -0.05rem;
+}
+
+#identifiers dd.author > .author {
+display: inline-flex;
+flex-direction: column;
+flex: 0 0 auto;
+min-width: max-content;
+margin: 0;
+padding: 0;
+}
+
+#identifiers .author-name {
+display: block;
+white-space: nowrap;
+line-height: 1.2;
+margin: 0 0 0.18rem 0;
+}
+
+#identifiers .org {
+display: block;
+white-space: nowrap;
+font-style: italic;
+line-height: 1.2;
+margin: 0 0 0.6rem 0;
+}
 .btn {
 font-family: Arial, Verdana, sans-serif;
 background-color: #337ab7;
@@ -621,49 +678,35 @@ page-break-inside: avoid;
   <![endif]-->
 </head>
 <body>
-<table><tr>
-<td>Workgroup:</td><td>FAPI</td></tr>
-
-<tr>
-<td>Published:</td><td>2026-03-27</td>
-</tr>
-<tr>
-<td>Status:</td><td>Draft 11</td>
-</tr>
-<tr><td>Authors:</td>
-  <td>
-    Nat Sakimura
-     <br /><i>(Nat.Consulting)</i>
-    <!-- 
-     &lt;nat@nat.consulting&gt;
-     <a href="http://nat.sakimura.org/">http://nat.sakimura.org/</a> 
-    -->
-  </td>
-  <td>
-    John Bradley
-     <br /><i>(Yubico)</i>
-    <!-- 
-     &lt;ve7jtb@ve7jtb.com&gt;
-     <a href="http://www.thread-safe.com/">http://www.thread-safe.com/</a> 
-    -->
-  </td>
-  <td>
-    Edmund Jay
-     <br /><i>(Illumila)</i>
-    <!-- 
-     &lt;ejay@mgi1.com&gt;
-     <a href="http://illumila.la/">http://illumila.la/</a> 
-    -->
-  </td>
-</tr>
-</table>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">FAPI</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-03-27" class="published">2026-03-27</time>
+    </dd>
+<dt class="label-intended-status">Status:</dt>
+<dd class="intended-status">Draft 11</dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="author">
+<div class="author">
+<div class="author-name">Nat Sakimura</div>
+<div class="org">NAT.Consulting</div>
+</div>
+<div class="author">
+<div class="author-name">John Bradley</div>
+<div class="org">Yubico</div>
+</div>
+<div class="author">
+<div class="author-name">Edmund Jay</div>
+<div class="org">Illumila</div>
+</div>
+</dd>
+</dl>
+</div>
 <header id="title-block-header">
-<h1 class="title">FAPI security profile 1.0 - Part 1: Baseline - draft
-11 incorporating errata set 1
-<!--
-— draft-11
--->
-</h1>
+  <h1 id="title">FAPI security profile 1.0 - Part 1: Baseline - Draft 11 incorporating errata set 1</h1>
 
 
 
@@ -754,8 +797,8 @@ brands</a></li>
 Privacy considerations</a></li>
 <li><a href="#annex-a-informative-acknowledgement" id="toc-annex-a-informative-acknowledgement">Annex A (Informative)
 Acknowledgement</a></li>
-<li><a href="#appendix-b-informative-changes" id="toc-appendix-b-informative-changes">Appendix B (Informative)
-Changes</a></li>
+<li><a href="#appendix-b-informative-document-history" id="toc-appendix-b-informative-document-history">Appendix B
+(Informative) Document History</a></li>
 <li><a href="#bibliography" id="toc-bibliography">Bibliography</a></li>
 </ul>
         </nav>
@@ -1248,7 +1291,7 @@ granted scope, the protected resource can use OAuth Token Introspection
 <a href="https://tools.ietf.org/html/rfc7662">RFC 7662</a>.</p></li>
 </ol>
 <p>Further, the resource server</p>
-<ol type="1">
+<ol start="14" type="1">
 <li><p>should support the use of Cross Origin Resource Sharing (CORS) <a href="https://www.w3.org/TR/2020/SPSD-cors-20200602/">CORS</a> and or
 other methods as appropriate to enable JavaScript clients to access the
 endpoint if it decides to provide access to JavaScript clients.</p>
@@ -1264,7 +1307,7 @@ OAuth 2.0 Bearer Token Usage <a href="https://tools.ietf.org/html/rfc6750">RFC 6
 <li>(withdrawn);</li>
 </ol>
 <p>Further, the client</p>
-<ol type="1">
+<ol start="3" type="1">
 <li>may send the last time the customer logged into the client in the
 <code>x-fapi-auth-date</code> header where the value is supplied as an
 HTTP-date as in Section 7.1.1.1 of <a href="https://tools.ietf.org/html/rfc7231">RFC 7231</a>, e.g.,
@@ -1499,8 +1542,8 @@ Liaison</li>
 <li>Lukasz Jaromin (Cloudentity)</li>
 <li>James Manger</li>
 </ul>
-<h1 class="unnumbered" id="appendix-b-informative-changes">Appendix B
-(Informative) Changes</h1>
+<h1 class="unnumbered" id="appendix-b-informative-document-history">Appendix B (Informative)
+Document History</h1>
 <p>To be removed at the publication time.</p>
 <ul>
 <li>2026-02-27

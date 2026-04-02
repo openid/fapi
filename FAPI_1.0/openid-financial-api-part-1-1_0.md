@@ -1,9 +1,9 @@
 ---
-title: FAPI security profile 1.0 - Part 1&colon; Baseline - draft 11 incorporating errata set 1
+title: FAPI security profile 1.0 - Part 1&colon; Baseline - Draft 11 incorporating errata set 1
 date: 2026-03-27
 author: 
 - name: Nat Sakimura
-  organization: Nat.Consulting
+  organization: NAT.Consulting
   email: nat@nat.consulting
   uri: http://nat.sakimura.org/
 - name: John Bradley
@@ -292,7 +292,7 @@ valid IPv4 or IPv6 address.
 
 Further, the resource server
 
-1. should support the use of Cross Origin Resource Sharing (CORS) [CORS] and or other methods as appropriate to enable JavaScript clients to access the endpoint if it decides to provide access to JavaScript clients.
+14. should support the use of Cross Origin Resource Sharing (CORS) [CORS] and or other methods as appropriate to enable JavaScript clients to access the endpoint if it decides to provide access to JavaScript clients.
 
     **NOTE**: Providing access to JavaScript clients has other security implications. Before supporting those clients [RFC 6819] should be consulted.
 
@@ -305,7 +305,7 @@ The client supporting this document
 
 Further, the client
 
-1. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC 7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
+3. may send the last time the customer logged into the client in the `x-fapi-auth-date` header where the value is supplied as an HTTP-date as in Section 7.1.1.1 of [RFC 7231], e.g., `x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT`;
 1. may send the customer’s IP address if this data is available in the `x-fapi-customer-ip-address` header, e.g., `x-fapi-customer-ip-address: 2001:DB8::1893:25c8:1946` or  `x-fapi-customer-ip-address: 198.51.100.119`; and
 1. may send the `x-fapi-interaction-id` request header, in which case the value shall be an 
 [RFC 4122] UUID to the server to help correlate log entries between client and server, 
@@ -512,7 +512,7 @@ The following people contributed to this document:
 * Lukasz Jaromin (Cloudentity)
 * James Manger
 
-# Appendix B (Informative) Changes {-}
+# Appendix B (Informative) Document History {-}
 
 To be removed at the publication time. 
 

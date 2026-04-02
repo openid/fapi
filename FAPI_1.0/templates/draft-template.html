@@ -40,41 +40,32 @@ $endif$
 $for(include-before)$
 $include-before$
 $endfor$
-<table><tr>
-<td>Workgroup:</td><td>$WG$</td></tr>
-
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">$WG$</dd>
 $if(date)$
-<tr>
-<td>Published:</td><td>$date$</td>
-</tr>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="$date$" class="published">$date$</time>
+    </dd>
 $endif$
-$if(draft)$
-<tr>
-<td>Status:</td><td>Draft $ver$</td>
-</tr>
-$endif$
-<tr><td>Authors:</td>
+<dt class="label-intended-status">Status:</dt>
+<dd class="intended-status">$if(draft)$Draft $ver$$endif$</dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="author">
 $for(author)$
-  <td>
-    $if(author.name)$$author.name$$endif$
-    $if(author.organization)$ <br/><i>($author.organization$)</i>$endif$
-    <!-- 
-    $if(author.email)$ &lt;$author.email$&gt;$endif$
-    $if(author.uri)$ <a href="$author.uri$">$author.uri$</a>$endif$ 
-    -->
-  </td>
+<div class="author">
+$if(author.name)$<div class="author-name">$author.name$</div>$endif$
+$if(author.organization)$<div class="org">$author.organization$</div>$endif$
+</div>
 $endfor$
-</tr>
-</table>
+</dd>
+</dl>
+</div>
 $if(title)$
 <header id="title-block-header">
-<h1 class="title">$title$
-<!--
-$if(draft)$
-— draft-$ver$
-$endif$
--->
-</h1>
+  <h1 id="title">$pagetitle$</h1>
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>
 $endif$
