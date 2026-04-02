@@ -169,17 +169,25 @@ border-left: 1px solid #ddd;
 
 @media screen and (min-width: 1024px) {
 :root {
-
 --toc-w: clamp(24rem, 22vw, 30rem);
---toc-gap: 1.25rem; 
-}
+--toc-gap: 1.25rem;
+--page-gap: 42px;
+--content-max: 72rem; }
 body {
 box-sizing: border-box;
-max-width: 1300px;
-width: 100%;
-margin: 42px 42px;
+width: min(
+var(--content-max),
+calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))
+);
+margin-left: calc(
+(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)) - min(var(--content-max), calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))) ) / 2
++ var(--page-gap)
+);
+margin-top: var(--page-gap);
+margin-bottom: var(--page-gap);
+margin-right: calc(var(--toc-w) + var(--toc-gap) + var(--page-gap));
 padding-left: 3em;
-padding-right: calc(var(--toc-w) + var(--toc-gap));
+padding-right: 0;
 }
 #toc {
 position: fixed;
@@ -614,7 +622,14 @@ page-break-inside: avoid;
 </head>
 <body>
 <table><tr>
-  <td>Working Group:</td><td>FAPI</td></tr>
+<td>Workgroup:</td><td>FAPI</td></tr>
+
+<tr>
+<td>Published:</td><td>2026-02-27</td>
+</tr>
+<tr>
+<td>Status:</td><td>Draft 11</td>
+</tr>
 <tr><td>Authors:</td>
   <td>
     Nat Sakimura
@@ -640,9 +655,6 @@ page-break-inside: avoid;
      <a href="http://illumila.la/">http://illumila.la/</a> 
     -->
   </td>
-</tr>
-<tr>
-<td>Date:</td><td>2026-02-27</td>
 </tr>
 </table>
 <header id="title-block-header">
@@ -943,124 +955,124 @@ apply.</p>
 terms</h1>
 <table>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>API</strong></td>
 <td></td>
 <td style="text-align: left;">application programming interface</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>CSRF</strong></td>
 <td></td>
 <td style="text-align: left;">cross site request forgery</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>DN</strong></td>
 <td></td>
 <td style="text-align: left;">distinguished name</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>HTTP</strong></td>
 <td></td>
 <td style="text-align: left;">hyper text transfer protocol</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>HTTPS</strong></td>
 <td></td>
 <td style="text-align: left;">hypertext transfer protocol secure</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JAR</strong></td>
 <td></td>
 <td style="text-align: left;">JWT-secured authorization request</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JARM</strong></td>
 <td></td>
 <td style="text-align: left;">JWT secured authorization response
 mode</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JOSE</strong></td>
 <td></td>
 <td style="text-align: left;">javascript object signing and
 encryption</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JSON</strong></td>
 <td></td>
 <td style="text-align: left;">javascript object notation</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JWE</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web encryption</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JWK</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web key</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JWKS</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web key sets</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JWS</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web signature</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JWT</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web token</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>MTLS</strong></td>
 <td></td>
 <td style="text-align: left;">mutual transport layer security</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>OIDF</strong></td>
 <td></td>
 <td style="text-align: left;">OpenID foundation</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>PAR</strong></td>
 <td></td>
 <td style="text-align: left;">pushed authorization requests</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>PII</strong></td>
 <td></td>
 <td style="text-align: left;">personally identifiable information</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>PKCE</strong></td>
 <td></td>
 <td style="text-align: left;">proof key for code exchange</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>REST</strong></td>
 <td></td>
 <td style="text-align: left;">representational state transfer</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>RP</strong></td>
 <td></td>
 <td style="text-align: left;">relying party</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>TLS</strong></td>
 <td></td>
 <td style="text-align: left;">transport layer security</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>URI</strong></td>
 <td></td>
 <td style="text-align: left;">uniform resource identifier</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>URL</strong></td>
 <td></td>
 <td style="text-align: left;">uniform resource locator</td>
@@ -1482,7 +1494,7 @@ latest version of <a href="https://tools.ietf.org/html/bcp195">BCP
 195</a>, if necessary to allow sufficient interoperability with users’
 web browsers or are required by local regulations.</p>
 <p><strong>NOTE:</strong> Permitted cipher suites are those that <a href="https://tools.ietf.org/html/bcp195">BCP 195</a> does not explicity
-say MUST NOT use.</p></li>
+say “MUST NOT” use.</p></li>
 </ol>
 <h2 id="algorithm-considerations">8.6 Algorithm considerations</h2>
 <p>For JWS, both clients and authorization servers</p>

@@ -1,6 +1,6 @@
 ---
 title: FAPI security profile 1.0 - Part 1&colon; Baseline - draft 11 incorporating errata set 1
-date: 2026-02-27
+date: 2026-03-27
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting

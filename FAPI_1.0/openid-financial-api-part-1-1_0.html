@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="dcterms.date" content="2026-02-27" />
+  <meta name="dcterms.date" content="2026-03-27" />
   <meta name="keywords" content="FAPI, Baseline security" />
   <meta name="description" content="Profile of OAuth with medium security options." />
   <title>FAPI security profile 1.0 - Part 1: Baseline - draft 11 incorporating errata set 1</title>
@@ -169,17 +169,25 @@ border-left: 1px solid #ddd;
 
 @media screen and (min-width: 1024px) {
 :root {
-
 --toc-w: clamp(24rem, 22vw, 30rem);
---toc-gap: 1.25rem; 
-}
+--toc-gap: 1.25rem;
+--page-gap: 42px;
+--content-max: 72rem; }
 body {
 box-sizing: border-box;
-max-width: 1300px;
-width: 100%;
-margin: 42px 42px;
+width: min(
+var(--content-max),
+calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))
+);
+margin-left: calc(
+(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)) - min(var(--content-max), calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))) ) / 2
++ var(--page-gap)
+);
+margin-top: var(--page-gap);
+margin-bottom: var(--page-gap);
+margin-right: calc(var(--toc-w) + var(--toc-gap) + var(--page-gap));
 padding-left: 3em;
-padding-right: calc(var(--toc-w) + var(--toc-gap));
+padding-right: 0;
 }
 #toc {
 position: fixed;
@@ -614,7 +622,14 @@ page-break-inside: avoid;
 </head>
 <body>
 <table><tr>
-  <td>Working Group:</td><td>FAPI</td></tr>
+<td>Workgroup:</td><td>FAPI</td></tr>
+
+<tr>
+<td>Published:</td><td>2026-03-27</td>
+</tr>
+<tr>
+<td>Status:</td><td>Draft 11</td>
+</tr>
 <tr><td>Authors:</td>
   <td>
     Nat Sakimura
@@ -640,9 +655,6 @@ page-break-inside: avoid;
      <a href="http://illumila.la/">http://illumila.la/</a> 
     -->
   </td>
-</tr>
-<tr>
-<td>Date:</td><td>2026-02-27</td>
 </tr>
 </table>
 <header id="title-block-header">
@@ -870,6 +882,8 @@ for Native Apps</p>
 <p><a href="https://tools.ietf.org/html/bcp195">BCP 195</a>,
 Recommendations for Secure Use of Transport Layer Security (TLS) and
 Datagram Transport Layer Security (DTLS)</p>
+<p><a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>, Transport Layer Security (TLS) Parameters</p>
 <p><a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>,
 OpenID Connect Core 1.0</p>
 <p><a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, OAuth 2.0
@@ -884,99 +898,99 @@ apply.</p>
 <h1 id="abbreviated-terms">4. Abbreviated terms</h1>
 <table>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>API</strong></td>
 <td></td>
 <td style="text-align: left;">application programming interface</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>CAA</strong></td>
 <td></td>
 <td style="text-align: left;">certificate authority authorization</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>CORS</strong></td>
 <td></td>
 <td style="text-align: left;">cross-origin resource sharing</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>CSRF</strong></td>
 <td></td>
 <td style="text-align: left;">cross site request forgery</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>DNSSEC</strong></td>
 <td></td>
 <td style="text-align: left;">domain name system security
 extensions</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>FAPI</strong></td>
 <td></td>
 <td style="text-align: left;">FAPI</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>HTTP</strong></td>
 <td></td>
 <td style="text-align: left;">hyper text transfer protocol</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>IP</strong></td>
 <td></td>
 <td style="text-align: left;">internet protocol</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JARM</strong></td>
 <td></td>
 <td style="text-align: left;">JWT secured authorization response
 mode</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>JSON</strong></td>
 <td></td>
 <td style="text-align: left;">javaScript object notation</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>JWT</strong></td>
 <td></td>
 <td style="text-align: left;">JSON web token</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>OIDF</strong></td>
 <td></td>
 <td style="text-align: left;">OpenID foundation</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>RP</strong></td>
 <td></td>
 <td style="text-align: left;">relying party</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>RSA</strong></td>
 <td></td>
 <td style="text-align: left;">Rivest–Shamir–Adleman</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>REST</strong></td>
 <td></td>
 <td style="text-align: left;">representational state transfer</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>TLS</strong></td>
 <td></td>
 <td style="text-align: left;">transport layer security</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>URI</strong></td>
 <td></td>
 <td style="text-align: left;">uniform resource identifier</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;"><strong>UTF</strong></td>
 <td></td>
 <td style="text-align: left;">unicode transformation format</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>UUID</strong></td>
 <td></td>
 <td style="text-align: left;">universally unique identifier</td>
@@ -1022,10 +1036,9 @@ of <a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, or</li>
 <li><code>client_secret_jwt</code> or <code>private_key_jwt</code> as
 specified in Section 9 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
 </ol></li>
-<li><p>shall require and use a key of size 2048 bits or larger for RSA
-algorithms;</p></li>
-<li><p>shall require and use a key of size 160 bits or larger for
-elliptic curve algorithms;</p></li>
+<li><p>shall require and use the key length permitted by <a href="https://tools.ietf.org/html/bcp195">BCP 195</a>;</p></li>
+<li><p>shall not use algorithms deprecated in <a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>;</p></li>
 <li><p>shall require <a href="https://tools.ietf.org/html/rfc7636">RFC
 7636</a> with <code>S256</code> as the code challenge method;</p></li>
 <li><p>shall require redirect URIs to be pre-registered;</p></li>
@@ -1080,7 +1093,8 @@ JWT).</p>
 <p><strong>NOTE</strong>: The requirement to return the list of granted
 scopes allows clients to detect when the authorization request was
 modified to include different scopes. Servers must still return the
-granted scopes if they are different from those requested.</p></li>
+granted scopes per section 5.1. of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a> if they are
+different from those requested.</p></li>
 </ol>
 <h4 id="returning-authenticated-users-identifier">5.2.2.1 Returning
 authenticated user’s identifier</h4>
@@ -1148,9 +1162,12 @@ the authentication request.</li>
 <p>If <code>openid</code> is not in the <code>scope</code> value, then
 the public client</p>
 <ol start="9" type="1">
-<li><p>shall include the <code>state</code> parameter defined in Section
+<li>shall include the <code>state</code> parameter defined in Section
 4.1.1 of <a href="https://tools.ietf.org/html/rfc6749">RFC
-6749</a>;</p></li>
+6749</a>.</li>
+</ol>
+<p>Further, a client</p>
+<ol start="10" type="1">
 <li><p>shall verify that the <code>scope</code> received in the token
 response is either an exact match, or contains a subset of the
 <code>scope</code> sent in the authorization request if the request was
@@ -1176,10 +1193,9 @@ of <a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, and</li>
 <li><code>client_secret_jwt</code> or <code>private_key_jwt</code> as
 specified in Section 9 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
 </ol></li>
-<li>shall use RSA keys with a minimum 2048 bits if using RSA
-cryptography;</li>
-<li>shall use elliptic curve keys with a minimum of 160 bits if using
-elliptic curve cryptography; and</li>
+<li>shall require and use the key length permitted by <a href="https://tools.ietf.org/html/bcp195">BCP 195</a>;</li>
+<li>shall not use algorithms deprecated in <a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>; and</li>
 <li>shall verify that its client secret has a minimum of 128 bits if
 using symmetric key cryptography.</li>
 </ol>
@@ -1292,8 +1308,9 @@ mitigate this risk.</p>
 authentication failure</h2>
 <p>Authorization request and response are not authenticated. For higher
 risk scenarios, they should be authenticated. See <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
-Security Profile 1.0 - Part 2: Advanced</a>, which uses request objects
-to achieve the message source authentication.</p>
+Security Profile 1.0 - Part 2: Advanced</a>, which uses request objects,
+and ID Token or <a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a> to achieve
+the message source authentication.</p>
 <h2 id="message-integrity-protection-failure">7.3 Message integrity
 protection failure</h2>
 <p>The authorization request does not have message integrity protection

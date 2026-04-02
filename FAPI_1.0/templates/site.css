@@ -170,33 +170,42 @@ nav.toc li {
 /* alternative layout for wide screens */
 @media screen and (min-width: 1024px) {
    :root {
-    /* TOC 幅：画面に追随しつつ上限下限を設定（1920pxでも破綻しにくい） */
     --toc-w: clamp(24rem, 22vw, 30rem);
-    --toc-gap: 1.25rem; /* 本文とTOCの間のすき間 */
+    --toc-gap: 1.25rem;
+    --page-gap: 42px;
+    --content-max: 72rem; 
   }
 
   body {
     box-sizing: border-box;
-    max-width: 1300px;
-    width: 100%;
-    margin: 42px 42px;
+    width: min(
+      var(--content-max),
+      calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))
+    );
+    margin-left: calc(
+      (100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)) - min(var(--content-max), calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))) ) / 2
+      + var(--page-gap)
+    );
+
+    margin-top: var(--page-gap);
+    margin-bottom: var(--page-gap);
+    margin-right: calc(var(--toc-w) + var(--toc-gap) + var(--page-gap));
     padding-left: 3em;
-    padding-right: calc(var(--toc-w) + var(--toc-gap));
+    padding-right: 0;
   }
 
   #toc {
     position: fixed;
     top: 0;
     right: 0;
-
     width: var(--toc-w);
     max-width: none;
-
     margin: 0;
     padding: 2em;
     height: 100%;
     overflow: auto;
   }
+
   #toc h2 {
     border-top: none;
     border-bottom: 1px solid #ddd;
