@@ -239,6 +239,9 @@ overflow: auto;
 height: calc(100vh - 48px);
 border-left: 1px solid #ddd;
 }
+#toc.active nav {
+display: block;
+}
 }
 
 @media screen and (min-width: 1024px) {
@@ -2208,11 +2211,13 @@ The technology described in this specification was made available from contribut
   Copyright © 2026 The OpenID Foundation
 </footer>
 
-<script>const toc = document.getElementById("toc");
+<script>
+const toc = document.getElementById("toc");
 toc.querySelector("h2").addEventListener("click", e => {
     toc.classList.toggle("active");
 });
 toc.querySelector("nav").addEventListener("click", e => {
+    e.preventDefault();
     toc.classList.remove("active");
 });
 </script>

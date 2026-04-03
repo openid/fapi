@@ -251,6 +251,9 @@ nav.toc li {
     height: calc(100vh - 48px);
     border-left: 1px solid #ddd;
   }
+  #toc.active nav {
+    display: block;
+  }
 }
 /* alternative layout for wide screens */
 @media screen and (min-width: 1024px) {
