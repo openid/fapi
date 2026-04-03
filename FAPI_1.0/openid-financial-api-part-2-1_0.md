@@ -1,6 +1,6 @@
 ---
 title: FAPI security profile 1.0 - Part 2&colon; Advanced - draft 11 incorporating errata set 1
-date: 2026-03-04
+date: 2026-04-04
 author: 
 - name: Nat Sakimura
   organization: Nat.Consulting
@@ -65,43 +65,43 @@ This document is applicable to higher risk use cases which includes commercial a
 # 2. Normative references
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-[Part1],  FAPI Security Profile 1.0 - Part 1: Baseline
+[Part1],  *FAPI Security Profile 1.0 - Part 1: Baseline*
 
 [Part1]: https://openid.net/specs/openid-financial-api-part-1-1_0.html
 
-[RFC 6749],  The OAuth 2.0 Authorization Framework
+[RFC 6749],  *The OAuth 2.0 Authorization Framework*
 
 [RFC 6749]: https://tools.ietf.org/html/rfc6749
 
-[RFC 6750] The OAuth 2.0 Authorization Framework: Bearer Token Usage
+[RFC 6750] *The OAuth 2.0 Authorization Framework: Bearer Token Usage*
 
 [RFC 6750]: https://tools.ietf.org/html/rfc6750
 
-[RFC 7636],  Proof Key for Code Exchange by OAuth Public Clients
+[RFC 7636],  *Proof Key for Code Exchange by OAuth Public Clients*
 
 [RFC 7636]: https://tools.ietf.org/html/rfc7636
 
-[OIDC], OpenID Connect Core 1.0
+[OIDC], *OpenID Connect Core 1.0*
 
 [OIDC]: https://openid.net/specs/openid-connect-core-1_0.html
 
-[RFC 8705], OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+[RFC 8705], *OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens*
 
 [RFC 8705]: https://tools.ietf.org/html/rfc8705
 
-[JARM], JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) incorporating errata set 1
+[JARM], *JWT Secured Authorization Response Mode for OAuth 2.0 (JARM) incorporating errata set 1*
 
 [JARM]: https://openid.net/specs/oauth-v2-jarm.html
 
-[RFC 9126],  OAuth 2.0 Pushed Authorization Requests
+[RFC 9126],  *OAuth 2.0 Pushed Authorization Requests*
 
 [RFC 9126]: https://www.rfc-editor.org/rfc/rfc9126.html
 
-[RFC 9101],  OAuth 2.0 JWT Secured Authorization Request
+[RFC 9101],  *OAuth 2.0 JWT Secured Authorization Request*
 
 [RFC 9101]: https://www.rfc-editor.org/rfc/rfc9101.html
 
-[ISO/IEC 29100], ISO/IEC 29100 Information technology — Security techniques — Privacy framework
+[ISO/IEC 29100], *ISO/IEC 29100 Information technology — Security techniques — Privacy framework*
 
 [ISO/IEC 29100]: https://www.iso.org/standard/85938.html
 
@@ -239,7 +239,7 @@ In addition, the authorization server
 
 **EXAMPLE** 
 
-see Annex A for additional information. 
+See Annex A for additional information. 
 
 #### 5.2.2.1 ID Token as detached signature
 
@@ -556,7 +556,10 @@ established by [RFC 7519].
 * Change Controller: OpenID Foundation FAPI Working Group - openid-specs-fapi@lists.openid.net
 * Reference: Section 5 of [[ this document ]]
 
-# Annex A (informative) Examples 
+# Annex A Examples {#examples .annex}
+::: {.bigcenter}
+(informative) 
+::: 
 
 ## A.0 JWK for examples
 
@@ -602,7 +605,7 @@ The code that generated these examples can be found here:
 https://gitlab.com/openid/fapi-examples
 -->
 
-## A.1 Example request object
+## A.1 Example request object {#example-request-object}
 
 ```jwt
     eyJraWQiOiJjbGllbnQtMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJhdWQiOiJodHRwczpcL1wv
@@ -635,7 +638,7 @@ which when decoded has the following body:
     }
 ```
 
-## A.2 Example signed id_token for authorization endpoint response
+## A.2 Example signed id_token for authorization endpoint response {#example-signed-id-token-for-authorization-endpoint-response}
 
 ```jwt
     eyJraWQiOiJzZXJ2ZXItMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJzdWIiOiIxMDAxIiwiYXVk
@@ -665,7 +668,7 @@ which when decoded has the following body:
     }
 ```
 
-## A.3 Example signed and encrypted id_token for authorization endpoint response
+## A.3 Example signed and encrypted id_token for authorization endpoint response {#example-signed-and-encrypted-id-token-for-authorization-endpoint-response}
 
 ```jwt
     eyJraWQiOiJjbGllbnQtZW5jLTIwMjAtMDgtMjgiLCJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwi
@@ -727,7 +730,7 @@ has the following body:
     }
 ```
 
-## A.4 Example JARM response
+## A.4 Example JARM response {#example-jarm-response}
 
 ```jwt
     eyJraWQiOiJzZXJ2ZXItMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJhdWQiOiI0NjkxODA2NDgw
@@ -752,7 +755,7 @@ which when decoded has the following body:
     }
 ```
 
-## A.5 Example private\_key\_jwt client assertion
+## A.5 Example private\_key\_jwt client assertion {#example-private-key-jwt-client-assertion}
 
 ```jwt
     eyJraWQiOiJjbGllbnQtMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJzdWIiOiI1MjQ4MDc1NDA1
@@ -778,8 +781,10 @@ which when decoded has the following body:
     }
 ```
 
-# Annex B (Informative) Acknowledgement {-}
-
+# Annex B Acknowledgement {- #acknowledgement .annex}
+::: {.bigcenter}
+(informative) 
+::: 
 The following people contributed to this document:
 
 * Nat Sakimura (NAT Consulting) -- Chair, Editor
@@ -812,7 +817,17 @@ The following people contributed to this document:
 * Lukasz Jaromin (Cloudentity)
 * James Manger
 
-# Annex C Changes {-}
+# Annex C Document History {- .annex}
+::: {.bigcenter}
+(informative) 
+::: 
+This section is to be removed before publication
+
+-11 
+
+* 2026-04-03
+    * Adjusted anchor to match the 1.0 Final. 
+    * Changed "Changes" to "Document History" for the publication check. 
 * 2026-02-27
     * Apllied editorial changes per ISO comments. 
     * Fixed formatting issues. 
@@ -828,37 +843,37 @@ The following people contributed to this document:
     * #612 - Fixed hanging paragraph in 5.1 and renumbered subclauses in 5.1.x
     * #611 - 8.3.5 content moved to previously empty 8.3.4
     
-# Bibliography
+# Bibliography {- .annex}
 
-* [ISODIR2], ISO/IEC Directives Part 2
+* [ISODIR2], *ISO/IEC Directives Part 2*
 
 [ISODIR2]: https://www.iso.org/sites/directives/current/part2/index.xhtml
 
-* [ISO/IEC 29134], Information technology — Security techniques — Guidelines for privacy impact assessment
+* [ISO/IEC 29134], *Information technology — Security techniques — Guidelines for privacy impact assessment*
 
 [ISO/IEC 29134]: https://www.iso.org/standard/86012.html
 
-* [RFC 6819] OAuth 2.0 Threat Model and Security Considerations
+* [RFC 6819] Lodderstedt, T., Ed., McGloin, M., and P. Hunt,  *OAuth 2.0 Threat Model and Security Considerations*
 
 [RFC 6819]: https://tools.ietf.org/html/rfc6819 
 
-* [RFC 7519] JSON Web Token (JWT)
+* [RFC 7519] Jones, M., Bradley, J., and N. Sakimura, *JSON Web Token (JWT)*
 
 [RFC 7519]:https://tools.ietf.org/html/rfc7519
 
-* [RFC 7591] OAuth 2.0 Dynamic Client Registration Protocol
+* [RFC 7591] Richer, J., Ed., Jones, M., Bradley, J., Machulak, M., and P. Hunt, *OAuth 2.0 Dynamic Client Registration Protocol*
 
 [RFC 7591]:https://tools.ietf.org/html/rfc7591 
 
-* [RFC 7592] OAuth 2.0 Dynamic Client Registration Management Protocol
+* [RFC 7592] Richer, J., Ed., Jones, M., Bradley, J., and M. Machulak, *OAuth 2.0 Dynamic Client Registration Management Protocol*
 
 [RFC 7592]:https://tools.ietf.org/html/rfc7592 
 
-* [RFC 8414] OAuth 2.0 Authorization Server Metadata
+* [RFC 8414] Jones, M., Sakimura, N., and J. Bradley, *OAuth 2.0 Authorization Server Metadata*
 
 [RFC 8414]: https://tools.ietf.org/html/rfc8414
 
-* [OIDD] OpenID Connect Discovery 1.0
+* [OIDD] Sakimura, N., Bradley, J., Jones, M., and E. Jay, *OpenID Connect Discovery 1.0*
 
 [OIDD]: https://openid.net/specs/openid-connect-discovery-1_0.html 
 
@@ -866,14 +881,14 @@ The following people contributed to this document:
 
 [BCP 195]: https://tools.ietf.org/html/bcp195
 
-* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security – An Evaluation of OpenID Connect
+* [SoK: Single Sign-On Security – An Evaluation of OpenID Connect] Mainka, C., Mladenov, V., Schwenk, J., and T. Wich, *SoK: Single Sign-On Security – An Evaluation of OpenID Connect*
 
 [SoK: Single Sign-On Security – An Evaluation of OpenID Connect]: https://ieeexplore.ieee.org/document/7961984
 
-* [FAPISEC] Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security Analysis of the OpenID Financial-grade API
+* [FAPISEC] Fett, D., Hosseyni, P., and R. Kuesters, *An Extensive Formal Security Analysis of the OpenID Financial-grade API*
 
 [FAPISEC]: https://ieeexplore.ieee.org/document/8835218
 
-* [OAUTHSEC] Fett, D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis of OAuth 2.0
+* [OAUTHSEC] Fett, D., Kuesters, R., and G. Schmitz, *A Comprehensive Formal Security Analysis of OAuth 2.0*
 
 [OAUTHSEC]: https://doi.org/10.1145/2976749.2978385

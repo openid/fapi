@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="dcterms.date" content="2026-02-27" />
+  <meta name="dcterms.date" content="2026-04-04" />
   <meta name="keywords" content="FAPI, Advanced security" />
   <meta name="description" content="Profile of OAuth with high security options." />
   <title>FAPI security profile 1.0 - Part 2: Advanced - draft 11 incorporating errata set 1</title>
@@ -45,7 +45,81 @@ a.toplink {
 float: right;
 margin-right: 0.5em;
 }
+.bigcenter {
+text-align: center;
+font-size: 1.5em;
+}
+.bigtext {
+font-size: 1.5em;
+}
+h1.center, h2.center, h3.center, h4.center, h5.center, h6.center {
+text-align: center;
+}
+h1.annex {
+border-top: 1px solid #999;
+border-bottom: none;
+padding-top: 2em;
+margin-top: 1em;
+text-align: center;
+}
 dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
+#identifiers {
+display: grid;
+grid-template-columns: 11rem 1fr;
+column-gap: 1.25rem;
+row-gap: 0.25rem;
+margin: 0 0 1.2rem 0;
+padding: 0;
+}
+#identifiers dt,
+#identifiers dd {
+margin: 0;
+padding: 0;
+float: none !important;
+clear: none !important;
+width: auto !important;
+}
+#identifiers dt {
+grid-column: 1;
+font-weight: 400;
+white-space: nowrap;
+}
+#identifiers dd {
+grid-column: 2;
+}
+
+#identifiers dd.author {
+display: flex !important;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+gap: 0 2.2rem;
+margin-top: -0.05rem;
+}
+
+#identifiers dd.author > .author {
+display: inline-flex;
+flex-direction: column;
+flex: 0 0 auto;
+min-width: max-content;
+margin: 0;
+padding: 0;
+}
+
+#identifiers .author-name {
+display: block;
+white-space: nowrap;
+line-height: 1.2;
+margin: 0 0 0.18rem 0;
+}
+
+#identifiers .org {
+display: block;
+white-space: nowrap;
+font-style: italic;
+line-height: 1.2;
+margin: 0 0 0.6rem 0;
+}
 .btn {
 font-family: Arial, Verdana, sans-serif;
 background-color: #337ab7;
@@ -191,7 +265,7 @@ padding-right: 0;
 }
 #toc {
 position: fixed;
-top: 0;
+top: 24px;
 right: 0;
 width: var(--toc-w);
 max-width: none;
@@ -512,7 +586,6 @@ max-width: 22em;
 ul ul {
 margin-bottom: 0.5em
 }
-ul { list-style-type: square; }
 dl { margin-top: auto; }
 dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
 dd {
@@ -559,60 +632,199 @@ opacity: 1;
 
 
 @media print {
-body {
-width:100% !important;
-margin:0 !important;
-padding:0 !important;
-line-height: 1.4;
-word-spacing:1.1pt;
-letter-spacing:0.2pt;
-font-family: "Times New Roman", serif;
+@page {
+size: A4;
+margin: 25mm 20mm 25mm 20mm;
+}
+html, body {
+margin: 0;
+padding: 0;
+background: #fff;
 color: #000;
-background: none;
+font-family: Cambria, "Times New Roman", Times, "Noto Serif JP", serif;
 }
-
-h1,h2,h3,h4,h5,h6 { font-family: Helvetica, Arial, sans-serif; }
-h1{font-size:19pt;}
-h2{font-size:17pt;}
-h3{font-size:15pt;}
-h4,h5,h6{font-size:12pt;}
-pre, code { font: 10pt Courier, monospace; }
-blockquote { margin: 1.3em; padding: 1em; font-size: 10pt; }
-hr { background-color: #ccc; }
-
-img { float: left; margin: 1em 1.5em 1.5em 0; }
-a img { border: none; }
-
-a:link, a:visited { background: transparent; font-weight: normal; text-decoration: underline; color:#333; }
-a:link[href^="http://"]:after, a[href^="http://"]:visited:after { content: " (" attr(href) ")"; font-size: 90%; }
-a[href^="http://"] {color:#000; }
-
-table { margin: 1px; text-align:left; }
-th { font-weight: bold; }
-th,td { padding: 4px 10px 4px 0; }
-tfoot { font-style: italic; }
-caption { background: #fff; margin-bottom:2em; text-align:left; }
-thead {display: table-header-group;}
-tr {page-break-inside: avoid;}
-
-.extension-checkbox { display: none; }
+body {
+font-size: 11pt;
+line-height: 1.3;
+max-width: none;
+color: #000 !important;
 }
-
-@media screen and (max-width: 1023px) {
-#toc nav { display: none; }
-#toc.active nav { display: block; }
+main, article, #content, .content {
+max-width: 170mm;
+margin: 0 auto;
 }
-@media print {
-.toplink {
-display: none;
+#title-block-header {
+padding-top: 30mm;
 }
-
+#title {
+font-size: 18pt;
+}
 #toc {
-padding-top: 1px;
+break-before: page;
+page-break-before: always;
+margin: 0 0 12mm 0;
+}
+#toc-title {
+margin: 0 0 6mm 0;
+font-size: 14pt;
+font-weight: 700;
+}
+#toc nav.toc li {
+line-height: 1.1;
+margin: 0.2em 0;
+}
+#warning {
+margin-top: 100mm;
+border: 1px solid #000;
+padding: 5mm;
+}
+#name-foreword,
+#introduction,
+#scope {
+break-before: page;
+page-break-before: always;
+}
+ul {
+list-style: none;
+}
+#scope + p + ul {
+list-style: none;
+padding-left: 0;
+}
+#scope + p + ul > li {
+position: relative;
+padding-left: 8mm; margin-bottom: 0.5em;
+}
+#scope + p + ul > li::before {
+content: "—";
+position: absolute;
+left: 0;
+width: 6mm;
+}
+body > ul > li,
+body > div:not(#toc) ul > li,
+body > section ul > li,
+body > blockquote ul > li {
+position: relative;
+margin-bottom: 0.5em;
+padding-left: 0;
+}
+body > ul > li::before,
+body > div:not(#toc) ul > li::before,
+body > section ul > li::before,
+body > blockquote ul > li::before {
+content: "—";
+position: absolute;
+left: -6mm;
+width: 5mm;
 }
 
-.vcard {
+nav.toc li::before,
+#TOC li::before,
+#toc li::before {
+content: none !important;
+}
+h1, h2, h3, h4, h5, h6 {
+color: #000;
+margin: 0 !important;
+padding: 0 !important;
+break-after: avoid;
+page-break-after: avoid;
 page-break-inside: avoid;
+border-bottom: none;
+margin-bottom: 4pt;
+}
+h1 {
+font-size: 13pt;
+margin-top: 6mm;
+margin-bottom: 4mm !important;
+padding-top: 0;
+}
+h1.annex {
+font-size: 14pt !important;
+border-top: none !important;
+}
+h2, h3, h4 {
+font-size: 12pt;
+margin-top: 4mm;
+margin-bottom: 4mm !important;
+}
+p, li {
+orphans: 3;
+widows: 3;
+}
+p {
+margin-top: 0;
+margin-bottom: 3.5mm;
+text-align: justify;
+}
+ul, ol {
+margin-top: 0;
+margin-bottom: 3mm;;
+padding-left: 6mm;
+}
+pre, blockquote, table, figure, img {
+break-inside: avoid;
+page-break-inside: avoid;
+}
+code {
+font-size: 0.9em !important;
+}
+table,
+table th,
+table td {
+border: none !important;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+th, td {
+border: 0.2mm solid #777;
+padding: 2mm 3mm;
+vertical-align: top;
+}
+.annex {
+break-before: page;
+page-break-before: always;
+}
+.center {
+text-align: center;
+}
+.small {
+font-size: 10pt;
+}
+a {
+color: inherit;
+text-decoration: none;
+}
+.bigcenter {
+text-align: center !important;
+font-size: 14pt !important;
+}
+.bigcenter p {
+text-align: center !important;
+font-size: 14pt !important;
+margin-bottom: 3mm;
+margin-top: 2mm;
+}
+pre.jwt,
+pre.jwt > code {
+font-size: 8pt !important;
+line-height: 1.1 !important;
+white-space: pre !important;
+}
+div.sourceCode > pre.sourceCode,
+div.sourceCode > pre.sourceCode > code.sourceCode {
+font-size: 8pt !important;
+line-height: 1.1 !important;
+white-space: pre !important;
+overflow: visible !important;
+}
+@bottom-center {
+content: "Copyright © 2026 The OpenID Foundation";
+font-size: 9pt;
 }
 }
 </style>
@@ -621,49 +833,35 @@ page-break-inside: avoid;
   <![endif]-->
 </head>
 <body>
-<table><tr>
-<td>Workgroup:</td><td>FAPI</td></tr>
-
-<tr>
-<td>Published:</td><td>2026-02-27</td>
-</tr>
-<tr>
-<td>Status:</td><td>Draft 11</td>
-</tr>
-<tr><td>Authors:</td>
-  <td>
-    Nat Sakimura
-     <br /><i>(Nat.Consulting)</i>
-    <!-- 
-     &lt;nat@nat.consulting&gt;
-     <a href="http://nat.sakimura.org/">http://nat.sakimura.org/</a> 
-    -->
-  </td>
-  <td>
-    John Bradley
-     <br /><i>(Yubico)</i>
-    <!-- 
-     &lt;ve7jtb@ve7jtb.com&gt;
-     <a href="http://www.thread-safe.com/">http://www.thread-safe.com/</a> 
-    -->
-  </td>
-  <td>
-    Edmund Jay
-     <br /><i>(Illumila)</i>
-    <!-- 
-     &lt;ejay@mgi1.com&gt;
-     <a href="http://illumila.la/">http://illumila.la/</a> 
-    -->
-  </td>
-</tr>
-</table>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">FAPI</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-04-04" class="published">2026-04-04</time>
+    </dd>
+<dt class="label-intended-status">Status:</dt>
+<dd class="intended-status">Draft 11</dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="author">
+<div class="author">
+<div class="author-name">Nat Sakimura</div>
+<div class="org">Nat.Consulting</div>
+</div>
+<div class="author">
+<div class="author-name">John Bradley</div>
+<div class="org">Yubico</div>
+</div>
+<div class="author">
+<div class="author-name">Edmund Jay</div>
+<div class="org">Illumila</div>
+</div>
+</dd>
+</dl>
+</div>
 <header id="title-block-header">
-<h1 class="title">FAPI security profile 1.0 - Part 2: Advanced - draft
-11 incorporating errata set 1
-<!--
-— draft-11
--->
-</h1>
+  <h1 id="title">FAPI security profile 1.0 - Part 2: Advanced - draft 11 incorporating errata set 1</h1>
 
 
 
@@ -715,9 +913,23 @@ provisions</a>
 <li><a href="#introduction-2" id="toc-introduction-2">5.2.1
 Introduction</a></li>
 <li><a href="#authorization-server" id="toc-authorization-server">5.2.2
-Authorization server</a></li>
+Authorization server</a>
+<ul>
+<li><a href="#authorization-server-provisions" id="toc-authorization-server-provisions">5.2.2.0 Authorization server
+provisions</a></li>
+<li><a href="#id-token-as-detached-signature-1" id="toc-id-token-as-detached-signature-1">5.2.2.1 ID Token as detached
+signature</a></li>
+<li><a href="#jarm" id="toc-jarm">5.2.2.2 JARM</a></li>
+</ul></li>
 <li><a href="#confidential-client" id="toc-confidential-client">5.2.3
-Confidential client</a></li>
+Confidential client</a>
+<ul>
+<li><a href="#general-provisions" id="toc-general-provisions">5.2.3.0
+General provisions</a></li>
+<li><a href="#id-token-as-detached-signature-2" id="toc-id-token-as-detached-signature-2">5.2.3.1 ID Token as detached
+signature</a></li>
+<li><a href="#jarm-1" id="toc-jarm-1">5.2.3.2 JARM</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 <li><a href="#accessing-protected-resources-using-tokens" id="toc-accessing-protected-resources-using-tokens">6. Accessing
@@ -791,24 +1003,24 @@ registry</a>
 Registry contents</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#annex-a-informative-examples" id="toc-annex-a-informative-examples">Annex A (informative) Examples</a>
+<li><a href="#examples" id="toc-examples">Annex A Examples</a>
 <ul>
 <li><a href="#a.0-jwk-for-examples" id="toc-a.0-jwk-for-examples">A.0
 JWK for examples</a></li>
-<li><a href="#a.1-example-request-object" id="toc-a.1-example-request-object">A.1 Example request object</a></li>
-<li><a href="#a.2-example-signed-id_token-for-authorization-endpoint-response" id="toc-a.2-example-signed-id_token-for-authorization-endpoint-response">A.2
+<li><a href="#example-request-object" id="toc-example-request-object">A.1 Example request object</a></li>
+<li><a href="#example-signed-id-token-for-authorization-endpoint-response" id="toc-example-signed-id-token-for-authorization-endpoint-response">A.2
 Example signed id_token for authorization endpoint response</a></li>
-<li><a href="#a.3-example-signed-and-encrypted-id_token-for-authorization-endpoint-response" id="toc-a.3-example-signed-and-encrypted-id_token-for-authorization-endpoint-response">A.3
+<li><a href="#example-signed-and-encrypted-id-token-for-authorization-endpoint-response" id="toc-example-signed-and-encrypted-id-token-for-authorization-endpoint-response">A.3
 Example signed and encrypted id_token for authorization endpoint
 response</a></li>
-<li><a href="#a.4-example-jarm-response" id="toc-a.4-example-jarm-response">A.4 Example JARM response</a></li>
-<li><a href="#a.5-example-private_key_jwt-client-assertion" id="toc-a.5-example-private_key_jwt-client-assertion">A.5 Example
+<li><a href="#example-jarm-response" id="toc-example-jarm-response">A.4
+Example JARM response</a></li>
+<li><a href="#example-private-key-jwt-client-assertion" id="toc-example-private-key-jwt-client-assertion">A.5 Example
 private_key_jwt client assertion</a></li>
 </ul></li>
-<li><a href="#annex-b-informative-acknowledgement" id="toc-annex-b-informative-acknowledgement">Annex B (Informative)
+<li><a href="#acknowledgement" id="toc-acknowledgement">Annex B
 Acknowledgement</a></li>
-<li><a href="#annex-c-changes" id="toc-annex-c-changes">Annex C
-Changes</a></li>
+<li><a href="#annex-c-document-history" id="toc-annex-c-document-history">Annex C Document History</a></li>
 <li><a href="#bibliography" id="toc-bibliography">Bibliography</a></li>
 </ul>
         </nav>
@@ -926,27 +1138,28 @@ document. For dated references, only the edition cited applies. For
 undated references, the latest edition of the referenced document
 (including any amendments) applies.</p>
 <p><a href="https://openid.net/specs/openid-financial-api-part-1-1_0.html">Part1</a>,
-FAPI Security Profile 1.0 - Part 1: Baseline</p>
-<p><a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, The OAuth
-2.0 Authorization Framework</p>
-<p><a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a> The OAuth
-2.0 Authorization Framework: Bearer Token Usage</p>
-<p><a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, Proof Key
-for Code Exchange by OAuth Public Clients</p>
+<em>FAPI Security Profile 1.0 - Part 1: Baseline</em></p>
+<p><a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, <em>The
+OAuth 2.0 Authorization Framework</em></p>
+<p><a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a> <em>The
+OAuth 2.0 Authorization Framework: Bearer Token Usage</em></p>
+<p><a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, <em>Proof
+Key for Code Exchange by OAuth Public Clients</em></p>
 <p><a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>,
-OpenID Connect Core 1.0</p>
-<p><a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, OAuth 2.0
-Mutual-TLS Client Authentication and Certificate-Bound Access Tokens</p>
-<p><a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a>, JWT
-Secured Authorization Response Mode for OAuth 2.0 (JARM) incorporating
-errata set 1</p>
+<em>OpenID Connect Core 1.0</em></p>
+<p><a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, <em>OAuth
+2.0 Mutual-TLS Client Authentication and Certificate-Bound Access
+Tokens</em></p>
+<p><a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a>,
+<em>JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)
+incorporating errata set 1</em></p>
 <p><a href="https://www.rfc-editor.org/rfc/rfc9126.html">RFC 9126</a>,
-OAuth 2.0 Pushed Authorization Requests</p>
+<em>OAuth 2.0 Pushed Authorization Requests</em></p>
 <p><a href="https://www.rfc-editor.org/rfc/rfc9101.html">RFC 9101</a>,
-OAuth 2.0 JWT Secured Authorization Request</p>
+<em>OAuth 2.0 JWT Secured Authorization Request</em></p>
 <p><a href="https://www.iso.org/standard/85938.html">ISO/IEC 29100</a>,
-ISO/IEC 29100 Information technology — Security techniques — Privacy
-framework</p>
+<em>ISO/IEC 29100 Information technology — Security techniques — Privacy
+framework</em></p>
 <h1 id="terms-and-definitions">3. Terms and definitions</h1>
 <p>For the purpose of this document, the terms defined in <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>, <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>
 and <a href="https://www.iso.org/standard/85938.html">ISO/IEC 29100</a>
@@ -1236,7 +1449,7 @@ concerns that necessitated the requirement to use PKCE - the reason PKCE
 is not required in other cases is merely to be backwards compatible with
 earlier drafts of this standard.</p>
 <p><strong>EXAMPLE</strong></p>
-<p>see Annex A for additional information.</p>
+<p>See Annex A for additional information.</p>
 <h4 id="id-token-as-detached-signature-1">5.2.2.1 ID Token as detached
 signature</h4>
 <p>In addition, if the <code>response_type</code> value
@@ -1668,8 +1881,10 @@ Claims” registry established by <a href="https://tools.ietf.org/html/rfc7519">
 openid-specs-fapi@lists.openid.net</li>
 <li>Reference: Section 5 of [[ this document ]]</li>
 </ul>
-<h1 id="annex-a-informative-examples">Annex A (informative)
-Examples</h1>
+<h1 class="annex" id="examples">Annex A Examples</h1>
+<div class="bigcenter">
+<p>(informative)</p>
+</div>
 <h2 id="a.0-jwk-for-examples">A.0 JWK for examples</h2>
 <p>The following are non-normative examples of various objects compliant
 with this specification, with line wraps within values for display
@@ -1707,7 +1922,7 @@ The code that generated these examples can be found here:
 
 https://gitlab.com/openid/fapi-examples
 -->
-<h2 id="a.1-example-request-object">A.1 Example request object</h2>
+<h2 id="example-request-object">A.1 Example request object</h2>
 <pre class="jwt"><code>    eyJraWQiOiJjbGllbnQtMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJhdWQiOiJodHRwczpcL1wv
     ZmFwaS1hcy5leGFtcGxlLmNvbVwvIiwibmJmIjoxNTk0MTQwMDMwLCJzY29wZSI6Im9wZW5pZCBwYXlt
     ZW50cyIsImlzcyI6IjUyNDgwNzU0MDUzIiwicmVzcG9uc2VfdHlwZSI6ImNvZGUgaWRfdG9rZW4iLCJy
@@ -1732,7 +1947,7 @@ https://gitlab.com/openid/fapi-examples
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;nonce&quot;</span><span class="fu">:</span> <span class="st">&quot;7xDCHviuPMSXJIigkHOcDi&quot;</span><span class="fu">,</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;client_id&quot;</span><span class="fu">:</span> <span class="st">&quot;52480754053&quot;</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
-<h2 id="a.2-example-signed-id_token-for-authorization-endpoint-response">A.2
+<h2 id="example-signed-id-token-for-authorization-endpoint-response">A.2
 Example signed id_token for authorization endpoint response</h2>
 <pre class="jwt"><code>    eyJraWQiOiJzZXJ2ZXItMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJzdWIiOiIxMDAxIiwiYXVk
     IjoiNTI0ODA3NTQwNTMiLCJjX2hhc2giOiJRUjJ6dWNmWVpraUxyYktCS0RWcGdRIiwic19oYXNoIjoi
@@ -1755,7 +1970,7 @@ Example signed id_token for authorization endpoint response</h2>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;iat&quot;</span><span class="fu">:</span> <span class="dv">1594140090</span><span class="fu">,</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;nonce&quot;</span><span class="fu">:</span> <span class="st">&quot;7xDCHviuPMSXJIigkHOcDi&quot;</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
-<h2 id="a.3-example-signed-and-encrypted-id_token-for-authorization-endpoint-response">A.3
+<h2 id="example-signed-and-encrypted-id-token-for-authorization-endpoint-response">A.3
 Example signed and encrypted id_token for authorization endpoint
 response</h2>
 <pre class="jwt"><code>    eyJraWQiOiJjbGllbnQtZW5jLTIwMjAtMDgtMjgiLCJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwi
@@ -1807,7 +2022,7 @@ response</h2>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;iat&quot;</span><span class="fu">:</span> <span class="dv">1595827190</span><span class="fu">,</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;nonce&quot;</span><span class="fu">:</span> <span class="st">&quot;7xDCHviuPMSXJIigkHOcDi&quot;</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
-<h2 id="a.4-example-jarm-response">A.4 Example JARM response</h2>
+<h2 id="example-jarm-response">A.4 Example JARM response</h2>
 <pre class="jwt"><code>    eyJraWQiOiJzZXJ2ZXItMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJhdWQiOiI0NjkxODA2NDgw
     MzkwNTEiLCJjb2RlIjoiendrR2FjOWp1TFg4RjhmcmFwRElTaTNLMkZ3bG40cXh3eWZOSUkzQ2p6MCIs
     ImlzcyI6Imh0dHBzOlwvXC9mYXBpLWFzLmV4YW1wbGUuY29tXC8iLCJzdGF0ZSI6IlZnU1VJRW5mbG5E
@@ -1824,7 +2039,7 @@ response</h2>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;state&quot;</span><span class="fu">:</span> <span class="st">&quot;VgSUIEnflnDxTe1vAtr54o&quot;</span><span class="fu">,</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;exp&quot;</span><span class="fu">:</span> <span class="dv">1594141090</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
-<h2 id="a.5-example-private_key_jwt-client-assertion">A.5 Example
+<h2 id="example-private-key-jwt-client-assertion">A.5 Example
 private_key_jwt client assertion</h2>
 <pre class="jwt"><code>    eyJraWQiOiJjbGllbnQtMjAyMC0wOC0yOCIsImFsZyI6IlBTMjU2In0.eyJzdWIiOiI1MjQ4MDc1NDA1
     MyIsImF1ZCI6Imh0dHBzOlwvXC9mYXBpLWFzLmV4YW1wbGUuY29tXC9hcGlcL3Rva2VuIiwiaXNzIjoi
@@ -1843,8 +2058,11 @@ private_key_jwt client assertion</h2>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;iat&quot;</span><span class="fu">:</span> <span class="dv">1594140091</span><span class="fu">,</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;jti&quot;</span><span class="fu">:</span> <span class="st">&quot;4vBctMSkK4wfuOui9Cyc&quot;</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
-<h1 class="unnumbered" id="annex-b-informative-acknowledgement">Annex B
-(Informative) Acknowledgement</h1>
+<h1 class="unnumbered annex" id="acknowledgement">Annex B
+Acknowledgement</h1>
+<div class="bigcenter">
+<p>(informative)</p>
+</div>
 <p>The following people contributed to this document:</p>
 <ul>
 <li>Nat Sakimura (NAT Consulting) – Chair, Editor</li>
@@ -1878,8 +2096,20 @@ Liaison</li>
 <li>Lukasz Jaromin (Cloudentity)</li>
 <li>James Manger</li>
 </ul>
-<h1 class="unnumbered" id="annex-c-changes">Annex C Changes</h1>
+<h1 class="unnumbered annex" id="annex-c-document-history">Annex C
+Document History</h1>
+<div class="bigcenter">
+<p>(informative)</p>
+</div>
+<p>This section is to be removed before publication</p>
+<p>-11</p>
 <ul>
+<li>2026-04-03
+<ul>
+<li>Adjusted anchor to match the 1.0 Final.</li>
+<li>Changed “Changes” to “Document History” for the publication
+check.</li>
+</ul></li>
 <li>2026-02-27
 <ul>
 <li>Apllied editorial changes per ISO comments.</li>
@@ -1901,39 +2131,44 @@ with ID Token Replay</li>
 <li>#611 - 8.3.5 content moved to previously empty 8.3.4</li>
 </ul></li>
 </ul>
-<h1 id="bibliography">Bibliography</h1>
+<h1 class="unnumbered annex" id="bibliography">Bibliography</h1>
 <ul>
 <li><a href="https://www.iso.org/sites/directives/current/part2/index.xhtml">ISODIR2</a>,
-ISO/IEC Directives Part 2</li>
+<em>ISO/IEC Directives Part 2</em></li>
 </ul>
 <ul>
 <li><a href="https://www.iso.org/standard/86012.html">ISO/IEC 29134</a>,
-Information technology — Security techniques — Guidelines for privacy
-impact assessment</li>
+<em>Information technology — Security techniques — Guidelines for
+privacy impact assessment</em></li>
 </ul>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc6819">RFC 6819</a> OAuth 2.0
-Threat Model and Security Considerations</li>
+<li><a href="https://tools.ietf.org/html/rfc6819">RFC 6819</a>
+Lodderstedt, T., Ed., McGloin, M., and P. Hunt, <em>OAuth 2.0 Threat
+Model and Security Considerations</em></li>
 </ul>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a> JSON Web
-Token (JWT)</li>
+<li><a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a> Jones,
+M., Bradley, J., and N. Sakimura, <em>JSON Web Token (JWT)</em></li>
 </ul>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc7591">RFC 7591</a> OAuth 2.0
-Dynamic Client Registration Protocol</li>
+<li><a href="https://tools.ietf.org/html/rfc7591">RFC 7591</a> Richer,
+J., Ed., Jones, M., Bradley, J., Machulak, M., and P. Hunt, <em>OAuth
+2.0 Dynamic Client Registration Protocol</em></li>
 </ul>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc7592">RFC 7592</a> OAuth 2.0
-Dynamic Client Registration Management Protocol</li>
+<li><a href="https://tools.ietf.org/html/rfc7592">RFC 7592</a> Richer,
+J., Ed., Jones, M., Bradley, J., and M. Machulak, <em>OAuth 2.0 Dynamic
+Client Registration Management Protocol</em></li>
 </ul>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc8414">RFC 8414</a> OAuth 2.0
-Authorization Server Metadata</li>
+<li><a href="https://tools.ietf.org/html/rfc8414">RFC 8414</a> Jones,
+M., Sakimura, N., and J. Bradley, <em>OAuth 2.0 Authorization Server
+Metadata</em></li>
 </ul>
 <ul>
 <li><a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>
-OpenID Connect Discovery 1.0</li>
+Sakimura, N., Bradley, J., Jones, M., and E. Jay, <em>OpenID Connect
+Discovery 1.0</em></li>
 </ul>
 <ul>
 <li><a href="https://tools.ietf.org/html/bcp195">BCP 195</a>
@@ -1943,18 +2178,18 @@ Datagram Transport Layer Security (DTLS)</li>
 <ul>
 <li><a href="https://ieeexplore.ieee.org/document/7961984">SoK: Single
 Sign-On Security – An Evaluation of OpenID Connect</a> Mainka, C.,
-Mladenov, V., Schwenk, J., and T. Wich: SoK: Single Sign-On Security –
-An Evaluation of OpenID Connect</li>
+Mladenov, V., Schwenk, J., and T. Wich, <em>SoK: Single Sign-On Security
+– An Evaluation of OpenID Connect</em></li>
 </ul>
 <ul>
 <li><a href="https://ieeexplore.ieee.org/document/8835218">FAPISEC</a>
-Fett, D., Hosseyni, P., Kuesters, R.: An Extensive Formal Security
-Analysis of the OpenID Financial-grade API</li>
+Fett, D., Hosseyni, P., and R. Kuesters, <em>An Extensive Formal
+Security Analysis of the OpenID Financial-grade API</em></li>
 </ul>
 <ul>
 <li><a href="https://doi.org/10.1145/2976749.2978385">OAUTHSEC</a> Fett,
-D., Kuesters, R., Schmitz, G.: A Comprehensive Formal Security Analysis
-of OAuth 2.0</li>
+D., Kuesters, R., and G. Schmitz, <em>A Comprehensive Formal Security
+Analysis of OAuth 2.0</em></li>
 </ul>
       </div>
 <div id="notices">
@@ -1969,6 +2204,10 @@ The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy (found at openid.net) requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. OpenID invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
 </p>
 </div>
+<footer>
+  Copyright © 2026 The OpenID Foundation
+</footer>
+
 <script>const toc = document.getElementById("toc");
 toc.querySelector("h2").addEventListener("click", e => {
     toc.classList.toggle("active");
