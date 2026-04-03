@@ -183,13 +183,33 @@ The technology described in this specification was made available from contribut
 </footer>
 
 <script>
-const toc = document.getElementById("toc");
-toc.querySelector("h2").addEventListener("click", e => {
-    toc.classList.toggle("active");
-});
-toc.querySelector("nav").addEventListener("click", e => {
-    toc.classList.remove("active");
-});
+(() => {
+  const toc = document.getElementById("toc");
+  if (!toc) return;
+
+  const tocHeading = toc.querySelector("#toc-title");
+  const tocNav = toc.querySelector("nav");
+
+  if (!tocHeading || !tocNav) return;
+
+  tocHeading.addEventListener("click", (e) => {
+    if (window.innerWidth <= 1023) {
+      e.preventDefault();
+      toc.classList.toggle("active");
+    }
+  });
+
+  tocNav.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
+    if (window.innerWidth <= 1023) {
+      requestAnimationFrame(() => {
+        toc.classList.remove("active");
+      });
+    }
+  });
+})();
 </script>
 </body>
 </html>
