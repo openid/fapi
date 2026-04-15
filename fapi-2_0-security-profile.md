@@ -222,8 +222,10 @@ attacks. CAA records [@RFC8659] help to mitigate this risk.
 For server-to-server communication endpoints that are not used by web
 browsers, the following requirements apply:
 
- 1. When using TLS 1.2, servers shall only permit the cipher suites recommended in [@!BCP195];
- 2. When using TLS 1.2, clients should only permit the cipher suites recommended in [@!BCP195].
+ 1. When using TLS 1.2, servers shall only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
+Parameters" registry group [@!BCP195].
+ 2. When using TLS 1.2, clients should only permit the cipher suites recommended in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
+Parameters" registry group [@!BCP195].
   
 #### MTLS ecosystems
 
@@ -260,8 +262,8 @@ requirements apply:
      purpose. Some top-level domains, like `.bank` and `.insurance`,
      have set such a policy and therefore protect all second-level
      domains below them.
-  2. When using TLS 1.2, servers shall only use cipher suites allowed in
-     [@!BCP195].
+  2. When using TLS 1.2, servers shall only use cipher suites allowed and not deprecated in the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
+Parameters" registry group [@!BCP195].
   3. Servers shall not support CORS [@!CORS.Protocol] for the authorization endpoint, as 
      clients must perform an HTTP redirect rather than access this endpoint 
      directly. 
@@ -270,9 +272,11 @@ requirements apply:
 suite allowed in [@!BCP195], whereas endpoints not used by web browsers can only 
 use cipher suites recommended by [@!BCP195].
 
-**NOTE 2**: New versions of [@!BCP195] will be published by the IETF periodically. 
+**NOTE 2**: New versions of [@!BCP195] will be published by the IETF periodically
+and the "TLS Cipher Suites" registry in the "Transport Layer Security (TLS)
+Parameters" registry group [@!BCP195] get updated by the IANA periodically. 
 At a minimum, implementors are expected to become compliant with newly issued 
-versions of BCP195 within 12 months, or sooner.
+versions of BCP195 and the IANA registry within 12 months, or sooner.
 
 ## Profile
 
