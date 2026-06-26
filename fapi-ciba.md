@@ -145,6 +145,8 @@ When this profile is used with the FAPI 1.0 specifications, the authorization se
 
 **NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider https://tools.ietf.org/html/draft-ietf-secevent-subject-identifiers for a standards based method of communicating user identifiers.
 
+**NOTE:** As per [@!CIBA], if the Client authenticates using a client assertion as described in Section 4.2 of [@!RFC7521], the authorization server MUST verify that it is the sole audience of the assertion, with the issuer identifier [RFC8414] of the authorization server as its sole value.
+
 ### Confidential client
 
 When this profile is used with the FAPI 1.0 specifications, a confidential client shall
