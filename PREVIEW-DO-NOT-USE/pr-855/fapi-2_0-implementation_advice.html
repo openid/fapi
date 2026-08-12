@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>FAPI 2.0 Implementation Advice</title>
+<meta content="Dave Tonge" name="author">
+<meta content="
+       Financial-grade API (FAPI) 2.0 Implementation Advice is a document to provide practical
+guidance on the implementation and usage of the FAPI 2.0 family of standards. 
+    " name="description">
+<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="security" name="keyword">
+<meta content="openid" name="keyword">
+<meta content="fapi-2_0-implementation_advice-01" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.16.0
+    Python 3.10.2
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    lxml 4.9.2
+    MarkupSafe 2.1.2
+    pycountry 22.3.5
+    PyYAML 6.0
+    requests 2.28.2
+    setuptools 57.5.0
+    six 1.16.0
+    wcwidth 0.2.6
+-->
+<link href="./fapi-2_0-implementation_advice-01.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necessary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  display: table;
+  border: none;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.ulBare, li.ulBare {
+  margin-left: 0em !important;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre {
+  background-color: #f9f9f9;
+  font-family: var(--font-mono);
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+/* Fix PDF info block run off issue */
+@media print {
+  #identifiers dd {
+    float: none;
+  }
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: var(--font-sans);
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  .breakable pre {
+    break-inside: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The following is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+.sourcecode pre,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .artwork > pre,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background slightly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr {
+  break-inside: avoid;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: auto;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottom margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the compact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact,
+dl.compact, .dlCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}
+/* Elements that should not be rendered on the same line as a <dt> */
+/* This should match the element list in writer.text.TextWriter.render_dl() */
+dd > div.artwork:first-child,
+dd > aside:first-child,
+dd > figure:first-child,
+dd > ol:first-child,
+dd > div.sourcecode:first-child,
+dd > table:first-child,
+dd > ul:first-child {
+  clear: left;
+}
+/* fix for weird browser behaviour when <dd/> is empty */
+dt+dd:empty::before{
+  content: "\00a0";
+}
+/* Make paragraph spacing inside <li> smaller than in body text, to fit better within the list */
+li > p {
+  margin-bottom: 0.5em
+}
+/* Don't let p margin spill out from inside list items */
+li > p:last-of-type:only-child {
+  margin-bottom: 0;
+}
+</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+</head>
+<body class="xml2rfc">
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left"></td>
+<td class="center">fapi-2-implementation-advice</td>
+<td class="right">August 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Tonge</td>
+<td class="center">Standards Track</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">connect</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-08-12" class="published">12 August 2026</time>
+    </dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">D. Tonge</div>
+<div class="org">Moneyhub</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">FAPI 2.0 Implementation Advice</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Financial-grade API (FAPI) 2.0 Implementation Advice is a document to provide practical
+guidance on the implementation and usage of the FAPI 2.0 family of standards.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-warning" class="internal xref">Warning</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-copyright-notice-license" class="internal xref">Copyright notice &amp; license</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
+                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-implementation-advice" class="internal xref">Implementation Advice</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-fapi-20-framework" class="internal xref">FAPI 2.0 Framework</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-http-headers" class="internal xref">HTTP Headers</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
+                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-x-fapi-interaction-id" class="internal xref">x-fapi-interaction-id</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
+                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-x-fapi-end-user-present" class="internal xref">x-fapi-end-user-present</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-dpop-vs-mtls" class="internal xref">DPoP vs MTLS</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.1">
+                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="auto internal xref">2.3.1</a>.  <a href="#name-dpop-considerations" class="internal xref">DPoP Considerations</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.2">
+                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="auto internal xref">2.3.2</a>.  <a href="#name-mtls-considerations" class="internal xref">MTLS Considerations</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.3">
+                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="auto internal xref">2.3.3</a>.  <a href="#name-selection-guidance" class="internal xref">Selection Guidance</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-access-token-size-considera" class="internal xref">Access Token Size Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.1">
+                    <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="auto internal xref">2.4.1</a>.  <a href="#name-security-and-performance" class="internal xref">Security and Performance</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
+                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.  <a href="#name-key-management" class="internal xref">Key Management</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6">
+                <p id="section-toc.1-1.2.2.6.1"><a href="#section-2.6" class="auto internal xref">2.6</a>.  <a href="#name-troubleshooting-common-issu" class="internal xref">Troubleshooting Common Issues</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6.2.1">
+                    <p id="section-toc.1-1.2.2.6.2.1.1"><a href="#section-2.6.1" class="auto internal xref">2.6.1</a>.  <a href="#name-connection-issues" class="internal xref">Connection Issues</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7">
+                <p id="section-toc.1-1.2.2.7.1"><a href="#section-2.7" class="auto internal xref">2.7</a>.  <a href="#name-authorization-server-handli" class="internal xref">Authorization Server Handling of Suspicious Requests</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8">
+                <p id="section-toc.1-1.2.2.8.1"><a href="#section-2.8" class="auto internal xref">2.8</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Financial-grade API (FAPI) 2.0 family of standards provides security profiles and specifications
+to enable implementers to deploy highly secure, interoperable APIs. While we have attempted
+to minimize the optionality in FAPI 2.0, there are still many decisions that need to be made by
+implementers. This document aims to provide advice for implementers based on the experience
+of members of the OpenID Foundation's FAPI Working Group.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<div id="warning">
+<section id="section-1.1">
+        <h3 id="name-warning">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-warning" class="section-name selfRef">Warning</a>
+        </h3>
+<p id="section-1.1-1">This document is not an OIDF International Standard. It is distributed for
+review and comment. It is subject to change without notice and may not be
+referred to as an International Standard.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Recipients of this draft are invited to submit, with their comments,
+notification of any relevant patent rights of which they are aware and to
+provide supporting documentation.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright-notice-license">
+<section id="section-1.2">
+        <h3 id="name-copyright-notice-license">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-copyright-notice-license" class="section-name selfRef">Copyright notice &amp; license</a>
+        </h3>
+<p id="section-1.2-1">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
+or other interested party a non-exclusive, royalty free, worldwide copyright
+license to reproduce, prepare derivative works from, distribute, perform and
+display, this Implementers Draft or Final Specification solely for the purposes
+of (i) developing specifications, and (ii) implementing Implementers Drafts and
+Final Specifications based on such documents, provided that attribution be made
+to the OIDF as the source of the material, but that such attribution does not
+indicate an endorsement by the OIDF.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">The technology described in this specification was made available from
+contributions from various sources, including members of the OpenID Foundation
+and others. Although the OpenID Foundation has taken steps to help ensure that
+the technology is available for distribution, it takes no position regarding the
+validity or scope of any intellectual property or other rights that might be
+claimed to pertain to the implementation or use of the technology described in
+this specification or the extent to which any license under such rights might or
+might not be available; neither does it represent that it has made any
+independent effort to identify any such rights. The OpenID Foundation and the
+contributors to this specification make no (and hereby expressly disclaim any)
+warranties (express, implied, or otherwise), including implied warranties of
+merchantability, non-infringement, fitness for a particular purpose, or title,
+related to this specification, and the entire risk as to implementing this
+specification is assumed by the implementer. The OpenID Intellectual Property
+Rights policy requires contributors to offer a patent promise not to assert
+certain patent claims against other contributors and against implementers. The
+OpenID Foundation invites any interested party to bring to its attention any
+copyrights, patents, patent applications, or other proprietary rights that may
+cover technology that may be required to practice this specification.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="notational-conventions">
+<section id="section-1.3">
+        <h3 id="name-notational-conventions">
+<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
+        </h3>
+<p id="section-1.3-1">The keywords "shall", "shall not", "should", "should not", "may", and "can" in
+this document are to be interpreted as described in ISO Directive Part 2
+<span>[<a href="#ISODIR2" class="cite xref">ISODIR2</a>]</span>. These keywords are not used as dictionary terms such that any
+occurrence of them shall be interpreted as keywords and are not to be
+interpreted with their natural language meanings.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="implementation-advice">
+<section id="section-2">
+      <h2 id="name-implementation-advice">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-implementation-advice" class="section-name selfRef">Implementation Advice</a>
+      </h2>
+<div id="fapi-2-0-framework">
+<section id="section-2.1">
+        <h3 id="name-fapi-20-framework">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-fapi-20-framework" class="section-name selfRef">FAPI 2.0 Framework</a>
+        </h3>
+<p id="section-2.1-1">The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.1-2.1">FAPI 2.0 Attacker model;<a href="#section-2.1-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.1-2.2">FAPI 2.0 Security profile;<a href="#section-2.1-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.1-2.3">FAPI 2.0 Message signing - for non repudiation of messages;<a href="#section-2.1-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.1-2.4">FAPI Client Initiated Backchannel Authentication - for decoupled or cross device flows;<a href="#section-2.1-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.1-2.5">Grant Management for OAuth 2.0 - for ecosystems that require interoperable grant management;<a href="#section-2.1-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.1-2.6">OAuth 2.0 Rich Authorization Requests  - for conveying complex authorizations.<a href="#section-2.1-2.6" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-2.1-3">The foundation of the framework is the attacker model and security profile. All the other
+specifications build on the security profile.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="http-headers">
+<section id="section-2.2">
+        <h3 id="name-http-headers">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-http-headers" class="section-name selfRef">HTTP Headers</a>
+        </h3>
+<p id="section-2.2-1">Implementers may find the following http-headers useful:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<div id="x-fapi-interaction-id">
+<section id="section-2.2.1">
+          <h4 id="name-x-fapi-interaction-id">
+<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-x-fapi-interaction-id" class="section-name selfRef">x-fapi-interaction-id</a>
+          </h4>
+<p id="section-2.2.1-1">This header can be used to enable Authorization Servers, Resource Servers and Clients to
+better track and debug any issues between them. If an ecosystem adopts <code>x-fapi-interaction-id</code> then
+the following clauses apply:<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-2.2.1-2">
+<li id="section-2.2.1-2.1">clients shall send the <code>x-fapi-interaction-id</code> request header, the value shall be a
+RFC4122 UUID,  e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-2.2.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.2.1-2.2">the AS or RS shall set the response header <code>x-fapi-interaction-id</code> to the value received from the corresponding FAPI client request header or to a [RFC4122] UUID value if the request header was not provided to track the interaction, e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-2.2.1-2.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.2.1-2.3">participants (whether Client, AS or RS) shall log the value of <code>x-fapi-interaction-id</code> in the log entry.<a href="#section-2.2.1-2.3" class="pilcrow">¶</a>
+</li>
+          </ol>
+<p id="section-2.2.1-3">NOTE: Clients may reuse the same <code>x-fapi-interaction-id</code> value across related requests within
+a single authorization code flow, including PAR requests, token requests, and immediate
+API calls. This can help with tracing and troubleshooting related transactions. Due to the
+nature of browser redirects, the authorization request itself typically cannot include HTTP
+headers, so the <code>x-fapi-interaction-id</code> will not be present in those requests. Specific
+guidance on when to reuse vs. generate new interaction IDs may be defined by individual
+ecosystems.<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="x-fapi-end-user-present">
+<section id="section-2.2.2">
+          <h4 id="name-x-fapi-end-user-present">
+<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-x-fapi-end-user-present" class="section-name selfRef">x-fapi-end-user-present</a>
+          </h4>
+<p id="section-2.2.2-1">Many ecosystems have different non-functional requirements depending on whether an end-user
+is present or not.  The <code>x-fapi-end-user-present</code> header indicates whether the request is
+being made in the context of an interactive end-user session or as part of a
+background/automated process. If an ecosystem adopts this header, the following clauses apply:<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2.2.2-2">
+<li id="section-2.2.2-2.1">
+              <p id="section-2.2.2-2.1.1">Clients shall send the <code>x-fapi-end-user-present</code> header with a value of <code>true</code> when
+the request is made with an end-user actively present in the session, and <code>false</code> when the
+request is part of a background process, batch operation, or automated task without active
+user participation.<a href="#section-2.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-2.2.2-2.2">
+              <p id="section-2.2.2-2.2.1">If the header is not present, servers should assume a default value of <code>false</code>
+(i.e., no end-user is present).<a href="#section-2.2.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-2.2.2-2.3">
+              <p id="section-2.2.2-2.3.1">The header value shall be a boolean: either <code>true</code> or <code>false</code>,
+e.g., <code>x-fapi-end-user-present: true</code>.<a href="#section-2.2.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<div id="purpose-and-benefits">
+<section id="section-2.2.2.1">
+            <h5 id="name-purpose-and-benefits">
+<a href="#section-2.2.2.1" class="section-number selfRef">2.2.2.1. </a><a href="#name-purpose-and-benefits" class="section-name selfRef">Purpose and Benefits</a>
+            </h5>
+<p id="section-2.2.2.1-1">The primary benefit of the <code>x-fapi-end-user-present</code> header is to support
+ecosystem-specific requirements for different traffic patterns:<a href="#section-2.2.2.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2.2.2.1-2">
+<li id="section-2.2.2.1-2.1">
+                <p id="section-2.2.2.1-2.1.1">Many ecosystems implement different rate limits for end-user-present vs. background
+operations. User-present operations may have higher per-second limits but lower daily
+limits, while background operations might have the opposite pattern.<a href="#section-2.2.2.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li id="section-2.2.2.1-2.2">
+                <p id="section-2.2.2.1-2.2.1">During high load situations, servers may prioritize user-present requests to
+maintain interactive performance while delaying background operations.<a href="#section-2.2.2.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ol>
+</section>
+</div>
+<div id="implementation-considerations">
+<section id="section-2.2.2.2">
+            <h5 id="name-implementation-consideratio">
+<a href="#section-2.2.2.2" class="section-number selfRef">2.2.2.2. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
+            </h5>
+<ol start="1" type="1" class="normal type-1" id="section-2.2.2.2-1">
+<li id="section-2.2.2.2-1.1">
+                <p id="section-2.2.2.2-1.1.1">This header is not a security mechanism. Authorization Servers must trust that
+Clients are filling in this header correctly and cannot independently verify the
+presence of an end user.<a href="#section-2.2.2.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li id="section-2.2.2.2-1.2">
+                <p id="section-2.2.2.2-1.2.1">This header replaces problematic approaches from previous specifications, such as:<a href="#section-2.2.2.2-1.2.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.2.2.2-1.2.2.1">
+                    <code>x-fapi-customer-ip-address</code>: Potentially exposed PII and created privacy concerns<a href="#section-2.2.2.2-1.2.2.1" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-2.2.2.2-1.2.2.2">
+                    <code>x-fapi-auth-date</code>: Frequently implemented incorrectly and requires date parsing<a href="#section-2.2.2.2-1.2.2.2" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-2.2.2.2-1.2.2.3">Client headers pass-through: Inconsistently used and may expose PII<a href="#section-2.2.2.2-1.2.2.3" class="pilcrow">¶</a>
+</li>
+                </ul>
+</li>
+              <li id="section-2.2.2.2-1.3">
+                <p id="section-2.2.2.2-1.3.1">Since Clients can set this value arbitrarily, ecosystem governance and monitoring are
+necessary to detect patterns of misuse, such as clients marking all API calls as
+user-present regardless of context.<a href="#section-2.2.2.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ol>
+<p id="section-2.2.2.2-2">NOTE: This header is only useful in ecosystems where recourse exists against clients that falsify its value.<a href="#section-2.2.2.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="dpop-vs-mtls">
+<section id="section-2.3">
+        <h3 id="name-dpop-vs-mtls">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-dpop-vs-mtls" class="section-name selfRef">DPoP vs MTLS</a>
+        </h3>
+<p id="section-2.3-1">Sender constraining access tokens is an important security measure that provides significant protections against token theft and misuse. FAPI 2.0 allows implementers to use either DPoP or MTLS to achieve this goal. Both approaches meet the security requirements, but each has different characteristics that may make one more suitable than the other depending on your ecosystem. This section outlines considerations to guide your choice.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<div id="dpop-considerations">
+<section id="section-2.3.1">
+          <h4 id="name-dpop-considerations">
+<a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-dpop-considerations" class="section-name selfRef">DPoP Considerations</a>
+          </h4>
+<ol start="1" type="1" class="compact type-1" id="section-2.3.1-1">
+<li id="section-2.3.1-1.1">DPoP operates at the application layer rather than the transport layer;<a href="#section-2.3.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.1-1.2">DPoP only sender constrains part of the request (the HTTP method and URL), unlike MTLS which protects the entire request;<a href="#section-2.3.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.1-1.3">DPoP requires cryptographic operations for each request, which may have performance implications;<a href="#section-2.3.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.1-1.4">DPoP introduces protocol complexity, including HTTP request URL normalization and optionally server-provided nonces;<a href="#section-2.3.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.1-1.5">DPoP library support is less mature than MTLS, and there is limited ecosystem deployment experience;<a href="#section-2.3.1-1.5" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.1-1.6">DPoP is the only viable option for browser-based clients (MTLS only works practically for server-to-server communication).<a href="#section-2.3.1-1.6" class="pilcrow">¶</a>
+</li>
+          </ol>
+</section>
+</div>
+<div id="mtls-considerations">
+<section id="section-2.3.2">
+          <h4 id="name-mtls-considerations">
+<a href="#section-2.3.2" class="section-number selfRef">2.3.2. </a><a href="#name-mtls-considerations" class="section-name selfRef">MTLS Considerations</a>
+          </h4>
+<ol start="1" type="1" class="compact type-1" id="section-2.3.2-1">
+<li id="section-2.3.2-1.1">MTLS performs both client authentication and sender constraining simultaneously, simplifying implementation for clients;<a href="#section-2.3.2-1.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.2-1.2">MTLS sender constrains the entire request, not just specific elements;<a href="#section-2.3.2-1.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.2-1.3">MTLS amortizes the cost of asymmetric cryptographic operations by performing them during the TLS handshake and reusing the connection;<a href="#section-2.3.2-1.3" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.2-1.4">Self-signed certificates can be used for sender constraining; the binding to the access token is established at the token endpoint without needing to distribute certificates via JWKS;<a href="#section-2.3.2-1.4" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.2-1.5">MTLS presents integration challenges at the transport layer, especially when operating at scale;<a href="#section-2.3.2-1.5" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.3.2-1.6">
+              <p id="section-2.3.2-1.6.1">MTLS implementations may encounter interoperability issues with certificate handling, including:<a href="#section-2.3.2-1.6.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.3.2-1.6.2.1">Certificate aliases<a href="#section-2.3.2-1.6.2.1" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-2.3.2-1.6.2.2">IP/SAN negotiation<a href="#section-2.3.2-1.6.2.2" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-2.3.2-1.6.2.3">DN matching for PKI;<a href="#section-2.3.2-1.6.2.3" class="pilcrow">¶</a>
+</li>
+              </ul>
+</li>
+            <li id="section-2.3.2-1.7">[RFC9440] provides additional guidance for MTLS implementations.<a href="#section-2.3.2-1.7" class="pilcrow">¶</a>
+</li>
+          </ol>
+</section>
+</div>
+<div id="selection-guidance">
+<section id="section-2.3.3">
+          <h4 id="name-selection-guidance">
+<a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-selection-guidance" class="section-name selfRef">Selection Guidance</a>
+          </h4>
+<p id="section-2.3.3-1">Both DPoP and MTLS are valid choices for sender constraining, and each has trade-offs.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-2">MTLS may be more suitable when:<a href="#section-2.3.3-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.3.3-3.1">Operating in closed ecosystems with existing PKI infrastructure;<a href="#section-2.3.3-3.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-2.3.3-3.2">Simplicity for client-side implementation is a priority;<a href="#section-2.3.3-3.2" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-2.3.3-3.3">Full request protection is desired;<a href="#section-2.3.3-3.3" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-2.3.3-3.4">Mature library support is required.<a href="#section-2.3.3-3.4" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.3-4">DPoP may be more suitable when:<a href="#section-2.3.3-4" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.3.3-5.1">Browser-based clients need to be supported (MTLS only works practically for server-to-server communication);<a href="#section-2.3.3-5.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-2.3.3-5.2">Transport layer integration for mutual TLS is impractical.<a href="#section-2.3.3-5.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.3-6">Implementers should not use both DPoP and MTLS simultaneously for sender constraining.<a href="#section-2.3.3-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="access-token-size-considerations">
+<section id="section-2.4">
+        <h3 id="name-access-token-size-considera">
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-access-token-size-considera" class="section-name selfRef">Access Token Size Considerations</a>
+        </h3>
+<p id="section-2.4-1">As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">Note: While OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> leaves token size decisions to the authorization server, implementers should be aware that many standard web servers reject headers larger than 8KB by default.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<div id="security-and-performance">
+<section id="section-2.4.1">
+          <h4 id="name-security-and-performance">
+<a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-security-and-performance" class="section-name selfRef">Security and Performance</a>
+          </h4>
+<p id="section-2.4.1-1">Large access tokens can impact both security and performance:<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-2.4.1-2">
+<li id="section-2.4.1-2.1">Large tokens increase the risk of header-based DDOS attacks<a href="#section-2.4.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.4.1-2.2">Larger tokens increase network latency and resource consumption<a href="#section-2.4.1-2.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.4.1-2.3">Authorization servers should practice data minimization and only include necessary claims<a href="#section-2.4.1-2.3" class="pilcrow">¶</a>
+</li>
+          </ol>
+</section>
+</div>
+</section>
+</div>
+<div id="key-management">
+<section id="section-2.5">
+        <h3 id="name-key-management">
+<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-key-management" class="section-name selfRef">Key Management</a>
+        </h3>
+<p id="section-2.5-1">Proper management of cryptographic keys is critical to the security of any FAPI 2.0 deployment.
+The compromise of private keys used for client authentication, token signing, or message signing
+can lead to severe security breaches, including unauthorized access to protected resources and
+impersonation attacks.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.5-2">While detailed guidance on key management is out of scope for the FAPI specifications,
+implementers should ensure they have robust policies and procedures in place covering:<a href="#section-2.5-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-2.5-3">
+<li id="section-2.5-3.1">secure generation of cryptographic keys;<a href="#section-2.5-3.1" class="pilcrow">¶</a>
+</li>
+          <li id="section-2.5-3.2">secure storage and protection of private keys;<a href="#section-2.5-3.2" class="pilcrow">¶</a>
+</li>
+          <li id="section-2.5-3.3">key rotation and lifecycle management;<a href="#section-2.5-3.3" class="pilcrow">¶</a>
+</li>
+          <li id="section-2.5-3.4">procedures for responding to key compromise;<a href="#section-2.5-3.4" class="pilcrow">¶</a>
+</li>
+          <li id="section-2.5-3.5">access controls for key material;<a href="#section-2.5-3.5" class="pilcrow">¶</a>
+</li>
+          <li id="section-2.5-3.6">backup and recovery procedures.<a href="#section-2.5-3.6" class="pilcrow">¶</a>
+</li>
+        </ol>
+<p id="section-2.5-4">Implementers should refer to established guidance on cryptographic key management, such as
+NIST Special Publication 800-57 <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> and the OWASP Key Management Cheat Sheet
+<span>[<a href="#OWASP.KeyManagement" class="cite xref">OWASP.KeyManagement</a>]</span>.<a href="#section-2.5-4" class="pilcrow">¶</a></p>
+<p id="section-2.5-5">NOTE: Hardware Security Modules (HSMs) or similar secure key storage mechanisms are strongly
+recommended for production deployments, particularly for high-value use cases.<a href="#section-2.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="troubleshooting-common-issues">
+<section id="section-2.6">
+        <h3 id="name-troubleshooting-common-issu">
+<a href="#section-2.6" class="section-number selfRef">2.6. </a><a href="#name-troubleshooting-common-issu" class="section-name selfRef">Troubleshooting Common Issues</a>
+        </h3>
+<div id="connection-issues">
+<section id="section-2.6.1">
+          <h4 id="name-connection-issues">
+<a href="#section-2.6.1" class="section-number selfRef">2.6.1. </a><a href="#name-connection-issues" class="section-name selfRef">Connection Issues</a>
+          </h4>
+<div id="large-access-tokens">
+<section id="section-2.6.1.1">
+            <h5 id="name-large-access-tokens">
+<a href="#section-2.6.1.1" class="section-number selfRef">2.6.1.1. </a><a href="#name-large-access-tokens" class="section-name selfRef">Large Access Tokens</a>
+            </h5>
+<p id="section-2.6.1.1-1">Implementers should consider logging the header size in order to catch issues with
+large access tokens or other potentially large headers.<a href="#section-2.6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.6.1.1-2">When access tokens are too large, implementers may encounter the following symptoms:<a href="#section-2.6.1.1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-2.6.1.1-3">
+<li id="section-2.6.1.1-3.1">HTTP 431 (Request Header Fields Too Large) responses from web servers<a href="#section-2.6.1.1-3.1" class="pilcrow">¶</a>
+</li>
+              <li id="section-2.6.1.1-3.2">Connection resets or timeouts when making requests with large tokens<a href="#section-2.6.1.1-3.2" class="pilcrow">¶</a>
+</li>
+              <li id="section-2.6.1.1-3.3">Inconsistent behavior where some requests succeed and others fail<a href="#section-2.6.1.1-3.3" class="pilcrow">¶</a>
+</li>
+              <li id="section-2.6.1.1-3.4">Log entries showing truncated or malformed Authorization headers<a href="#section-2.6.1.1-3.4" class="pilcrow">¶</a>
+</li>
+            </ol>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="authorization-server-handling-of-suspicious-requests">
+<section id="section-2.7">
+        <h3 id="name-authorization-server-handli">
+<a href="#section-2.7" class="section-number selfRef">2.7. </a><a href="#name-authorization-server-handli" class="section-name selfRef">Authorization Server Handling of Suspicious Requests</a>
+        </h3>
+<p id="section-2.7-1">Many Authorization Server implementations employ Web Application Firewalls (WAFs) and security rules to protect against common attacks such as XSS. This section provides guidance on balancing legitimate security concerns with the need to accept randomly generated values in parameters like state and nonce.<a href="#section-2.7-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2.7-2">
+<li id="section-2.7-2.1">
+            <p id="section-2.7-2.1.1">Authorization Servers may reject authorization requests that contain suspicious parameter values which could indicate malicious intent, such as potential XSS attack vectors<a href="#section-2.7-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-2.7-2.2">
+            <p id="section-2.7-2.2.1">While Authorization Servers should evaluate requests for potential security issues, they should not implement blanket restrictions that block certain characters (e.g., "&lt;") entirely<a href="#section-2.7-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-2.7-2.3">
+            <p id="section-2.7-2.3.1">Authorization Servers should accept any random state/nonce values that comply with the underlying specifications<a href="#section-2.7-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-2.7-2.4">
+            <p id="section-2.7-2.4.1">When rejecting suspicious requests, Authorization Servers should return or show appropriate error responses as defined in OAuth 2.0 and related specifications<a href="#section-2.7-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-2.7-2.5">
+            <p id="section-2.7-2.5.1">Clients should use URL-safe characters when generating values for <code>state</code> and <code>nonce</code> parameters<a href="#section-2.7-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-2.7-2.6">
+            <p id="section-2.7-2.6.1">If a client needs to include non-URL-safe characters in the <code>state</code> parameter, it should base64url encode the value, as Authorization Servers may reject values containing characters that resemble attack vectors<a href="#section-2.7-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="section-2.7-3">NOTE: What constitutes a suspicious or malicious request may vary depending on the threat model of each Authorization Server implementation. This document intentionally avoids providing an exhaustive list of patterns to block, as such a list would quickly become outdated and might provide a false sense of security.<a href="#section-2.7-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="section-2.8">
+        <h3 id="name-acknowledgements">
+<a href="#section-2.8" class="section-number selfRef">2.8. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+        </h3>
+<p id="section-2.8-1">todo...<a href="#section-2.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<section id="section-3">
+      <h2 id="name-informative-references">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+      </h2>
+<dl class="references">
+<dt id="ISODIR2">[ISODIR2]</dt>
+      <dd>
+<span class="refAuthor">ISO/IEC</span>, <span class="refTitle">"ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents"</span>, <span>&lt;<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml">https://www.iso.org/sites/directives/current/part2/index.xhtml</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
+      <dd>
+<span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 – General"</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final">https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OWASP.KeyManagement">[OWASP.KeyManagement]</dt>
+      <dd>
+<span class="refAuthor">OWASP</span>, <span class="refTitle">"Key Management Cheat Sheet"</span>, <span>&lt;<a href="https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+    <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<div id="notices">
+<section id="appendix-A">
+      <h2 id="name-notices">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-notices" class="section-name selfRef">Notices</a>
+      </h2>
+<p id="appendix-A-1">Copyright (c) 2021 The OpenID Foundation.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Dave Tonge</span></div>
+<div dir="auto" class="left"><span class="org">Moneyhub</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:dave@tonge.org" class="email">dave@tonge.org</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
