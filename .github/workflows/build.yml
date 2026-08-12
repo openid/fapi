@@ -1,0 +1,184 @@
+name: Build FAPI specifications
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build spec HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # build-all.py runs ./pandoc-3.1.9/bin/pandoc for the FAPI 1.0 documents;
+      # fetch the pinned release it expects (as the old Bitbucket pipeline did).
+      - name: Install pandoc
+        run: |
+          curl -fsSL https://github.com/jgm/pandoc/releases/download/3.1.9/pandoc-3.1.9-linux-amd64.tar.gz \
+            | tar -xz pandoc-3.1.9/bin/pandoc
+
+      # Builds every spec (markdown2rfc via docker for the mmark ones, pandoc
+      # for FAPI 1.0) plus index.html and manifest.json, all at the repo root.
+      - name: Build specifications
+        run: ./build-all.py
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp *.html manifest.json _site/
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      # The xml2rfc XML (still carrying its -NN draft-version suffix), kept as
+      # an artifact for draft submissions; not published to the site.
+      - name: Upload XML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: xml
+          path: '*.xml'
+          if-no-files-found: error
+
+  # The site is served from the gh-pages branch (Pages source: "Deploy from a
+  # branch"): master's drafts live at the root, and per-PR previews live under
+  # PREVIEW-DO-NOT-USE/pr-<N>/ (removed again by preview-cleanup.yml). Same
+  # model as the openid/dchp repo.
+  publish-to-pages:
+    name: Publish drafts to GitHub Pages
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    # Serialise gh-pages pushes so two quick merges to master can't race.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: ${{ runner.temp }}/site
+      - name: Publish to gh-pages branch
+        # Run a copy from outside the work tree: the script switches the
+        # checkout to gh-pages, which has no tools/.
+        run: |
+          cp tools/publish-gh-pages.sh "$RUNNER_TEMP/"
+          bash "$RUNNER_TEMP/publish-gh-pages.sh" root "$RUNNER_TEMP/site" \
+            "Publish FAPI drafts for ${GITHUB_SHA}"
+
+  # HTML preview of the PR's drafts, linked from a sticky PR comment. Fork PRs
+  # get a read-only GITHUB_TOKEN, so previews only run for branches in this
+  # repo.
+  deploy-preview:
+    name: Deploy PR preview to GitHub Pages
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: ${{ runner.temp }}/site
+      - name: Deploy preview to gh-pages branch
+        run: |
+          cp tools/publish-gh-pages.sh "$RUNNER_TEMP/"
+          bash "$RUNNER_TEMP/publish-gh-pages.sh" subdir \
+            "PREVIEW-DO-NOT-USE/pr-${{ github.event.pull_request.number }}" \
+            "$RUNNER_TEMP/site" \
+            "Preview for PR #${{ github.event.pull_request.number }}"
+      - name: Comment with preview links
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const prNum = context.issue.number;
+            const sha = context.payload.pull_request.head.sha;
+            // Assumes the default <owner>.github.io/<repo> Pages host (no CNAME).
+            const base = `https://${context.repo.owner}.github.io/${context.repo.repo}/PREVIEW-DO-NOT-USE/pr-${prNum}/`;
+
+            // Source .md -> generated .html, written by build-all.py and
+            // shipped inside the site artifact.
+            const manifest = JSON.parse(
+              fs.readFileSync(`${process.env.RUNNER_TEMP}/site/manifest.json`, 'utf8'));
+
+            // Link directly to the drafts whose sources this PR touches. A PR
+            // touching no spec sources (or only unbuilt ones) gets just the
+            // index link.
+            const changedFiles = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNum,
+              per_page: 100,
+            });
+            const changed = new Set(changedFiles.map(f => f.filename));
+            const changedDrafts = Object.entries(manifest)
+              .filter(([src]) => changed.has(src))
+              .map(([, html]) => html)
+              .sort();
+
+            // Invisible marker identifying our comment, so the visible heading
+            // can be reworded without breaking the update-in-place matching.
+            const marker = '<!-- fapi-preview-comment -->';
+            const lines = ['📄 **HTML preview**', ''];
+            if (changedDrafts.length > 0) {
+              lines.push('Drafts changed in this PR:');
+              for (const html of changedDrafts) {
+                lines.push(`- [${html}](${base}${html})`);
+              }
+              lines.push('');
+            }
+            lines.push(`[All drafts](${base}index.html)`);
+            lines.push('');
+            lines.push(
+              `_Preview of ${sha}; updated on every push. For review only — ` +
+              'the official specifications are published at https://openid.net/specs/_');
+            lines.push(marker);
+            const body = lines.join('\n');
+
+            // Update the existing preview comment rather than adding a new one.
+            let existing = null;
+            for await (const response of github.paginate.iterator(
+              github.rest.issues.listComments,
+              { owner: context.repo.owner, repo: context.repo.repo, issue_number: prNum, per_page: 100 }
+            )) {
+              const found = response.data.find(c => c.body.includes(marker));
+              if (found) { existing = found; break; }
+            }
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNum,
+                body,
+              });
+            }
