@@ -137,13 +137,13 @@ When this profile is used with the FAPI 1.0 specifications, the authorization se
 1. shall support unsigned and signed backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1; and
 1. shall require the signed authentication request to contain `nbf` and `exp` claims that limit the lifetime of the request to no more than 60 minutes.
 
-**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the authorization server, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RAR]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
+**NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the authorization server, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RFC9396]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
 
 **NOTE:** The binding message is required to protect the user by binding the session on the consumption device with the session on the authentication device. An example use case is when a user is paying at POS terminal. The user will enter their user identifier to start the [@!CIBA] flow, the terminal will then display a code, the user will receive a notification on their phone (the authentication device) to ask them to authenticate and authorize the transaction, as part of the authorization process the user will be shown a code and will be asked to check that it is the same as the one shown on the terminal.
 
 **NOTE:** The FAPI CIBA profile only supports CIBA ping and poll modes, therefore it is only possible to retrieve access tokens and optionally refresh tokens from the token endpoint.
 
-**NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider https://tools.ietf.org/html/draft-ietf-secevent-subject-identifiers for a standards based method of communicating user identifiers.
+**NOTE:** While the format of the `login_hint` and `login_hint_token` parameters are not defined by [@!CIBA] or this profile, implementers may wish to consider [@RFC9493] for a standards based method of communicating user identifiers.
 
 **NOTE:** As per [@!CIBA], if the Client authenticates using a client assertion as described in Section 4.2 of [@!RFC7521], the authorization server MUST verify that it is the sole audience of the assertion, with the issuer identifier [RFC8414] of the authorization server as its sole value.
 
@@ -214,6 +214,8 @@ redirect based flows. This profile aims to help implementers of [@!CIBA] for
 higher security needs to reduce or eliminate these attack vectors. There are 
 however further security considerations that should be taken into account when 
 implementing this specification.
+
+This profile has been the subject of a formal security analysis [@FAPI2SEC].
 
 It is strongly recommended to use OAuth 2 redirect based flows secured by [@!FAPI1.1], 
 [@!FAPI1.2] or [@!FAPI2] for the same device use cases because decoupled flows suffer from session 
@@ -485,14 +487,19 @@ which contains the JWT payload:
 
 {backmatter}
 
-<reference anchor="FAPI2" target="https://openid.net/specs/fapi-2_0-security-profile-ID2.html">
+<reference anchor="FAPI2" target="https://openid.net/specs/fapi-security-profile-2_0-final.html">
   <front>
     <title>FAPI 2.0 Security Profile</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
-  <date day="25" month="February" year="2014" />
-
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+    <date day="22" month="February" year="2025" />
   </front>
 </reference>
 
@@ -540,29 +547,19 @@ which contains the JWT payload:
 
 </reference>
 
-<reference anchor="RAR" target="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rar">
+<reference anchor="XDBCP" target="https://www.rfc-editor.org/info/bcp247">
     <front>
-        <title>OAuth 2.0 Rich Authorization Requests</title>
-        <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
-    </author>
-          <date day="25" month="February" year="2014" />
-    </front>
-</reference>
-
-<reference anchor="XDBCP" target="https://www.ietf.org/archive/id/draft-ietf-oauth-cross-device-security-09.html">
-    <front>
-        <title>Cross-Device Flows: Security Best Current Practice</title>        
-        <author initials="D." surname="Fett" fullname="Daniel Fett">
-          <organization>Authlete</organization>
-        </author>
+        <title>Best Current Practice for Security of Cross-Device Flows</title>
         <author initials="P." surname="Kasselman" fullname="Pieter Kasselman">
           <organization>SPIRL</organization>
+        </author>
+        <author initials="D." surname="Fett" fullname="Daniel Fett">
+          <organization>Authlete</organization>
         </author>
         <author initials="F." surname="Skokan" fullname="Filip Skokan">
           <organization>Okta</organization>
         </author>
-          <date day="06" month="January" year="2025" />
+          <date month="August" year="2026" />
     </front>
 </reference>
 
@@ -575,10 +572,26 @@ which contains the JWT payload:
   </front>
 </reference>
 
+<reference anchor="FAPI2SEC" target="https://doi.ieeecomputersociety.org/10.1109/CSF61375.2024.00002">
+  <front>
+    <title>Formal Security Analysis of the OpenID Financial-grade API 2.0</title>
+    <author initials="P." surname="Hosseyni" fullname="Pedram Hosseyni">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="R." surname="Kuesters" fullname="Ralf Kuesters">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <author initials="T." surname="Würtele" fullname="Tim Würtele">
+      <organization>University of Stuttgart, Germany</organization>
+    </author>
+    <date day="08" month="Jul" year="2024"/>
+  </front>
+</reference>
+
 # Notices
 
-Copyright (c) 2024 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
-The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft, Final Specification, or Final Specification Incorporating Errata Corrections solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts, Final Specifications, and Final Specification Incorporating Errata Corrections based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
-The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy (found at openid.net) requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. OpenID invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
