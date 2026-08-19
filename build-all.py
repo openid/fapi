@@ -22,24 +22,11 @@ dirs_exclude = [
 # This list is currently a list of files that fail to process
 # Some of them we likely don't care about, but some of them should be fixed and removed from the list
 files_exclude = [
-    './FAPI_2_0_Advanced_Profile.md',
     './FAPI_2_0_Advanced_Authorization_Profile.md',
-    './FAPI_2_0_Baseline_Profile.md',
-    './Financial_API_JWT_Secured_Authorization_Response_Mode.md',
     './Financial_API_Lodging_Intent.md',
-    './Financial_API_Pushed_Request_Object.md',
     './Financial_API_Simple_HTTP_Message_Integrity_Protocol.md',
-    './Financial_API_WD_000.md',
-    './Financial_API_WD_001.md',
-    './Financial_API_WD_002.md',
-    './Financial_API_WD_003.md',
-    './Financial_API_WD_004.md',
-    './Financial_API_WD_005.md',
     './TR-Cross_browser_payment_initiation_attack.md',
-    './fapi-grant-management.md',
-    './FAPI_1.0/changes-between-id2-and-final.md',
-    './FAPI_2_0_Message_Signing.md',
-    './FAPI_2_0_Security_Profile.md'
+    './FAPI_1.0/changes-between-id2-and-final.md'
 ]
 
 fapi1_files = [
