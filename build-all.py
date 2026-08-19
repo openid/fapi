@@ -22,7 +22,6 @@ dirs_exclude = [
 # This list is currently a list of files that fail to process
 # Some of them we likely don't care about, but some of them should be fixed and removed from the list
 files_exclude = [
-    './FAPI_2_0_Advanced_Authorization_Profile.md',
     './Financial_API_Lodging_Intent.md',
     './Financial_API_Simple_HTTP_Message_Integrity_Protocol.md',
     './TR-Cross_browser_payment_initiation_attack.md',
