@@ -1,2 +1,10 @@
 .idea
 .DS_Store
+*~
+
+# build outputs (root-anchored: FAPI_1.0/ has tracked .html/.xml artifacts)
+/*.html
+/*.xml
+/manifest.json
+/_site/
+/pandoc-3.1.9/

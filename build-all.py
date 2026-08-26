@@ -6,6 +6,7 @@
 # exits with appropriate success / failure return code
 
 import glob
+import json
 import os
 import re
 import sys
@@ -47,9 +48,18 @@ fapi1_files = [
     './FAPI_1.0/openid-financial-api-part-2-1_0.md'
 ]
 
+# Pinned by digest so the rendering is reproducible: an untagged/:latest image
+# could silently change the output between identical commits. Regenerate the
+# digest with `docker buildx imagetools inspect danielfett/markdown2rfc:latest`.
+MD2RFC_IMAGE = 'danielfett/markdown2rfc@sha256:7b4412559d6ba5db45a14174a28da5b240512e7c2a886a5e4adb44e5e67f34ca'
+
 failed = []
 
 files_generated = []
+
+# source .md -> generated .html, written to manifest.json for CI to link the
+# drafts changed in a pull request from the preview comment
+manifest = {}
 
 def get_output_filename(fname):
     # get the output filename, i.e. do what https://github.com/oauthstuff/markdown2rfc/blob/master/make.sh#L18 does
@@ -88,12 +98,13 @@ def execute_command(cmd, fname, outputfname):
         os.rename(outputfname, newoutputfname)
         outputfname = newoutputfname
         print("Renamed output to "+outputfname)
-    files_generated.append(newoutputfname)
+    files_generated.append(outputfname)
+    manifest[fname[2:] if fname.startswith('./') else fname] = outputfname
     print()
 
 def process_spec(fname):
     currentdir = os.getcwd()
-    cmd = [ 'docker', 'run', '-v', currentdir+':/data', 'danielfett/markdown2rfc', fname ]
+    cmd = [ 'docker', 'run', '-v', currentdir+':/data', MD2RFC_IMAGE, fname ]
     print("Running: " + ' '.join(cmd))
     outputfname = get_output_filename(fname)
     outputfname += ".html"
@@ -133,9 +144,16 @@ def generate_index():
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>OpenID Foundation FAPI Working Group Drafts</title>
-  <link rel="stylesheet" href="../base.css" type="text/css"/>
   <style type="text/css">
 <!--
+body {
+	font-family: sans-serif;
+	margin: 2em;
+}
+.navigation li {
+	display: inline;
+	margin-right: 1.5em;
+}
 .style1 {
 	color: #FF0000;
 	font-weight: bold;
@@ -158,8 +176,8 @@ def generate_index():
 <div id="nav" class="column span-18 append-1 prepend-1">
   <ul class="navigation">
     <li><a href='https://openid.net/wg/fapi/'>About</a></li>
-    <li><a href='https://bitbucket.org/openid/fapi/'>Repository</a></li>
-    <li><a href="https://bitbucket.org/openid/fapi/issues?status=new&status=open">Issues</a></li>
+    <li><a href='https://github.com/openid/fapi'>Repository</a></li>
+    <li><a href='https://github.com/openid/fapi/issues'>Issues</a></li>
   </ul>
 </div>
 <div id="content">
@@ -183,6 +201,8 @@ def generate_index():
 
 walk_tree()
 generate_index()
+with open('manifest.json', 'w') as f:
+    json.dump(manifest, f, indent=2, sort_keys=True)
 if failed:
     print("The processing of some specifications failed:")
     for f in failed:

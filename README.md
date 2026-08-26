@@ -2,6 +2,8 @@
 
 This is the official repository for OpenID Foundation Financial-grade API (FAPI) Working Group. 
 
+The latest drafts are built automatically from this repository and published at <https://openid.github.io/fapi/>. These reflect in-progress edits; the official specifications are published at <https://openid.net/specs/>.
+
 ### What is this repository for? ###
 
 * FAPI 1.0 - This is a profile of OpenID Connect. 
@@ -26,7 +28,7 @@ You can find the overview and rationale of the working group at [the WG page](ht
 * You MUST execute the Contributor Agreement either by 
     * [Electronic Signature](http://openid.net/intellectual-property/) and notify openid-specs-fapi-owner@lists.openid.net; OR 
     * print this [PDF](http://openid.net/wordpress-content/uploads/2010/01/paper-contribution-agreement-20100122.pdf) and fill, sign, scan, and send it to openid-specs-fapi-owner@lists.openid.net. 
-* You MUST file an issue to [the issue tracker](https://bitbucket.org/openid/fapi/issues?status=new&status=open) before contributing a code. 
+* You MUST file an issue to [the issue tracker](https://github.com/openid/fapi/issues) before contributing a code.
 * You MUST test that the contributed code compiles without error. 
 
 ### Who do I talk to? ###
