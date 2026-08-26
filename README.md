@@ -11,8 +11,8 @@ This is the official repository for OpenID Foundation Financial-grade API (FAPI)
     * [JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)](oauth-v2-jarm.md)
     * [Implementation and Deployment Advice](Financial_API_Implementation_And_Deployment_Advice.md)
 * FAPI 2.0 - This is a profile of OAuth 2.0
-    * [Baseline Profile](FAPI_2_0_Baseline_Profile.md)
-    * [Advanced Profile](FAPI_2_0_Advanced_Profile.md)
+    * [Security Profile](fapi-2_0-security-profile.md)
+    * [Message Signing](fapi-2_0-message-signing.md)
     * [Attacker Model](FAPI_2_0_Attacker_Model.md)
     * [Grant Management](FAPI_2_0_Grant_Management.md)
 * Other documents
