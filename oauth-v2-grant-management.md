@@ -104,7 +104,7 @@ Examples:
 
 * In banking, the client could query the details of a grant to determine what accounts have been added to the grant by a user or other fine-grained details of the authorization (when the user has a choice).
 
-* In some scenarios, a resource owner can be multiple natural persons, so additional authorizations might be required and this might occur after the original authorization was granted by the intiating resource owner. The client can query the status of consent at any point after the authorization to determine if complete authorization has occured (by adhoc query or regular polling). Another scenario that fits in this category is multi-party approval process for business entities.
+* In some scenarios, a resource owner can be multiple natural persons, so additional authorizations might be required and this might occur after the original authorization was granted by the initiating resource owner. The client can query the status of consent at any point after the authorization to determine if complete authorization has occurred (by adhoc query or regular polling). Another scenario that fits in this category is multi-party approval process for business entities.
 
 * Some jurisdictions require client's and authorization server's applications to provide a dashboard to a user to view and revoke authorizations given to the authorization server. Querying the details of the grant allows clients to have access to the up-to-date status and contents of the consent.
 
@@ -223,7 +223,7 @@ This specification introduces the token response parameter `grant_id`:
 
 `grant_id`: URL safe string value identifying an individual grant managed by a particular authorization server for a certain client and a certain resource owner. The `grant_id` value must be unique in the context of a certain authorization server and should have enough entropy to make it impractical to guess it.
 
-The AS must return a `grant_id` if the `grant_management_action` request parameter is provided and specified action is valid and supported (for example, `create`, `update` or `replace`).
+The AS must return a `grant_id` if the `grant_management_action` request parameter is provided and specified action is valid and supported (for example, `create`, `merge` or `replace`).
 
 Here is an example response:
 
@@ -237,7 +237,7 @@ Cache-Control: no-cache, no-store
    "token_type": "example",
    "expires_in": 3600,
    "refresh_token": "tGzv3JOkF0XG5Qx2TlKWIA",
-   “grant_id”: ”TSdqirmAxDa0_-DB_1bASQ”
+   "grant_id": "TSdqirmAxDa0_-DB_1bASQ"
 }
 ```
 
@@ -253,7 +253,7 @@ If the tokens haven't been claimed the grant should be deleted by the AS after a
 
 ### Modification
 
-Grant can be modified by a client via update or replace actions.
+Grant can be modified by a client via merge or replace actions.
 
 Some elements of a grant can be updated by the AS to reflect the status of some resources included in the grant. For example, if a user chose to share an account with a client and this account required additional authorizations before being considered as fully authorized.
 
@@ -270,7 +270,7 @@ Currently supported actions are:
 * Query: Retrieve the current status of a specific grant
 * Revoke: Request the revocation of a grant
 
-The Grant Management API does not provide bulk access to all grants of a certain client for functional and privacy reasons. Every grant is associated with a certain resource owner, so just getting the status is useless for the client as long as there is not indication of the user the client can use this grant for. Adding user identity data to the status data would weaken the privacy protection OAuth offers for users towards a client.
+The Grant Management API does not provide bulk access to all grants of a certain client for functional and privacy reasons. Every grant is associated with a certain resource owner, so just getting the status is useless for the client as long as there is no indication of the user the client can use this grant for. Adding user identity data to the status data would weaken the privacy protection OAuth offers for users towards a client.
 
 The Grant Management API will not expose any tokens associated with a certain grant in order to prevent token leakage. The client is supposed to manage its grants along with the respective tokens and ensure its usage in the correct user context.
 
@@ -292,7 +292,7 @@ Communication with the Grant Management API must use the "https" scheme.
 
 ## Grant Resource URL
 
-The resource URL for a certain grant is built by concatenating the grant management endpoint URL, a slash, and the the `grant_id`. For example, if the grant management endpoint is defined as
+The resource URL for a certain grant is built by concatenating the grant management endpoint URL, a slash, and the `grant_id`. For example, if the grant management endpoint is defined as
 
 ```
 https://as.example.com/grants
@@ -405,7 +405,7 @@ The following information about the grant may be provided:
 * `last_updated`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
 * `expires_at`: (optional) time when the grant expires expressed as a number containing a NumericDate value.
 * `created_at`: (optional) time when the grant was originally created expressed as a number containing a NumericDate value.
-* `updated_by`: (optional) string value that indicates who updated the grant. Allowed values are 'client' and “authorization_server“.
+* `updated_by`: (optional) string value that indicates who updated the grant. Allowed values are 'client' and 'authorization_server'.
 
 `NumericDate` is JSON numeric value representing the number of seconds from 1970-01-01T00:00:00Z UTC until the specified UTC date/time, ignoring leap seconds.  This is equivalent to the IEEE Std 1003.1, 2013 Edition [POSIX.1] definition "Seconds Since the Epoch", in which each day is accounted for by exactly 86400 seconds, other than that non-integer values can be represented.  See RFC 3339 [RFC3339] for details regarding date/times in general and UTC in particular.
       
@@ -468,9 +468,9 @@ OPTIONAL. Boolean where, if `true`, all authorization requests must specify a `g
 
 A client (as logical entity) may use multiple client ids to deliver its service across different platforms, e.g. apps for iOS and Android and a Web App. It is recommended that the AS support sharing of grants among client ids belonging to the same client. Sector identifier URIs as defined in [@OpenID.Registration] is one option to group client ids under single administrative control.
 
-## Addressibility of grant components
+## Addressability of grant components
 
-Implementations may wish to consider solutions to allow for addressibility of individual components within a grant. Trust ecosystems should consider their requirements during implementation and consider either;
+Implementations may wish to consider solutions to allow for addressability of individual components within a grant. Trust ecosystems should consider their requirements during implementation and consider either;
 
 * Including a unique identifier within the authorization object (ie. `id` within the RAR) or;
 * Defining a comparison algorithm for the grant to allow for derivation of update and append actions
@@ -481,7 +481,7 @@ The grant resource's data model serves the purpose of making the content of a gr
 
 Deployments should ensure access tokens are issued with an audience restricted to a certain resource server. This is good security practice and it allows implementations to use the existing claim "aud" to convey the resource value in addition to the scope in access tokens and respective introspection responses.
 
-# Privacy Consideration {#Privacy}
+# Privacy Considerations {#Privacy}
 
 `grant_id` is issued by the authorization server for each established grant between a client and a resource owner. This should prevent correlation between different clients.
 
@@ -493,7 +493,7 @@ It must not be possible to identify the user or derive any personally identifiab
 
 A grant id is considered a public identifier, it is not a secret. Implementations must assume grant ids leak to attackers, e.g. through authorization requests. For example, access to the sensitive data associated with a certain grant must not be made accessible without suitable security measures, e.g. an authentication and authorization of the respective client.
 
-During the execution of a transaction utilizing grant mode `replace`, it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self-contained access tokens are in use and there is a requirement for immediate propogation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
+During the execution of a transaction utilizing grant mode `replace`, it is possible that the results of the resultant grant contain a permission set which is not a superset of the previous permission set. Consequently, where self-contained access tokens are in use and there is a requirement for immediate propagation shorter than the lifespan of access tokens, the AS should immediately revoke all relevant tokens by an out-of-band means.
 
 {backmatter}
 
@@ -610,7 +610,7 @@ Metadata Name:
 : `grant_management_actions_supported`
 
 Metadata Description:
-: JSON array containing the authorization details types the AS supports
+: JSON array containing the grant management actions the AS supports
 
 Change Controller:
 : IESG
