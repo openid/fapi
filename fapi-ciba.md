@@ -1,5 +1,5 @@
 %%%
-title = "FAPI Client Initiated Backchannel Authentication Profile - draft"
+title = "FAPI Client Initiated Backchannel Authentication Profile - Draft 04"
 abbrev = "fapi-ciba"
 ipr = "none"
 workgroup = "fapi"
@@ -7,7 +7,7 @@ keyword = ["security", "openid", "ciba"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-ciba-03"
+value = "fapi-ciba-04"
 status = "standard"
 
 [[author]]
@@ -34,7 +34,7 @@ This document is a profile of the OpenID Connect Client Initiated Backchannel Au
 
 This profile may be used with either:
 
-1. FAPI API Security Profile 1.0 - Parts 1 and 2 or
+1. FAPI Security Profile 1.0 - Parts 1 and 2 or
 2. FAPI 2.0 Security Profile
 
 .# Warning
@@ -484,6 +484,25 @@ which contains the JWT payload:
   }
 }
 ```
+
+# Document History
+
+[[ To be removed from the final specification ]]
+
+-04
+
+* First working group draft since Implementer's Draft 1 (2019)
+* Allow this profile to be used with FAPI 2.0 as well as FAPI 1.0
+* Make unsigned backchannel authentication requests the default; FAPI 1.0 authorization servers also support signed requests
+* Replace lodging intent with Rich Authorization Requests [@RFC9396]
+* Add `login_hint_token` type metadata for discovery and registration
+* Recommend redirect-based FAPI flows for same-device use; position CIBA for cross-device and user-not-present cases
+* Reference BCP 247 / RFC 10027 for cross-device security
+* Note that binding messages do not protect against an attacker-controlled consumption device
+* Reference the FAPI 2.0 formal security analysis
+* Clarify audience restrictions on client assertions
+* Inherit TLS and JWS/JWE requirements from the FAPI 1.0 or FAPI 2.0 specifications
+* Convert the source to xml2rfc markdown (`fapi-ciba.md`)
 
 {backmatter}
 
