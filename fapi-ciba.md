@@ -129,12 +129,13 @@ In addition the authorization server
 1. shall support CIBA poll mode;
 1. may support CIBA ping mode;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
-1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata; and
-1. may require clients to provide a `request_context` claim as defined in Section 4.3 of this profile.
+1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata;
+1. may require clients to provide a `request_context` claim as defined in Section 4.3 of this profile; and
+1. shall support unsigned backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1.
 
 When this profile is used with the FAPI 1.0 specifications, the authorization server
 
-1. shall support unsigned and signed backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1; and
+1. shall also support signed backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1; and
 1. shall require the signed authentication request to contain `nbf` and `exp` claims that limit the lifetime of the request to no more than 60 minutes.
 
 **NOTE:** As per [@!CIBA], `login_hint`, `login_hint_token` and `id_token_hint` are used only to determine who the user is. In scenarios where complex authorization parameters need to be conveyed from the client to the authorization server, implementers should consider using OAuth 2.0 Rich Authorization Requests [@!RFC9396]. The use of parameterized scope values or the use of an additional request parameter are both supported by this specification.
@@ -163,7 +164,9 @@ When this profile is used with the FAPI 1.0 specifications, the confidential cli
 
 1. should only send signed authentication requests as defined in [@!CIBA] 7.1.1 to the backchannel authentication endpoint.
 
-##NOTE:## When used with FAPI 2.0, both signed and unsigned requests are supported.
+When this profile is used with the FAPI 2.0 specifications, the confidential client
+
+1. shall send unsigned authentication requests as defined in [@!CIBA] 7.1.1 to the backchannel authentication endpoint.
 
 ### Extensions to CIBA authentication request
 
