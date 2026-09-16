@@ -259,10 +259,15 @@ the scope of access requested is similar then the only way to ensure that a user
 authorizing the correct transaction is for the user to compare the binding messages
 on the authentication and consumption devices.
 
+Even then, a binding message does not protect against an attacker-controlled
+consumption device. The attacker can display the same binding message and copy
+the name and branding of an honest client, so the user cannot tell that the
+application showing the message is the client shown by the authorization server.
+
 If this risk is deemed unacceptable then implementers should either consider alternative
 mechanisms of verifying the binding message (e.g. conveying it to the authentication
-device via a QR code), or use ephemeral user identifiers generated on the authentication
-device.
+device via a QR code, or physical proximity as described in [@!XDBCP]), or use
+ephemeral user identifiers generated on the authentication device.
 
 ## Loss of fraud markers to authorization server
 
