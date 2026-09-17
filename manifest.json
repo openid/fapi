@@ -1,0 +1,14 @@
+{
+  "FAPI_1.0/openid-financial-api-part-1-1_0.md": "openid-financial-api-part-1-1_0.html",
+  "FAPI_1.0/openid-financial-api-part-2-1_0.md": "openid-financial-api-part-2-1_0.html",
+  "FAPI_2_0_Implementation_Advice.md": "fapi-2_0-implementation_advice.html",
+  "Financial_API_HTTP_Signing.md": "fapi-http-signing-requirements.html",
+  "Financial_API_Implementation_And_Deployment_Advice.md": "fapi-implementation-deployment-advice.html",
+  "fapi-2_0-attacker-model.md": "fapi-attacker-model-2_0.html",
+  "fapi-2_0-http-signatures.md": "fapi-2_0-http-signatures.html",
+  "fapi-2_0-message-signing.md": "fapi-message-signing-2_0.html",
+  "fapi-2_0-security-profile.md": "fapi-security-profile-2_0.html",
+  "fapi-ciba.md": "fapi-ciba.html",
+  "oauth-v2-grant-management.md": "oauth-v2-grant-management.html",
+  "oauth-v2-jarm.md": "oauth-v2-jarm.html"
+}
