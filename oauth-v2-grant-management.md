@@ -402,7 +402,7 @@ The privileges associated with the grant will be provided as a JSON array contai
 * `authorization_details`: (optional) JSON array of JSON objects as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The following information about the grant may be provided:
-* `last_updated`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
+* `last_updated_at`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
 * `expires_at`: (optional) time when the grant expires expressed as a number containing a NumericDate value.
 * `created_at`: (optional) time when the grant was originally created expressed as a number containing a NumericDate value.
 * `updated_by`: (optional) string value that indicates who updated the grant. Allowed values are 'client' and 'authorization_server'.
