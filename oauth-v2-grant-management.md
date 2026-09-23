@@ -7,7 +7,7 @@ keyword = ["security", "oauth", "grant", "consent"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "oauth-v2-grant-management-03"
+value = "oauth-v2-grant-management-04"
 status = "standard"
 
 [[author]]
@@ -402,7 +402,7 @@ The privileges associated with the grant will be provided as a JSON array contai
 * `authorization_details`: (optional) JSON array of JSON objects as defined in [@!I-D.ietf-oauth-rar] containing all authorization details as requested and consented in one or more authorization requests associated with the respective grant.
 
 The following information about the grant may be provided:
-* `last_updated`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
+* `last_updated_at`: (optional) time when the grant was last updated expressed as a number containing a NumericDate value.
 * `expires_at`: (optional) time when the grant expires expressed as a number containing a NumericDate value.
 * `created_at`: (optional) time when the grant was originally created expressed as a number containing a NumericDate value.
 * `updated_by`: (optional) string value that indicates who updated the grant. Allowed values are 'client' and 'authorization_server'.
@@ -665,7 +665,7 @@ We would like to thank Vladimir Dzhuvinov, Takahiko Kawasaki, Roland Hedberg, Fi
 
 # Notices
 
-Copyright (c) 2023 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
@@ -674,6 +674,10 @@ The technology described in this specification was made available from contribut
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -04
+   
+   * Change name from `last_updated` to `last_updated_at`
 
    -03
 
