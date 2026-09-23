@@ -16,7 +16,7 @@
 <meta content="oauth" name="keyword">
 <meta content="grant" name="keyword">
 <meta content="consent" name="keyword">
-<meta content="oauth-v2-grant-management-03" name="ietf.draft">
+<meta content="oauth-v2-grant-management-04" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.16.0
     Python 3.10.2
@@ -35,7 +35,7 @@
     six 1.16.0
     wcwidth 0.2.6
 -->
-<link href="./oauth-v2-grant-management-03.xml" rel="alternate" type="application/rfc+xml">
+<link href="./oauth-v2-grant-management-04.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">/*
 
@@ -2250,7 +2250,7 @@ OPTIONAL. Boolean where, if <code>true</code>, all authorization requests must s
       <h2 id="name-notices">
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-notices" class="section-name selfRef">Notices</a>
       </h2>
-<p id="appendix-C-1">Copyright (c) 2023 The OpenID Foundation.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">Copyright (c) 2026 The OpenID Foundation.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <p id="appendix-C-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 </section>
@@ -2261,36 +2261,41 @@ OPTIONAL. Boolean where, if <code>true</code>, all authorization requests must s
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-D-1">[[ To be removed from the final specification ]]<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">-03<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<p id="appendix-D-2">-04<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-3.1">editorial changes<a href="#appendix-D-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-D-3.1">Change name from <code>last_updated</code> to <code>last_updated_at</code><a href="#appendix-D-3.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-4">-02<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+<p id="appendix-D-4">-03<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-5.1">renamed <code>update</code> action to <code>merge</code><a href="#appendix-D-5.1" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-5.2">added <code>expires_at</code>, <code>created_at</code>, <code>last_updated</code> and <code>updated_by</code><a href="#appendix-D-5.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-5.3">clarifications<a href="#appendix-D-5.3" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-5.4">added <code>replace</code> grant management action to server metadata<a href="#appendix-D-5.4" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-5.5">added IANA section content<a href="#appendix-D-5.5" class="pilcrow">¶</a>
+<li class="compact" id="appendix-D-5.1">editorial changes<a href="#appendix-D-5.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-6">-01<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+<p id="appendix-D-6">-02<a href="#appendix-D-6" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-7.1">simplified authorization requests<a href="#appendix-D-7.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-D-7.1">renamed <code>update</code> action to <code>merge</code><a href="#appendix-D-7.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-D-7.2">added metadata control grant management behavior of AS and client<a href="#appendix-D-7.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-D-7.2">added <code>expires_at</code>, <code>created_at</code>, <code>last_updated</code> and <code>updated_by</code><a href="#appendix-D-7.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-D-7.3">extended grant resource data model<a href="#appendix-D-7.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-D-7.3">clarifications<a href="#appendix-D-7.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-D-7.4">added <code>replace</code> grant management action to server metadata<a href="#appendix-D-7.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-D-7.5">added IANA section content<a href="#appendix-D-7.5" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-8">-00<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<p id="appendix-D-8">-01<a href="#appendix-D-8" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-9.1">initial revision<a href="#appendix-D-9.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-D-9.1">simplified authorization requests<a href="#appendix-D-9.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-D-9.2">added metadata control grant management behavior of AS and client<a href="#appendix-D-9.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-D-9.3">extended grant resource data model<a href="#appendix-D-9.3" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-D-10">-00<a href="#appendix-D-10" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-D-11.1">initial revision<a href="#appendix-D-11.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
