@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2026-03-27" />
+  <meta name="keywords" content="FAPI, Baseline security" />
+  <meta name="description" content="Profile of OAuth with medium security options." />
+  <title>FAPI security profile 1.0 - Part 1: Baseline - Draft 11 incorporating errata set 1</title>
+  <style>
+</style>
+  <style type="text/css">html {
+color: #555;
+margin: auto;
+padding: 10px;
+
+}
+
+:root {
+--font-sans: 'Arial', 'Helvetica', sans-serif;
+--font-serif: 'Times', 'Times New Roman', serif;
+--font-mono: 'Courier', 'Courier New', monospace;
+--color-neutral-muted: #dddddd;
+}
+body {
+font-size: 14px;
+font-family: var(--font-sans);
+line-height: 1.6;
+max-width: 90%;
+right: 20em;
+margin: 1.5em auto;
+color: #222;
+background-color: #fff;
+scroll-behavior: smooth;
+}
+.subtitle {
+font-size: 18pt;
+font-style: italic;
+}
+.abstract-title {font-weight: bold; font-size: 18px;}
+.abstract {margin-bottom: 3em;}
+
+a.toplink {
+float: right;
+margin-right: 0.5em;
+}
+.bigcenter {
+text-align: center;
+font-size: 1.5em;
+}
+.bigtext {
+font-size: 1.5em;
+}
+h1.center, h2.center, h3.center, h4.center, h5.center, h6.center {
+text-align: center;
+}
+h1.annex {
+border-top: 1px solid #999;
+border-bottom: none;
+padding-top: 2em;
+margin-top: 1em;
+text-align: center;
+}
+dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
+#identifiers {
+display: grid;
+grid-template-columns: 11rem 1fr;
+column-gap: 1.25rem;
+row-gap: 0.25rem;
+margin: 0 0 1.2rem 0;
+padding: 0;
+}
+#identifiers dt,
+#identifiers dd {
+margin: 0;
+padding: 0;
+float: none !important;
+clear: none !important;
+width: auto !important;
+}
+#identifiers dt {
+grid-column: 1;
+font-weight: 400;
+white-space: nowrap;
+}
+#identifiers dd {
+grid-column: 2;
+}
+
+#identifiers dd.author {
+display: flex !important;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+gap: 0 2.2rem;
+margin-top: -0.05rem;
+}
+
+#identifiers dd.author > .author {
+display: inline-flex;
+flex-direction: column;
+flex: 0 0 auto;
+min-width: max-content;
+margin: 0;
+padding: 0;
+}
+
+#identifiers .author-name {
+display: block;
+white-space: nowrap;
+line-height: 1.2;
+margin: 0 0 0.18rem 0;
+}
+
+#identifiers .org {
+display: block;
+white-space: nowrap;
+font-style: italic;
+line-height: 1.2;
+margin: 0 0 0.6rem 0;
+}
+.btn {
+font-family: Arial, Verdana, sans-serif;
+background-color: #337ab7;
+color: white;
+font-weight: bold;
+font-size: 1em;
+padding: 0.5em 1.5em;
+white-space: normal;
+border-radius: 12px;
+}
+.extension-checkbox {
+float: right;
+opacity: 0.5;
+cursor: help;
+}
+.container {
+display: flex;
+}
+@media screen {
+pre {
+overflow-x: auto;
+max-width: 100%;
+max-width: calc(100% - 22px);
+}
+}
+
+@media (min-width: 600px) {
+.index ul {
+-moz-column-count: 2;
+column-count: 2;
+-moz-column-gap: 20px;
+column-gap: 20px;
+}
+.index ul ul {
+-moz-column-count: 1;
+column-count: 2;
+-moz-column-gap: 0;
+column-gap: 0;
+}
+}
+
+a.toplink {
+float: right;
+margin-right: 0.5em;
+}
+
+#toc {
+padding: 0.75em 0 2em 0;
+margin-bottom: 1em;
+}
+nav.toc ul {
+margin: 0 0.5em 0 0;
+padding: 0;
+list-style: none;
+}
+nav.toc li {
+line-height: 1.3em;
+margin: 0.75em 0;
+padding-left: 1.2em;
+text-indent: -1.2em;
+}
+
+@media screen and (max-width: 1023px) {
+body {
+padding-top: 2em;
+}
+#title {
+padding: 1em 0;
+}
+h1 {
+font-size: 24px;
+}
+h2 {
+font-size: 20px;
+margin-top: -18px; 
+padding-top: 38px;
+}
+#identifiers dd {
+max-width: 60%;
+}
+#toc {
+position: fixed;
+z-index: 2;
+top: 0;
+right: 0;
+padding: 0;
+margin: 0;
+background-color: inherit;
+border-bottom: 1px solid #ccc;
+}
+#toc h2 {
+margin: -1px 0 0 0;
+padding: 4px 0 4px 6px;
+padding-right: 1em;
+min-width: 190px;
+font-size: 1.1em;
+text-align: right;
+background-color: #444;
+color: white;
+cursor: pointer;
+}
+#toc h2::before { 
+float: right;
+position: relative;
+width: 1em;
+height: 1px;
+left: -164px;
+margin: 6px 0 0 0;
+background: white none repeat scroll 0 0;
+box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+content: "";
+}
+#toc nav {
+display: none;
+padding: 0.5em 1em 1em;
+overflow: auto;
+height: calc(100vh - 48px);
+border-left: 1px solid #ddd;
+}
+#toc.active nav {
+display: block;
+}
+}
+
+@media screen and (min-width: 1024px) {
+:root {
+--toc-w: clamp(24rem, 22vw, 30rem);
+--toc-gap: 1.25rem;
+--page-gap: 42px;
+--content-max: 72rem; }
+body {
+box-sizing: border-box;
+width: min(
+var(--content-max),
+calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))
+);
+margin-left: calc(
+(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)) - min(var(--content-max), calc(100vw - var(--toc-w) - var(--toc-gap) - (2 * var(--page-gap)))) ) / 2
++ var(--page-gap)
+);
+margin-top: var(--page-gap);
+margin-bottom: var(--page-gap);
+margin-right: calc(var(--toc-w) + var(--toc-gap) + var(--page-gap));
+padding-left: 3em;
+padding-right: 0;
+}
+#toc {
+position: fixed;
+top: 24px;
+right: 0;
+width: var(--toc-w);
+max-width: none;
+margin: 0;
+padding: 2em;
+height: 100%;
+overflow: auto;
+}
+#toc h2 {
+border-top: none;
+border-bottom: 1px solid #ddd;
+font-size: 1em;
+font-weight: normal;
+margin: 0;
+padding: 0.25em 1em 1em 0;
+}
+#toc nav {
+display: block;
+height: calc(90vh - 84px);
+bottom: 0;
+padding: 0.5em 0 0;
+overflow: auto;
+}
+img { 
+max-width: 100%;
+height: auto;
+}
+}
+
+#toc {
+background-color: white;
+}
+
+@media screen and (max-width: 1023px) {
+#toc h2 a,
+#toc h2 a:link,
+#toc h2 a:focus,
+#toc h2 a:hover,
+#toc a.toplink,
+#toc a.toplink:hover {
+color: white;
+background-color: #444;
+text-decoration: none;
+}
+}
+
+@media screen and (min-width: 1024px) {
+#toc {
+padding: 0 0 1em 1em;
+}
+}
+
+.section-number {
+padding-right: 0.5em;
+}
+
+tt, code, pre, code {
+font-size: 95%;
+}
+
+a.toplink {
+float: right;
+margin-right: 0.5em;
+}
+main {
+position: relative; 
+order: 1;
+min-width: 300px;
+padding-bottom: 60em; 
+}
+#input-search {
+font-family: Arial, Verdana, sans-serif;
+font-weight: normal;
+font-size: 13pt;
+border-radius: 24px;
+}
+#input-search {
+border-style: none;
+border: 1px solid grey;
+}
+#submit-search {
+border-style: none;
+background-color: #337ab7;
+color: white;
+font-family: Arial, Verdana, sans-serif;
+font-size: 12pt;
+font-weight: normal;
+border-radius: 6px;
+padding: 4px;
+}
+.modal {
+display: none;
+}
+.modal.scrollable {
+height: 32em;
+overflow-y: scroll;
+}
+.modal.show {
+display: block;
+position: absolute;
+z-index: 1;
+width: 90%;
+margin: auto;
+background: white;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.modal-header {
+background-color: cyan;
+margin: 0;
+padding: 4pt 0pt 4pt 0pt;
+font-size: 13pt;
+font-weight: 600;
+}
+.modal-title {
+}
+.modal-body {
+padding: 6pt;
+}
+header span {
+font-family: Arial, Verdana, sans-serif;
+}
+header .big {
+font-size: 36pt;
+border: none;
+}
+header .small {
+font-size: 22pt;
+color: gray;
+}
+h1.title {
+clear: both;
+font-size: 28px;
+padding: 1em 0 0.5em;
+}
+h1, h2, h3 {
+padding-bottom: 3px;
+border-bottom: 1px solid black;
+}
+h4 { font-size: 14pt;
+font-weight: bold;
+margin-top: 1em;
+}
+h1 {
+font-size: 18pt;
+}
+h2 {
+font-size: 16pt;
+}
+h3 {
+font-size: 14pt;
+}
+
+#title, h1, h2, h3, h4, h5, h6 {
+margin: 1em 0 0.5em;
+font-weight: bold;
+line-height: 1.3;
+}
+#title {
+clear: both;
+border-bottom: 1px solid #ddd;
+margin: 0 0 0.5em 0;
+padding: 1em 0 0.5em;
+}
+h1 {
+font-size: 26px;
+margin: 1em 0;
+}
+h2 {
+font-size: 22px;
+margin-top: -20px; 
+padding-top: 33px;
+}
+h3 {
+font-size: 18px;
+margin-top: -36px; 
+padding-top: 42px;
+}
+h4 {
+font-size: 16px;
+margin-top: -36px; 
+padding-top: 42px;
+}
+h5, h6 {
+font-size: 14px;
+}
+code{
+white-space: pre-wrap;
+font-size: 1em;
+font-family: monospace;
+padding: .2em .4em;
+margin: 0;
+font-size: 100%;
+white-space: break-spaces;
+background-color: var(--color-neutral-muted);
+border-radius: 6px;
+background-color: #eeeeee;
+}
+span.nowrap code { white-space: nowrap; }
+a.option code { color: inherit; }
+pre{ font-size: 11pt; }
+.smallcaps{font-variant: small-caps;}
+.line-block{white-space: pre-line;}
+.column{display: inline-block;}
+q { quotes: "窶�" "窶�" "窶�" "窶�"; }
+a {
+color: #22e;
+text-decoration: none;
+}
+
+
+div.sourceCode {
+margin: 1em 0;
+}
+div.sourceCode > pre.sourceCode {
+margin: 0;
+padding: 0.5em 0.6em;
+background: #dddddd;
+border-radius: 8px;
+overflow: auto;
+}
+
+div.sourceCode > pre.sourceCode > code.sourceCode {
+background: transparent !important;
+padding: 0 !important;
+margin: 0 !important;
+border-radius: 0 !important;
+white-space: pre; 
+font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+"Liberation Mono", "Courier New", monospace;
+font-size: 0.95em;
+line-height: 1.45;
+}
+
+div.sourceCode > pre.sourceCode > code.sourceCode > span {
+background: transparent !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+
+div.sourceCode a[href^="#cb"] {
+color: inherit;
+text-decoration: none;
+}
+
+pre.jwt {
+margin: 1em 0;
+padding: 0.5em 0.6em;
+background: #dddddd;
+border-radius: 8px;
+overflow: auto;
+}
+
+pre.jwt > code {
+background: transparent !important;
+padding: 0 !important;
+margin: 0 !important;
+border-radius: 0 !important;
+white-space: pre; 
+font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+"Liberation Mono", "Courier New", monospace;
+font-size: 0.95em;
+line-height: 1.45;
+}
+
+div.sourceCode a[href^="#cb"] {
+color: inherit;
+text-decoration: none;
+}
+
+div.sourceCode > pre.sourceCode > code.sourceCode {
+font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+font-size: 0.95em;
+line-height: 1.45;
+white-space: pre; 
+}
+.card-header {
+background-color: #eee;
+border-radius: 24px 24px 24px 24px;
+padding: 3pt 6pt 3pt 6pt;
+}
+.show .card-header {
+border-radius: 24px 24px 0px 0px;
+}
+.card {
+padding: 0pt;
+margin: 6pt;
+border: 1px solid grey;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+border-radius: 24px;
+}
+.card-body {
+padding: 6pt;
+display: none;
+}
+.show .card-body {
+display: block;
+}
+table {
+margin-top: 1em;
+margin-bottom: 1em;
+}
+table th {
+border-bottom: 1px solid black;
+}
+th, td {
+padding-right: 10pt;
+vertical-align: top;
+}
+.twocol {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+.col {
+min-width: 12em;
+max-width: 22em;
+}
+ul ul {
+margin-bottom: 0.5em
+}
+dl { margin-top: auto; }
+dt { font-weight: bold; margin-bottom: 0em; margin-top:1em;}
+dd {
+margin-left: 0em;
+}
+hr {
+height: 1px;
+color: #aaa;
+background-color: #aaa;
+border: 0;
+margin: .2em 0 .2em 0;
+}
+blockquote {
+padding: 0 1.6em;
+color: #666;
+background-color: #ffffff;
+}
+footer {
+padding: 1em;
+color: #888;
+text-align: center;
+font-size: 12pt;
+}
+
+.anchor:before {
+
+content: '迫\FE0E';
+display: inline-block;
+font-size: 14pt;
+left: -1.75em;
+line-height: 1.66;
+opacity: 0.2;
+padding-right: 0.5em;
+position: absolute;
+}
+.anchor:hover {
+text-decoration: none;
+}
+h1:hover > .anchor::before,
+h2:hover > .anchor::before,
+h3:hover > .anchor::before {
+opacity: 1;
+}
+
+
+@media print {
+@page {
+size: A4;
+margin: 25mm 20mm 25mm 20mm;
+}
+html, body {
+margin: 0;
+padding: 0;
+background: #fff;
+color: #000;
+font-family: Cambria, "Times New Roman", Times, "Noto Serif JP", serif;
+}
+body {
+font-size: 11pt;
+line-height: 1.3;
+max-width: none;
+color: #000 !important;
+}
+main, article, #content, .content {
+max-width: 170mm;
+margin: 0 auto;
+}
+#title-block-header {
+padding-top: 30mm;
+}
+#title {
+font-size: 18pt;
+}
+#toc {
+break-before: page;
+page-break-before: always;
+margin: 0 0 12mm 0;
+}
+#toc-title {
+margin: 0 0 6mm 0;
+font-size: 14pt;
+font-weight: 700;
+}
+#toc nav.toc li {
+line-height: 1.1;
+margin: 0.2em 0;
+}
+#warning {
+margin-top: 100mm;
+border: 1px solid #000;
+padding: 5mm;
+}
+#name-foreword,
+#introduction,
+#scope {
+break-before: page;
+page-break-before: always;
+}
+ul {
+list-style: none;
+}
+#scope + p + ul {
+list-style: none;
+padding-left: 0;
+}
+#scope + p + ul > li {
+position: relative;
+padding-left: 8mm; margin-bottom: 0.5em;
+}
+#scope + p + ul > li::before {
+content: "—";
+position: absolute;
+left: 0;
+width: 6mm;
+}
+body > ul > li,
+body > div:not(#toc) ul > li,
+body > section ul > li,
+body > blockquote ul > li {
+position: relative;
+margin-bottom: 0.5em;
+padding-left: 0;
+}
+body > ul > li::before,
+body > div:not(#toc) ul > li::before,
+body > section ul > li::before,
+body > blockquote ul > li::before {
+content: "—";
+position: absolute;
+left: -6mm;
+width: 5mm;
+}
+
+nav.toc li::before,
+#TOC li::before,
+#toc li::before {
+content: none !important;
+}
+h1, h2, h3, h4, h5, h6 {
+color: #000;
+margin: 0 !important;
+padding: 0 !important;
+break-after: avoid;
+page-break-after: avoid;
+page-break-inside: avoid;
+border-bottom: none;
+margin-bottom: 4pt;
+}
+h1 {
+font-size: 13pt;
+margin-top: 6mm;
+margin-bottom: 4mm !important;
+padding-top: 0;
+}
+h1.annex {
+font-size: 14pt !important;
+border-top: none !important;
+}
+h2, h3, h4 {
+font-size: 12pt;
+margin-top: 4mm;
+margin-bottom: 4mm !important;
+}
+p, li {
+orphans: 3;
+widows: 3;
+}
+p {
+margin-top: 0;
+margin-bottom: 3.5mm;
+text-align: justify;
+}
+ul, ol {
+margin-top: 0;
+margin-bottom: 3mm;;
+padding-left: 6mm;
+}
+pre, blockquote, table, figure, img {
+break-inside: avoid;
+page-break-inside: avoid;
+}
+code {
+font-size: 0.9em !important;
+}
+table,
+table th,
+table td {
+border: none !important;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+th, td {
+border: 0.2mm solid #777;
+padding: 2mm 3mm;
+vertical-align: top;
+}
+.annex {
+break-before: page;
+page-break-before: always;
+}
+.center {
+text-align: center;
+}
+.small {
+font-size: 10pt;
+}
+a {
+color: inherit;
+text-decoration: none;
+}
+.bigcenter {
+text-align: center !important;
+font-size: 14pt !important;
+}
+.bigcenter p {
+text-align: center !important;
+font-size: 14pt !important;
+margin-bottom: 3mm;
+margin-top: 2mm;
+}
+pre.jwt,
+pre.jwt > code {
+font-size: 8pt !important;
+line-height: 1.1 !important;
+white-space: pre !important;
+}
+div.sourceCode > pre.sourceCode,
+div.sourceCode > pre.sourceCode > code.sourceCode {
+font-size: 8pt !important;
+line-height: 1.1 !important;
+white-space: pre !important;
+overflow: visible !important;
+}
+@bottom-center {
+content: "Copyright © 2026 The OpenID Foundation";
+font-size: 9pt;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">FAPI</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-03-27" class="published">2026-03-27</time>
+    </dd>
+<dt class="label-intended-status">Status:</dt>
+<dd class="intended-status">Draft 11</dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="author">
+<div class="author">
+<div class="author-name">Nat Sakimura</div>
+<div class="org">NAT.Consulting</div>
+</div>
+<div class="author">
+<div class="author-name">John Bradley</div>
+<div class="org">Yubico</div>
+</div>
+<div class="author">
+<div class="author-name">Edmund Jay</div>
+<div class="org">Illumila</div>
+</div>
+</dd>
+</dl>
+</div>
+<header id="title-block-header">
+  <h1 id="title">FAPI security profile 1.0 - Part 1: Baseline - Draft 11 incorporating errata set 1</h1>
+
+
+
+    <div id="warning">
+        <h2 id="name-warning">
+            Warning
+        </h2>
+        <p>This document is not an OIDF International Standard. It is distributed for
+            review and comment. It is subject to change without notice and may not be
+            referred to as an International Standard.</p>
+        <p>Recipients of this draft are invited to submit, with their comments,
+            notification of any relevant patent rights of which they are aware and to
+            provide supporting documentation.</p>
+    </div>
+
+
+</header>
+
+      <div id="toc">
+          <a href="#" onclick="scroll(0,0)" class="toplink">▲</a>
+          <h2 id="toc-title"><a href="#TOC" class="section-name selfRef">Table
+of contents</a></h2>
+        <nav id="TOC" class="toc" role="doc-toc">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#notational-conventions" id="toc-notational-conventions">Notational Conventions</a></li>
+<li><a href="#scope" id="toc-scope">1. Scope</a></li>
+<li><a href="#normative-references" id="toc-normative-references">2.
+Normative references</a></li>
+<li><a href="#terms-and-definitions" id="toc-terms-and-definitions">3.
+Terms and definitions</a></li>
+<li><a href="#abbreviated-terms" id="toc-abbreviated-terms">4.
+Abbreviated terms</a></li>
+<li><a href="#baseline-security-profile" id="toc-baseline-security-profile">5. Baseline security profile</a>
+<ul>
+<li><a href="#introduction-1" id="toc-introduction-1">5.1
+Introduction</a></li>
+<li><a href="#baseline-security-provisions" id="toc-baseline-security-provisions">5.2 Baseline security
+provisions</a>
+<ul>
+<li><a href="#introduction-2" id="toc-introduction-2">5.2.1
+Introduction</a></li>
+<li><a href="#authorization-server" id="toc-authorization-server">5.2.2
+Authorization server</a></li>
+<li><a href="#public-client" id="toc-public-client">5.2.3 Public
+client</a></li>
+<li><a href="#confidential-client" id="toc-confidential-client">5.2.4
+Confidential client</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#accessing-protected-resources" id="toc-accessing-protected-resources">6. Accessing protected
+resources</a>
+<ul>
+<li><a href="#introduction-3" id="toc-introduction-3">6.1
+Introduction</a></li>
+<li><a href="#baseline-access-provisions" id="toc-baseline-access-provisions">6.2 Baseline access provisions</a>
+<ul>
+<li><a href="#protected-resources-provisions" id="toc-protected-resources-provisions">6.2.1 Protected resources
+provisions</a></li>
+<li><a href="#client-provisions" id="toc-client-provisions">6.2.2 Client
+provisions</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#security-considerations" id="toc-security-considerations">7. Security considerations</a>
+<ul>
+<li><a href="#tls-and-dnssec-considerations" id="toc-tls-and-dnssec-considerations">7.1 TLS and DNSSEC
+considerations</a></li>
+<li><a href="#message-source-authentication-failure" id="toc-message-source-authentication-failure">7.2 Message source
+authentication failure</a></li>
+<li><a href="#message-integrity-protection-failure" id="toc-message-integrity-protection-failure">7.3 Message integrity
+protection failure</a></li>
+<li><a href="#message-containment-failure" id="toc-message-containment-failure">7.4 Message containment failure</a>
+<ul>
+<li><a href="#authorization-request-and-response" id="toc-authorization-request-and-response">7.4.1 Authorization request
+and response</a></li>
+<li><a href="#token-request-and-response" id="toc-token-request-and-response">7.4.2 Token request and
+response</a></li>
+<li><a href="#resource-request-and-response" id="toc-resource-request-and-response">7.4.3 Resource request and
+response</a></li>
+</ul></li>
+<li><a href="#native-apps" id="toc-native-apps">7.5 Native apps</a></li>
+<li><a href="#incomplete-or-incorrect-implementations-of-the-specifications" id="toc-incomplete-or-incorrect-implementations-of-the-specifications">7.6
+Incomplete or incorrect implementations of the specifications</a></li>
+<li><a href="#discovery-multiple-brands" id="toc-discovery-multiple-brands">7.7 Discovery &amp; multiple
+brands</a></li>
+</ul></li>
+<li><a href="#privacy-considerations" id="toc-privacy-considerations">8.
+Privacy considerations</a></li>
+<li><a href="#annex-a-informative-acknowledgement" id="toc-annex-a-informative-acknowledgement">Annex A (Informative)
+Acknowledgement</a></li>
+<li><a href="#appendix-b-informative-document-history" id="toc-appendix-b-informative-document-history">Appendix B
+(Informative) Document History</a></li>
+<li><a href="#bibliography" id="toc-bibliography">Bibliography</a></li>
+</ul>
+        </nav>
+      </div>
+
+        <section class="note" id="section-note.1">
+      <h2 id="name-foreword">
+Foreword
+      </h2>
+<p>The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.</p>
+<p>Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.</p>
+</section>
+<!--
+<section class="note" id="section-note.4">
+      <h2 id="name-notational-conventions">
+Notational Conventions
+      </h2>
+<p id="section-note.4-1">The keywords "shall", "shall not", "should", "should not", "may", and "can" in
+this document are to be interpreted as described in ISO Directive Part 2
+<span>[<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml" class="cite xref">ISODIR2</a>]</span>. 
+</p>
+
+These keywords are not used as dictionary terms such that any
+occurrence of them shall be interpreted as keywords and are not to be
+interpreted with their natural language meanings.
+They are all in lower case to rule out the dictionary meaning use of these words so that they can be translated easily.
+Following is a summary of the keywords.
+</p>
+<p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Kind</th>
+<th style="text-align: center;">Keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Requirement</td>
+<td style="text-align: center;">shall, shall not</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Recommendation</td>
+<td style="text-align: center;">should, should not</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Permission</td>
+<td style="text-align: center;">may</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Possibility</td>
+<td style="text-align: center;">can, cannot</td>
+</tr>
+</tbody>
+</table>
+</p>
+-->
+</section>
+<p>FAPI 1.0 consists of the following parts:</p>
+<ul>
+<li>FAPI Security Profile 1.0 - Part 1: Baseline</li>
+<li><a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
+Security Profile 1.0 - Part 2: Advanced</a></li>
+</ul>
+<p>These parts are intended to be used with <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>, <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, and <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>.</p>
+<section id="introduction" class="level1 unnumbered">
+<h1 class="unnumbered">Introduction</h1>
+<p>FAPI is a highly secured OAuth profile that aims to provide specific
+implementation guidelines for security and interoperability. The FAPI
+security profile can be applied to APIs in any market area that requires
+a higher level of security than provided by standard <a href="https://tools.ietf.org/html/rfc6749">OAuth</a> or <a href="https://openid.net/specs/openid-connect-core-1_0.html">OpenID
+Connect</a>. Among other security enhancements, this specification
+provides a secure alternative to screen scraping. Screen scraping
+accesses user’s data and functions by impresonating a user through
+password sharing. This brittle, inefficient, and insecure practice
+creates security vulnerabilities which require financial institutions to
+allow what appears to be an automated attack against their
+applications.</p>
+<p>This document is Part 1 of FAPI Security Profile 1.0. It specifies a
+baseline security profile of OAuth that is suitable for protecting APIs
+with a moderate inherent risk. Importantly, this profile does not
+provide non-repudiation (signing of authorization requests and
+responses) and sender-constrained access tokens. If such features or a
+higher level of security is desired, the use of <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
+Security Profile 1.0 - Part 2: Advanced</a> is recommended.</p>
+<p>Although it is possible to code an OpenID provider and relying party
+from first principles using this specification, the main audience for
+this specification is parties who already have a certified
+implementation of OpenID Connect and want to achieve a higher level of
+security. Implementers are encouraged to understand the security
+considerations contained in Section 7.6 before embarking on a ‘from
+scratch’ implementation.</p>
+</section>
+<section id="notational-conventions" class="level1">
+<h1>Notational Conventions</h1>
+<p>The keywords “shall”, “shall not”, “should”, “should not”, “may”, and
+“can” in this document are to be interpreted as described in <a href="https://www.iso.org/sites/directives/current/part2/index.xhtml">ISO
+Directive Part 2</a>. These keywords are not used as dictionary terms
+such that any occurrence of them shall be interpreted as keywords and
+are not to be interpreted with their natural language meanings.</p>
+</section>
+<section id="scope" class="level1">
+<h1>1. Scope</h1>
+<p>This document specifies the method for an application to:</p>
+<ul>
+<li>obtain OAuth tokens in a moderately secure manner for access to
+protected data;</li>
+<li>use OpenID Connect (OIDC) to identify the customer (user); and</li>
+<li>use tokens to access REST APIs in a moderately secure manner.</li>
+</ul>
+</section>
+<section id="normative-references" class="level1">
+<h1>2. Normative references</h1>
+<p>The following documents are referred to in the text in such a way
+that some or all of their content constitutes requirements of this
+document. For dated references, only the edition cited applies. For
+undated references, the latest edition of the referenced document
+(including any amendments) applies.</p>
+<p><a href="https://tools.ietf.org/html/rfc4122">RFC 4122</a>, A
+Universally Unique IDentifier (UUID) URN Namespace</p>
+<p><a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, The OAuth
+2.0 Authorization Framework</p>
+<p><a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, Proof Key
+for Code Exchange by OAuth Public Clients</p>
+<p><a href="https://tools.ietf.org/html/rfc6125">RFC 6125</a>,
+Representation and Verification of Domain-Based Application Service
+Identity within Internet Public Key Infrastructure Using X.509 (PKIX)
+Certificates in the Context of Transport Layer Security (TLS)</p>
+<p><a href="https://tools.ietf.org/html/bcp212">BCP 212</a>, OAuth 2.0
+for Native Apps</p>
+<p><a href="https://tools.ietf.org/html/bcp195">BCP 195</a>,
+Recommendations for Secure Use of Transport Layer Security (TLS) and
+Datagram Transport Layer Security (DTLS)</p>
+<p><a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>, Transport Layer Security (TLS) Parameters</p>
+<p><a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>,
+OpenID Connect Core 1.0</p>
+<p><a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, OAuth 2.0
+Mutual-TLS Client Authentication and Certificate-Bound Access Tokens</p>
+<p><a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>,
+OpenID Connect Discovery 1.0</p>
+<p><a href="https://tools.ietf.org/html/rfc7231">RFC 7231</a>, Hypertext
+Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+</section>
+<section id="terms-and-definitions" class="level1">
+<h1>3. Terms and definitions</h1>
+<p>For the purpose of this document, the terms defined in <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>, <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>, <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>
+apply.</p>
+</section>
+<section id="abbreviated-terms" class="level1">
+<h1>4. Abbreviated terms</h1>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>API</strong></td>
+<td></td>
+<td style="text-align: left;">application programming interface</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CAA</strong></td>
+<td></td>
+<td style="text-align: left;">certificate authority authorization</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CORS</strong></td>
+<td></td>
+<td style="text-align: left;">cross-origin resource sharing</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CSRF</strong></td>
+<td></td>
+<td style="text-align: left;">cross site request forgery</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>DNSSEC</strong></td>
+<td></td>
+<td style="text-align: left;">domain name system security
+extensions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>FAPI</strong></td>
+<td></td>
+<td style="text-align: left;">FAPI</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>HTTP</strong></td>
+<td></td>
+<td style="text-align: left;">hyper text transfer protocol</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IP</strong></td>
+<td></td>
+<td style="text-align: left;">internet protocol</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>JARM</strong></td>
+<td></td>
+<td style="text-align: left;">JWT secured authorization response
+mode</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>JSON</strong></td>
+<td></td>
+<td style="text-align: left;">javaScript object notation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>JWT</strong></td>
+<td></td>
+<td style="text-align: left;">JSON web token</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>OIDF</strong></td>
+<td></td>
+<td style="text-align: left;">OpenID foundation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RP</strong></td>
+<td></td>
+<td style="text-align: left;">relying party</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RSA</strong></td>
+<td></td>
+<td style="text-align: left;">Rivest–Shamir–Adleman</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>REST</strong></td>
+<td></td>
+<td style="text-align: left;">representational state transfer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TLS</strong></td>
+<td></td>
+<td style="text-align: left;">transport layer security</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>URI</strong></td>
+<td></td>
+<td style="text-align: left;">uniform resource identifier</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>UTF</strong></td>
+<td></td>
+<td style="text-align: left;">unicode transformation format</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>UUID</strong></td>
+<td></td>
+<td style="text-align: left;">universally unique identifier</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="baseline-security-profile" class="level1">
+<h1>5. Baseline security profile</h1>
+<section id="introduction-1" class="level2">
+<h2>5.1 Introduction</h2>
+<p>The OIDF FAPI security profile specifies security requirements for
+API resources protected by the OAuth 2.0 Authorization Framework that
+consists of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>,
+<a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>, <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>, and other
+specifications.</p>
+<p>FAPI Security Profile 1.0 - Part 1: Baseline and <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">Part
+2: Advanced</a> specify different levels of security. The
+characteristics required of the tokens are different and the methods to
+obtain tokens are explained separately. This document specifies the
+baseline security provisions.</p>
+</section>
+<section id="baseline-security-provisions" class="level2">
+<h2>5.2 Baseline security provisions</h2>
+<section id="introduction-2" class="level3">
+<h3>5.2.1 Introduction</h3>
+<p>Some APIs, such as ones that provide potentially sensitive
+information, require a greater level of protection than basic <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a> requires. FAPI
+provides such greater protection.</p>
+<p>As a profile of the OAuth 2.0 Authorization Framework, this document
+mandates the following to the baseline profile of the FAPI Security
+Profile 1.0.</p>
+</section>
+<section id="authorization-server" class="level3">
+<h3>5.2.2 Authorization server</h3>
+<section id="authorization-server-provisions" class="level4">
+<h4>5.2.2.0 Authorization server provisions</h4>
+<p>The authorization server</p>
+<ol type="1">
+<li><p>shall support confidential clients;</p></li>
+<li><p>should support public clients;</p></li>
+<li><p>shall provide a client secret that adheres to the requirements in
+Section 16.19 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a> if
+a symmetric key is used;</p></li>
+<li><p>shall authenticate the confidential client using one of the
+following methods:</p>
+<ol type="1">
+<li>Mutual TLS for OAuth client authentication as specified in Section 2
+of <a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, or</li>
+<li><code>client_secret_jwt</code> or <code>private_key_jwt</code> as
+specified in Section 9 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
+</ol></li>
+<li><p>shall require and use the key length permitted by <a href="https://tools.ietf.org/html/bcp195">BCP 195</a>;</p></li>
+<li><p>shall not use algorithms deprecated in <a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>;</p></li>
+<li><p>shall require <a href="https://tools.ietf.org/html/rfc7636">RFC
+7636</a> with <code>S256</code> as the code challenge method;</p></li>
+<li><p>shall require redirect URIs to be pre-registered;</p></li>
+<li><p>shall require the <code>redirect_uri</code> in the authorization
+request;</p></li>
+<li><p>shall require the value of <code>redirect_uri</code> to exactly
+match one of the pre-registered redirect URIs;</p></li>
+<li><p>shall require user authentication to an appropriate level of
+assurance for the operations the client will be authorized to perform on
+behalf of the user;</p></li>
+<li><p>shall require explicit approval by the user to authorize the
+requested scope if it has not been previously authorized;</p></li>
+<li><p>shall reject an authorization code (Section 1.3.1 of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>) if it has been
+previously used;</p></li>
+<li><p>shall return token responses that conform to Section 4.1.4 of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a>;</p></li>
+<li><p>shall return the list of granted scopes with the issued access
+token if the request was passed in the front channel and was not
+integrity protected;</p></li>
+<li><p>shall provide non-guessable access tokens, authorization codes,
+and refresh token (where applicable), with sufficient entropy such that
+the probability of an attacker guessing the generated token is
+computationally infeasible as per <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a> Section
+10.10;</p></li>
+<li><p>should clearly identify the details of the grant to the user
+during authorization as in 16.18 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</p></li>
+<li><p>should provide a mechanism for the end-user to revoke access
+tokens and refresh tokens granted to a client as in 16.18 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</p></li>
+<li><p>shall return an <code>invalid_client</code> error as defined in
+5.2 of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a> when
+mis-matched client identifiers were provided through the client
+authentication methods that permits sending the client identifier in
+more than one way;</p></li>
+<li><p>shall require redirect URIs to use the https scheme;</p></li>
+<li><p>should issue access tokens with a lifetime of under 10 minutes
+unless the tokens are sender-constrained; and</p></li>
+<li><p>shall support <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>,
+may support <a href="https://tools.ietf.org/html/rfc8414">RFC 8414</a>
+and shall not distribute discovery metadata (such as the authorization
+endpoint) by any other means.</p></li>
+<li><p>shall require the <code>response_type</code> values
+<code>code</code> or <code>code id_token</code></p>
+<p><strong>NOTE</strong>: The use of refresh tokens instead of
+long-lived access tokens for both public and confidential clients is
+recommended.</p>
+<p><strong>NOTE</strong>: The FAPI Security Profile 1.0 authorization
+server may limit the scopes for the purpose of not implementing certain
+APIs.</p>
+<p><strong>NOTE</strong>: Clients are expected to treat access tokens as
+opaque strings and replay them as is. Authorization servers can issue
+unstructured or structured access tokens (for example, a signed
+JWT).</p>
+<p><strong>NOTE</strong>: The requirement to return the list of granted
+scopes allows clients to detect when the authorization request was
+modified to include different scopes. Servers must still return the
+granted scopes per section 5.1. of <a href="https://tools.ietf.org/html/rfc6749">RFC 6749</a> if they are
+different from those requested.</p></li>
+</ol>
+</section>
+<section id="returning-authenticated-users-identifier" class="level4">
+<h4>5.2.2.1 Returning authenticated user’s identifier</h4>
+<p>Further, if it is desired to provide the authenticated user’s
+identifier to the client in the token response, the authorization
+server:</p>
+<ol type="1">
+<li>shall support the authentication request as in Section 3.1.2.1 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
+<li>shall perform the authentication request verification as in Section
+3.1.2.2 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
+<li>shall authenticate the user as in Section 3.1.2.2 and 3.1.2.3 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
+<li>shall provide the authentication response as in Section 3.1.2.4 and
+3.1.2.5 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>
+depending on the outcome of the authentication;</li>
+<li>shall perform the token request verification as in Section 3.1.3.2
+of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;
+and</li>
+<li>shall issue an ID Token in the token response when
+<code>openid</code> was included in the requested <code>scope</code> as
+in Section 3.1.3.3 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>
+with its <code>sub</code> value corresponding to the authenticated user
+and optional <code>acr</code> value in ID Token.</li>
+</ol>
+</section>
+<section id="client-requesting-openid-scope" class="level4">
+<h4>5.2.2.2 Client requesting openid scope</h4>
+<p>If the client requests the openid scope, the authorization server</p>
+<ol type="1">
+<li>shall require the <code>nonce</code> parameter defined in Section
+3.1.2.1 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a> in
+the authentication request.</li>
+</ol>
+</section>
+<section id="clients-not-requesting-openid-scope" class="level4">
+<h4>5.2.2.3 Clients not requesting openid scope</h4>
+<p>If the client does not request the openid scope, the authorization
+server</p>
+<ol type="1">
+<li>shall require the <code>state</code> parameter defined in Section
+4.1.1 of <a href="https://tools.ietf.org/html/rfc6749">RFC
+6749</a>.</li>
+</ol>
+</section>
+</section>
+<section id="public-client" class="level3">
+<h3>5.2.3 Public client</h3>
+<p>A public client</p>
+<ol type="1">
+<li>shall support <a href="https://tools.ietf.org/html/rfc7636">RFC
+7636</a>;</li>
+<li>shall use <code>S256</code> as the code challenge method for the <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a>;</li>
+<li>shall use separate and distinct redirect URI for each authorization
+server that it talks to;</li>
+<li>shall store the redirect URI value in the resource owner’s
+user-agents (such as browser) session and compare it with the redirect
+URI that the authorization response was received at, where, if the URIs
+do not match, the client shall terminate the process with error;</li>
+<li>(withdrawn); and</li>
+<li>shall implement an effective CSRF protection.</li>
+</ol>
+<p>Further, if it is desired to obtain a persistent identifier of the
+authenticated user, then the public client</p>
+<ol start="7" type="1">
+<li>shall include <code>openid</code> in the <code>scope</code> value;
+and</li>
+<li>shall include the <code>nonce</code> parameter defined in Section
+3.1.2.1 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a> in
+the authentication request.</li>
+</ol>
+<p>If <code>openid</code> is not in the <code>scope</code> value, then
+the public client</p>
+<ol start="9" type="1">
+<li>shall include the <code>state</code> parameter defined in Section
+4.1.1 of <a href="https://tools.ietf.org/html/rfc6749">RFC
+6749</a>.</li>
+</ol>
+<p>Further, a client</p>
+<ol start="10" type="1">
+<li><p>shall verify that the <code>scope</code> received in the token
+response is either an exact match, or contains a subset of the
+<code>scope</code> sent in the authorization request if the request was
+passed in the front channel and was not integrity protected;
+and</p></li>
+<li><p>shall only use authorization server metadata obtained from the
+metadata document published by the authorization server at its well
+known endpoint as defined in <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>
+or <a href="https://tools.ietf.org/html/rfc8414">RFC 8414</a>.</p>
+<p><strong>NOTE</strong>: Adherence to <a href="https://tools.ietf.org/html/rfc7636">RFC 7636</a> means that the
+token request includes <code>code_verifier</code> parameter in the
+request.</p></li>
+</ol>
+</section>
+<section id="confidential-client" class="level3">
+<h3>5.2.4 Confidential client</h3>
+<p>In addition to the provisions for a public client, a confidential
+client</p>
+<ol type="1">
+<li>shall support the following methods to authenticate against the
+token endpoint:
+<ol type="1">
+<li>Mutual TLS for OAuth client authentication as specified in Section 2
+of <a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a>, and</li>
+<li><code>client_secret_jwt</code> or <code>private_key_jwt</code> as
+specified in Section 9 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>;</li>
+</ol></li>
+<li>shall require and use the key length permitted by <a href="https://tools.ietf.org/html/bcp195">BCP 195</a>;</li>
+<li>shall not use algorithms deprecated in <a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">IANA
+TLSP</a>; and</li>
+<li>shall verify that its client secret has a minimum of 128 bits if
+using symmetric key cryptography.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="accessing-protected-resources" class="level1">
+<h1>6. Accessing protected resources</h1>
+<section id="introduction-3" class="level2">
+<h2>6.1 Introduction</h2>
+<p>The FAPI endpoints are OAuth 2.0 protected resource endpoints that
+return protected information for the resource owner associated with the
+submitted access token.</p>
+</section>
+<section id="baseline-access-provisions" class="level2">
+<h2>6.2 Baseline access provisions</h2>
+<section id="protected-resources-provisions" class="level3">
+<h3>6.2.1 Protected resources provisions</h3>
+<p>The resource server with the FAPI endpoints</p>
+<ol type="1">
+<li><p>shall support the use of the HTTP GET method as in Section 4.3.1
+of <a href="https://tools.ietf.org/html/rfc7231">RFC 7231</a>;</p></li>
+<li><p>shall accept access tokens in the HTTP header as in Section 2.1
+of OAuth 2.0 Bearer Token Usage <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>;</p></li>
+<li><p>shall not accept access tokens in the query parameters stated in
+Section 2.3 of OAuth 2.0 Bearer Token Usage <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>;</p></li>
+<li><p>shall verify that the access token is neither expired nor
+revoked;</p></li>
+<li><p>shall verify that the scope associated with the access token
+authorizes access to the resource it is representing;</p></li>
+<li><p>shall identify the associated entity to the access
+token;</p></li>
+<li><p>shall only return the resource identified by the combination of
+the entity implicit in the access and the granted scope and otherwise
+return errors as in Section 3.1 of <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>;</p></li>
+<li><p>shall encode the response in UTF-8 if applicable;</p></li>
+<li><p>shall send the <code>Content-type</code> HTTP header
+<code>Content-Type: application/json</code> if applicable;</p></li>
+<li><p>shall send the server date in HTTP Date header as in Section
+7.1.1.2 of <a href="https://tools.ietf.org/html/rfc7231">RFC
+7231</a>;</p></li>
+<li><p>shall set the response header <code>x-fapi-interaction-id</code>
+to the value received from the corresponding FAPI client request header
+or to an <a href="https://tools.ietf.org/html/rfc4122">RFC 4122</a> UUID
+value if the request header was not provided to track the interaction,
+e.g.,
+<code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;</p></li>
+<li><p>shall log the value of <code>x-fapi-interaction-id</code> in the
+log entry; and</p></li>
+<li><p>shall not reject requests with a
+<code>x-fapi-customer-ip-address</code> header containing a valid IPv4
+or IPv6 address.</p>
+<p><strong>NOTE</strong>: While this document does not specify the exact
+method to obtain the entity associated with the access token and the
+granted scope, the protected resource can use OAuth Token Introspection
+<a href="https://tools.ietf.org/html/rfc7662">RFC 7662</a>.</p></li>
+</ol>
+<p>Further, the resource server</p>
+<ol start="14" type="1">
+<li><p>should support the use of Cross Origin Resource Sharing (CORS) <a href="https://www.w3.org/TR/2020/SPSD-cors-20200602/">CORS</a> and or
+other methods as appropriate to enable JavaScript clients to access the
+endpoint if it decides to provide access to JavaScript clients.</p>
+<p><strong>NOTE</strong>: Providing access to JavaScript clients has
+other security implications. Before supporting those clients <a href="https://tools.ietf.org/html/rfc6819">RFC 6819</a> should be
+consulted.</p></li>
+</ol>
+</section>
+<section id="client-provisions" class="level3">
+<h3>6.2.2 Client provisions</h3>
+<p>The client supporting this document</p>
+<ol type="1">
+<li>shall send access tokens in the HTTP header as in Section 2.1 of
+OAuth 2.0 Bearer Token Usage <a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a>; and</li>
+<li>(withdrawn);</li>
+</ol>
+<p>Further, the client</p>
+<ol start="3" type="1">
+<li>may send the last time the customer logged into the client in the
+<code>x-fapi-auth-date</code> header where the value is supplied as an
+HTTP-date as in Section 7.1.1.1 of <a href="https://tools.ietf.org/html/rfc7231">RFC 7231</a>, e.g.,
+<code>x-fapi-auth-date: Tue, 11 Sep 2012 19:43:31 GMT</code>;</li>
+<li>may send the customer’s IP address if this data is available in the
+<code>x-fapi-customer-ip-address</code> header, e.g.,
+<code>x-fapi-customer-ip-address: 2001:DB8::1893:25c8:1946</code> or
+<code>x-fapi-customer-ip-address: 198.51.100.119</code>; and</li>
+<li>may send the <code>x-fapi-interaction-id</code> request header, in
+which case the value shall be an <a href="https://tools.ietf.org/html/rfc4122">RFC 4122</a> UUID to the
+server to help correlate log entries between client and server, e.g.,
+<code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="security-considerations" class="level1">
+<h1>7. Security considerations</h1>
+<section id="tls-and-dnssec-considerations" class="level2">
+<h2>7.1 TLS and DNSSEC considerations</h2>
+<p>As confidential information is being exchanged, all interactions
+shall be encrypted with TLS (HTTPS).</p>
+<p>The recommendations for Secure Use of Transport Layer Security in <a href="https://tools.ietf.org/html/bcp195">BCP 195</a> shall be followed,
+with the following additional requirements:</p>
+<ol type="1">
+<li>TLS version 1.2 or later shall be used for all communications.</li>
+<li>A TLS server certificate check shall be performed, as per <a href="https://tools.ietf.org/html/rfc6125">RFC 6125</a>.</li>
+</ol>
+<p>Endpoints for the use by web browsers should use mechanisms to ensure
+that connections cannot be downgraded using TLS stripping attacks. A
+preloaded HTTP Strict Transport Security policy (see <a href="https://hstspreload.org/">PRELOAD</a> and <a href="https://tools.ietf.org/html/rfc6797">RFC 6797</a>) can be used for
+this purpose. Some top-level domains, like <code>.bank</code> and
+<code>.insurance</code>, have set such a policy and therefore protect
+all second-level domains below them.</p>
+<p>For a comprehensive protection against network attackers, all
+endpoints should additionally use DNSSEC to protect against DNS spoofing
+attacks that can lead to the issuance of rogue domain-validated TLS
+certificates.</p>
+<p><strong>NOTE</strong>: Even if an endpoint uses only organization
+validated (OV) or extended validation (EV) TLS certificates, rogue
+domain-validated certificates can be used to impersonate the endpoints
+and conduct man-in-the-middle attacks. CAA records <a href="https://tools.ietf.org/html/rfc8659">RFC 8659</a> can help to
+mitigate this risk.</p>
+</section>
+<section id="message-source-authentication-failure" class="level2">
+<h2>7.2 Message source authentication failure</h2>
+<p>Authorization request and response are not authenticated. For higher
+risk scenarios, they should be authenticated. See <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
+Security Profile 1.0 - Part 2: Advanced</a>, which uses request objects,
+and ID Token or <a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a> to achieve
+the message source authentication.</p>
+</section>
+<section id="message-integrity-protection-failure" class="level2">
+<h2>7.3 Message integrity protection failure</h2>
+<p>The authorization request does not have message integrity protection
+and hence request tampering and parameter injection are possible. Where
+such protection is desired, <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
+Security Profile 1.0 - Part 2: Advanced</a> should be used.</p>
+<p>The response is integrity protected when the ID Token is returned
+from the authorization endpoint.</p>
+</section>
+<section id="message-containment-failure" class="level2">
+<h2>7.4 Message containment failure</h2>
+<section id="authorization-request-and-response" class="level3">
+<h3>7.4.1 Authorization request and response</h3>
+<p>In this document, the authorization request is not encrypted. Thus,
+it is possible to leak the information contained if the web browser is
+compromised. If authorization request encryption is desired, the use of
+<a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">FAPI
+Security Profile 1.0 - Part 2: Advanced</a> is recommended.</p>
+<p>The leakage of information from the ID token can be mitigated by
+encrypting the ID token. If the leakage of any other information in the
+authorization response is of concern then consider using <a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a> with
+encryption.</p>
+<p>It is possible to leak the information through the logs if the
+parameters were recorded in the logs and the access to the logs are
+compromised. Strict access control to the logs in such cases should be
+enforced.</p>
+</section>
+<section id="token-request-and-response" class="level3">
+<h3>7.4.2 Token request and response</h3>
+<p>It is possible to leak information through the logs if the parameters
+were recorded in the logs and the access to the logs are compromised.
+Strict access control to the logs in such cases should be enforced.</p>
+</section>
+<section id="resource-request-and-response" class="level3">
+<h3>7.4.3 Resource request and response</h3>
+<p>Care should be taken so that the sensitive data will not be leaked
+through the referrer.</p>
+<p>If the access token is a bearer token, it is possible to exercise the
+stolen token. Since the access token can be used against multiple URIs,
+the risk of leaking is much larger than the refresh token, which is used
+only against the token endpoint. Thus, the lifetime of the access token
+should be much shorter than that of the refresh token. Refer to Section
+16.18 of <a href="https://openid.net/specs/openid-connect-core-1_0.html">OIDC</a>
+for more discussion on the lifetimes of access tokens and refresh
+tokens.</p>
+</section>
+</section>
+<section id="native-apps" class="level2">
+<h2>7.5 Native apps</h2>
+<p>When native apps are used as either public clients, dynamically
+registered confidential clients or user-agents receiving the
+authorization response for a server based confidential client, the
+recommendations for OAuth 2.0 for Native Apps in <a href="https://tools.ietf.org/html/bcp212">BCP 212</a> shall be followed,
+with the following additional requirements:</p>
+<p>When registering redirect URIs, authorization servers</p>
+<ol type="1">
+<li>shall not support “private-use URI scheme redirection”; and</li>
+<li>shall not support “loopback interface redirection”.</li>
+</ol>
+<p>These requirements mean that FAPI Security Profile 1.0 compliant
+implementations can only support native apps through the use of “claimed
+HTTPS scheme URI redirection”.</p>
+<p><strong>NOTE</strong>: Nothing in this document seeks to disallow
+fixed urls in the form https://localhost:port-number/callback, as these
+are particularly useful in non-production systems or in clients used in
+development, to facilitate faster and easier development.</p>
+</section>
+<section id="incomplete-or-incorrect-implementations-of-the-specifications" class="level2">
+<h2>7.6 Incomplete or incorrect implementations of the
+specifications</h2>
+<p>To achieve the full security benefits, it is important the
+implementation of this specification, and the underlying OpenID Connect
+and OAuth specifications, are both complete and correct.</p>
+<p>The OpenID Foundation provides tools that can be used to confirm that
+an implementation is correct:</p>
+<p><a href="https://openid.net/certification/">https://openid.net/certification/</a></p>
+<p>The OpenID Foundation maintains a list of certified
+implementations:</p>
+<p><a href="https://openid.net/developers/certified/">https://openid.net/developers/certified/</a></p>
+<p>Deployments that use this specification should use a certified
+implementation.</p>
+</section>
+<section id="discovery-multiple-brands" class="level2">
+<h2>7.7 Discovery &amp; multiple brands</h2>
+<p>Organizations who need to support multiple “brands” with individual
+authorization endpoints from a single authorization server deployment
+shall use a separate <code>issuer</code> per brand. This can be achieved
+either at the domain level
+(e.g. <code>https://brand-a.auth.example.com</code> and
+<code>https://brand-b.auth.example.com</code>) or with different paths
+(e.g. <code>https://auth.example.com/brand-a</code> and
+<code>https://auth.example.com/brand-b</code>)</p>
+<p>As stated in 5.2.2.0-22 clients shall only use metadata values
+obtained via metadata documents as defined in <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>.
+Communicating metadata through other means (e.g. via email) opens up a
+social engineering attack vector.</p>
+<p>Note that the requirement to use <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDD</a>
+is not a requirement to support dynamic client registration.</p>
+</section>
+</section>
+<section id="privacy-considerations" class="level1">
+<h1>8. Privacy considerations</h1>
+<p>There are many factors to be considered in terms of privacy when
+implementing this document. However, since this document is a profile of
+OAuth and OpenID Connect, all of them are generic and apply to OAuth or
+OpenID Connect and are not specific to this document. Implementers are
+advised to perform a thorough privacy impact assessment and manage
+identified risks appropriately.</p>
+<p><strong>NOTE</strong>: Implementers can consult documents like <a href="https://www.iso.org/standard/85938.html">ISO/IEC 29100</a> and <a href="https://www.iso.org/standard/86012.html">ISO/IEC 29134</a> for
+this purpose.</p>
+<p>Privacy threats to OAuth and OpenID Connect implementations include
+the following:</p>
+<ul>
+<li>(Inappropriate privacy notice) A privacy notice provided at a
+<code>policy_url</code> or by other means can be inappropriate.</li>
+<li>(Inadequate choice) Providing a consent screen without adequate
+choices does not form consent.</li>
+<li>(Misuse of data) An authorization server, resource server or client
+can potentially use the data not according to the purpose that was
+agreed.</li>
+<li>(Collection minimization violation) A client asking for more data
+than it absolutely needs to fulfil the purpose is violating the
+collection minimization principle.</li>
+<li>(Unsolicited personal data from the resource) Some bad resource
+server implementations may return more data than was requested. If the
+data is personal data, then this would be a violation of privacy
+principles.</li>
+<li>(Data minimization violation) Any process that is processing more
+data than it needs is violating the data minimization principle.</li>
+<li>(RP tracking by authorization server/OpenID provider) Authorization
+server/OpenID provider identifying what data is being provided to which
+client/RP.</li>
+<li>(User tracking by RPs) Two or more RPs correlating access tokens or
+ID Tokens to track users.</li>
+<li>(RP misidentification by user at authorization server) User
+misunderstands who the RP is due to a confusing representation of the RP
+at the authorization server’s authorization page.</li>
+<li>(Mismatch between user’s understanding or what RP is displaying to a
+user and the actual authorization request) To enhance the trust of the
+ecosystem, best practice is for the authorization server to make clear
+what is included in the authorization request (for example, what data
+will be released to the RP).</li>
+<li>(Attacker observing personal data in authorization request)
+Authorization request might contain personal data. This can be observed
+by an attacker.</li>
+<li>(Attacker observing personal data in authorization endpoint
+response) In some frameworks, even state is deemed personal data. This
+can be observed by an attacker through various means.</li>
+<li>(Data leak from authorization server) Authorization server stores
+personal data. If authorization server is compromised, these data can
+leak or be modified.</li>
+<li>(Data leak from resource) Some resource servers store personal data.
+If a resource server is compromised, these data can leak or be
+modified.</li>
+<li>(Data leak from clients) Some clients store personal data. If the
+client is compromised, these data can leak or be modified.</li>
+</ul>
+<p>These threats can be mitigated by choosing appropriate options in
+OAuth or OpenID Connect, or by introducing some operational rules. For
+example, “attacker observing personal data in authorization request” can
+be mitigated by either using authorization request by reference using
+<code>request_uri</code> or by encrypting the request object. Similarly,
+“attacker observing personal data in authorization endpoint response”
+can be mitigated by encrypting the ID Token or <a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a>
+response.</p>
+</section>
+<section id="annex-a-informative-acknowledgement" class="level1 unnumbered">
+<h1 class="unnumbered">Annex A (Informative) Acknowledgement</h1>
+<p>The following people contributed to this document:</p>
+<ul>
+<li>Nat Sakimura (NAT Consulting) – Chair, Editor</li>
+<li>Anoop Saxena (Intuit) – Co-chair, FS-ISAC Liaison</li>
+<li>Anthony Nadalin (Microsoft) – Co-chair, SC 27 Liaison</li>
+<li>Edmund Jay (Illumila) – Co-editor</li>
+<li>Dave Tonge (Moneyhub) – Co-chair, UK Implementation Entity
+Liaison</li>
+<li>Paul A. Grassi (NIST) – X9 Liaison</li>
+<li>Joseph Heenan (Authlete)</li>
+<li>Sascha H. Preibisch (CA)</li>
+<li>Henrik Biering (Peercraft)</li>
+<li>Anton Taborszky (Deutsche Telecom)</li>
+<li>John Bradley (Yubico)</li>
+<li>Tom Jones (Independent)</li>
+<li>Axel Nennker (Deutsche Telekom)</li>
+<li>Daniel Fett (yes.com)</li>
+<li>Torsten Lodderstedt (yes.com)</li>
+<li>Ralph Bragg (Raidiam)</li>
+<li>Brian Campbell (Ping Identity)</li>
+<li>Dima Postnikov (Independent)</li>
+<li>Stuart Low (Biza.io)</li>
+<li>Takahiko Kawasaki (Authlete)</li>
+<li>Vladimir Dzhuvinov (Connect2Id)</li>
+<li>Chris Michael (Open Banking)</li>
+<li>Freddi Gyara (Open Banking)</li>
+<li>Rob Otto (Ping Identity)</li>
+<li>Francis Pouatcha (adorsys)</li>
+<li>Kosuke Koiwai (KDDI)</li>
+<li>Bjorn Hjelm (Verizon)</li>
+<li>Lukasz Jaromin (Cloudentity)</li>
+<li>James Manger</li>
+</ul>
+</section>
+<section id="appendix-b-informative-document-history" class="level1 unnumbered">
+<h1 class="unnumbered">Appendix B (Informative) Document History</h1>
+<p>To be removed at the publication time.</p>
+<ul>
+<li>2026-02-27
+<ul>
+<li>Fixing the editorial issues pointed out by ISO.</li>
+</ul></li>
+<li>2023-06-25
+<ul>
+<li>Reformatting to the pandoc markdown</li>
+<li>#600 - Changed Financial-grade API to FAPI</li>
+<li>Changed the title to incorporate “errata”</li>
+<li>#494 - 5.2.3-10 clarifies requirement for clients to verify the
+token endpoint’s scope response if using non-integrity protected
+front-channel requests</li>
+<li>#428 - Recommends usage of <a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">Part2</a>
+if authorization request encryption is desired and <a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a> for
+authorization response information leakage mitigation</li>
+<li>#405 - Use https for document references</li>
+<li>#601 - Removed subclause 8.1 title</li>
+<li>#409 - Rename [MTLS] as <a href="https://tools.ietf.org/html/rfc8705">RFC 8705</a></li>
+<li>#458 - Clarifies that authorization server require response_type =
+code or code, id_token</li>
+</ul></li>
+</ul>
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered">Bibliography</h1>
+<ul>
+<li><a href="https://openid.net/specs/openid-financial-api-part-2-1_0.html">Part2</a>
+FAPI Security Profile 1.0 - Part 2: Advanced</li>
+</ul>
+<ul>
+<li><a href="https://www.iso.org/sites/directives/current/part2/index.xhtml">ISODIR2</a>
+- ISO/IEC Directives, Part 2 - Principles and rules for the structure
+and drafting of ISO and IEC documents</li>
+</ul>
+<ul>
+<li><a href="https://www.iso.org/standard/85938.html">ISO/IEC 29100</a>
+ISO/IEC 29100 Information technology — Security techniques — Privacy
+framework</li>
+</ul>
+<ul>
+<li><a href="https://www.iso.org/standard/86012.html">ISO/IEC 29134</a>
+ISO/IEC 29134 Information technology — Security techniques — Guidelines
+for privacy impact assessment</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc6750">RFC 6750</a> The OAuth
+2.0 Authorization Framework: Bearer Token Usage</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc6797">RFC 6797</a> HTTP
+Strict Transport Security (HSTS)</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc7662">RFC 7662</a> OAuth 2.0
+Token Introspection</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc6819">RFC 6819</a> OAuth 2.0
+Threat Model and Security Considerations</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc8414">RFC 8414</a> OAuth 2.0
+Authorization Server Metadata</li>
+</ul>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc8659">RFC 8659</a> DNS
+Certification Authority Authorization (CAA) Resource Record</li>
+</ul>
+<ul>
+<li><a href="https://hstspreload.org/">PRELOAD</a> HSTS Preload List
+Submission</li>
+</ul>
+<ul>
+<li><a href="https://openid.net/specs/oauth-v2-jarm.html">JARM</a> JWT
+Secured Authorization Response Mode for OAuth 2.0 (JARM)</li>
+</ul>
+<ul>
+<li><a href="https://www.w3.org/TR/2020/SPSD-cors-20200602/">CORS</a>
+Cross-Origin Resource Sharing</li>
+</ul>
+</section>
+      </div>
+<div id="notices">
+      <h2 id="name-notices">
+Notices
+      </h2>
+<p>Copyright (c) 2026 The OpenID Foundation.</p>
+<p>
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft, Final Specification, or Final Specification Incorporating Errata Corrections solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts, Final Specifications, and Final Specification Incorporating Errata Corrections based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+</p>
+<p>
+The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy (found at openid.net) requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. OpenID invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+</p>
+</div>
+<footer>
+  Copyright © 2026 The OpenID Foundation
+</footer>
+
+<script>
+(() => {
+  const toc = document.getElementById("toc");
+  if (!toc) return;
+
+  const tocHeading = toc.querySelector("#toc-title");
+  const tocNav = toc.querySelector("nav");
+
+  if (!tocHeading || !tocNav) return;
+
+  tocHeading.addEventListener("click", (e) => {
+    if (window.innerWidth <= 1023) {
+      e.preventDefault();
+      toc.classList.toggle("active");
+    }
+  });
+
+  tocNav.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
+    if (window.innerWidth <= 1023) {
+      requestAnimationFrame(() => {
+        toc.classList.remove("active");
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
