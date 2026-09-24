@@ -288,14 +288,13 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-## JWS/JWE Algorithm considerations
+## TLS and algorithm considerations
 
 When this profile is used with the FAPI 1.0 specifications, authorization servers and clients
-shall follow the guidance around JWT signing and encryption algorithms in [@!FAPI1.2] 8.6 and
-8.6.1.
+shall follow the TLS and algorithm requirements in [@!FAPI1.1] and [@!FAPI1.2].
 
 When this profile is used with the FAPI 2.0 specifications, authorization servers and clients
-shall follow the guidance around cryptography and secrets in [@!FAPI2] 5.4.
+shall follow the TLS and algorithm requirements in [@!FAPI2].
 
 ## Authentication device security
 
@@ -325,32 +324,6 @@ is not sender constrained. If the `backchannel_client_notification_endpoint`, th
 `auth_req_id` and the `client_notification_token` are known to an attacker, they may be able
 to force the client to call the token endpoint repeatedly or before the authentication has
 completed. For most deployments this is not a significant issue.
-
-## TLS considerations
-
-As confidential information is being exchanged, all interactions shall be encrypted
-with TLS (HTTPS).
-
-The recommendations for Secure Use of Transport Layer Security in [@!BCP195] shall be followed,
-with the following additional requirements:
-
-1. TLS version 1.2 or later shall be used for all communications.
-1. A TLS server certificate check shall be performed, as per [RFC6125].
-1. Only the cipher suites recommended in [@!BCP195] shall be permitted.
-
-## Algorithm considerations
-
-For JWS, both clients and authorization servers:
-
-1. shall use `PS256` or `ES256` algorithms;
-1. should not use algorithms that use RSASSA-PKCS1-v1_5 (e.g. `RS256`);
-1. shall not use `none`;
-
-## Encryption algorithm considerations
-
-For JWE, both clients and authorization servers
-
-1. shall not use the `RSA1_5` algorithm.
 
 # Privacy considerations
 
@@ -561,15 +534,6 @@ which contains the JWT payload:
         </author>
           <date month="August" year="2026" />
     </front>
-</reference>
-
-<reference anchor="BCP195" target="https://www.rfc-editor.org/info/bcp195">
-  <front>
-    <title>BCP195</title>
-    <author>
-      <organization>IETF</organization>
-    </author>
-  </front>
 </reference>
 
 <reference anchor="FAPI2SEC" target="https://doi.ieeecomputersociety.org/10.1109/CSF61375.2024.00002">
