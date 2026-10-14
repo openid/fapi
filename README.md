@@ -9,19 +9,20 @@ The latest drafts are built automatically from this repository and published at 
 * FAPI 1.0 - This is a profile of OpenID Connect. 
     * [Part 1: Baseline Security Profile](FAPI_1.0/openid-financial-api-part-1-1_0.md)
     * [Part 2: Advanced Security Profile](FAPI_1.0/openid-financial-api-part-2-1_0.md)
-    * [Client Initiated Backchannel Authentication Profile](Financial_API_WD_CIBA.md)
+    * [Client Initiated Backchannel Authentication Profile](fapi-ciba.md)
     * [JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)](oauth-v2-jarm.md)
     * [Implementation and Deployment Advice](Financial_API_Implementation_And_Deployment_Advice.md)
 * FAPI 2.0 - This is a profile of OAuth 2.0
     * [Security Profile](fapi-2_0-security-profile.md)
     * [Message Signing](fapi-2_0-message-signing.md)
-    * [Attacker Model](FAPI_2_0_Attacker_Model.md)
-    * [Grant Management](FAPI_2_0_Grant_Management.md)
+    * [Attacker Model](fapi-2_0-attacker-model.md)
+    * [Grant Management](oauth-v2-grant-management.md)
+    * [Client Initiated Backchannel Authentication Profile](fapi-ciba.md)
 * Other documents
     * [Cross-Browser Payment Initiation Attack](TR-Cross_browser_payment_initiation_attack.md)
-    * [Implementation and deployment advice](https://github.com/openid/fapi/blob/master/Financial_API_Implementation_And_Deployment_Advice.md) [issues](https://github.com/openid/fapi/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22component%3A%20Implementation%20%26%20Deployment%20Advice%22)
+    * [Implementation and deployment advice](Financial_API_Implementation_And_Deployment_Advice.md)
 
-You can find the overview and rationale of the working group at [the WG page](http://openid.net/wg/fapi/). 
+You can find the overview and rationale of the working group at [the WG page](https://openid.net/wg/fapi/). 
 
 ### Contribution guidelines ###
 
