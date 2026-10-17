@@ -1,5 +1,5 @@
 %%%
-title = "FAPI Client Initiated Backchannel Authentication Profile - draft"
+title = "FAPI Client Initiated Backchannel Authentication Profile - Draft 04"
 abbrev = "fapi-ciba"
 ipr = "none"
 workgroup = "fapi"
@@ -7,7 +7,7 @@ keyword = ["security", "openid", "ciba"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "fapi-ciba-03"
+value = "fapi-ciba-04"
 status = "standard"
 
 [[author]]
@@ -34,7 +34,7 @@ This document is a profile of the OpenID Connect Client Initiated Backchannel Au
 
 This profile may be used with either:
 
-1. FAPI API Security Profile 1.0 - Parts 1 and 2 or
+1. FAPI Security Profile 1.0 - Parts 1 and 2 or
 2. FAPI 2.0 Security Profile
 
 .# Warning
@@ -130,7 +130,7 @@ In addition the authorization server
 1. may support CIBA ping mode;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata; and
-1. may require clients to provide a `request_context` claim as defined in Section 4.3 of this profile.
+1. may require clients to provide a `request_context` claim as defined in Section 4.1.3 of this profile.
 
 When this profile is used with the FAPI 1.0 specifications, the authorization server
 
@@ -484,6 +484,23 @@ which contains the JWT payload:
   }
 }
 ```
+
+# Document History
+
+[[ To be removed from the final specification ]]
+
+-04
+
+* First working group draft since Implementer's Draft 1 (2019)
+* Allow this profile to be used with FAPI 2.0 as well as FAPI 1.0
+* Replace lodging intent with Rich Authorization Requests [@RFC9396]
+* Add `login_hint_token` type metadata for discovery and registration
+* Recommend redirect-based FAPI flows for same-device use; position CIBA for cross-device and user-not-present cases
+* Reference BCP 247 / RFC 10027 for cross-device security
+* Reference the FAPI 2.0 formal security analysis
+* Clarify audience restrictions on client assertions
+* Update TLS requirements to follow BCP 195
+* Convert the source to xml2rfc markdown (`fapi-ciba.md`)
 
 {backmatter}
 
