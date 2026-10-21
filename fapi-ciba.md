@@ -288,7 +288,7 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-## TLS and JWS/JWE considerations
+## TLS and JWS/JWE
 
 When this profile is used with the FAPI 1.0 specifications, authorization servers and clients
 shall follow the TLS and JWS/JWE requirements in [@!FAPI1.1] and [@!FAPI1.2].
