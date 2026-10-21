@@ -288,13 +288,13 @@ https://openid.net/developers/certified/
 
 Deployments that use this specification should use a certified implementation.
 
-## TLS and algorithm considerations
+## TLS and JWS/JWE considerations
 
 When this profile is used with the FAPI 1.0 specifications, authorization servers and clients
-shall follow the TLS and algorithm requirements in [@!FAPI1.1] and [@!FAPI1.2].
+shall follow the TLS and JWS/JWE requirements in [@!FAPI1.1] and [@!FAPI1.2].
 
 When this profile is used with the FAPI 2.0 specifications, authorization servers and clients
-shall follow the TLS and algorithm requirements in [@!FAPI2].
+shall follow the TLS and JWS/JWE requirements in [@!FAPI2].
 
 ## Authentication device security
 
