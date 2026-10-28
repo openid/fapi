@@ -205,6 +205,21 @@ A client should reject the response if it requests a JARM [@JARM] response from 
 
 An authorization server that also serves clients that do not use PKCE [@RFC7636] can be subject to the PKCE downgrade attack described in Section 4.8 of [@RFC9700]. Section 4.8.2 of [@RFC9700] requires such an authorization server to reject a token request that contains a `code_verifier` if the authorization request did not contain a `code_challenge`.
 
+## Native Applications
+
+1. Clients should use the authorization code flow with redirects when the end-user uses the client and authenticates on the same device; and
+2. clients should use CIBA [@CIBA] only when the end-user authenticates on an authentication device that is separate from the consumption device.
+
+When both the client and the authorization server provide native applications, the end-user can move between them without using a browser:
+
+1. clients should use claimed HTTPS redirect URIs as described in Section 7.2 of [@RFC8252];
+2. authorization servers should claim their authorization endpoint URL in their native application; and
+3. clients and authorization servers should open these URLs in the other party's application if it is installed, and in a browser otherwise.
+
+NOTE 1: On iOS, the `universalLinksOnly` option, and on Android 11 and later, the `FLAG_ACTIVITY_REQUIRE_NON_BROWSER` intent flag, open a URL only if an installed application claims it, so that the application can fall back to a browser.
+
+NOTE 2: On Android 12 and later, an HTTPS URL that is not a verified Android App Link always opens in a browser, so the authorization endpoint URL and redirect URI need to be verified App Links. On earlier versions, the end-user can be offered another installed application that handles the same URL.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
@@ -291,6 +306,28 @@ This document was developed by the OpenID FAPI Working Group.
     </author>
    <date day="18" month="Feb" year="2025"/>
   </front>
+</reference>
+
+<reference anchor="CIBA" target="http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">
+    <front>
+        <title>OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0</title>
+        <author initials="G." surname="Fernandez Rodriguez" fullname="Gonzalo Fernandez Rodriguez">
+            <organization>Telefonica I+D</organization>
+        </author>
+        <author initials="F." surname="Walter" fullname="Florian Walter">
+            <organization>Deutsche Telekom AG</organization>
+        </author>
+        <author initials="A." surname="Nennker" fullname="Axel Nennker">
+            <organization>Deutsche Telekom AG</organization>
+        </author>
+        <author initials="D." surname="Tonge" fullname="Dave Tonge">
+            <organization>Moneyhub</organization>
+        </author>
+        <author initials="B." surname="Campbell" fullname="Brian Campbell">
+            <organization>Ping Identity</organization>
+        </author>
+        <date day="1" month="September" year="2021" />
+    </front>
 </reference>
 
 <reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0-final.html">
