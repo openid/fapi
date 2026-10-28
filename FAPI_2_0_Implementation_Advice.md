@@ -88,7 +88,7 @@ the following clauses apply:
 
 1. clients shall send the `x-fapi-interaction-id` request header, the value shall be a 
 UUID [@RFC9562],  e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
-1. the AS or RS shall set the response header `x-fapi-interaction-id` to the value received from the corresponding FAPI client request header or to a UUID [@RFC9562] value if the request header was not provided to track the interaction, e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
+1. the AS or RS shall set the response header `x-fapi-interaction-id` to the value received from the corresponding FAPI client request header if that value is a UUID [@RFC9562], or otherwise to a new UUID [@RFC9562] value to track the interaction, e.g., `x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a`;
 1. participants (whether Client, AS or RS) shall log the value of `x-fapi-interaction-id` in the log entry.
 
 NOTE: Clients may reuse the same `x-fapi-interaction-id` value across related requests within
