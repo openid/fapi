@@ -191,6 +191,12 @@ DPoP may be more suitable when:
 
 Implementers should not use both DPoP and MTLS simultaneously for sender constraining.
 
+## Organization-Level Certificates
+
+Some ecosystems issue certificates to organizations rather than to individual clients, for example eIDAS certificates. Such a certificate identifies the organization, not the client software, and one organization can operate several clients, which can have different permissions.
+
+NOTE: Some ecosystems use these certificates for mutual TLS, including for certificate-bound access tokens as described in Section 3 of [@RFC8705], and authenticate each client using `private_key_jwt` (Section 9 of [@OIDC]) with keys registered for that client. The authorization server can then identify the individual client rather than only the organization.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
@@ -325,6 +331,28 @@ This document was developed by the OpenID FAPI Working Group.
     </author>
    <date month="May" year="2020"/>
 </front>
+</reference>
+
+<reference anchor="OIDC" target="https://openid.net/specs/openid-connect-core-1_0.html">
+  <front>
+    <title>OpenID Connect Core 1.0 incorporating errata set 2</title>
+    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
+      <organization>NAT.Consulting</organization>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization>Yubico</organization>
+    </author>
+    <author initials="M." surname="Jones" fullname="Mike Jones">
+      <organization>Self-Issued Consulting</organization>
+    </author>
+    <author initials="B." surname="de Medeiros" fullname="Breno de Medeiros">
+      <organization>Google</organization>
+    </author>
+    <author initials="C." surname="Mortimore" fullname="Chuck Mortimore">
+      <organization>Disney</organization>
+    </author>
+    <date day="15" month="December" year="2023"/>
+  </front>
 </reference>
 
 <reference anchor="OWASP.KeyManagement" target="https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html">
