@@ -220,6 +220,12 @@ NOTE 1: On iOS, the `universalLinksOnly` option, and on Android 11 and later, th
 
 NOTE 2: On Android 12 and later, an HTTPS URL that is not a verified Android App Link always opens in a browser, so the authorization endpoint URL and redirect URI need to be verified App Links. On earlier versions, the end-user can be offered another installed application that handles the same URL.
 
+## Confirming the Same End-User
+
+When OpenID Connect is used, a client that sends the end-user through authorization again, for example to extend an existing grant, can confirm that it is the same end-user by requesting the `sub` claim in the ID Token with the expected value using the `claims` parameter, as described in Section 5.5.1 of [@OIDC]. The authorization server then only returns a successful response for that end-user.
+
+Authorization servers should support the `claims` parameter and keep the `sub` value of an end-user stable, as described in Section 5.7 of [@OIDC].
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
@@ -389,6 +395,28 @@ This document was developed by the OpenID FAPI Working Group.
     </author>
    <date month="May" year="2020"/>
 </front>
+</reference>
+
+<reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
+  <front>
+    <title>OpenID Connect Core 1.0 incorporating errata set 2</title>
+    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
+      <organization>NRI</organization>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization>Ping Identity</organization>
+    </author>
+    <author initials="M." surname="Jones" fullname="Mike Jones">
+      <organization>Microsoft</organization>
+    </author>
+    <author initials="B." surname="de Medeiros" fullname="Breno de Medeiros">
+      <organization>Google</organization>
+    </author>
+    <author initials="C." surname="Mortimore" fullname="Chuck Mortimore">
+      <organization>Salesforce</organization>
+    </author>
+   <date day="8" month="Nov" year="2014"/>
+  </front>
 </reference>
 
 <reference anchor="OWASP.KeyManagement" target="https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html">
