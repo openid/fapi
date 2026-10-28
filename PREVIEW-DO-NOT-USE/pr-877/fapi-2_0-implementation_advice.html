@@ -1607,7 +1607,7 @@ user-present regardless of context.<a href="#section-1.2.2.2-1.3.1" class="pilcr
         <h3 id="name-jarm-downgrade">
 <a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-jarm-downgrade" class="section-name selfRef">JARM Downgrade</a>
         </h3>
-<p id="section-1.5-1">A client should reject the response if it requests a JARM <span>[<a href="#JARM" class="cite xref">JARM</a>]</span> response from an authorization server that advertises JARM support in its <code>response_modes_supported</code> metadata but receives a response that is not JARM-compliant.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-1">A client should reject the response if it requests a JARM <span>[<a href="#JARM" class="cite xref">JARM</a>]</span> response from an authorization server that advertises JARM support in its <code>response_modes_supported</code> metadata but receives the authorization response parameters, such as <code>code</code> and <code>state</code>, directly instead of in a <code>response</code> JWT.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="pkce-downgrade">
