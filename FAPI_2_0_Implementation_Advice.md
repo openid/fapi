@@ -302,6 +302,10 @@ NOTE: What constitutes a suspicious or malicious request may vary depending on t
 
 When the authorization server cannot return an error response to the client, for example because the redirect URI is invalid (Section 4.1.2.1 of [@RFC6749]), it informs the end-user instead. The message should not be factually incorrect for either the end-user or the client's developer, for example by suggesting that trying again will help when the client's request was invalid. A generic message, such as "Something went wrong", may be used.
 
+## Consent and Authorization Screens
+
+OpenID Foundation conformance tests do not check that the information shown to the end-user when authorizing access matches the access being granted. Ecosystems should define requirements for this information, particularly where authorization details [@RFC9396] or ecosystem-specific permissions are used, and check them as part of their own certification processes.
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group.
