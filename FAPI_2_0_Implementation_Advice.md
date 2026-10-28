@@ -191,6 +191,12 @@ DPoP may be more suitable when:
 
 Implementers should not use both DPoP and MTLS simultaneously for sender constraining.
 
+## Organization-Level Certificates
+
+Some ecosystems issue certificates to organizations rather than to individual clients, for example eIDAS certificates, and an organization can operate more than one client.
+
+NOTE: One way to distinguish a client from the organization that operates it is for each client to register the certificates and keys it uses: the subject distinguished name of its TLS client certificate using the `tls_client_auth_subject_dn` client metadata parameter [@RFC8705], and its signing keys at a `jwks_uri` [@RFC7591].
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
