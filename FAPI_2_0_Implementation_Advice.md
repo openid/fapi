@@ -65,12 +65,12 @@ interpreted with their natural language meanings.
 
 The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:
 
-* FAPI 2.0 Attacker model;
-* FAPI 2.0 Security profile;
-* FAPI 2.0 Message signing - for non repudiation of messages;
+* FAPI 2.0 Attacker Model [@attackermodel];
+* FAPI 2.0 Security Profile [@FAPI2_Security_Profile];
+* FAPI 2.0 Message Signing [@FAPIMessageSigning] - for non repudiation of messages;
 * FAPI Client Initiated Backchannel Authentication - for decoupled or cross device flows;
 * Grant Management for OAuth 2.0 - for ecosystems that require interoperable grant management;
-* OAuth 2.0 Rich Authorization Requests  - for conveying complex authorizations.
+* OAuth 2.0 Rich Authorization Requests [@RFC9396] - for conveying complex authorizations.
 
 The foundation of the framework is the attacker model and security profile. All the other 
 specifications build on the security profile.
@@ -269,16 +269,44 @@ This document was developed by the OpenID FAPI Working Group.
 
 {backmatter}
 
-<reference anchor="attackermodel" target="https://bitbucket.org/openid/fapi/src/master/FAPI_2_0_Attacker_Model.md">
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-attacker-model-2_0-final.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
-   <date day="28" month="Jul" year="2021"/>
+   <date day="18" month="Feb" year="2025"/>
   </front>
 </reference>
 
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0-final.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
+  </front>
+</reference>
+
+<reference anchor="FAPIMessageSigning" target="https://openid.net/specs/fapi-message-signing-2_0-final.html">
+  <front>
+    <title>FAPI 2.0 Message Signing</title>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+   <date day="25" month="Sep" year="2025"/>
+  </front>
+</reference>
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>
