@@ -201,6 +201,10 @@ NOTE: One way to distinguish a client from the organization that operates it is 
 
 A client should reject the response if it requests a JARM [@JARM] response from an authorization server that advertises JARM support in its `response_modes_supported` metadata but receives the authorization response parameters, such as `code` and `state`, directly instead of in a `response` JWT.
 
+## PKCE Downgrade
+
+An authorization server that also serves clients that do not use PKCE [@RFC7636] can be subject to the PKCE downgrade attack described in Section 4.8 of [@RFC9700]. Section 4.8.2 of [@RFC9700] requires such an authorization server to reject a token request that contains a `code_verifier` if the authorization request did not contain a `code_challenge`.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
