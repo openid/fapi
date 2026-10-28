@@ -305,6 +305,12 @@ NOTE: What constitutes a suspicious or malicious request may vary depending on t
 
 When the authorization server cannot return an error to the client, for example because the client identifier or redirect URI is missing or invalid (Section 4.1.2.1 of [@RFC6749]), it shows an error to the end-user instead. The authorization server can choose not to reveal the details of the error, but the message should not be factually incorrect when read by either the end-user or the client's developer. For example, "Something went wrong" is acceptable, but "Something went wrong, please try again" is not, because trying again does not fix an invalid request.
 
+## Consent and Authorization Screens
+
+Section 5.3.2.2 of the FAPI 2.0 Security Profile [@FAPI2_Security_Profile] says that authorization servers should provide end-users with all necessary information to make an informed decision about whether to consent, including the identity of the client and the scope of the authorization. It does not define how this information is presented, which varies between ecosystems and with local regulation, for example data protection law. OpenID Foundation conformance tests do not check that the information shown to the end-user matches the access being granted.
+
+Ecosystems should define requirements for this information, particularly where authorization details [@RFC9396] or ecosystem-specific permissions are used, and check them as part of their own certification processes. For example, the UK Open Banking Customer Experience Guidelines [@OBUK.CEG] set out what end-users are shown when they give and manage consent.
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group.
@@ -412,6 +418,16 @@ This document was developed by the OpenID FAPI Working Group.
     </author>
    <date month="May" year="2020"/>
 </front>
+</reference>
+
+<reference anchor="OBUK.CEG" target="https://standards.openbanking.org.uk/customer-experience-guidelines/">
+  <front>
+    <title>Customer Experience Guidelines</title>
+    <author>
+      <organization>Open Banking Limited</organization>
+    </author>
+    <date day="18" month="March" year="2026"/>
+  </front>
 </reference>
 
 <reference anchor="OIDC" target="https://openid.net/specs/openid-connect-core-1_0.html">
