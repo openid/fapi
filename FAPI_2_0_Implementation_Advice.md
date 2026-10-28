@@ -298,6 +298,10 @@ Many Authorization Server implementations employ Web Application Firewalls (WAFs
 
 NOTE: What constitutes a suspicious or malicious request may vary depending on the threat model of each Authorization Server implementation. This document intentionally avoids providing an exhaustive list of patterns to block, as such a list would quickly become outdated and might provide a false sense of security.
 
+## Errors Shown to the End-User
+
+When the authorization server cannot return an error response to the client, for example because the redirect URI is invalid (Section 4.1.2.1 of [@RFC6749]), it informs the end-user instead. The message should not be factually incorrect for either the end-user or the client's developer, for example by suggesting that trying again will help when the client's request was invalid. A generic message, such as "Something went wrong", may be used.
+
 # Acknowledgements
 
 This document was developed by the OpenID FAPI Working Group.
