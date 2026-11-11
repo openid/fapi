@@ -130,7 +130,7 @@ In addition the authorization server
 1. may support CIBA ping mode;
 1. shall, if it supports the acr claim and the client has requested acr, return an 'acr' claim in the resulting ID token;
 1. should not use the login_hint or login_hint_token to convey "intent ids" or any other authorization metadata;
-1. may require clients to provide a `request_context` claim as defined in Section 4.3 of this profile; and
+1. may require clients to provide a `request_context` claim as defined in Section 4.1.3 of this profile; and
 1. shall support unsigned backchannel authentication endpoint requests as described in [@!CIBA] 7.1.1, unless a FAPI 2.0 profile requires signed requests.
 
 When this profile is used with the FAPI 1.0 specifications, the authorization server
