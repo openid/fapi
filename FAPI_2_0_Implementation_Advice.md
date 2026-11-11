@@ -197,6 +197,10 @@ Some ecosystems issue certificates to organizations rather than to individual cl
 
 NOTE: The authorization server can still tell these clients apart by identifying the client by its `client_id` and checking that the certificate or key used is one registered for that client. For example, each client can register the subject distinguished name of its TLS client certificate using the `tls_client_auth_subject_dn` client metadata parameter [@RFC8705], and publish its signing keys at its registered `jwks_uri` [@RFC7591].
 
+## JARM Downgrade
+
+A client should reject the response if it requests a JARM [@JARM] response from an authorization server that advertises JARM support in its `response_modes_supported` metadata but receives the authorization response parameters, such as `code` and `state`, directly instead of in a `response` JWT.
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
@@ -321,6 +325,19 @@ This document was developed by the OpenID FAPI Working Group.
       <organization>ISO/IEC</organization>
     </author>
 </front>
+</reference>
+
+<reference anchor="JARM" target="https://openid.net/specs/oauth-v2-jarm-final.html">
+  <front>
+    <title>JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
+    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+      <organization>Yes</organization>
+    </author>
+    <author initials="B." surname="Campbell" fullname="Brian Campbell">
+      <organization>Ping</organization>
+    </author>
+   <date day="9" month="Nov" year="2022"/>
+  </front>
 </reference>
 
 <reference anchor="NIST.SP.800-57pt1r5" target="https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final">
