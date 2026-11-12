@@ -1,6 +1,6 @@
-# OpenID Foundation Financial-grade API #
+# OpenID Foundation FAPI WG Repository #
 
-This is the official repository for OpenID Foundation Financial-grade API (FAPI) Working Group. 
+This is the official repository for OpenID Foundation FAPI Working Group. 
 
 The latest drafts are built automatically from this repository and published at <https://openid.github.io/fapi/>. These reflect in-progress edits; the official specifications are published at <https://openid.net/specs/>.
 
