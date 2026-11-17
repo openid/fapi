@@ -2,8 +2,8 @@
 title = "FAPI 2.0 Implementation Advice"
 abbrev = "fapi-2-implementation-advice"
 ipr = "none"
-workgroup = "connect"
-keyword = ["security", "openid"]
+workgroup = "fapi"
+keyword = ["security", "openid", "fapi"]
 
 [seriesInfo]
 name = "Internet-Draft"
@@ -14,21 +14,24 @@ status = "standard"
 initials="D."
 surname="Tonge"
 fullname="Dave Tonge"
-organization="Moneyhub"
+organization="Moneyhub Financial Technology"
     [author.address]
     email = "dave@tonge.org"
 
-
 %%%
 
-.# Abstract 
+.# Abstract
 
 Financial-grade API (FAPI) 2.0 Implementation Advice is a document to provide practical
 guidance on the implementation and usage of the FAPI 2.0 family of standards.
 
-{mainmatter}
+.# Foreword
 
-# Introduction
+The OpenID Foundation (OIDF) promotes, protects and nurtures the OpenID community and technologies. As a non-profit international standardizing body, it is comprised by over 160 participating entities (workgroup participant). The work of preparing implementer drafts and final international standards is carried out through OIDF workgroups in accordance with the OpenID Process. Participants interested in a subject for which a workgroup has been established have the right to be represented in that workgroup. International organizations, governmental and non-governmental, in liaison with OIDF, also take part in the work. OIDF collaborates closely with other standardizing bodies in the related fields.
+
+Final drafts adopted by the Workgroup through consensus are circulated publicly for the public review for 60 days and for the OIDF members for voting. Publication as an OIDF Standard requires approval by at least 50% of the members casting a vote. There is a possibility that some of the elements of this document may be subject to patent rights. OIDF shall not be held responsible for identifying any or all such patent rights.
+
+.# Introduction
 
 The Financial-grade API (FAPI) 2.0 family of standards provides security profiles and specifications
 to enable implementers to deploy highly secure, interoperable APIs. While we have attempted 
@@ -36,7 +39,7 @@ to minimize the optionality in FAPI 2.0, there are still many decisions that nee
 implementers. This document aims to provide advice for implementers based on the experience
 of members of the OpenID Foundation's FAPI Working Group.
 
-## Warning
+.# Warning
 
 This document is not an OIDF International Standard. It is distributed for
 review and comment. It is subject to change without notice and may not be
@@ -46,38 +49,7 @@ Recipients of this draft are invited to submit, with their comments,
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 
-## Copyright notice & license
-
-The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
-or other interested party a non-exclusive, royalty free, worldwide copyright
-license to reproduce, prepare derivative works from, distribute, perform and
-display, this Implementers Draft or Final Specification solely for the purposes
-of (i) developing specifications, and (ii) implementing Implementers Drafts and
-Final Specifications based on such documents, provided that attribution be made
-to the OIDF as the source of the material, but that such attribution does not
-indicate an endorsement by the OIDF.
-
-The technology described in this specification was made available from
-contributions from various sources, including members of the OpenID Foundation
-and others. Although the OpenID Foundation has taken steps to help ensure that
-the technology is available for distribution, it takes no position regarding the
-validity or scope of any intellectual property or other rights that might be
-claimed to pertain to the implementation or use of the technology described in
-this specification or the extent to which any license under such rights might or
-might not be available; neither does it represent that it has made any
-independent effort to identify any such rights. The OpenID Foundation and the
-contributors to this specification make no (and hereby expressly disclaim any)
-warranties (express, implied, or otherwise), including implied warranties of
-merchantability, non-infringement, fitness for a particular purpose, or title,
-related to this specification, and the entire risk as to implementing this
-specification is assumed by the implementer. The OpenID Intellectual Property
-Rights policy requires contributors to offer a patent promise not to assert
-certain patent claims against other contributors and against implementers. The
-OpenID Foundation invites any interested party to bring to its attention any
-copyrights, patents, patent applications, or other proprietary rights that may
-cover technology that may be required to practice this specification.
-
-## Notational Conventions
+.# Notational Conventions
 
 The keywords "shall", "shall not", "should", "should not", "may", and "can" in
 this document are to be interpreted as described in ISO Directive Part 2
@@ -85,18 +57,20 @@ this document are to be interpreted as described in ISO Directive Part 2
 occurrence of them shall be interpreted as keywords and are not to be
 interpreted with their natural language meanings.
 
+{mainmatter}
+
 # Implementation Advice
 
 ## FAPI 2.0 Framework
 
 The FAPI 2.0 Framework is comprised of several documents. At the time of writing, they are:
 
-* FAPI 2.0 Attacker model;
-* FAPI 2.0 Security profile;
-* FAPI 2.0 Message signing - for non repudiation of messages;
+* FAPI 2.0 Attacker Model [@attackermodel];
+* FAPI 2.0 Security Profile [@FAPI2_Security_Profile];
+* FAPI 2.0 Message Signing [@FAPIMessageSigning] - for non repudiation of messages;
 * FAPI Client Initiated Backchannel Authentication - for decoupled or cross device flows;
 * Grant Management for OAuth 2.0 - for ecosystems that require interoperable grant management;
-* OAuth 2.0 Rich Authorization Requests  - for conveying complex authorizations.
+* OAuth 2.0 Rich Authorization Requests [@RFC9396] - for conveying complex authorizations.
 
 The foundation of the framework is the attacker model and security profile. All the other 
 specifications build on the security profile.
@@ -289,22 +263,50 @@ Many Authorization Server implementations employ Web Application Firewalls (WAFs
 
 NOTE: What constitutes a suspicious or malicious request may vary depending on the threat model of each Authorization Server implementation. This document intentionally avoids providing an exhaustive list of patterns to block, as such a list would quickly become outdated and might provide a false sense of security.
 
-## Acknowledgements
+# Acknowledgements
 
-todo...
+This document was developed by the OpenID FAPI Working Group.
 
 {backmatter}
 
-<reference anchor="attackermodel" target="https://bitbucket.org/openid/fapi/src/master/FAPI_2_0_Attacker_Model.md">
+<reference anchor="attackermodel" target="https://openid.net/specs/fapi-attacker-model-2_0-final.html">
   <front>
     <title>FAPI 2.0 Attacker Model</title>
     <author initials="D." surname="Fett" fullname="Daniel Fett">
-      <organization>yes.com</organization>
+      <organization>Authlete</organization>
     </author>
-   <date day="28" month="Jul" year="2021"/>
+   <date day="18" month="Feb" year="2025"/>
   </front>
 </reference>
 
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0-final.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
+  </front>
+</reference>
+
+<reference anchor="FAPIMessageSigning" target="https://openid.net/specs/fapi-message-signing-2_0-final.html">
+  <front>
+    <title>FAPI 2.0 Message Signing</title>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology</organization>
+    </author>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+   <date day="25" month="Sep" year="2025"/>
+  </front>
+</reference>
 
 <reference anchor="ISODIR2" target="https://www.iso.org/sites/directives/current/part2/index.xhtml">
 <front>
@@ -336,8 +338,8 @@ todo...
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
-The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft, Final Specification, or Final Specification Incorporating Errata Corrections solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts, Final Specifications, and Final Specification Incorporating Errata Corrections based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
