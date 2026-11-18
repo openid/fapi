@@ -221,6 +221,14 @@ NOTE 1: On iOS, the `universalLinksOnly` option, and on Android 11 and later, th
 
 NOTE 2: On Android 12 and later, an HTTPS URL that is not a verified Android App Link always opens in a browser, so the authorization endpoint URL and redirect URI need to be verified App Links. On earlier versions, the end-user can be offered any installed application that handles the same URL, which could be a malicious application.
 
+## Confirming the Same End-User
+
+OAuth does not identify the end-user to the client, and the FAPI 2.0 Security Profile [@FAPI2_Security_Profile] does not require OpenID Connect. Where a client needs to confirm that the same end-user is authorizing again, for example to extend an existing grant, it can use OpenID Connect and either send an `id_token_hint` or request the expected `sub` value using the `claims` parameter, as described in Section 3.1.2.2 of [@OIDC]. The client should then check the `sub` claim in the returned ID Token.
+
+NOTE: Authorization servers do not have to support the `claims` parameter or accept an expired ID Token in `id_token_hint`.
+
+Identifying the end-user relies on the `sub` value being stable. Section 5.7 of [@OIDC] says that `iss` and `sub` together are the only claims a client can rely on as a stable identifier for the end-user. Some ecosystems have allowed `sub` to contain a value that changes on each authorization, such as a consent identifier. Clients in these ecosystems cannot use OpenID Connect to identify end-users, including to confirm that the same end-user is authorizing again. Ecosystems that need clients to identify end-users should require a stable `sub` value. Where correlation between clients is a concern, this can be a pairwise identifier (Section 8 of [@OIDC]).
+
 ## Access Token Size Considerations
 
 As key size grows and more elements are added to access tokens, it's possible for the HTTP Authorization header containing the access token plus other headers to cumulatively be larger than the allowed buffer size for HTTP requests in many web infrastructure components. It is important to watch this closely via logging and alerting to ensure that production traffic is not adversely affected and that adjustments to the allowed buffer size can be made in a timely manner.
