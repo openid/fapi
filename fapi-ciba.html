@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>FAPI Client Initiated Backchannel Authentication Profile - draft</title>
+<title>FAPI Client Initiated Backchannel Authentication Profile - Draft 04</title>
 <meta content="Dave Tonge" name="author">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="security" name="keyword">
 <meta content="openid" name="keyword">
 <meta content="ciba" name="keyword">
-<meta content="fapi-ciba-03" name="ietf.draft">
+<meta content="fapi-ciba-04" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.16.0
     Python 3.10.2
@@ -29,7 +29,7 @@
     six 1.16.0
     wcwidth 0.2.6
 -->
-<link href="./fapi-ciba-03.xml" rel="alternate" type="application/rfc+xml">
+<link href="./fapi-ciba-04.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">/*
 
@@ -1228,7 +1228,7 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">FAPI Client Initiated Backchannel Authentication Profile - draft</h1>
+<h1 id="title">FAPI Client Initiated Backchannel Authentication Profile - Draft 04</h1>
 <section class="note" id="section-note.1">
       <h2 id="name-foreword">
 <a href="#name-foreword" class="section-name selfRef">Foreword</a>
@@ -1244,7 +1244,7 @@ li > p:last-of-type:only-child {
 <p id="section-note.2-2">This document is a profile of the OpenID Connect Client Initiated Backchannel Authentication Flow <span>[<a href="#CIBA" class="cite xref">CIBA</a>]</span>. The CIBA spec allows a client that gains knowledge of an identifier for the user to obtain tokens from the authorization server. The user consent is given at the user's authentication device mediated by the authorization server. This document profiles the CIBA specification to bring it in line with FAPI Security Profiles and provides security recommendations for its use with APIs that require high levels of security.<a href="#section-note.2-2" class="pilcrow">¶</a></p>
 <p id="section-note.2-3">This profile may be used with either:<a href="#section-note.2-3" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-note.2-4">
-<li id="section-note.2-4.1">FAPI API Security Profile 1.0 - Parts 1 and 2 or<a href="#section-note.2-4.1" class="pilcrow">¶</a>
+<li id="section-note.2-4.1">FAPI Security Profile 1.0 - Parts 1 and 2 or<a href="#section-note.2-4.1" class="pilcrow">¶</a>
 </li>
         <li id="section-note.2-4.2">FAPI 2.0 Security Profile<a href="#section-note.2-4.2" class="pilcrow">¶</a>
 </li>
@@ -1335,22 +1335,13 @@ interpreted with their natural language meanings.<a href="#section-note.4-1" cla
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-incomplete-or-incorrect-imp" class="internal xref">Incomplete or incorrect implementations of the specifications</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
-                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-jws-jwe-algorithm-considera" class="internal xref">JWS/JWE Algorithm considerations</a></p>
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-tls-and-jws-jwe" class="internal xref">TLS and JWS/JWE</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.7">
                 <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="auto internal xref">5.7</a>.  <a href="#name-authentication-device-secur" class="internal xref">Authentication device security</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
                 <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.  <a href="#name-ciba-token-delivery-modes" class="internal xref">CIBA token delivery modes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9">
-                <p id="section-toc.1-1.5.2.9.1"><a href="#section-5.9" class="auto internal xref">5.9</a>.  <a href="#name-tls-considerations" class="internal xref">TLS considerations</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.10">
-                <p id="section-toc.1-1.5.2.10.1"><a href="#section-5.10" class="auto internal xref">5.10</a>. <a href="#name-algorithm-considerations" class="internal xref">Algorithm considerations</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.11">
-                <p id="section-toc.1-1.5.2.11.1"><a href="#section-5.11" class="auto internal xref">5.11</a>. <a href="#name-encryption-algorithm-consid" class="internal xref">Encryption algorithm considerations</a></p>
 </li>
             </ul>
 </li>
@@ -1380,16 +1371,19 @@ interpreted with their natural language meanings.<a href="#section-note.4-1" cla
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-document-history" class="internal xref">Document History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1689,16 +1683,15 @@ is correct:<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.5-6">Deployments that use this specification should use a certified implementation.<a href="#section-5.5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="jws-jwe-algorithm-considerations">
+<div id="tls-and-jws-jwe">
 <section id="section-5.6">
-        <h3 id="name-jws-jwe-algorithm-considera">
-<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-jws-jwe-algorithm-considera" class="section-name selfRef">JWS/JWE Algorithm considerations</a>
+        <h3 id="name-tls-and-jws-jwe">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-tls-and-jws-jwe" class="section-name selfRef">TLS and JWS/JWE</a>
         </h3>
 <p id="section-5.6-1">When this profile is used with the FAPI 1.0 specifications, authorization servers and clients
-shall follow the guidance around JWT signing and encryption algorithms in <span>[<a href="#FAPI1.2" class="cite xref">FAPI1.2</a>]</span> 8.6 and
-8.6.1.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+shall follow the TLS and JWS/JWE requirements in <span>[<a href="#FAPI1.1" class="cite xref">FAPI1.1</a>]</span> and <span>[<a href="#FAPI1.2" class="cite xref">FAPI1.2</a>]</span>.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 <p id="section-5.6-2">When this profile is used with the FAPI 2.0 specifications, authorization servers and clients
-shall follow the guidance around cryptography and secrets in <span>[<a href="#FAPI2" class="cite xref">FAPI2</a>]</span> 5.4.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+shall follow the TLS and JWS/JWE requirements in <span>[<a href="#FAPI2" class="cite xref">FAPI2</a>]</span>.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authentication-device-security">
@@ -1732,53 +1725,6 @@ is not sender constrained. If the <code>backchannel_client_notification_endpoint
 <code>auth_req_id</code> and the <code>client_notification_token</code> are known to an attacker, they may be able
 to force the client to call the token endpoint repeatedly or before the authentication has
 completed. For most deployments this is not a significant issue.<a href="#section-5.8-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="tls-considerations">
-<section id="section-5.9">
-        <h3 id="name-tls-considerations">
-<a href="#section-5.9" class="section-number selfRef">5.9. </a><a href="#name-tls-considerations" class="section-name selfRef">TLS considerations</a>
-        </h3>
-<p id="section-5.9-1">As confidential information is being exchanged, all interactions shall be encrypted
-with TLS (HTTPS).<a href="#section-5.9-1" class="pilcrow">¶</a></p>
-<p id="section-5.9-2">The recommendations for Secure Use of Transport Layer Security in <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span> shall be followed,
-with the following additional requirements:<a href="#section-5.9-2" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-5.9-3">
-<li id="section-5.9-3.1">TLS version 1.2 or later shall be used for all communications.<a href="#section-5.9-3.1" class="pilcrow">¶</a>
-</li>
-          <li id="section-5.9-3.2">A TLS server certificate check shall be performed, as per [RFC6125].<a href="#section-5.9-3.2" class="pilcrow">¶</a>
-</li>
-          <li id="section-5.9-3.3">Only the cipher suites recommended in <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span> shall be permitted.<a href="#section-5.9-3.3" class="pilcrow">¶</a>
-</li>
-        </ol>
-</section>
-</div>
-<div id="algorithm-considerations">
-<section id="section-5.10">
-        <h3 id="name-algorithm-considerations">
-<a href="#section-5.10" class="section-number selfRef">5.10. </a><a href="#name-algorithm-considerations" class="section-name selfRef">Algorithm considerations</a>
-        </h3>
-<p id="section-5.10-1">For JWS, both clients and authorization servers:<a href="#section-5.10-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-5.10-2">
-<li id="section-5.10-2.1">shall use <code>PS256</code> or <code>ES256</code> algorithms;<a href="#section-5.10-2.1" class="pilcrow">¶</a>
-</li>
-          <li id="section-5.10-2.2">should not use algorithms that use RSASSA-PKCS1-v1_5 (e.g. <code>RS256</code>);<a href="#section-5.10-2.2" class="pilcrow">¶</a>
-</li>
-          <li id="section-5.10-2.3">shall not use <code>none</code>;<a href="#section-5.10-2.3" class="pilcrow">¶</a>
-</li>
-        </ol>
-</section>
-</div>
-<div id="encryption-algorithm-considerations">
-<section id="section-5.11">
-        <h3 id="name-encryption-algorithm-consid">
-<a href="#section-5.11" class="section-number selfRef">5.11. </a><a href="#name-encryption-algorithm-consid" class="section-name selfRef">Encryption algorithm considerations</a>
-        </h3>
-<p id="section-5.11-1">For JWE, both clients and authorization servers<a href="#section-5.11-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-5.11-2">
-<li id="section-5.11-2.1">shall not use the <code>RSA1_5</code> algorithm.<a href="#section-5.11-2.1" class="pilcrow">¶</a>
-</li>
-        </ol>
 </section>
 </div>
 </section>
@@ -1967,15 +1913,46 @@ tion-type%3Ajwt-bearer
 </div>
 </section>
 </div>
+<div id="document-history">
 <section id="section-10">
+      <h2 id="name-document-history">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+      </h2>
+<p id="section-10-1">[[ To be removed from the final specification ]]<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">-04<a href="#section-10-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-10-3.1">First working group draft since Implementer's Draft 1 (2019)<a href="#section-10-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.2">Allow this profile to be used with FAPI 2.0 as well as FAPI 1.0<a href="#section-10-3.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.3">Make unsigned backchannel authentication requests the default; FAPI 1.0 authorization servers also support signed requests<a href="#section-10-3.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.4">Replace lodging intent with Rich Authorization Requests <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span><a href="#section-10-3.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.5">Add <code>login_hint_token</code> type metadata for discovery and registration<a href="#section-10-3.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.6">Recommend redirect-based FAPI flows for same-device use; position CIBA for cross-device and user-not-present cases<a href="#section-10-3.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.7">Reference BCP 247 / RFC 10027 for cross-device security<a href="#section-10-3.7" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.8">Note that binding messages do not protect against an attacker-controlled consumption device<a href="#section-10-3.8" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.9">Reference the FAPI 2.0 formal security analysis<a href="#section-10-3.9" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.10">Clarify audience restrictions on client assertions<a href="#section-10-3.10" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.11">Inherit TLS and JWS/JWE requirements from the FAPI 1.0 or FAPI 2.0 specifications<a href="#section-10-3.11" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-10-3.12">Convert the source to xml2rfc markdown (<code>fapi-ciba.md</code>)<a href="#section-10-3.12" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<section id="section-11">
       <h2 id="name-normative-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
-<dt id="BCP195">[BCP195]</dt>
-      <dd>
-<span class="refAuthor">IETF</span>, <span class="refTitle">"BCP195"</span>, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp195">https://www.rfc-editor.org/info/bcp195</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="CIBA">[CIBA]</dt>
       <dd>
 <span class="refAuthor">Fett, D.</span>, <span class="refTitle">"OpenID Connect Client Initiated Backchannel Authentication Core"</span>, <time datetime="2014-02-25" class="refDate">25 February 2014</time>, <span>&lt;<a href="http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html</a>&gt;</span>. </dd>
@@ -1996,19 +1973,15 @@ tion-type%3Ajwt-bearer
       <dd>
 <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Mortimore, C.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">Y. Goland</span>, <span class="refTitle">"Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span class="seriesInfo">RFC 7521</span>, <span class="seriesInfo">DOI 10.17487/RFC7521</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7521">https://www.rfc-editor.org/info/rfc7521</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC9396">[RFC9396]</dt>
-      <dd>
-<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="XDBCP">[XDBCP]</dt>
     <dd>
 <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">F. Skokan</span>, <span class="refTitle">"Best Current Practice for Security of Cross-Device Flows"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp247">https://www.rfc-editor.org/info/bcp247</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
-<section id="section-11">
+<section id="section-12">
       <h2 id="name-informative-references">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
 <dt id="FAPI2SEC">[FAPI2SEC]</dt>
@@ -2018,6 +1991,10 @@ tion-type%3Ajwt-bearer
 <dt id="ISODIR2">[ISODIR2]</dt>
       <dd>
 <span class="refAuthor">ISO/IEC</span>, <span class="refTitle">"ISO/IEC Directives, Part 2 - Principles and rules for the structure and drafting of ISO and IEC documents"</span>, <span>&lt;<a href="https://www.iso.org/sites/directives/current/part2/index.xhtml">https://www.iso.org/sites/directives/current/part2/index.xhtml</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9396">[RFC9396]</dt>
+      <dd>
+<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9493">[RFC9493]</dt>
     <dd>
