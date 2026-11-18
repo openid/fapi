@@ -15,6 +15,7 @@ The latest drafts are built automatically from this repository and published at 
 * FAPI 2.0 - This is a profile of OAuth 2.0
     * [Security Profile](fapi-2_0-security-profile.md)
     * [Message Signing](fapi-2_0-message-signing.md)
+    * [Implementation Advice](FAPI_2_0_Implementation_Advice.md) [issues](https://github.com/openid/fapi/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22component%3A%20Implementation%20%26%20Deployment%20Advice%22)
     * [Attacker Model](FAPI_2_0_Attacker_Model.md)
     * [Grant Management](FAPI_2_0_Grant_Management.md)
 * Other documents
