@@ -1636,8 +1636,9 @@ user-present regardless of context.<a href="#section-1.2.2.2-1.3.1" class="pilcr
           <li id="section-1.7-3.3">clients and authorization servers should open these URLs in the other party's application if it is installed, and in a browser otherwise.<a href="#section-1.7-3.3" class="pilcrow">¶</a>
 </li>
         </ol>
-<p id="section-1.7-4">NOTE 1: On iOS, the <code>universalLinksOnly</code> option, and on Android 11 and later, the <code>FLAG_ACTIVITY_REQUIRE_NON_BROWSER</code> intent flag, open a URL only if an installed application claims it, so that the application can fall back to a browser.<a href="#section-1.7-4" class="pilcrow">¶</a></p>
-<p id="section-1.7-5">NOTE 2: On Android 12 and later, an HTTPS URL that is not a verified Android App Link always opens in a browser, so the authorization endpoint URL and redirect URI need to be verified App Links. On earlier versions, the end-user can be offered any installed application that handles the same URL, which could be a malicious application.<a href="#section-1.7-5" class="pilcrow">¶</a></p>
+<p id="section-1.7-4">The OpenID Foundation guest blog on app-to-app authorization <span>[<a href="#App2App" class="cite xref">App2App</a>]</span> describes this flow in more detail.<a href="#section-1.7-4" class="pilcrow">¶</a></p>
+<p id="section-1.7-5">NOTE 1: On iOS, the <code>universalLinksOnly</code> option, and on Android 11 and later, the <code>FLAG_ACTIVITY_REQUIRE_NON_BROWSER</code> intent flag, open a URL only if an installed application claims it, so that the application can fall back to a browser.<a href="#section-1.7-5" class="pilcrow">¶</a></p>
+<p id="section-1.7-6">NOTE 2: On Android 12 and later, an HTTPS URL that is not a verified Android App Link always opens in a browser, so the authorization endpoint URL and redirect URI need to be verified App Links. On earlier versions, the end-user can be offered any installed application that handles the same URL, which could be a malicious application.<a href="#section-1.7-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="access-token-size-considerations">
@@ -1775,6 +1776,10 @@ large access tokens or other potentially large headers.<a href="#section-1.10.1.
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
+<dt id="App2App">[App2App]</dt>
+      <dd>
+<span class="refAuthor">Heenan, J.</span>, <span class="refTitle">"Implementing App-to-App Authorisation in OAuth2/OpenID Connect"</span>, <time datetime="2019-10-21" class="refDate">21 October 2019</time>, <span>&lt;<a href="https://openid.net/guest-blog-implementing-app-to-app-authorisation-in-oauth2-openid-connect/">https://openid.net/guest-blog-implementing-app-to-app-authorisation-in-oauth2-openid-connect/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="CIBA">[CIBA]</dt>
       <dd>
 <span class="refAuthor">Fernandez Rodriguez, G.</span>, <span class="refAuthor">Walter, F.</span>, <span class="refAuthor">Nennker, A.</span>, <span class="refAuthor">Tonge, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0"</span>, <time datetime="2021-09-01" class="refDate">1 September 2021</time>, <span>&lt;<a href="http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">http://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html</a>&gt;</span>. </dd>
