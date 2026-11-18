@@ -1398,9 +1398,9 @@ better track and debug any issues between them. If an ecosystem adopts <code>x-f
 the following clauses apply:<a href="#section-1.2.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-1.2.1-2">
 <li id="section-1.2.1-2.1">clients shall send the <code>x-fapi-interaction-id</code> request header, the value shall be a
-RFC4122 UUID,  e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-1.2.1-2.1" class="pilcrow">¶</a>
+UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>,  e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-1.2.1-2.1" class="pilcrow">¶</a>
 </li>
-            <li id="section-1.2.1-2.2">the AS or RS shall set the response header <code>x-fapi-interaction-id</code> to the value received from the corresponding FAPI client request header or to a [RFC4122] UUID value if the request header was not provided to track the interaction, e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-1.2.1-2.2" class="pilcrow">¶</a>
+            <li id="section-1.2.1-2.2">the AS or RS shall set the response header <code>x-fapi-interaction-id</code> to the value received from the corresponding FAPI client request header if that value is a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>, or otherwise to a new UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> value to track the interaction, e.g., <code>x-fapi-interaction-id: c770aef3-6784-41f7-8e0e-ff5f97bddb3a</code>;<a href="#section-1.2.1-2.2" class="pilcrow">¶</a>
 </li>
             <li id="section-1.2.1-2.3">participants (whether Client, AS or RS) shall log the value of <code>x-fapi-interaction-id</code> in the log entry.<a href="#section-1.2.1-2.3" class="pilcrow">¶</a>
 </li>
@@ -1746,6 +1746,10 @@ large access tokens or other potentially large headers.<a href="#section-1.6.1.1
 <dt id="RFC9396">[RFC9396]</dt>
       <dd>
 <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9562">[RFC9562]</dt>
+      <dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562">https://www.rfc-editor.org/info/rfc9562</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="attackermodel">[attackermodel]</dt>
     <dd>
